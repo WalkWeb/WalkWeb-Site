@@ -1,0 +1,15 @@
+{
+    "name": "walk/walkweb-site",
+    "autoload": {
+        "psr-4": {
+            "Walk\\WalkwebNew\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "WalkWeb",
+            "email": "av18775@list.ru"
+        }
+    ],
+    "require": {}
+}
