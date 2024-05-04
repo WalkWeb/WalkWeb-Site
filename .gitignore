@@ -1,2 +1,18 @@
 /vendor/
+.phpunit.result.cache
 .idea/
+
+# result code coverage (php vendor/bin/phpunit --coverage-html html)
+html/
+
+# Local config
+config.local.php
+
+# Unit test config
+config.test.php
+
+# Default file log name
+logs
+
+# MySQL from docker data directory
+data/

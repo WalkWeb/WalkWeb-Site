@@ -2,7 +2,12 @@
     "name": "walk/walkweb-site",
     "autoload": {
         "psr-4": {
-            "Walk\\WalkwebNew\\": "src/"
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     },
     "authors": [
@@ -11,5 +16,7 @@
             "email": "av18775@list.ru"
         }
     ],
-    "require": {}
+    "require": {
+        "walkweb/dw-framework-core": "1.0.11"
+    }
 }
