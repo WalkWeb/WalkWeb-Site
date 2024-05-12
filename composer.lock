@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87b166b2252c4c1e89b7f578b49b0f1b",
+    "content-hash": "56cee9b7e4fa01def5a7737da3c37e8f",
     "packages": [
         {
             "name": "phpmailer/phpmailer",
@@ -89,16 +89,16 @@
         },
         {
             "name": "walkweb/dw-framework-core",
-            "version": "1.0.11",
+            "version": "1.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WalkWeb/DW-Framework-Core.git",
-                "reference": "770f1c7433755ca5d0713b104b4408d7464db032"
+                "reference": "66f9b264046aed0d67da31432e9a7f9c8fe58da6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WalkWeb/DW-Framework-Core/zipball/770f1c7433755ca5d0713b104b4408d7464db032",
-                "reference": "770f1c7433755ca5d0713b104b4408d7464db032",
+                "url": "https://api.github.com/repos/WalkWeb/DW-Framework-Core/zipball/66f9b264046aed0d67da31432e9a7f9c8fe58da6",
+                "reference": "66f9b264046aed0d67da31432e9a7f9c8fe58da6",
                 "shasum": ""
             },
             "require": {
@@ -132,9 +132,9 @@
             "description": "Core Micro MVC Framework",
             "support": {
                 "issues": "https://github.com/WalkWeb/DW-Framework-Core/issues",
-                "source": "https://github.com/WalkWeb/DW-Framework-Core/tree/1.0.11"
+                "source": "https://github.com/WalkWeb/DW-Framework-Core/tree/1.0.12"
             },
-            "time": "2024-05-04T19:30:11+00:00"
+            "time": "2024-05-12T18:58:02+00:00"
         }
     ],
     "packages-dev": [],

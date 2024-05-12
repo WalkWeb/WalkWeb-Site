@@ -17,6 +17,6 @@
         }
     ],
     "require": {
-        "walkweb/dw-framework-core": "1.0.11"
+        "walkweb/dw-framework-core": "1.0.12"
     }
 }
