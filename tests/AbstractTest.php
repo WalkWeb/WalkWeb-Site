@@ -12,7 +12,7 @@ use WalkWeb\NW\Route\Router;
 use WalkWeb\NW\Runtime;
 use WalkWeb\NW\Traits\StringTrait;
 
-class AbstractTest extends TestCase
+abstract class AbstractTest extends TestCase
 {
     use StringTrait;
 
