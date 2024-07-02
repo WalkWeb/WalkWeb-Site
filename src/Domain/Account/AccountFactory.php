@@ -6,8 +6,13 @@ namespace App\Domain\Account;
 
 use App\Domain\Account\Floor\Floor;
 use App\Domain\Account\Group\AccountGroup;
+use App\Domain\Account\Group\AccountGroupInterface;
 use App\Domain\Account\Status\AccountStatus;
+use App\Domain\Account\Status\AccountStatusInterface;
 use App\Domain\Account\Upload\AccountUpload;
+use DateTime;
+use Exception;
+use Ramsey\Uuid\Uuid;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\StringTrait;
 use WalkWeb\NW\Traits\ValidationTrait;
@@ -54,6 +59,49 @@ class AccountFactory
             self::date($createdAt, AccountException::INVALID_CREATED_AT_VALUE),
             self::date($updatedAt, AccountException::INVALID_CREATED_AT_VALUE),
         );
+    }
+
+    /**
+     * Create object Account from data register page
+     *
+     * @param array $data
+     * @param string $hashKey
+     * @return AccountInterface
+     * @throws AppException
+     */
+    public static function createNew(array $data, string $hashKey): AccountInterface
+    {
+        try {
+            $login = self::loginValidation($data);
+            $password = self::passwordValidate($data);
+            $password = password_hash($password . $hashKey, PASSWORD_BCRYPT, ['cost' => 10]);
+            $canLike = true;
+
+            return new Account(
+                Uuid::uuid4()->toString(),
+                $login,
+                $login,
+                $password,
+                self::emailValidate($data),
+                false,
+                false,
+                self::generateString(30),
+                self::generateString(30),
+                self::templateValidate($data),
+                self::ipValidate($data),
+                self::refValidate($data),
+                self::userAgentValidate($data),
+                $canLike,
+                new Floor(self::int($data, 'floor_id', AccountException::INVALID_FLOOR_ID)),
+                new AccountStatus(AccountStatusInterface::ACTIVE),
+                new AccountGroup(AccountGroupInterface::USER),
+                new AccountUpload(0, AccountInterface::UPLOAD_MAX_BASE),
+                new DateTime(),
+                new DateTime(),
+            );
+        } catch (Exception $e) {
+            throw new AppException($e->getMessage());
+        }
     }
 
     /**

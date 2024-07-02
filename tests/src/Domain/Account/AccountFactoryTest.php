@@ -7,14 +7,18 @@ namespace Tests\src\Domain\Account;
 use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountFactory;
 use App\Domain\Account\AccountInterface;
+use App\Domain\Account\Group\AccountGroupInterface;
+use App\Domain\Account\Status\AccountStatusInterface;
+use DateTime;
 use Exception;
+use Ramsey\Uuid\Uuid;
 use Tests\AbstractTest;
 use WalkWeb\NW\AppException;
 
 class AccountFactoryTest extends AbstractTest
 {
     /**
-     * Test on success create object Account from array
+     * Test on success create object Account from array (database)
      *
      * @dataProvider createFromDBSuccessDataProvider
      * @param array $data
@@ -50,7 +54,7 @@ class AccountFactoryTest extends AbstractTest
     }
 
     /**
-     * Test on fail create object Account from array
+     * Test on fail create object Account from array (database)
      *
      * @dataProvider createFromDBFailDataProvider
      * @param array $data
@@ -63,6 +67,56 @@ class AccountFactoryTest extends AbstractTest
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
         AccountFactory::createFromDB($data);
+    }
+
+    /**
+     * Test on success create object Account from array (registration form)
+     *
+     * @dataProvider createNewSuccessDataProvider
+     * @param array $data
+     * @throws AppException
+     */
+    public function testAccountFactoryCreateNewSuccess(array $data): void
+    {
+        $account = AccountFactory::createNew($data, KEY);
+
+        self::assertTrue(Uuid::isValid($account->getId()));
+        self::assertEquals($data['login'], $account->getLogin());
+        self::assertEquals($data['login'], $account->getName());
+        self::assertTrue(password_verify($data['password'] . KEY, $account->getPassword()));
+        self::assertEquals($data['email'], $account->getEmail());
+        self::assertFalse($account->isEmailVerified());
+        self::assertFalse($account->isRegComplete());
+        self::assertEquals(30, mb_strlen($account->getAuthToken()));
+        self::assertEquals(30, mb_strlen($account->getVerifiedToken()));
+        self::assertEquals($data['template'], $account->getTemplate());
+        self::assertEquals($data['ip'], $account->getIp());
+        self::assertEquals($data['ref'], $account->getRef());
+        self::assertEquals($data['floor_id'], $account->getFloor()->getId());
+        self::assertEquals(AccountStatusInterface::ACTIVE, $account->getStatus()->getId());
+        self::assertEquals(AccountGroupInterface::USER, $account->getGroup()->getId());
+        self::assertEquals(0, $account->getUpload()->getUpload());
+        self::assertEquals(AccountInterface::UPLOAD_MAX_BASE, $account->getUpload()->getUploadMax());
+        self::assertEquals(AccountInterface::UPLOAD_MAX_BASE, $account->getUpload()->getUploadRemainder());
+        self::assertEquals($data['user_agent'], $account->getUserAgent());
+        self::assertTrue($account->isCanLike());
+        self::assertEquals((new DateTime())->format(self::DATE_FORMAT), $account->getCreatedAt()->format(self::DATE_FORMAT));
+        self::assertEquals((new DateTime())->format(self::DATE_FORMAT), $account->getUpdatedAt()->format(self::DATE_FORMAT));
+    }
+
+    /**
+     * Test on fail create object Account from array (registration form)
+     *
+     * @dataProvider createNewFailDataProvider
+     * @param array $data
+     * @param string $error
+     * @throws AppException
+     */
+    public function testAccountFactoryCreateNewFail(array $data, string $error): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage($error);
+        AccountFactory::createNew($data, KEY);
     }
 
     /**
@@ -1895,6 +1949,472 @@ class AccountFactoryTest extends AbstractTest
                     'updated_at'     => '2020-99-99 11:00:00',
                 ],
                 AccountException::INVALID_UPDATED_AT_VALUE,
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function createNewSuccessDataProvider(): array
+    {
+        return [
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     * @throws Exception
+     */
+    public function createNewFailDataProvider(): array
+    {
+        return [
+            // miss login
+            [
+                [
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_LOGIN,
+            ],
+            // login invalid type
+            [
+                [
+                    'login'          => true,
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_LOGIN,
+            ],
+            // login over min length
+            [
+                [
+                    'login'          => self::generateString(AccountInterface::LOGIN_MIN_LENGTH - 1),
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_LOGIN_LENGTH . AccountInterface::LOGIN_MIN_LENGTH . '-' . AccountInterface::LOGIN_MAX_LENGTH,
+            ],
+            // login over max length
+            [
+                [
+                    'login'          => self::generateString(AccountInterface::LOGIN_MAX_LENGTH + 1),
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_LOGIN_LENGTH . AccountInterface::LOGIN_MIN_LENGTH . '-' . AccountInterface::LOGIN_MAX_LENGTH,
+            ],
+            // login invalid symbol
+            [
+                [
+                    'login'          => 'Login&',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_LOGIN_SYMBOL,
+            ],
+
+            // miss password
+            [
+                [
+                    'login'          => 'NameUser',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_PASSWORD,
+            ],
+            // password invalid type
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => 123,
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_PASSWORD,
+            ],
+            // password over min length
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => self::generateString(AccountInterface::PASSWORD_MIN_LENGTH - 1),
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_PASSWORD_LENGTH . AccountInterface::PASSWORD_MIN_LENGTH . '-' . AccountInterface::PASSWORD_MAX_LENGTH,
+            ],
+            // password over max length
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => self::generateString(AccountInterface::PASSWORD_MAX_LENGTH + 1),
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_PASSWORD_LENGTH . AccountInterface::PASSWORD_MIN_LENGTH . '-' . AccountInterface::PASSWORD_MAX_LENGTH,
+            ],
+
+            // miss email
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_EMAIL,
+            ],
+            // email invalid type
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => ['mail1@mail.com'],
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_EMAIL,
+            ],
+            // email over min length
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => self::generateString(AccountInterface::EMAIL_MIN_LENGTH - 1),
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_EMAIL_LENGTH . AccountInterface::EMAIL_MIN_LENGTH . '-' . AccountInterface::EMAIL_MAX_LENGTH,
+            ],
+            // email over max length
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => self::generateString(AccountInterface::EMAIL_MAX_LENGTH + 1),
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_EMAIL_LENGTH . AccountInterface::EMAIL_MIN_LENGTH . '-' . AccountInterface::EMAIL_MAX_LENGTH,
+            ],
+            // invalid email
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'email_email',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_EMAIL_SYMBOL,
+            ],
+
+            // miss template
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_TEMPLATE,
+            ],
+            // template invalid type
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => null,
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_TEMPLATE,
+            ],
+            // template over min length
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => self::generateString(AccountInterface::TEMPLATE_MIN_LENGTH - 1),
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_TEMPLATE_LENGTH . AccountInterface::TEMPLATE_MIN_LENGTH . '-' . AccountInterface::TEMPLATE_MAX_LENGTH,
+            ],
+            // template over max length
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => self::generateString(AccountInterface::TEMPLATE_MAX_LENGTH + 1),
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_TEMPLATE_LENGTH . AccountInterface::TEMPLATE_MIN_LENGTH . '-' . AccountInterface::TEMPLATE_MAX_LENGTH,
+            ],
+
+            // miss ip
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_IP,
+            ],
+            // ip invalid type
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => 123,
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_IP,
+            ],
+            // ip over min length
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => self::generateString(AccountInterface::IP_MIN_LENGTH - 1),
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_IP_LENGTH . AccountInterface::IP_MIN_LENGTH . '-' . AccountInterface::IP_MAX_LENGTH,
+            ],
+            // ip over max length
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => self::generateString(AccountInterface::IP_MAX_LENGTH + 1),
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_IP_LENGTH . AccountInterface::IP_MIN_LENGTH . '-' . AccountInterface::IP_MAX_LENGTH,
+            ],
+
+            // miss ref
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_REF,
+            ],
+            // ref invalid type
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => true,
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_REF,
+            ],
+            // ref over max length
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => self::generateString(AccountInterface::REF_MAX_LENGTH + 1),
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_REF_LENGTH . AccountInterface::REF_MIN_LENGTH . '-' . AccountInterface::REF_MAX_LENGTH,
+            ],
+
+            // miss floor_id
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_FLOOR_ID,
+            ],
+            // floor_id invalid type
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => '1',
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::INVALID_FLOOR_ID,
+            ],
+            // undefined floor_id
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 5,
+                    'user_agent'     => 'undefined',
+                ],
+                AccountException::UNKNOWN_FLOOR_ID,
+            ],
+
+            // miss user_agent
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+
+                ],
+                AccountException::INVALID_USER_AGENT,
+            ],
+            // user_agent invalid type
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 0,
+
+                ],
+                AccountException::INVALID_USER_AGENT,
+            ],
+            // user_agent over max length
+            [
+                [
+                    'login'          => 'NameUser',
+                    'password'       => '123456',
+                    'email'          => 'mail1@mail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => self::generateString(AccountInterface::USER_AGENT_MAX_LENGTH + 1),
+                ],
+                AccountException::INVALID_USER_AGENT_LENGTH . AccountInterface::USER_AGENT_MIN_LENGTH . '-' . AccountInterface::USER_AGENT_MAX_LENGTH,
             ],
         ];
     }
