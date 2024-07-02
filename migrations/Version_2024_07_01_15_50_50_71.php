@@ -21,7 +21,7 @@ class Version_2024_07_01_15_50_50_71
                 `login`          VARCHAR(20) UNIQUE NOT NULL,                 # Login
                 `name`           VARCHAR(20) UNIQUE NOT NULL,                 # Отображаемое имя
                 `password`       VARCHAR(60) NOT NULL,                        # хеш пароля
-                `email`          VARCHAR(30) UNIQUE NOT NULL,                 # почта
+                `email`          VARCHAR(40) UNIQUE NOT NULL,                 # почта
                 `email_verified` TINYINT NOT NULL DEFAULT 0,                  # подтвержден ли почтовый ящик
                 `reg_complete`   TINYINT NOT NULL DEFAULT 0,                  # завершена ли регистрация
                 `auth_token`     VARCHAR(30) NOT NULL,                        # токен для авторизации

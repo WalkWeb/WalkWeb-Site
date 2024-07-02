@@ -12,7 +12,42 @@ use DateTimeInterface;
 
 interface AccountInterface
 {
-    // TODO min-max length value
+    public const LOGIN_MIN_LENGTH          = 4;
+    public const LOGIN_MAX_LENGTH          = 14;
+    public const LOGIN_PARENT              = '/^[a-zA-Z0-9а-яА-ЯёЁ\-_]*$/u';
+
+    public const NAME_MIN_LENGTH           = 4;
+    public const NAME_MAX_LENGTH           = 14;
+    public const NAME_PARENT               = '/^[a-zA-Z0-9а-яА-ЯёЁ\-_]*$/u';
+
+    public const PASSWORD_MIN_LENGTH       = 5;
+    public const PASSWORD_MAX_LENGTH       = 60;
+
+    public const EMAIL_MIN_LENGTH          = 6;
+    public const EMAIL_MAX_LENGTH          = 40;
+
+    public const AUTH_TOKEN_MIN_LENGTH     = 30;
+    public const AUTH_TOKEN_MAX_LENGTH     = 30;
+
+    public const VERIFIED_TOKEN_MIN_LENGTH = 30;
+    public const VERIFIED_TOKEN_MAX_LENGTH = 30;
+
+    public const TEMPLATE_MIN_LENGTH       = 2;
+    public const TEMPLATE_MAX_LENGTH       = 10;
+
+    public const IP_MIN_LENGTH             = 7;
+    public const IP_MAX_LENGTH             = 39;
+
+    public const REF_MIN_LENGTH            = 0;
+    public const REF_MAX_LENGTH            = 30;
+
+    public const USER_AGENT_MIN_LENGTH     = 0;
+    public const USER_AGENT_MAX_LENGTH     = 100;
+
+    public const UPLOAD_MIN_VALUE          = 0;
+    public const UPLOAD_MAX_VALUE          = 300*1024*1024;
+    public const UPLOAD_MAX_BASE           = 20*1024*1024;
+    public const UPLOAD_PER_LEVEL          = 3*1024*1024;
 
     public function getId(): string;
     public function getLogin(): string;
