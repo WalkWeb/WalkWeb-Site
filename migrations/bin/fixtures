@@ -19,9 +19,290 @@ try {
     $app = new App(new Router(new RouteCollection()), Container::create());
     $db = $app->getContainer()->getConnectionPool()->getConnection();
 
-    $db->query("...");
+    $db->query("
+        INSERT INTO `account_energy` VALUES
+        ('2dad01e1-af9d-479d-9f48-92823f585827', 100, 1583780978.0000, 0),
+        ('17746e87-4e15-4c60-8b2f-8cb01032c47a', 100, 1583780978.0000, 0),
+        ('c44a05d0-7428-4640-a88e-85412e1047e4', 100, 1583780978.0000, 0),
+        ('abae7c6e-5ca8-4583-aa97-62d6baca763b', 100, 1583780978.0000, 0),
+        ('2a0aad5b-9b1e-47d0-b89b-43debc804098', 100, 1583780978.0000, 0),
+        ('ce29d60c-0b94-4ea6-b3b1-e54178e8561d', 100, 1583780978.0000, 0),
+        ('48a51008-520a-4f19-a181-e961e1fc7bfe', 100, 1583780978.0000, 0),
+        ('9055fc71-0ac1-400d-aa40-8aed8e54fe21', 100, 1583780978.0000, 0),
+        ('c762c75f-8618-41dc-a40e-5bf0fe01d347', 100, 1583780978.0000, 0),
+        ('fada14e3-0821-43f5-b95a-d80637ec30ba', 100, 1583780978.0000, 0);
+    ");
 
-    echo "Complete\n";
+    // Пользователи:
+    // 1)  группа: пользователь,      email: подтвержден,    регистрация: завершена,    статус: активен,      статус в чате: активен
+    // 2)  группа: пользователь,      email: подтвержден,    регистрация: завершена,    статус: заблокирован, статус в чате: активен
+    // 3)  группа: пользователь,      email: не подтвержден, регистрация: не завершена, статус: активен,      статус в чате: активен
+    // 4)  группа: модератор,         email: подтвержден,    регистрация: завершена,    статус: активен,      статус в чате: активен
+    // 5)  группа: гл. администратор, email: подтвержден,    регистрация: завершена,    статус: активен,      статус в чате: активен
+    // 6)  группа: администратор,     email: подтвержден,    регистрация: завершена,    статус: активен,      статус в чате: активен
+    // 7)  группа: пользователь,      email: подтвержден,    регистрация: завершена,    статус: активен,      статус в чате: только чтение
+    // 8)  группа: пользователь,      email: подтвержден,    регистрация: завершена,    статус: активен,      статус в чате: доступ закрыт
+    // 9)  группа: пользователь,      email: подтвержден,    регистрация: завершена,    статус: активен,      статус в чате: модератор
+    // 10) группа: пользователь,      email: подтвержден,    регистрация: завершена,    статус: активен,      статус в чате: администратор
+    $db->query("
+        INSERT INTO `accounts` (
+            `id`, `login`, `name`, `password`, `email`, `email_verified`, `reg_complete`, `auth_token`,
+            `verified_token`, `ip`, `ref`, `floor_id`, `status_id`, `group_id`, `energy_id`, `chat_status_id`,
+            `upload`, `notice`, `user_agent`, `can_like`, `created_at`, `updated_at`
+        ) VALUES
+        -- 1
+        (
+            '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+            'DemoUser',
+            'DemoUser',
+            '" . '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea' . "',
+            'mail1@mail.com',
+            1,
+            1,
+            'auth_token1',
+            'verified_token1',
+            '127.0.0.1',
+            'ref_link1',
+            1,
+            1,
+            10,
+            '2dad01e1-af9d-479d-9f48-92823f585827',
+            10,
+            0,
+            0,
+            'undefined',
+            1,
+            '2020-12-25 11:00:00',
+            '2020-12-25 11:00:00'
+        ),
+        -- 2
+         (
+             'a29393e0-34b4-4419-9c13-f4e8a1b54cf2',
+             'BlockedUser',
+             'BlockedUser',
+             '" . '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea' . "',
+             'mail2@mail.com',
+             1,
+             1,
+             'auth_token2',
+             'verified_token2',
+             '127.0.0.1',
+             'ref_link2',
+             1,
+             2,
+             10,
+             '17746e87-4e15-4c60-8b2f-8cb01032c47a',
+             10,
+             0,
+             0,
+             'undefined',
+             1,
+             '2020-12-25 12:00:00',
+             '2020-12-25 12:00:00'
+         ),
+        -- 3
+         (
+             'b2d1fee9-5034-464d-a1d3-b64adf66c1b8',
+             'NoEndRegisterUser',
+             'NoEndRegisterUser',
+             '" . '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea' . "',
+             'mail3@mail.com',
+             0,
+             0,
+             'auth_token3',
+             'verified_token3',
+             '127.0.0.1',
+             'ref_link3',
+             1,
+             1,
+             10,
+             'c44a05d0-7428-4640-a88e-85412e1047e4',
+             10,
+             0,
+             0,
+             'undefined',
+             1,
+             '2020-12-25 13:00:00',
+             '2020-12-25 13:00:00'
+         ),
+         -- 4
+         (
+             '2785fe29-fe18-44b7-9b48-b3b3e0fa7d90',
+             'DemoModerator',
+             'DemoModerator',
+             '" . '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea' . "',
+             'mail4@mail.com',
+             1,
+             1,
+             'auth_token4',
+             'verified_token4',
+             '127.0.0.1',
+             'ref_link4',
+             1,
+             1,
+             20,
+             'abae7c6e-5ca8-4583-aa97-62d6baca763b',
+             10,
+             0,
+             0,
+             'undefined',
+             1,
+             '2020-12-25 14:00:00',
+             '2020-12-25 14:00:00'
+         ),
+        -- 5
+         (
+             'c0a29b32-2b13-4535-a804-d2d865c20387',
+             'DemoMainAdmin',
+             'DemoMainAdmin',
+             '" . '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea' . "',
+             'mail5@mail.com',
+             1,
+             1,
+             'auth_token5',
+             'verified_token5',
+             '127.0.0.1',
+             'ref_link5',
+             1,
+             1,
+             30,
+             '2a0aad5b-9b1e-47d0-b89b-43debc804098',
+             10,
+             0,
+             0,
+             'undefined',
+             1,
+             '2020-12-25 15:00:00',
+             '2020-12-25 15:00:00'
+         ),
+        -- 6
+         (
+             '33f1592b-67ce-4fa4-ab64-661b7c6f03f2',
+             'DemoAdmin',
+             'DemoAdmin',
+             '" . '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea' . "',
+             'mail6@mail.com',
+             1,
+             1,
+             'auth_token6',
+             'verified_token6',
+             '127.0.0.1',
+             'ref_link6',
+             1,
+             1,
+             31,
+             'ce29d60c-0b94-4ea6-b3b1-e54178e8561d',
+             10,
+             0,
+             0,
+             'undefined',
+             1,
+             '2020-12-25 16:00:00',
+             '2020-12-25 16:00:00'
+         ),
+         -- 7
+         (
+             '22493866-7471-4333-b01f-d8eb65b26035',
+             'ReadOnlyChat',
+             'ReadOnlyChat',
+             '" . '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea' . "',
+             'mail7@mail.com',
+             1,
+             1,
+             'auth_token7',
+             'verified_token7',
+             '127.0.0.1',
+             'ref_link7',
+             1,
+             1,
+             10,
+             '48a51008-520a-4f19-a181-e961e1fc7bfe',
+             20,
+             0,
+             0,
+             'undefined',
+             1,
+             '2020-12-25 17:00:00',
+             '2020-12-25 17:00:00'
+         ),
+         -- 8
+         (
+             '2e5dab8b-548f-468c-a80f-1a77af9dd90e',
+             'BlockedChat',
+             'BlockedChat',
+             '" . '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea' . "',
+             'mail8@mail.com',
+             1,
+             1,
+             'auth_token8',
+             'verified_token8',
+             '127.0.0.1',
+             'ref_link8',
+             1,
+             1,
+             10,
+             '9055fc71-0ac1-400d-aa40-8aed8e54fe21',
+             30,
+             0,
+             0,
+             'undefined',
+             1,
+             '2020-12-25 18:00:00',
+             '2020-12-25 18:00:00'
+         ),
+        -- 9
+         (
+             'c3ba0b81-c82b-41fd-ad2f-264d51b2fd6c',
+             'DemoChatModerator',
+             'DemoChatModerator',
+             '" . '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea' . "',
+             'mail9@mail.com',
+             1,
+             1,
+             'auth_token9',
+             'verified_token9',
+             '127.0.0.1',
+             'ref_link9',
+             1,
+             1,
+             10,
+             'c762c75f-8618-41dc-a40e-5bf0fe01d347',
+             40,
+             0,
+             0,
+             'undefined',
+             1,
+             '2020-12-25 19:00:00',
+             '2020-12-25 19:00:00'
+         ),
+        -- 10
+         (
+             'c46db3dd-70ab-4245-9bf8-57c7b2de63f2',
+             'DemoChatAdmin',
+             'DemoChatAdmin',
+             '" . '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea' . "',
+             'mail10@mail.com',
+             1,
+             1,
+             'auth_token10',
+             'verified_token10',
+             '127.0.0.1',
+             'ref_link10',
+             1,
+             1,
+             10,
+             'fada14e3-0821-43f5-b95a-d80637ec30ba',
+             50,
+             0,
+             0,
+             'undefined',
+             1,
+             '2020-12-25 20:00:00',
+             '2020-12-25 20:00:00'
+         );
+    ");
+
+    echo "Fixtures Load\n";
     return 0;
 } catch (Exception $e) {
     echo "{$e->getMessage()}\n";
