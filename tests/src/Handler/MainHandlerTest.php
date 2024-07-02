@@ -21,7 +21,7 @@ class MainHandlerTest extends AbstractTest
         $request = new Request(['REQUEST_URI' => '/']);
         $response = $this->app->handle($request);
 
-        self::assertMatchesRegularExpression('/WalkWeb Site/', $response->getBody());
+        self::assertMatchesRegularExpression('/Заголовок поста #1/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
     }
 

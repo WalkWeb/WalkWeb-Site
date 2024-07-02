@@ -19,15 +19,18 @@ body {
     padding-top: 0;
     padding-right: 0;
 }
+
 .head_menu > ul {
     border-radius: 0 5px 0 5px;
 }
+
 .head_menu > ul > li {
     margin: 0 5px;
     padding: 12px 0;
     position: relative;
     display: inline-block;
 }
+
 .head_menu > ul > li > a {
     color: #333333;
     display: block;
@@ -177,5 +180,8 @@ a.post_link:hover {
     color: #999;
 }
 
+h1 {
+    margin-bottom: 20px;
+}
 
 
