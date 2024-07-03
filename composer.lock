@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18dfceecffa0c86b5581a61250de592f",
+    "content-hash": "a42fd3feac123f026da6f32b164fb6f8",
     "packages": [
         {
             "name": "brick/math",
@@ -572,16 +572,16 @@
         },
         {
             "name": "walkweb/dw-framework-core",
-            "version": "1.0.14",
+            "version": "1.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WalkWeb/DW-Framework-Core.git",
-                "reference": "794d11db86757601a341ce6a43fe176a409b1683"
+                "reference": "44646a6fddb727ec1a0b51c93b04136f09966004"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WalkWeb/DW-Framework-Core/zipball/794d11db86757601a341ce6a43fe176a409b1683",
-                "reference": "794d11db86757601a341ce6a43fe176a409b1683",
+                "url": "https://api.github.com/repos/WalkWeb/DW-Framework-Core/zipball/44646a6fddb727ec1a0b51c93b04136f09966004",
+                "reference": "44646a6fddb727ec1a0b51c93b04136f09966004",
                 "shasum": ""
             },
             "require": {
@@ -616,9 +616,9 @@
             "description": "Core Micro MVC Framework",
             "support": {
                 "issues": "https://github.com/WalkWeb/DW-Framework-Core/issues",
-                "source": "https://github.com/WalkWeb/DW-Framework-Core/tree/1.0.14"
+                "source": "https://github.com/WalkWeb/DW-Framework-Core/tree/1.0.15"
             },
-            "time": "2024-07-02T12:55:26+00:00"
+            "time": "2024-07-03T13:29:19+00:00"
         }
     ],
     "packages-dev": [
