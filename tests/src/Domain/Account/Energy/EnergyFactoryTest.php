@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\src\Domain\Account\Energy;
+namespace Test\src\Domain\Account\Energy;
 
 use App\Domain\Account\Energy\EnergyException;
 use App\Domain\Account\Energy\EnergyFactory;
 use App\Domain\Account\Energy\EnergyInterface;
 use Ramsey\Uuid\Uuid;
-use Tests\AbstractTest;
+use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 
 class EnergyFactoryTest extends AbstractTest
@@ -93,7 +93,7 @@ class EnergyFactoryTest extends AbstractTest
                     'energy_id'         => 'f0c4391a-f16a-4a22-80fb-ac0a02168b1f',
                     'energy'            => 50,
                     'energy_bonus'      => 20,
-                    'energy_updated_at' => (float)microtime(true),
+                    'energy_updated_at' => round((float)microtime(true), 1),
                     'energy_residue'    => 5,
                 ],
                 50,

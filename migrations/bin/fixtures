@@ -10,6 +10,7 @@ if (file_exists(__DIR__ . '/../../config.local.php')) {
     require_once __DIR__ . '/../../config.php';
 }
 
+use App\Domain\Account\Energy\EnergyInterface;
 use WalkWeb\NW\App;
 use WalkWeb\NW\Container;
 use WalkWeb\NW\Route\RouteCollection;
@@ -18,19 +19,20 @@ use WalkWeb\NW\Route\Router;
 try {
     $app = new App(new Router(new RouteCollection()), Container::create());
     $db = $app->getContainer()->getConnectionPool()->getConnection();
+    $maxEnergy = EnergyInterface::BASE_ENERGY;
 
     $db->query("
-        INSERT INTO `account_energy` VALUES
-        ('2dad01e1-af9d-479d-9f48-92823f585827', 100, 1583780978.0000, 0),
-        ('17746e87-4e15-4c60-8b2f-8cb01032c47a', 100, 1583780978.0000, 0),
-        ('c44a05d0-7428-4640-a88e-85412e1047e4', 100, 1583780978.0000, 0),
-        ('abae7c6e-5ca8-4583-aa97-62d6baca763b', 100, 1583780978.0000, 0),
-        ('2a0aad5b-9b1e-47d0-b89b-43debc804098', 100, 1583780978.0000, 0),
-        ('ce29d60c-0b94-4ea6-b3b1-e54178e8561d', 100, 1583780978.0000, 0),
-        ('48a51008-520a-4f19-a181-e961e1fc7bfe', 100, 1583780978.0000, 0),
-        ('9055fc71-0ac1-400d-aa40-8aed8e54fe21', 100, 1583780978.0000, 0),
-        ('c762c75f-8618-41dc-a40e-5bf0fe01d347', 100, 1583780978.0000, 0),
-        ('fada14e3-0821-43f5-b95a-d80637ec30ba', 100, 1583780978.0000, 0);
+        INSERT INTO `account_energy` (`id`, `energy`, `updated_at`, `residue`, `bonus`) VALUES
+        ('2dad01e1-af9d-479d-9f48-92823f585827', $maxEnergy, 1583780978.0000, 0, 0),
+        ('17746e87-4e15-4c60-8b2f-8cb01032c47a', $maxEnergy, 1583780978.0000, 0, 0),
+        ('c44a05d0-7428-4640-a88e-85412e1047e4', $maxEnergy, 1583780978.0000, 0, 0),
+        ('abae7c6e-5ca8-4583-aa97-62d6baca763b', $maxEnergy, 1583780978.0000, 0, 0),
+        ('2a0aad5b-9b1e-47d0-b89b-43debc804098', $maxEnergy, 1583780978.0000, 0, 0),
+        ('ce29d60c-0b94-4ea6-b3b1-e54178e8561d', $maxEnergy, 1583780978.0000, 0, 0),
+        ('48a51008-520a-4f19-a181-e961e1fc7bfe', $maxEnergy, 1583780978.0000, 0, 0),
+        ('9055fc71-0ac1-400d-aa40-8aed8e54fe21', $maxEnergy, 1583780978.0000, 0, 0),
+        ('c762c75f-8618-41dc-a40e-5bf0fe01d347', $maxEnergy, 1583780978.0000, 0, 0),
+        ('fada14e3-0821-43f5-b95a-d80637ec30ba', $maxEnergy, 1583780978.0000, 0, 0);
     ");
 
     // Пользователи:

@@ -25,8 +25,8 @@ class Energy implements EnergyInterface
         $this->id = $id;
         $this->energy = $energy;
         $this->maxEnergy = $maxEnergy;
-        $this->time = $time;
-        $this->updatedAt = $updatedAt;
+        $this->time = round($time, 4);
+        $this->updatedAt = round($updatedAt, 4);
         $this->residue = $residue;
 
         // Если энергия меньше максимальной, если больше - просто уменьшаем до максимальной

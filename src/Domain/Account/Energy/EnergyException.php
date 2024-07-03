@@ -8,6 +8,7 @@ use Exception;
 
 class EnergyException extends Exception
 {
+    public const NOT_FOUND                    = 'Energy not found';
     public const ALREADY_MAX                  = 'Energy already max';
     public const NO_ENOUGH                    = 'No enough energy. Have %d need %d';
     public const ZERO_VALUE                   = 'No change energy: zero value';

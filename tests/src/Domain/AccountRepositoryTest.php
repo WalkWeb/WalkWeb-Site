@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\src\Domain;
+namespace Test\src\Domain;
 
 use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountRepository;
-use Tests\AbstractTest;
+use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 
 class AccountRepositoryTest extends AbstractTest
@@ -48,6 +48,6 @@ class AccountRepositoryTest extends AbstractTest
      */
     private function getRepository(): AccountRepository
     {
-        return new AccountRepository($this->getContainer());
+        return new AccountRepository($this->createContainer());
     }
 }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\src\Domain\Account\Group;
+namespace Test\src\Domain\Account\Group;
 
 use App\Domain\Account\AccountException;
 use App\Domain\Account\Group\AccountGroup;
-use Tests\AbstractTest;
+use Test\AbstractTest;
 
 class AccountGroupTest extends AbstractTest
 {

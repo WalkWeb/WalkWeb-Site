@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\src\Handler\Account;
+namespace Test\src\Handler\Account;
 
-use Tests\AbstractTest;
+use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;

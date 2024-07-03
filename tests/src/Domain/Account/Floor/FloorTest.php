@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\src\Domain\Account\Floor;
+namespace Test\src\Domain\Account\Floor;
 
 use App\Domain\Account\AccountException;
 use App\Domain\Account\Floor\Floor;
-use Tests\AbstractTest;
+use Test\AbstractTest;
 
 class FloorTest extends AbstractTest
 {

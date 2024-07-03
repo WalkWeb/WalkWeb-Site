@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Test;
 
 use PHPUnit\Framework\TestCase;
 use WalkWeb\NW\App;
@@ -21,6 +21,8 @@ abstract class AbstractTest extends TestCase
     protected App $app;
     protected string $dir;
 
+    private static ?Container $container = null;
+
     /**
      * @throws AppException
      */
@@ -35,7 +37,29 @@ abstract class AbstractTest extends TestCase
         }
 
         $router = require __DIR__ . '/../routes/web.php';
-        $this->app = new App($router, $this->getContainer());
+        self::getContainer()->getConnectionPool()->getConnection()->autocommit(false);
+        $this->app = new App($router, self::getContainer());
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function setDown(): void
+    {
+        self::getContainer()->getConnectionPool()->getConnection()->rollback();
+    }
+
+    /**
+     * @return Container
+     * @throws AppException
+     */
+    public static function getContainer(): Container
+    {
+        if (self::$container === null) {
+            self::$container = self::createContainer();
+        }
+
+        return self::$container;
     }
 
     /**
@@ -45,7 +69,7 @@ abstract class AbstractTest extends TestCase
      */
     protected function getApp(Router $router): App
     {
-        return new App($router, $this->getContainer());
+        return new App($router, self::createContainer());
     }
 
     /**
@@ -55,7 +79,7 @@ abstract class AbstractTest extends TestCase
      * @return Container
      * @throws AppException
      */
-    protected function getContainer(
+    protected static function createContainer(
         string $appEnv = APP_ENV,
         string $viewDir = VIEW_DIR,
         string $migrationDir = MIGRATION_DIR

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\src\Domain\Account\Status;
+namespace Test\src\Domain\Account\Status;
 
 use App\Domain\Account\AccountException;
 use App\Domain\Account\Status\AccountStatus;
-use Tests\AbstractTest;
+use Test\AbstractTest;
 
 class AccountStatusTest extends AbstractTest
 {

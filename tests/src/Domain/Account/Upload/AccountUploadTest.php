@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\src\Domain\Account\Upload;
+namespace Test\src\Domain\Account\Upload;
 
 use App\Domain\Account\Upload\AccountUpload;
-use Tests\AbstractTest;
+use Test\AbstractTest;
 
 class AccountUploadTest extends AbstractTest
 {

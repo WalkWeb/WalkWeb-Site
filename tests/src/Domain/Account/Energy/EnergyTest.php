@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\src\Domain\Account\Energy;
+namespace Test\src\Domain\Account\Energy;
 
 use Exception;
 use App\Domain\Account\Energy\Energy;
 use App\Domain\Account\Energy\EnergyException;
 use App\Domain\Account\Energy\EnergyInterface;
-use Tests\AbstractTest;
+use Test\AbstractTest;
 
 class EnergyTest extends AbstractTest
 {
@@ -21,7 +21,7 @@ class EnergyTest extends AbstractTest
         $id = '23474820-3e4f-45e3-ba0b-78d202f56ad5';
         $actualEnergy = 50;
         $maxEnergy = 100;
-        $time = (float)microtime(true);
+        $time = round((float)microtime(true), 2);
         $updatedAt = 1566745426.0000;
         $residue = 20;
 
@@ -54,8 +54,8 @@ class EnergyTest extends AbstractTest
             $id = '23474820-3e4f-45e3-ba0b-78d202f56ad5';
             $actualEnergy = 50;
             $maxEnergy = 100;
-            $time = (float)microtime(true) + $i / 10;
-            $updatedAt = (float)microtime(true) + $i / 10;
+            $time = round((float)microtime(true) + $i / 10);
+            $updatedAt = round((float)microtime(true) + $i / 10);
             $residue = 10;
 
             $energy = new Energy($id, $actualEnergy, $maxEnergy, $time, $updatedAt, $residue);

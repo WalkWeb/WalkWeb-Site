@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\src\Domain\Account;
+namespace Test\src\Domain\Account;
 
 use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountFactory;
@@ -12,7 +12,7 @@ use App\Domain\Account\Status\AccountStatusInterface;
 use DateTime;
 use Exception;
 use Ramsey\Uuid\Uuid;
-use Tests\AbstractTest;
+use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 
 class AccountFactoryTest extends AbstractTest

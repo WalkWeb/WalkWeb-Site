@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\src\Domain\Account;
+namespace Test\src\Domain\Account;
 
 use App\Domain\Account\Account;
 use App\Domain\Account\AccountException;
@@ -11,7 +11,7 @@ use App\Domain\Account\Group\AccountGroup;
 use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Account\Upload\AccountUpload;
 use DateTime;
-use Tests\AbstractTest;
+use Test\AbstractTest;
 
 class AccountTest extends AbstractTest
 {
