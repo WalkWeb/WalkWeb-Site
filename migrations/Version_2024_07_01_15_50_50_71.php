@@ -31,9 +31,9 @@ class Version_2024_07_01_15_50_50_71
                 `ref`            VARCHAR(30) NOT NULL,                        # реферальный ключ
                 `floor_id`       TINYINT UNSIGNED NOT NULL,                   # id пола
                 `status_id`      TINYINT UNSIGNED NOT NULL DEFAULT 1,         # id статуса
-                `group_id`       TINYINT UNSIGNED NOT NULL DEFAULT 1,         # id группы
+                `group_id`       TINYINT UNSIGNED NOT NULL DEFAULT 10,        # id группы
                 `energy_id`      VARCHAR(36) NOT NULL,                        # id записи в таблице `energy`
-                `chat_status_id` TINYINT UNSIGNED NOT NULL DEFAULT 1,         # id статуса аккаунта в чате
+                `chat_status_id` TINYINT UNSIGNED NOT NULL DEFAULT 10,        # id статуса аккаунта в чате
                 `upload`         INT UNSIGNED NOT NULL DEFAULT 0,             # суммарный вес файлов, загруженных пользователем
                 `notice`         TINYINT UNSIGNED NOT NULL DEFAULT 0,         # есть ли у пользователя активные уведомления
                 `user_agent`     VARCHAR(100) NOT NULL DEFAULT \'undefined\', # информация userAgent полученная от браузера

@@ -131,7 +131,7 @@ try {
          (
              '2785fe29-fe18-44b7-9b48-b3b3e0fa7d90',
              'DemoModerator',
-             'DemoModerator',
+             'NameModerator',
              '" . '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea' . "',
              'mail4@mail.com',
              1,
