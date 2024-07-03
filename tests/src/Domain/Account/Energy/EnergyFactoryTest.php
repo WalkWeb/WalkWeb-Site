@@ -7,13 +7,14 @@ namespace Tests\src\Domain\Account\Energy;
 use App\Domain\Account\Energy\EnergyException;
 use App\Domain\Account\Energy\EnergyFactory;
 use App\Domain\Account\Energy\EnergyInterface;
+use Ramsey\Uuid\Uuid;
 use Tests\AbstractTest;
 use WalkWeb\NW\AppException;
 
 class EnergyFactoryTest extends AbstractTest
 {
     /**
-     * Тест на успешное создание объекта Energy на основе массива с данными
+     * Test on success create object Energy from array (data from database)
      *
      * @dataProvider successDataProvider
      * @param array $data
@@ -21,9 +22,9 @@ class EnergyFactoryTest extends AbstractTest
      * @param int $expectedResidue
      * @throws AppException
      */
-    public function testEnergyFactoryCreateSuccess(array $data, int $expectedEnergy, int $expectedResidue): void
+    public function testEnergyFactoryCreateFromDBSuccess(array $data, int $expectedEnergy, int $expectedResidue): void
     {
-        $energy = $this->getFactory()->create($data);
+        $energy = EnergyFactory::createFromDB($data);
 
         self::assertEquals($data['energy_id'], $energy->getId());
         self::assertEquals($expectedEnergy, $energy->getEnergy());
@@ -38,18 +39,34 @@ class EnergyFactoryTest extends AbstractTest
     }
 
     /**
-     * Тесты на различные варианты невалидных данных
+     * Test on fail create object Energy from array
      *
      * @dataProvider failDataProvider
      * @param array $data
      * @param string $error
      * @throws AppException
      */
-    public function testEnergyFactoryCreateFail(array $data, string $error): void
+    public function testEnergyFactoryCreateFromDBFail(array $data, string $error): void
     {
         $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
-        $this->getFactory()->create($data);
+        EnergyFactory::createFromDB($data);
+    }
+
+    /**
+     * Test on success create new Energy object
+     */
+    public function testEnergyFactoryCreateNewSuccess(): void
+    {
+        $energy = EnergyFactory::createNew();
+
+        self::assertTrue(Uuid::isValid($energy->getId()));
+        self::assertEquals(EnergyInterface::BASE_ENERGY, $energy->getEnergy());
+        self::assertEquals(EnergyInterface::BASE_ENERGY, $energy->getMaxEnergy());
+        self::assertEquals(0, $energy->getResidue());
+        self::assertEquals((int)microtime(true), (int)$energy->getTime());
+        self::assertEquals((int)microtime(true), (int)$energy->getUpdatedAt());
+        self::assertFalse($energy->isUpdated());
     }
 
     /**
@@ -287,13 +304,5 @@ class EnergyFactoryTest extends AbstractTest
                 EnergyException::INCORRECT_RESIDUE_DATA,
             ],
         ];
-    }
-
-    /**
-     * @return EnergyFactory
-     */
-    private function getFactory(): EnergyFactory
-    {
-        return new EnergyFactory();
     }
 }

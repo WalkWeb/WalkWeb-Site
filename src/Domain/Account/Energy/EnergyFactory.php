@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Account\Energy;
 
+use Ramsey\Uuid\Uuid;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\ValidationTrait;
 
@@ -12,13 +13,13 @@ class EnergyFactory
     use ValidationTrait;
 
     /**
-     * Создает объект Energy на основе массива с параметрами
+     * Create object Energy from array (data from database)
      *
      * @param array $data
      * @return EnergyInterface
      * @throws AppException
      */
-    public function create(array $data): EnergyInterface
+    public static function createFromDB(array $data): EnergyInterface
     {
         self::string($data, 'energy_id', EnergyException::INCORRECT_ENERGY_ID_DATA);
         self::int($data, 'energy', EnergyException::INCORRECT_ENERGY_DATA);
@@ -54,6 +55,23 @@ class EnergyFactory
             (float)microtime(true),
             $data['energy_updated_at'],
             $data['energy_residue']
+        );
+    }
+
+    /**
+     * Create new Energy object (for new created user)
+     *
+     * @return EnergyInterface
+     */
+    public static function createNew(): EnergyInterface
+    {
+        return new Energy(
+            Uuid::uuid4()->toString(),
+            EnergyInterface::BASE_ENERGY,
+            EnergyInterface::BASE_ENERGY,
+            (float)microtime(true),
+            (float)microtime(true),
+            0
         );
     }
 }
