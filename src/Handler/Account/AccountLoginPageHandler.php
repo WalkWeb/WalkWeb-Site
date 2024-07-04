@@ -9,10 +9,12 @@ use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
-class AccountRegistrationPageHandler extends AbstractHandler
+class AccountLoginPageHandler extends AbstractHandler
 {
+    public const ALREADY_AUTH = 'Вы уже авторизованы';
+
     /**
-     * Print registration page
+     * Print login page
      *
      * @param Request $request
      * @return Response
@@ -22,6 +24,8 @@ class AccountRegistrationPageHandler extends AbstractHandler
     {
         // TODO Проверка на то, что пользователь уже авторизован
 
-        return $this->render('account/registration', ['csrfToken' => $this->container->getCsrf()->getCsrfToken()]);
+        return $this->render('account/login', [
+            'csrfToken' => $this->container->getCsrf()->getCsrfToken(),
+        ]);
     }
 }
