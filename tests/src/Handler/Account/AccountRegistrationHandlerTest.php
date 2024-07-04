@@ -71,6 +71,11 @@ class AccountRegistrationHandlerTest extends AbstractTest
         $response = $this->app->handle($request);
 
         self::assertMatchesRegularExpression('/User with this login already exists/', $response->getBody());
+
+        // Check auto substitution
+        self::assertMatchesRegularExpression('/DemoUser/', $response->getBody());
+        self::assertMatchesRegularExpression('/mail@mail.com/', $response->getBody());
+
         self::assertEquals(Response::OK, $response->getStatusCode());
     }
 
@@ -92,6 +97,11 @@ class AccountRegistrationHandlerTest extends AbstractTest
         $response = $this->app->handle($request);
 
         self::assertMatchesRegularExpression('/User with this name already exists/', $response->getBody());
+
+        // Check auto substitution
+        self::assertMatchesRegularExpression('/NameModerator/', $response->getBody());
+        self::assertMatchesRegularExpression('/mail@mail.com/', $response->getBody());
+
         self::assertEquals(Response::OK, $response->getStatusCode());
     }
 
@@ -113,6 +123,11 @@ class AccountRegistrationHandlerTest extends AbstractTest
         $response = $this->app->handle($request);
 
         self::assertMatchesRegularExpression('/User with this email already exists/', $response->getBody());
+
+        // Check auto substitution
+        self::assertMatchesRegularExpression('/User-2/', $response->getBody());
+        self::assertMatchesRegularExpression('/mail1@mail.com/', $response->getBody());
+
         self::assertEquals(Response::OK, $response->getStatusCode());
     }
 

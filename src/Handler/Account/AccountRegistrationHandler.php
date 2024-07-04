@@ -22,13 +22,13 @@ class AccountRegistrationHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
+        $body = $request->getBody();
+
         try {
             $csrfToken = $request->csrf;
             if (!$this->container->getCsrf()->checkCsrfToken($csrfToken ?? '')) {
                 throw new AppException('Invalid csrf-token');
             }
-
-            $body = $request->getBody();
 
             $body['template'] = TEMPLATE_DEFAULT;
             $body['ip'] = $this->getIp($request);
@@ -46,7 +46,16 @@ class AccountRegistrationHandler extends AbstractHandler
             return $this->render('account/registration_complete');
 
         } catch (AppException $e) {
-            return $this->render('account/registration', ['error' => $e->getMessage()]);
+            return $this->render(
+                'account/registration',
+                [
+                    'error'     => $e->getMessage(),
+                    'csrfToken' => $this->container->getCsrf()->getCsrfToken(),
+                    'login'     => $body['login'] ?? '',
+                    'email'     => $body['email'] ?? '',
+                    'floor'     => $body['floor_id'] ?? 1,
+                ]
+            );
         }
     }
 
