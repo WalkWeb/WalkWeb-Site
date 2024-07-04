@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Account;
 
+use App\Domain\Account\DTO\LoginRequest;
 use App\Domain\Account\Energy\EnergyFactory;
 use App\Domain\Account\Energy\EnergyInterface;
 use App\Domain\Account\Energy\EnergyRepository;
@@ -85,6 +86,37 @@ class AccountRepository
                 ['type' => 's', 'value' => $this->createEnergy()->getId()],
             ]
         );
+    }
+
+    /**
+     * Проверяет, существует ли пользователь с указанным логином и паролем, и если есть - возвращает его авторизационный
+     * токен
+     *
+     * @param LoginRequest $request
+     * @param string $hashKey
+     * @return string|null
+     * @throws AppException
+     */
+    public function auth(LoginRequest $request, string $hashKey): ?string
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `auth_token`, `password` FROM `accounts` WHERE `login` = ?',
+            [
+                ['type' => 's', 'value' => $request->getLogin()],
+            ],
+            true
+        );
+
+        if (
+            $data &&
+            array_key_exists('password', $data) &&
+            array_key_exists('auth_token', $data) &&
+            password_verify($request->getPassword() . $hashKey, $data['password'])
+        ) {
+            return $data['auth_token'];
+        }
+
+        return null;
     }
 
     /**
