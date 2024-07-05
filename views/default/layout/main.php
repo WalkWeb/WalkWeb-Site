@@ -24,8 +24,8 @@
         <div class="head_menu float_right">
             <ul>
                 <li><a href="#">Добавить пост</a></li>
-                <li><a href="#">Вход</a></li>
-                <li><a href="#">Регистрация</a></li>
+                <li><a href="/login">Вход</a></li>
+                <li><a href="/registration">Регистрация</a></li>
                 <li><a href="#">Статистика</a></li>
             </ul>
         </div>
