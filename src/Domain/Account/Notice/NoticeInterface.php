@@ -18,6 +18,8 @@ interface NoticeInterface
     public const TYPE_WARNING = 2;
     public const TYPE_SUCCESS = 3;
 
+    // TODO Min-max message length: 5-600
+
     /**
      * Возвращает ID уведомления
      *
