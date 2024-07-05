@@ -14,7 +14,7 @@ class AuthException extends Exception
     public const INVALID_ACCOUNT_GROUP_ID       = 'Incorrect "account_group_id" parameter, it required and type int';
     public const INVALID_ACCOUNT_STATUS_ID      = 'Incorrect "account_status_id" parameter, it required and type int';
     public const INVALID_ENERGY_DATA            = 'Incorrect "energy" parameter, it required and type array';
-    public const INVALID_CAN_LIKE               = 'Incorrect "can_like" parameter, it required and type bool';
+    public const INVALID_CAN_LIKE               = 'Incorrect "can_like" parameter, it required and type int';
     public const INVALID_NOTICES_DATA           = 'Incorrect "notices" parameter, it required and type array';
     public const INVALID_NOTICE_DATA            = 'Incorrect notice data, excepted array';
     public const INVALID_LEVEL                  = 'Incorrect "level" data, excepted int';
