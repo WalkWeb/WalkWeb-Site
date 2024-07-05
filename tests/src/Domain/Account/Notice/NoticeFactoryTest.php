@@ -9,6 +9,7 @@ use App\Domain\Account\Notice\NoticeFactory;
 use DateTime;
 use Exception;
 use Test\AbstractTest;
+use WalkWeb\NW\AppException;
 
 class NoticeFactoryTest extends AbstractTest
 {
@@ -37,6 +38,8 @@ class NoticeFactoryTest extends AbstractTest
      * @dataProvider failDataProvider
      * @param array $data
      * @param string $error
+     * @throws NoticeException
+     * @throws AppException
      */
     public function testNoticeFactoryCreateFail(array $data, string $error): void
     {
@@ -57,7 +60,7 @@ class NoticeFactoryTest extends AbstractTest
                     'type'       => 1,
                     'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
                     'message'    => 'message',
-                    'view'       => true,
+                    'view'       => 0,
                     'created_at' => '2019-08-12 14:00:00',
                 ],
             ],
@@ -76,7 +79,7 @@ class NoticeFactoryTest extends AbstractTest
                     'type'       => 1,
                     'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
                     'message'    => 'message',
-                    'view'       => true,
+                    'view'       => 0,
                     'created_at' => '2019-08-12 14:00:00',
                 ],
                 NoticeException::INVALID_ID,
@@ -88,7 +91,7 @@ class NoticeFactoryTest extends AbstractTest
                     'type'       => 1,
                     'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
                     'message'    => 'message',
-                    'view'       => true,
+                    'view'       => 0,
                     'created_at' => '2019-08-12 14:00:00',
                 ],
                 NoticeException::INVALID_ID,
@@ -99,7 +102,7 @@ class NoticeFactoryTest extends AbstractTest
                     'id'         => '7d9593ce-b4c0-483f-a8ac-df0f021cf8ce',
                     'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
                     'message'    => 'message',
-                    'view'       => true,
+                    'view'       => 0,
                     'created_at' => '2019-08-12 14:00:00',
                 ],
                 NoticeException::INVALID_TYPE,
@@ -111,7 +114,7 @@ class NoticeFactoryTest extends AbstractTest
                     'type'       => true,
                     'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
                     'message'    => 'message',
-                    'view'       => true,
+                    'view'       => 0,
                     'created_at' => '2019-08-12 14:00:00',
                 ],
                 NoticeException::INVALID_TYPE,
@@ -122,7 +125,7 @@ class NoticeFactoryTest extends AbstractTest
                     'id'         => '7d9593ce-b4c0-483f-a8ac-df0f021cf8ce',
                     'type'       => 1,
                     'message'    => 'message',
-                    'view'       => true,
+                    'view'       => 0,
                     'created_at' => '2019-08-12 14:00:00',
                 ],
                 NoticeException::INVALID_ACCOUNT_ID,
@@ -134,7 +137,7 @@ class NoticeFactoryTest extends AbstractTest
                     'type'       => 1,
                     'account_id' => 100,
                     'message'    => 'message',
-                    'view'       => true,
+                    'view'       => 0,
                     'created_at' => '2019-08-12 14:00:00',
                 ],
                 NoticeException::INVALID_ACCOUNT_ID,
@@ -145,7 +148,7 @@ class NoticeFactoryTest extends AbstractTest
                     'id'         => '7d9593ce-b4c0-483f-a8ac-df0f021cf8ce',
                     'type'       => 1,
                     'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
-                    'view'       => true,
+                    'view'       => 0,
                     'created_at' => '2019-08-12 14:00:00',
                 ],
                 NoticeException::INVALID_MESSAGE,
@@ -157,7 +160,7 @@ class NoticeFactoryTest extends AbstractTest
                     'type'       => 1,
                     'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
                     'message'    =>[ 'message'],
-                    'view'       => true,
+                    'view'       => 0,
                     'created_at' => '2019-08-12 14:00:00',
                 ],
                 NoticeException::INVALID_MESSAGE,
@@ -192,7 +195,7 @@ class NoticeFactoryTest extends AbstractTest
                     'type'       => 1,
                     'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
                     'message'    => 'message',
-                    'view'       => true,
+                    'view'       => 0,
                 ],
                 NoticeException::INVALID_CREATED_AT,
             ],
@@ -203,7 +206,7 @@ class NoticeFactoryTest extends AbstractTest
                     'type'       => 1,
                     'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
                     'message'    => 'message',
-                    'view'       => true,
+                    'view'       => 0,
                     'created_at' => 10.5,
                 ],
                 NoticeException::INVALID_CREATED_AT,
@@ -215,7 +218,7 @@ class NoticeFactoryTest extends AbstractTest
                     'type'       => 1,
                     'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
                     'message'    => 'message',
-                    'view'       => true,
+                    'view'       => 0,
                     'created_at' => '1111111111',
                 ],
                 NoticeException::INVALID_CREATED_AT,

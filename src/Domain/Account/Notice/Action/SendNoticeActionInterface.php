@@ -15,7 +15,8 @@ interface SendNoticeActionInterface
      * @param string $accountId
      * @param string $message
      * @param int $type
+     * @return NoticeInterface
      * @throws NoticeException
      */
-    public function send(string $accountId, string $message, int $type = NoticeInterface::TYPE_INFO): void;
+    public function send(string $accountId, string $message, int $type = NoticeInterface::TYPE_INFO): NoticeInterface;
 }

@@ -29,7 +29,7 @@ class AccountRepository
      */
     public function get(string $name): AccountInterface
     {
-        $data =  $this->container->getConnectionPool()->getConnection()->query(
+        $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT * FROM `accounts` WHERE `name` = ?',
             [['type' => 's', 'value' => $name]],
             true

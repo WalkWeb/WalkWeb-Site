@@ -6,44 +6,47 @@ namespace Test\src\Domain\Account\Notice\Action;
 
 use App\Domain\Account\Notice\Action\SendNoticeAction;
 use App\Domain\Account\Notice\NoticeException;
-use App\Domain\Account\Notice\NoticeInterface;
-use ReflectionClass;
-use ReflectionException;
+use App\Domain\Account\Notice\NoticeRepository;
+use App\Domain\Account\Notice\NoticeRepositoryInterface;
 use Test\AbstractTest;
-use Test\Mock\Domain\Account\Notice\MockNoticeRepository;
+use WalkWeb\NW\AppException;
 
 class SendNoticeActionTest extends AbstractTest
 {
     /**
-     * Тест на создание и сохранение (как бы сохранение) уведомления для пользователя
+     * Тест на создание и сохранение уведомления для пользователя
      *
      * @throws NoticeException
-     * @throws ReflectionException
+     * @throws AppException
      */
     public function testSendNoticeAction(): void
     {
-        $sendNoticeAction = new SendNoticeAction($mockRepository = new MockNoticeRepository());
+        $sendNoticeAction = new SendNoticeAction($this->getRepository());
 
-        $accountId = '3a08a6c4-ebca-4444-bff5-0eac1634fa15';
-        $message = 'Notice message';
+        $accountId = '1e3a3b27-12da-4c73-a3a7-b83092705bae';
+        $message = 'Notice message 123';
 
-        // Создание уведомление и сохранение его
-        $sendNoticeAction->send($accountId, $message);
+        $sendNotice = $sendNoticeAction->send($accountId, $message);
 
-        // Чтобы получить уведомление из репозитория, используем рефлексию
-        $reflectionClass = new ReflectionClass($mockRepository);
-        $reflectionProperty = $reflectionClass->getProperty('notices');
-        $reflectionProperty->setAccessible(true);
+        $notice = $this->getRepository()->get($sendNotice->getId());
 
-        $notices = $reflectionProperty->getValue($mockRepository);
+        self::assertEquals($notice->getId(), $sendNotice->getId());
+        self::assertEquals($notice->getType(), $sendNotice->getType());
+        self::assertEquals($notice->getAccountId(), $sendNotice->getAccountId());
+        self::assertEquals($notice->getMessage(), $sendNotice->getMessage());
+        self::assertEquals($notice->isView(), $sendNotice->isView());
+        self::assertEquals(
+            $notice->getCreatedAt()->format(self::DATE_FORMAT),
+            $sendNotice->getCreatedAt()->format(self::DATE_FORMAT)
+        );
+    }
 
-        self::assertCount(1, $notices);
-
-        /** @var NoticeInterface $notice */
-        foreach ($notices as $notice) {
-            self::assertEquals($accountId, $notice->getAccountId());
-            self::assertEquals($message, $notice->getMessage());
-            self::assertEquals(NoticeInterface::TYPE_INFO, $notice->getType());
-        }
+    /**
+     * @return NoticeRepositoryInterface
+     * @throws AppException
+     */
+    private function getRepository(): NoticeRepositoryInterface
+    {
+        return new NoticeRepository(self::getContainer());
     }
 }

@@ -26,17 +26,22 @@ class SendNoticeAction implements SendNoticeActionInterface
      * @param string $accountId
      * @param string $message
      * @param int $type
+     * @return NoticeInterface
      * @throws NoticeException
      */
-    public function send(string $accountId, string $message, int $type = NoticeInterface::TYPE_INFO): void
+    public function send(string $accountId, string $message, int $type = NoticeInterface::TYPE_INFO): NoticeInterface
     {
-        $this->noticeRepository->save(new Notice(
+        $notice = new Notice(
             (string)Uuid::uuid4(),
             $type,
             $accountId,
             $message,
             true,
             new DateTime()
-        ));
+        );
+
+        $this->noticeRepository->save($notice);
+
+        return $notice;
     }
 }

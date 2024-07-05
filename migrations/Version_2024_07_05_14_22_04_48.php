@@ -32,11 +32,14 @@ class Version_2024_07_05_14_22_04_48
         $connectionPool->getConnection()->query('
             CREATE TABLE `notices` (
                 `id`         VARCHAR(36) PRIMARY KEY,
-                `type`       TINYINT NOT NULL DEFAULT 1,
+                `type`       TINYINT UNSIGNED NOT NULL DEFAULT 1,
                 `account_id` VARCHAR(36) NOT NULL,
                 `message`    VARCHAR(600) NOT NULL,
                 `view`       TINYINT NOT NULL DEFAULT 0,
-                `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                
+                FOREIGN KEY (`type`) REFERENCES `notice_type`(`id`),
+                FOREIGN KEY (`account_id`) REFERENCES `accounts`(`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ');
 
