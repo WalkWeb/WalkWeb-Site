@@ -7,6 +7,7 @@ namespace Test\src\Domain\Account\Notice;
 use App\Domain\Account\AccountException;
 use App\Domain\Account\Notice\Notice;
 use App\Domain\Account\Notice\NoticeException;
+use App\Domain\Account\Notice\NoticeFactory;
 use App\Domain\Account\Notice\NoticeRepository;
 use App\Domain\Account\Notice\NoticeRepositoryInterface;
 use DateTime;
@@ -101,6 +102,32 @@ class NoticeRepositoryTest extends AbstractTest
         $this->expectExceptionMessage(AccountException::NOT_FOUND);
         $this->getRepository()->save($notice);
     }
+
+    /**
+     * Test on get actual notices for account
+     *
+     * @dataProvider getActualDataProvider
+     * @param string $accountId
+     * @param array $noticesData
+     * @throws AppException
+     * @throws NoticeException
+     */
+    public function testNoticeRepositoryGetActual(string $accountId, array $noticesData): void
+    {
+        $notices = $this->getRepository()->getActual($accountId);
+
+        self::assertSameSize($noticesData, $notices);
+
+        $i = 0;
+        foreach ($notices as $notice) {
+            self::assertEquals(
+                NoticeFactory::create($noticesData[$i]),
+                $notice
+            );
+            $i++;
+        }
+    }
+
     /**
      * @return NoticeRepositoryInterface
      * @throws AppException
@@ -108,5 +135,49 @@ class NoticeRepositoryTest extends AbstractTest
     private function getRepository(): NoticeRepositoryInterface
     {
         return new NoticeRepository(self::getContainer());
+    }
+
+    /**
+     * @return array
+     */
+    public function getActualDataProvider(): array
+    {
+        return [
+            [
+                '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                [
+                    [
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af1',
+                        'type'       => 1,
+                        'account_id' => '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                        'message'    => 'notice message 1',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 11:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af2',
+                        'type'       => 2,
+                        'account_id' => '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                        'message'    => 'notice message 2',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 12:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af3',
+                        'type'       => 3,
+                        'account_id' => '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                        'message'    => 'notice message 3',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 13:00:00',
+                    ],
+                ],
+            ],
+            [
+                'a29393e0-34b4-4419-9c13-f4e8a1b54cf2',
+                [],
+            ],
+        ];
     }
 }

@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Auth;
 
-use App\Domain\Account\AccountException;
 use App\Domain\Account\Energy\EnergyFactory;
 use App\Domain\Account\Group\AccountGroup;
 use App\Domain\Account\MainCharacter\Level\LevelInterface;
-use App\Domain\Account\Notice\NoticeCollection;
-use App\Domain\Account\Notice\NoticeException;
-use App\Domain\Account\Notice\NoticeFactory;
+use App\Domain\Account\Notice\NoticeCollectionFactory;
 use App\Domain\Account\Status\AccountStatus;
-use WalkWeb\NW\AppException;
+use Exception;
 use WalkWeb\NW\Traits\ValidationTrait;
 
 class AuthFactory
@@ -24,10 +21,7 @@ class AuthFactory
      *
      * @param array $data
      * @return AuthInterface
-     * @throws AuthException
-     * @throws AccountException
-     * @throws NoticeException
-     * @throws AppException
+     * @throws Exception
      */
     public static function create(array $data): AuthInterface
     {
@@ -49,16 +43,6 @@ class AuthFactory
             AuthException::INVALID_LEVEL_VALUE . LevelInterface::MIN_LEVEL . '-' . LevelInterface::MAX_LEVEL
         );
 
-        $notices = new NoticeCollection();
-
-        foreach ($data['notices'] as $noticeData) {
-            if (!is_array($noticeData)) {
-                throw new AuthException(AuthException::INVALID_NOTICE_DATA);
-            }
-
-            $notices->add(NoticeFactory::create($noticeData));
-        }
-
         return new Auth(
             $data['id'],
             $data['name'],
@@ -67,7 +51,7 @@ class AuthFactory
             new AccountStatus($data['account_status_id']),
             EnergyFactory::createFromDB($data['energy']),
             (bool)$data['can_like'],
-            $notices,
+            NoticeCollectionFactory::create($data['notices']),
             $data['level'],
             $data['stat_points'],
         );

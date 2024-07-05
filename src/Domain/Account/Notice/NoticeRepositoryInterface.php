@@ -31,4 +31,12 @@ interface NoticeRepositoryInterface
      * @param NoticeInterface $notice
      */
     public function save(NoticeInterface $notice): void;
+
+    /**
+     * Возвращает все актуальные уведомления для указанного пользователя
+     *
+     * @param string $accountId
+     * @return NoticeCollection
+     */
+    public function getActual(string $accountId): NoticeCollection;
 }

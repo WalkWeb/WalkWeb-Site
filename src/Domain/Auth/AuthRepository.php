@@ -55,8 +55,6 @@ class AuthRepository
             throw new AppException(AccountException::NOT_FOUND, Response::NOT_FOUND);
         }
 
-        // TODO если notice === 1 - делать отдельный запрос на актуальные уведомления
-
         $data['energy'] = [
             'energy_id'         => $data['energy_id'],
             'energy'            => $data['energy'],
@@ -65,12 +63,32 @@ class AuthRepository
             'energy_residue'    => $data['energy_residue'],
         ];
 
+        $data['notices'] = $this->getNotice($data['notice'] === 1, $data['id']);
+
         // TODO Mocks
         $data['avatar'] = '';
         $data['level'] = 1;
         $data['stat_points'] = 0;
-        $data['notices'] = [];
 
         return AuthFactory::create($data);
+    }
+
+    /**
+     * @param bool $exist
+     * @param string $accountId
+     * @return array
+     * @throws AppException
+     */
+    public function getNotice(bool $exist, string $accountId): array
+    {
+        if ($exist) {
+            return $this->container->getConnectionPool()->getConnection()->query(
+                'SELECT `id`, `type`, `account_id`, `message`, `view`, `created_at` 
+                FROM `notices` WHERE `account_id` = ? AND `view` = 0',
+                [['type' => 's', 'value' => $accountId]]
+            );
+        }
+
+        return [];
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Account\Notice;
 
 use App\Domain\Account\AccountException;
+use App\Domain\Auth\AuthException;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 use WalkWeb\NW\Response;
@@ -27,7 +28,7 @@ class NoticeRepository implements NoticeRepositoryInterface
     public function get(string $id): NoticeInterface
     {
         $data = $this->container->getConnectionPool()->getConnection()->query(
-            'SELECT * FROM `notices` WHERE `id` = ?',
+            'SELECT `id`, `type`, `account_id`, `message`, `view`, `created_at` FROM `notices` WHERE `id` = ?',
             [['type' => 's', 'value' => $id]],
             true
         );
@@ -37,6 +38,24 @@ class NoticeRepository implements NoticeRepositoryInterface
         }
 
         return NoticeFactory::create($data);
+    }
+
+    /**
+     * @param string $accountId
+     * @return NoticeCollection
+     * @throws AppException
+     * @throws NoticeException
+     * @throws AuthException
+     */
+    public function getActual(string $accountId): NoticeCollection
+    {
+        return NoticeCollectionFactory::create(
+            $this->container->getConnectionPool()->getConnection()->query(
+                'SELECT `id`, `type`, `account_id`, `message`, `view`, `created_at` 
+                FROM `notices` WHERE `account_id` = ? AND `view` = 0',
+                [['type' => 's', 'value' => $accountId]]
+            )
+        );
     }
 
     /**
@@ -66,5 +85,7 @@ class NoticeRepository implements NoticeRepositoryInterface
                 ['type' => 's', 'value' => $notice->getCreatedAt()->format('Y-m-d H:i:s')],
             ]
         );
+
+        // TODO Set accounts.notice = 1
     }
 }
