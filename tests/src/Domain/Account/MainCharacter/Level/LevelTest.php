@@ -74,7 +74,7 @@ class LevelTest extends AbstractTest
     {
         $level = 200;
 
-        $this->expectException(LevelException::class);
+        $this->expectException(AppException::class);
         $this->expectExceptionMessage(LevelException::INVALID_LEVEL . ': ' . $level);
         new Level(
             '3544c1bc-8757-47db-9998-6f14522b5252',

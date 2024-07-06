@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Account\MainCharacter\Era;
 
+use WalkWeb\NW\AppException;
+
 /**
  * Эпохи меняются редко (например, раз-два в год) по этому, чтобы не делать каждый раз запрос на данные по эпохе, данные
  * по ним дублируются в коде
@@ -30,12 +32,12 @@ class EraFactory
      *
      * @param int $id
      * @return EraInterface
-     * @throws EraException
+     * @throws AppException
      */
     public static function create(int $id): EraInterface
     {
         if (!array_key_exists($id, self::$data)) {
-            throw new EraException(EraException::UNKNOWN_ERA . ": $id");
+            throw new AppException(EraException::UNKNOWN_ERA . ": $id");
         }
 
         return new Era($id, self::$data[$id]['name'], self::$data[$id]['actual']);

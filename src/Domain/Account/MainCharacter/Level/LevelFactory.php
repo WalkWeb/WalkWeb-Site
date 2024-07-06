@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Account\MainCharacter\Level;
 
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
-use Exception;
+use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\ValidationTrait;
 
 class LevelFactory
@@ -18,7 +18,7 @@ class LevelFactory
      * @param array $data
      * @param SendNoticeActionInterface $sendNoticeAction
      * @return LevelInterface
-     * @throws Exception
+     * @throws AppException
      */
     public static function create(array $data, SendNoticeActionInterface $sendNoticeAction): LevelInterface
     {

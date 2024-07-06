@@ -7,6 +7,7 @@ namespace Test\src\Domain\Account\MainCharacter\Era;
 use App\Domain\Account\MainCharacter\Era\EraException;
 use App\Domain\Account\MainCharacter\Era\EraFactory;
 use Test\AbstractTest;
+use WalkWeb\NW\AppException;
 
 class EraFactoryTest extends AbstractTest
 {
@@ -17,7 +18,7 @@ class EraFactoryTest extends AbstractTest
      * @param int $id
      * @param string $expectedName
      * @param bool $expectedActive
-     * @throws EraException
+     * @throws AppException
      */
     public function testEraFactoryCreateSuccess(int $id, string $expectedName, bool $expectedActive): void
     {
@@ -31,12 +32,12 @@ class EraFactoryTest extends AbstractTest
     /**
      * Тест на ситуацию, когда передан неизвестный id эпохи
      *
-     * @throws EraException
+     * @throws AppException
      */
     public function testEraFactoryCreateUnknownId(): void
     {
         $id = 99;
-        $this->expectException(EraException::class);
+        $this->expectException(AppException::class);
         $this->expectExceptionMessage(EraException::UNKNOWN_ERA . ": $id");
         EraFactory::create($id);
     }

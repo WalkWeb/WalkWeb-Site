@@ -6,6 +6,7 @@ namespace App\Domain\Account\MainCharacter\Level;
 
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use App\Domain\Account\Notice\NoticeException;
+use WalkWeb\NW\AppException;
 
 class Level implements LevelInterface
 {
@@ -428,7 +429,7 @@ class Level implements LevelInterface
      * @param int $exp
      * @param int $statPoints
      * @param SendNoticeActionInterface $sendNoticeAction
-     * @throws LevelException
+     * @throws AppException
      */
     public function __construct(
         string $accountId,
@@ -508,6 +509,7 @@ class Level implements LevelInterface
      * @param int $addExp
      * @throws LevelException
      * @throws NoticeException
+     * @throws AppException
      */
     public function addExp(int $addExp): void
     {
@@ -535,12 +537,12 @@ class Level implements LevelInterface
     }
 
     /**
-     * @throws LevelException
+     * @throws AppException
      */
     private function setAdditionalParams(): void
     {
         if (!array_key_exists($this->level, self::$levelsData)) {
-            throw new LevelException(LevelException::INVALID_LEVEL . ': ' . $this->level);
+            throw new AppException(LevelException::INVALID_LEVEL . ': ' . $this->level);
         }
 
         $this->expToLevel = self::$levelsData[$this->level]['exp_to_lvl'];
@@ -552,6 +554,7 @@ class Level implements LevelInterface
      *
      * @throws LevelException
      * @throws NoticeException
+     * @throws AppException
      */
     private function increaseLevel(): void
     {
