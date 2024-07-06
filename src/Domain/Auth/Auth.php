@@ -11,6 +11,8 @@ use App\Domain\Account\Status\AccountStatusInterface;
 
 class Auth implements AuthInterface
 {
+    // TODO Add template
+
     private string $id;
     private string $name;
     private string $avatar;

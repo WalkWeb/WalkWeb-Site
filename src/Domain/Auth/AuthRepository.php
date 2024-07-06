@@ -22,7 +22,7 @@ class AuthRepository
     /**
      * @param string $authToken
      * @return AuthInterface|null
-     * @throws Exception
+     * @throws AppException
      */
     public function get(string $authToken): ?AuthInterface
     {

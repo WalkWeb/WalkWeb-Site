@@ -18,11 +18,7 @@ class StatisticsMiddlewareTest extends AbstractTest
     public function testStatisticsMiddleware(): void
     {
         $request = new Request(['REQUEST_URI' => '/']);
-
-
         $response = $this->createApp()->handle($request);
-
-
 
         self::assertCount(1, $response->getHeaders());
 
