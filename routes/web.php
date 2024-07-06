@@ -9,4 +9,6 @@ $routes->post('account.registration', '/registration', 'App\\Handler\\Account\\A
 $routes->get('account.login', '/login', 'App\\Handler\\Account\\AccountLoginPageHandler');
 $routes->post('account.login', '/login', 'App\\Handler\\Account\\AccountLoginHandler');
 
+$routes->addMiddleware('App\\Middleware\\StatisticsMiddleware');
+
 return new WalkWeb\NW\Route\Router($routes);

@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 use WalkWeb\NW\App;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
-use WalkWeb\NW\Route\Router;
 use WalkWeb\NW\Runtime;
 use WalkWeb\NW\Traits\StringTrait;
 
@@ -63,12 +62,12 @@ abstract class AbstractTest extends TestCase
     }
 
     /**
-     * @param Router $router
      * @return App
      * @throws AppException
      */
-    protected function getApp(Router $router): App
+    protected function createApp(): App
     {
+        $router = require __DIR__ . '/../routes/web.php';
         return new App($router, self::createContainer());
     }
 
