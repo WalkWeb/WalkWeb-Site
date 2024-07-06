@@ -125,6 +125,7 @@ class LevelTest extends AbstractTest
         self::assertEquals(1350, $level->getExpToLevel());
         self::assertEquals(8 * LevelInterface::ADD_STAT_POINT, $level->getStatPoints());
 
+        // TODO
         // Проверяем наличие уведомлений
 //        $reflectionClass = new ReflectionClass($noticeRepository);
 //        $reflectionProperty = $reflectionClass->getProperty('notices');
