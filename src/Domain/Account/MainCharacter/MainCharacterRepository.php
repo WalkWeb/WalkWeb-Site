@@ -11,6 +11,8 @@ use WalkWeb\NW\Response;
 
 class MainCharacterRepository
 {
+    public const ADD_SQL = 'INSERT INTO `characters_main` (`id`, `account_id`, `era_id`, `level`, `exp`, `energy_bonus`, `upload_bonus`, `stats_point`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+
     private Container $container;
 
     public function __construct(Container $container)
@@ -18,7 +20,26 @@ class MainCharacterRepository
         $this->container = $container;
     }
 
-    // TODO add
+    /**
+     * @param MainCharacterInterface $character
+     * @throws AppException
+     */
+    public function add(MainCharacterInterface $character): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            self::ADD_SQL,
+            [
+                ['type' => 's', 'value' => $character->getId()],
+                ['type' => 's', 'value' => $character->getAccountId()],
+                ['type' => 'i', 'value' => $character->getEra()->getId()],
+                ['type' => 'i', 'value' => $character->getLevel()->getLevel()],
+                ['type' => 'i', 'value' => $character->getLevel()->getExp()],
+                ['type' => 'i', 'value' => $character->getEnergyBonus()],
+                ['type' => 'i', 'value' => $character->getUploadBonus()],
+                ['type' => 'i', 'value' => $character->getLevel()->getStatPoints()],
+            ]
+        );
+    }
 
     /**
      * @param string $id

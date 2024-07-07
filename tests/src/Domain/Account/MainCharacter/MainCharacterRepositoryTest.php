@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Account\MainCharacter;
 
+use App\Domain\Account\AccountFactory;
+use App\Domain\Account\AccountRepository;
 use App\Domain\Account\MainCharacter\MainCharacterException;
+use App\Domain\Account\MainCharacter\MainCharacterFactory;
 use App\Domain\Account\MainCharacter\MainCharacterRepository;
 use Exception;
 use Test\AbstractTest;
@@ -72,6 +75,52 @@ class MainCharacterRepositoryTest extends AbstractTest
     }
 
     /**
+     * Test on add new MainCharacter
+     *
+     * @dataProvider addDataProvider
+     * @param array $data
+     * @throws AppException
+     */
+    public function testMainCharacterRepositoryAddSuccess(array $data): void
+    {
+        $container = self::getContainer();
+        $sendNotice = $this->getSendNoticeAction();
+        $account = AccountFactory::createNew($data, 'hash_key');
+        $accountRepository = new AccountRepository($container);
+        $mainCharacterRepository = new MainCharacterRepository($container);
+
+        $accountRepository->add($account);
+        $mainCharacter = MainCharacterFactory::createNew($account->getId(), $sendNotice);
+
+        $mainCharacterRepository->add($mainCharacter);
+        $entityCharacter = $mainCharacterRepository->get($mainCharacter->getId(), $sendNotice);
+
+        self::assertEquals($mainCharacter->getId(), $entityCharacter->getId());
+        self::assertEquals($account->getId(), $entityCharacter->getAccountId());
+        self::assertEquals(1, $entityCharacter->getEra()->getId());
+        self::assertEquals(1, $entityCharacter->getLevel()->getLevel());
+        self::assertEquals(0, $entityCharacter->getLevel()->getExp());
+        self::assertEquals(0, $entityCharacter->getEnergyBonus());
+        self::assertEquals(0, $entityCharacter->getUploadBonus());
+        self::assertEquals(0, $entityCharacter->getLevel()->getStatPoints());
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testMainCharacterRepositoryAddUnknownAccountId(): void
+    {
+        $mainCharacter = MainCharacterFactory::createNew(
+            '51fd0337-fa0b-439a-9033-240d78af57e3',
+            $this->getSendNoticeAction()
+        );
+
+        $this->expectException(AppException::class);
+        $this->expectExceptionMessage(MainCharacterRepository::ADD_SQL);
+        $this->getRepository()->add($mainCharacter);
+    }
+
+    /**
      * @return array
      */
     public function successDataProvider(): array
@@ -112,6 +161,27 @@ class MainCharacterRepositoryTest extends AbstractTest
                     'upload_bonus' => 0,
                     'stats_point'  => 10,
                 ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function addDataProvider(): array
+    {
+        return [
+            [
+                [
+                    'login'          => 'User',
+                    'password'       => '123456',
+                    'email'          => 'mail1@gmail.com',
+                    'template'       => 'default',
+                    'ip'             => '127.0.0.1',
+                    'ref'            => 'ref_link1',
+                    'floor_id'       => 1,
+                    'user_agent'     => 'undefined',
+                ]
             ],
         ];
     }

@@ -31,6 +31,8 @@ class Version_2024_07_06_21_51_48_42
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ');
 
+        // TODO add unique index id+era_id
+
         echo "Added characters_main\n";
     }
 }
