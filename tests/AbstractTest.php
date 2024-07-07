@@ -21,6 +21,7 @@ abstract class AbstractTest extends TestCase
     public const DEMO_USER       = '1e3a3b27-12da-4c73-a3a7-b83092705b01';
     public const BLOCKED_USER    = '1e3a3b27-12da-4c73-a3a7-b83092705b02';
     public const NO_END_REG_USER = '1e3a3b27-12da-4c73-a3a7-b83092705b03';
+    public const DEMO_MODERATOR  = '1e3a3b27-12da-4c73-a3a7-b83092705b04';
 
     use StringTrait;
 

@@ -55,20 +55,30 @@ class NoticeRepositoryTest extends AbstractTest
      * @throws AppException
      * @throws NoticeException
      */
-    public function testNoticeRepositorySaveSuccess(): void
+    public function testNoticeRepositoryAddSuccess(): void
     {
+        $accountId = self::DEMO_MODERATOR;
+        $container = self::getContainer();
+        $repository = new NoticeRepository($container);
+
+        self::assertEquals(0, $container->getConnectionPool()->getConnection()->query(
+            'SELECT `notice` FROM `accounts` WHERE `id` = ?',
+            [['type' => 's', 'value' => $accountId]],
+            true
+        )['notice']);
+
         $notice = new Notice(
             'a38153cc-08ab-47a5-8ca0-89767e7aa1c5',
             2,
-            self::DEMO_USER,
+            $accountId,
             'save notice',
             true,
             new DateTime('2021-10-15 20:00:00'),
         );
 
-        $this->getRepository()->save($notice);
+        $this->getRepository()->add($notice);
 
-        $noticeDb = $this->getRepository()->get($notice->getId());
+        $noticeDb = $repository->get($notice->getId());
 
         self::assertEquals($notice->getId(), $noticeDb->getId());
         self::assertEquals($notice->getType(), $noticeDb->getType());
@@ -79,6 +89,12 @@ class NoticeRepositoryTest extends AbstractTest
             $notice->getCreatedAt()->format(self::DATE_FORMAT),
             $noticeDb->getCreatedAt()->format(self::DATE_FORMAT)
         );
+
+        self::assertEquals(1, $container->getConnectionPool()->getConnection()->query(
+            'SELECT `notice` FROM `accounts` WHERE `id` = ?',
+            [['type' => 's', 'value' => $accountId]],
+            true
+        )['notice']);
     }
 
     /**
@@ -87,7 +103,7 @@ class NoticeRepositoryTest extends AbstractTest
      * @throws AppException
      * @throws NoticeException
      */
-    public function testNoticeRepositorySaveAccountIdNotFound(): void
+    public function testNoticeRepositoryAddAccountIdNotFound(): void
     {
         $notice = new Notice(
             'f9d710c0-00e9-4509-99aa-11ba50895b6e',
@@ -100,7 +116,7 @@ class NoticeRepositoryTest extends AbstractTest
 
         $this->expectException(AppException::class);
         $this->expectExceptionMessage(AccountException::NOT_FOUND);
-        $this->getRepository()->save($notice);
+        $this->getRepository()->add($notice);
     }
 
     /**

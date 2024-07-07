@@ -62,7 +62,7 @@ class NoticeRepository implements NoticeRepositoryInterface
      * @param NoticeInterface $notice
      * @throws AppException
      */
-    public function save(NoticeInterface $notice): void
+    public function add(NoticeInterface $notice): void
     {
         $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT `id` FROM `accounts` WHERE `id` = ?',
@@ -86,6 +86,9 @@ class NoticeRepository implements NoticeRepositoryInterface
             ]
         );
 
-        // TODO Set accounts.notice = 1
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `accounts` SET `notice` = 1 WHERE `id` = ?',
+            [['type' => 's', 'value' => $notice->getAccountId()]]
+        );
     }
 }

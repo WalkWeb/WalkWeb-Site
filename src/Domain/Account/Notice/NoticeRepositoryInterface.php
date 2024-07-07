@@ -30,7 +30,7 @@ interface NoticeRepositoryInterface
      *
      * @param NoticeInterface $notice
      */
-    public function save(NoticeInterface $notice): void;
+    public function add(NoticeInterface $notice): void;
 
     /**
      * Возвращает все актуальные уведомления для указанного пользователя

@@ -40,7 +40,7 @@ class SendNoticeAction implements SendNoticeActionInterface
             new DateTime()
         );
 
-        $this->noticeRepository->save($notice);
+        $this->noticeRepository->add($notice);
 
         return $notice;
     }

@@ -240,8 +240,6 @@ class AccountFactory
             AccountException::INVALID_TEMPLATE_LENGTH . AccountInterface::TEMPLATE_MIN_LENGTH . '-' . AccountInterface::TEMPLATE_MAX_LENGTH
         );
 
-        // TODO Проверка на фиксированные значения шаблонов
-
         return $template;
     }
 
