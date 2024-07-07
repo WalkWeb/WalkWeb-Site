@@ -34,6 +34,7 @@ class AuthRepository
             `accounts`.`status_id` as `account_status_id`, 
             `accounts`.`can_like`,
             `accounts`.`notice`,
+            `accounts`.`template`,
             
             `account_energy`.`id` as `energy_id`,
             `account_energy`.`energy` as `energy`,

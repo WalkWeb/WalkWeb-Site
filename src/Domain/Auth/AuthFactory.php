@@ -37,6 +37,7 @@ class AuthFactory
             self::array($data, 'notices', AuthException::INVALID_NOTICES_DATA);
             self::int($data, 'level', AuthException::INVALID_LEVEL);
             self::int($data, 'stat_points', AuthException::INVALID_STAT_POINTS);
+            self::string($data, 'template', AuthException::INVALID_TEMPLATE);
 
             self::intMinMaxValue(
                 $data['level'],
@@ -56,6 +57,7 @@ class AuthFactory
                 NoticeCollectionFactory::create($data['notices']),
                 $data['level'],
                 $data['stat_points'],
+                $data['template'],
             );
         } catch (Exception $e) {
             throw new AppException($e->getMessage());

@@ -11,8 +11,6 @@ use App\Domain\Account\Status\AccountStatusInterface;
 
 class Auth implements AuthInterface
 {
-    // TODO Add template
-
     private string $id;
     private string $name;
     private string $avatar;
@@ -23,6 +21,7 @@ class Auth implements AuthInterface
     private NoticeCollection $notices;
     private int $level;
     private int $statPoints;
+    private string $template;
 
     public function __construct(
         string $id,
@@ -34,7 +33,8 @@ class Auth implements AuthInterface
         bool $canLike,
         NoticeCollection $notices,
         int $level,
-        int $statPoints
+        int $statPoints,
+        string $template
     )
     {
         $this->id = $id;
@@ -47,6 +47,7 @@ class Auth implements AuthInterface
         $this->notices = $notices;
         $this->level = $level;
         $this->statPoints = $statPoints;
+        $this->template = $template;
     }
 
     /**
@@ -121,13 +122,27 @@ class Auth implements AuthInterface
         return $this->level;
     }
 
+    /**
+     * @return int
+     */
     public function getStatPoints(): int
     {
         return $this->statPoints;
     }
 
+    /**
+     * @param int $statPoints
+     */
     public function setStatPoints(int $statPoints): void
     {
         $this->statPoints = $statPoints;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplate(): string
+    {
+        return $this->template;
     }
 }

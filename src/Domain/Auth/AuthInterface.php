@@ -82,12 +82,23 @@ interface AuthInterface
     public function getLevel(): int;
 
     /**
+     * Возвращает количество свободных очков параметров основного персонажа
+     *
      * @return int
      */
     public function getStatPoints(): int;
 
     /**
+     * Устанавливает новое количество свободных очков параметров основного персонажа
+     *
      * @param int $statPoints
      */
     public function setStatPoints(int $statPoints): void;
+
+    /**
+     * Возвращает используемый пользователем шаблон сайта
+     *
+     * @return string
+     */
+    public function getTemplate(): string;
 }
