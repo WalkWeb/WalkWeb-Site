@@ -6,12 +6,15 @@ namespace Test\src\Domain\Account\MainCharacter;
 
 use App\Domain\Account\MainCharacter\MainCharacterException;
 use App\Domain\Account\MainCharacter\MainCharacterFactory;
+use Ramsey\Uuid\Uuid;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 
 class MainCharacterFactoryTest extends AbstractTest
 {
     /**
+     * Test on success create MainCharacter from array data
+     *
      * @dataProvider successDataProvider
      * @param array $data
      * @throws AppException
@@ -31,6 +34,8 @@ class MainCharacterFactoryTest extends AbstractTest
     }
 
     /**
+     * Test on failure create MainCharacter from array data
+     *
      * @dataProvider failDataProvider
      * @param array $data
      * @param string $error
@@ -40,6 +45,26 @@ class MainCharacterFactoryTest extends AbstractTest
         $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
         MainCharacterFactory::create($data, $this->getSendNoticeAction());
+    }
+
+    /**
+     * Test on success create new MainCharacter
+     *
+     * @throws AppException
+     */
+    public function testMainCharacterFactoryCreateNewSuccess(): void
+    {
+        $accountId = '672cbfaa-731b-4065-a9b0-cd3bf3e9066f';
+        $character = MainCharacterFactory::createNew($accountId, $this->getSendNoticeAction());
+
+        self::assertTrue(Uuid::isValid($character->getId()));
+        self::assertEquals($accountId, $character->getAccountId());
+        self::assertEquals(1, $character->getEra()->getId());
+        self::assertEquals(1, $character->getLevel()->getLevel());
+        self::assertEquals(0, $character->getLevel()->getExp());
+        self::assertEquals(0, $character->getEnergyBonus());
+        self::assertEquals(0, $character->getUploadBonus());
+        self::assertEquals(0, $character->getLevel()->getStatPoints());
     }
 
     /**

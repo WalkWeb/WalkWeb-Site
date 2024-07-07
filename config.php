@@ -60,3 +60,6 @@ define('MAIL_CONFIG', [
     'smtp_password' => 'smtp_password',
     'from'          => 'mail@mail.com',
 ]);
+
+/** Текущая актуальная эра */
+define('ACTIVE_ERA', 1);

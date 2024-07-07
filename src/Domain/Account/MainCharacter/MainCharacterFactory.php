@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Domain\Account\MainCharacter;
 
 use App\Domain\Account\MainCharacter\Era\EraFactory;
+use App\Domain\Account\MainCharacter\Level\Level;
 use App\Domain\Account\MainCharacter\Level\LevelFactory;
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
+use Ramsey\Uuid\Uuid;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\ValidationTrait;
 
@@ -35,5 +37,24 @@ class MainCharacterFactory
         );
     }
 
-    // TODO createNew
+    /**
+     * @param string $accountId
+     * @param SendNoticeActionInterface $sendNoticeAction
+     * @return MainCharacterInterface
+     * @throws AppException
+     */
+    public static function createNew(string $accountId, SendNoticeActionInterface $sendNoticeAction): MainCharacterInterface
+    {
+        $id = Uuid::uuid4()->toString();
+        self::uuid($accountId, MainCharacterException::INVALID_ACCOUNT_ID_VALUE);
+
+        return new MainCharacter(
+            $id,
+            $accountId,
+            EraFactory::create(ACTIVE_ERA),
+            new Level($accountId, $id, 1, 0, 0, $sendNoticeAction),
+            0,
+            0
+        );
+    }
 }
