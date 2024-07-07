@@ -6,6 +6,10 @@ namespace App\Handler\Account;
 
 use App\Domain\Account\AccountFactory;
 use App\Domain\Account\AccountRepository;
+use App\Domain\Account\MainCharacter\MainCharacterFactory;
+use App\Domain\Account\MainCharacter\MainCharacterRepository;
+use App\Domain\Account\Notice\Action\SendNoticeAction;
+use App\Domain\Account\Notice\NoticeRepository;
 use WalkWeb\NW\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
@@ -39,9 +43,14 @@ class AccountRegistrationHandler extends AbstractHandler
             $body['user_agent'] = '';
 
             $account = AccountFactory::createNew($body, KEY);
-
             $repository = new AccountRepository($this->container);
+            $mainCharacterRepository = new MainCharacterRepository($this->container);
+            $sendNoticeAction = new SendNoticeAction(new NoticeRepository($this->container));
+
             $repository->add($account);
+
+            $mainCharacter = MainCharacterFactory::createNew($account->getId(), $sendNoticeAction);
+            $mainCharacterRepository->add($mainCharacter);
 
             return $this->render('account/registration_complete');
 

@@ -40,17 +40,30 @@ class AccountRegistrationHandlerTest extends AbstractTest
         self::assertMatchesRegularExpression('/Вы успешно зарегистрировались!/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
 
-        $data = self::getContainer()->getConnectionPool()->getConnection()->query(
+        $account = self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT * FROM `accounts` WHERE `login` = ?',
             [['type' => 's', 'value' => $login]],
             true
         );
 
-        self::assertEquals($data['login'], $login);
-        self::assertEquals($data['name'], $login);
-        self::assertEquals($data['email'], $email);
-        self::assertEquals($data['floor_id'], (int)$floorId);
-        self::assertEquals($data['ip'], $ip);
+        self::assertEquals($account['login'], $login);
+        self::assertEquals($account['name'], $login);
+        self::assertEquals($account['email'], $email);
+        self::assertEquals($account['floor_id'], (int)$floorId);
+        self::assertEquals($account['ip'], $ip);
+
+        $mainCharacter = self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `characters_main` WHERE `account_id` = ?',
+            [['type' => 's', 'value' => $account['id']]],
+            true
+        );
+
+        self::assertEquals(ACTIVE_ERA, $mainCharacter['era_id']);
+        self::assertEquals(1, $mainCharacter['level']);
+        self::assertEquals(0, $mainCharacter['exp']);
+        self::assertEquals(0, $mainCharacter['energy_bonus']);
+        self::assertEquals(0, $mainCharacter['upload_bonus']);
+        self::assertEquals(0, $mainCharacter['stats_point']);
     }
 
     /**
