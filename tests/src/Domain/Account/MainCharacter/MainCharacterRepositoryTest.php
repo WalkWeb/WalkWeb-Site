@@ -57,7 +57,9 @@ class MainCharacterRepositoryTest extends AbstractTest
      */
     public function testMainCharacterRepositoryUpdateSuccess(): void
     {
-        $mainCharacter = $this->getRepository()->get('2e437627-7b06-456a-b0c6-e70150492901', $this->getSendNoticeAction());
+        $mainCharacterId = '2e437627-7b06-456a-b0c6-e70150492910';
+
+        $mainCharacter = $this->getRepository()->get($mainCharacterId, $this->getSendNoticeAction());
 
         self::assertEquals(1, $mainCharacter->getLevel()->getLevel());
         self::assertEquals(0, $mainCharacter->getLevel()->getExp());
@@ -67,7 +69,7 @@ class MainCharacterRepositoryTest extends AbstractTest
 
         $this->getRepository()->update($mainCharacter);
 
-        $mainCharacter = $this->getRepository()->get('2e437627-7b06-456a-b0c6-e70150492901', $this->getSendNoticeAction());
+        $mainCharacter = $this->getRepository()->get($mainCharacterId, $this->getSendNoticeAction());
 
         self::assertEquals(4, $mainCharacter->getLevel()->getLevel());
         self::assertEquals(500, $mainCharacter->getLevel()->getExp());

@@ -23,6 +23,8 @@ class AuthRepositoryTest extends AbstractTest
      * @param int $statusId
      * @param string $energyId
      * @param array $noticesData
+     * @param int $level
+     * @param int $statPoints
      * @throws Exception
      */
     public function testAuthRepositoryGetSuccess(
@@ -31,7 +33,9 @@ class AuthRepositoryTest extends AbstractTest
         string $name,
         int $statusId,
         string $energyId,
-        array $noticesData
+        array $noticesData,
+        int $level,
+        int $statPoints
     ): void
     {
         $auth = $this->getRepository()->get($authToken);
@@ -59,10 +63,11 @@ class AuthRepositoryTest extends AbstractTest
             $i++;
         }
 
+        self::assertEquals($level, $auth->getLevel());
+        self::assertEquals($statPoints, $auth->getStatPoints());
+
         // TODO Mock
         self::assertEquals('', $auth->getAvatar());
-        self::assertEquals(1, $auth->getLevel());
-        self::assertEquals(0, $auth->getStatPoints());
     }
 
     /**
@@ -126,6 +131,8 @@ class AuthRepositoryTest extends AbstractTest
                         'created_at' => '2021-12-25 13:00:00',
                     ],
                 ],
+                1,
+                0
             ],
             [
                 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a2',
@@ -134,6 +141,8 @@ class AuthRepositoryTest extends AbstractTest
                 2,
                 '17746e87-4e15-4c60-8b2f-8cb01032c47a',
                 [],
+                2,
+                5,
             ],
         ];
     }

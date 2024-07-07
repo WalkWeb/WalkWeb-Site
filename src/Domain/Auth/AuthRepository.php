@@ -36,6 +36,9 @@ class AuthRepository
             `accounts`.`notice`,
             `accounts`.`template`,
             
+            `characters_main`.`level`,
+            `characters_main`.`stats_point` as `stat_points`,
+       
             `account_energy`.`id` as `energy_id`,
             `account_energy`.`energy` as `energy`,
             `account_energy`.`bonus` as `energy_bonus`,
@@ -45,6 +48,7 @@ class AuthRepository
             FROM `accounts`
                 
             JOIN `account_energy` on `accounts`.`energy_id` = `account_energy`.`id`
+            JOIN `characters_main` on `accounts`.`id` = `characters_main`.`account_id`
 
             WHERE `accounts`.`auth_token` = ?',
             [['type' => 's', 'value' => $authToken]],
@@ -67,8 +71,6 @@ class AuthRepository
 
         // TODO Mocks
         $data['avatar'] = '';
-        $data['level'] = 1;
-        $data['stat_points'] = 0;
 
         return AuthFactory::create($data);
     }
