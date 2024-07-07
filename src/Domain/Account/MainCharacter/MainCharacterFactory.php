@@ -34,4 +34,6 @@ class MainCharacterFactory
             self::int($data, 'upload_bonus', MainCharacterException::INVALID_UPLOAD_BONUS)
         );
     }
+
+    // TODO createNew
 }

@@ -7,12 +7,8 @@ namespace Test\src\Domain\Account\MainCharacter\Level;
 use App\Domain\Account\MainCharacter\Level\LevelException;
 use App\Domain\Account\MainCharacter\Level\LevelFactory;
 use App\Domain\Account\MainCharacter\Level\LevelInterface;
-use App\Domain\Account\Notice\Action\SendNoticeAction;
-use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
-use App\Domain\Account\Notice\NoticeRepository;
 use Exception;
 use Test\AbstractTest;
-use WalkWeb\NW\AppException;
 
 class LevelFactoryTest extends AbstractTest
 {
@@ -336,14 +332,5 @@ class LevelFactoryTest extends AbstractTest
                 LevelException::INVALID_STAT_POINTS_VALUE . LevelInterface::MIN_STAT_POINTS . '-' . LevelInterface::MAX_STAT_POINTS,
             ],
         ];
-    }
-
-    /**
-     * @return SendNoticeActionInterface
-     * @throws AppException
-     */
-    private function getSendNoticeAction(): SendNoticeActionInterface
-    {
-        return new SendNoticeAction(new NoticeRepository(self::getContainer()));
     }
 }

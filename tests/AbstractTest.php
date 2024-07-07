@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Test;
 
+use App\Domain\Account\Notice\Action\SendNoticeAction;
+use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
+use App\Domain\Account\Notice\NoticeRepository;
 use PHPUnit\Framework\TestCase;
 use WalkWeb\NW\App;
 use WalkWeb\NW\AppException;
@@ -13,10 +16,11 @@ use WalkWeb\NW\Traits\StringTrait;
 
 abstract class AbstractTest extends TestCase
 {
-    public const DATE_FORMAT  = 'Y-m-d H:i:s';
+    public const DATE_FORMAT     = 'Y-m-d H:i:s';
 
-    public const DEMO_USER    = '1e3a3b27-12da-4c73-a3a7-b83092705b01';
-    public const BLOCKED_USER = '1e3a3b27-12da-4c73-a3a7-b83092705b02';
+    public const DEMO_USER       = '1e3a3b27-12da-4c73-a3a7-b83092705b01';
+    public const BLOCKED_USER    = '1e3a3b27-12da-4c73-a3a7-b83092705b02';
+    public const NO_END_REG_USER = '1e3a3b27-12da-4c73-a3a7-b83092705b03';
 
     use StringTrait;
 
@@ -102,5 +106,14 @@ abstract class AbstractTest extends TestCase
         $container->set(Runtime::class, new Runtime());
 
         return $container;
+    }
+
+    /**
+     * @return SendNoticeActionInterface
+     * @throws AppException
+     */
+    protected function getSendNoticeAction(): SendNoticeActionInterface
+    {
+        return new SendNoticeAction(new NoticeRepository(self::getContainer()));
     }
 }

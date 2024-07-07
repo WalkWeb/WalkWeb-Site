@@ -6,9 +6,6 @@ namespace Test\src\Domain\Account\MainCharacter;
 
 use App\Domain\Account\MainCharacter\MainCharacterException;
 use App\Domain\Account\MainCharacter\MainCharacterFactory;
-use App\Domain\Account\Notice\Action\SendNoticeAction;
-use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
-use App\Domain\Account\Notice\NoticeRepository;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 
@@ -236,14 +233,5 @@ class MainCharacterFactoryTest extends AbstractTest
                 MainCharacterException::INVALID_UPLOAD_BONUS,
             ],
         ];
-    }
-
-    /**
-     * @return SendNoticeActionInterface
-     * @throws AppException
-     */
-    private function getSendNoticeAction(): SendNoticeActionInterface
-    {
-        return new SendNoticeAction(new NoticeRepository(self::getContainer()));
     }
 }

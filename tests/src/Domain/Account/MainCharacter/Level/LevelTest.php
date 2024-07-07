@@ -244,13 +244,4 @@ class LevelTest extends AbstractTest
             ],
         ];
     }
-
-    /**
-     * @return SendNoticeActionInterface
-     * @throws AppException
-     */
-    private function getSendNoticeAction(): SendNoticeActionInterface
-    {
-        return new SendNoticeAction(new NoticeRepository(self::getContainer()));
-    }
 }
