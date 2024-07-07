@@ -94,7 +94,7 @@ class AuthRepositoryTest extends AbstractTest
         return [
             [
                 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1',
-                '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                self::DEMO_USER,
                 'DemoUser',
                 1,
                 '2dad01e1-af9d-479d-9f48-92823f585827',
@@ -102,7 +102,7 @@ class AuthRepositoryTest extends AbstractTest
                     [
                         'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af1',
                         'type'       => 1,
-                        'account_id' => '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                        'account_id' => self::DEMO_USER,
                         'message'    => 'notice message 1',
                         'view'       => 0,
                         'created_at' => '2021-12-25 11:00:00',
@@ -111,7 +111,7 @@ class AuthRepositoryTest extends AbstractTest
 
                         'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af2',
                         'type'       => 2,
-                        'account_id' => '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                        'account_id' => self::DEMO_USER,
                         'message'    => 'notice message 2',
                         'view'       => 0,
                         'created_at' => '2021-12-25 12:00:00',
@@ -120,7 +120,7 @@ class AuthRepositoryTest extends AbstractTest
 
                         'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af3',
                         'type'       => 3,
-                        'account_id' => '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                        'account_id' => self::DEMO_USER,
                         'message'    => 'notice message 3',
                         'view'       => 0,
                         'created_at' => '2021-12-25 13:00:00',
@@ -129,7 +129,7 @@ class AuthRepositoryTest extends AbstractTest
             ],
             [
                 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a2',
-                'a29393e0-34b4-4419-9c13-f4e8a1b54cf2',
+                self::BLOCKED_USER,
                 'BlockedUser',
                 2,
                 '17746e87-4e15-4c60-8b2f-8cb01032c47a',

@@ -94,7 +94,7 @@ class LevelTest extends AbstractTest
     public function testLevelAddExpSuccess(): void
     {
         $level = new Level(
-            $accountId = '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+            $accountId = self::DEMO_USER,
             '556d9249-5f5f-47d4-b41c-ca580f6c5e23',
             1,
             0, 0,
@@ -175,7 +175,7 @@ class LevelTest extends AbstractTest
     public function testLevelAddOverExp(): void
     {
         $level = new Level(
-            '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+            self::DEMO_USER,
             '556d9249-5f5f-47d4-b41c-ca580f6c5e23',
             100,
             2396700 + 10000,

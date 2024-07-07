@@ -127,7 +127,7 @@ class AccountFactoryTest extends AbstractTest
         return [
             [
                 [
-                    'id'             => '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                    'id'             => self::DEMO_USER,
                     'login'          => 'LoginUser',
                     'name'           => 'NameUser',
                     'password'       => '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea',

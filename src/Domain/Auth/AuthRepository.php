@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\Auth;
 
 use App\Domain\Account\AccountException;
-use Exception;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 use WalkWeb\NW\Response;

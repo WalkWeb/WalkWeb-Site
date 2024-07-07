@@ -30,7 +30,7 @@ class NoticeRepositoryTest extends AbstractTest
 
         self::assertEquals($id, $notice->getId());
         self::assertEquals(1, $notice->getType());
-        self::assertEquals('1e3a3b27-12da-4c73-a3a7-b83092705bae', $notice->getAccountId());
+        self::assertEquals(self::DEMO_USER, $notice->getAccountId());
         self::assertEquals('notice message 1', $notice->getMessage());
         self::assertFalse($notice->isView());
         self::assertEquals('2021-12-25 11:00:00', $notice->getCreatedAt()->format(self::DATE_FORMAT));
@@ -60,7 +60,7 @@ class NoticeRepositoryTest extends AbstractTest
         $notice = new Notice(
             'a38153cc-08ab-47a5-8ca0-89767e7aa1c5',
             2,
-            '22493866-7471-4333-b01f-d8eb65b26035',
+            self::DEMO_USER,
             'save notice',
             true,
             new DateTime('2021-10-15 20:00:00'),
@@ -144,12 +144,12 @@ class NoticeRepositoryTest extends AbstractTest
     {
         return [
             [
-                '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                self::DEMO_USER,
                 [
                     [
                         'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af1',
                         'type'       => 1,
-                        'account_id' => '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                        'account_id' => self::DEMO_USER,
                         'message'    => 'notice message 1',
                         'view'       => 0,
                         'created_at' => '2021-12-25 11:00:00',
@@ -158,7 +158,7 @@ class NoticeRepositoryTest extends AbstractTest
 
                         'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af2',
                         'type'       => 2,
-                        'account_id' => '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                        'account_id' => self::DEMO_USER,
                         'message'    => 'notice message 2',
                         'view'       => 0,
                         'created_at' => '2021-12-25 12:00:00',
@@ -167,7 +167,7 @@ class NoticeRepositoryTest extends AbstractTest
 
                         'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af3',
                         'type'       => 3,
-                        'account_id' => '1e3a3b27-12da-4c73-a3a7-b83092705bae',
+                        'account_id' => self::DEMO_USER,
                         'message'    => 'notice message 3',
                         'view'       => 0,
                         'created_at' => '2021-12-25 13:00:00',

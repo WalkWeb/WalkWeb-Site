@@ -13,7 +13,10 @@ use WalkWeb\NW\Traits\StringTrait;
 
 abstract class AbstractTest extends TestCase
 {
-    public const DATE_FORMAT = 'Y-m-d H:i:s';
+    public const DATE_FORMAT  = 'Y-m-d H:i:s';
+
+    public const DEMO_USER    = '1e3a3b27-12da-4c73-a3a7-b83092705b01';
+    public const BLOCKED_USER = '1e3a3b27-12da-4c73-a3a7-b83092705b02';
 
     use StringTrait;
 

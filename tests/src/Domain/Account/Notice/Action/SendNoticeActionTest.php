@@ -23,7 +23,7 @@ class SendNoticeActionTest extends AbstractTest
     {
         $sendNoticeAction = new SendNoticeAction($this->getRepository());
 
-        $accountId = '1e3a3b27-12da-4c73-a3a7-b83092705bae';
+        $accountId = self::DEMO_USER;
         $message = 'Notice message 123';
 
         $sendNotice = $sendNoticeAction->send($accountId, $message);
