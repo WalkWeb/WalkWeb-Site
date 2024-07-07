@@ -37,9 +37,9 @@ class AccountRegistrationHandler extends AbstractHandler
             $body['template'] = TEMPLATE_DEFAULT;
             $body['ip'] = $this->getIp($request);
             $body['floor_id'] = (int)$body['floor_id'];
+            $body['ref'] = $request->ref;
 
             // TODO Add
-            $body['ref'] = '';
             $body['user_agent'] = '';
 
             $account = AccountFactory::createNew($body, KEY);
@@ -63,6 +63,7 @@ class AccountRegistrationHandler extends AbstractHandler
                     'login'     => $body['login'] ?? '',
                     'email'     => $body['email'] ?? '',
                     'floor'     => $body['floor_id'] ?? 1,
+                    'ref'       => $request->ref,
                 ]
             );
         }

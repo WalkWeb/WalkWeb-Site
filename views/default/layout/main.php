@@ -25,7 +25,7 @@
             <ul>
                 <li><a href="#">Добавить пост</a></li>
                 <li><a href="/login">Вход</a></li>
-                <li><a href="/registration">Регистрация</a></li>
+                <li><a href="/registration/main">Регистрация</a></li>
                 <li><a href="#">Статистика</a></li>
             </ul>
         </div>

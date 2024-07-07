@@ -22,6 +22,9 @@ class AccountRegistrationPageHandler extends AbstractHandler
     {
         // TODO Проверка на то, что пользователь уже авторизован
 
-        return $this->render('account/registration', ['csrfToken' => $this->container->getCsrf()->getCsrfToken()]);
+        return $this->render('account/registration', [
+            'csrfToken' => $this->container->getCsrf()->getCsrfToken(),
+            'ref'       => $request->ref,
+        ]);
     }
 }

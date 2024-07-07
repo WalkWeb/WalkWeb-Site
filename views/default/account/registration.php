@@ -1,7 +1,13 @@
 <?php
 
+use WalkWeb\NW\AppException;
+
+if (empty($ref) || !is_string($ref)) {
+    throw new AppException('account/registration miss $ref');
+}
+
 $this->title = 'Регистрация';
-$postAction = '/registration';
+$postAction = "/registration/$ref";
 
 echo '<h1>' . htmlspecialchars($this->title) . '</h1>';
 

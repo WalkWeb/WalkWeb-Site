@@ -20,6 +20,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
      * @param string $password
      * @param string $floorId
      * @param string $ip
+     * @param string $ref
      * @throws AppException
      */
     public function testAccountRegistrationHandlerSuccess(
@@ -28,7 +29,8 @@ class AccountRegistrationHandlerTest extends AbstractTest
         string $email,
         string $password,
         string $floorId,
-        string $ip
+        string $ip,
+        string $ref
     ): void
     {
         $request = new Request(
@@ -46,11 +48,12 @@ class AccountRegistrationHandlerTest extends AbstractTest
             true
         );
 
-        self::assertEquals($account['login'], $login);
-        self::assertEquals($account['name'], $login);
-        self::assertEquals($account['email'], $email);
-        self::assertEquals($account['floor_id'], (int)$floorId);
-        self::assertEquals($account['ip'], $ip);
+        self::assertEquals($login, $account['login']);
+        self::assertEquals($login, $account['name']);
+        self::assertEquals($email, $account['email']);
+        self::assertEquals((int)$floorId, $account['floor_id']);
+        self::assertEquals($ip, $account['ip']);
+        self::assertEquals($ref, $account['ref']);
 
         $mainCharacter = self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT * FROM `characters_main` WHERE `account_id` = ?',
@@ -77,7 +80,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
         $floorId = '1';
 
         $request = new Request(
-            ['REQUEST_URI' => '/registration', 'REQUEST_METHOD' => 'POST'],
+            ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
             ['login' => $login, 'email' => $email, 'password' => $password, 'floor_id' => $floorId],
         );
 
@@ -103,7 +106,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
         $floorId = '1';
 
         $request = new Request(
-            ['REQUEST_URI' => '/registration', 'REQUEST_METHOD' => 'POST'],
+            ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
             ['login' => $login, 'email' => $email, 'password' => $password, 'floor_id' => $floorId],
         );
 
@@ -129,7 +132,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
         $floorId = '1';
 
         $request = new Request(
-            ['REQUEST_URI' => '/registration', 'REQUEST_METHOD' => 'POST'],
+            ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
             ['login' => $login, 'email' => $email, 'password' => $password, 'floor_id' => $floorId],
         );
 
@@ -150,7 +153,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
     public function testAccountRegistrationHandlerInvalidCsrfToken(): void
     {
         $request = new Request(
-            ['REQUEST_URI' => '/registration', 'REQUEST_METHOD' => 'POST'],
+            ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
             ['login' => 'User-11', 'email' => '11mail@mail.com', 'password' => '12345', 'floor_id' => '1'],
         );
 
@@ -167,36 +170,40 @@ class AccountRegistrationHandlerTest extends AbstractTest
     {
         return [
             [
-                ['REQUEST_URI' => '/registration', 'REQUEST_METHOD' => 'POST'],
+                ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
                 'User-10',
                 '10mail@mail.com',
                 '12345',
                 '1',
                 'undefined',
+                'main',
             ],
             [
-                ['REQUEST_URI' => '/registration', 'REQUEST_METHOD' => 'POST', 'HTTP_CLIENT_IP' => '0.0.0.0'],
+                ['REQUEST_URI' => '/registration/ref100', 'REQUEST_METHOD' => 'POST', 'HTTP_CLIENT_IP' => '0.0.0.0'],
                 'User-20',
                 '20mail@mail.com',
                 '12345',
                 '2',
                 '0.0.0.0',
+                'ref100',
             ],
             [
-                ['REQUEST_URI' => '/registration', 'REQUEST_METHOD' => 'POST', 'HTTP_X_FORWARDED_FOR' => '1.1.1.1'],
+                ['REQUEST_URI' => '/registration/default', 'REQUEST_METHOD' => 'POST', 'HTTP_X_FORWARDED_FOR' => '1.1.1.1'],
                 'User-30',
                 '30mail@mail.com',
                 '123456',
                 '1',
                 '1.1.1.1',
+                'default',
             ],
             [
-                ['REQUEST_URI' => '/registration', 'REQUEST_METHOD' => 'POST', 'REMOTE_ADDR' => '2.2.2.2'],
+                ['REQUEST_URI' => '/registration/aaa', 'REQUEST_METHOD' => 'POST', 'REMOTE_ADDR' => '2.2.2.2'],
                 'User-40',
                 '40mail@mail.com',
                 '12345',
                 '1',
                 '2.2.2.2',
+                'aaa',
             ],
         ];
     }

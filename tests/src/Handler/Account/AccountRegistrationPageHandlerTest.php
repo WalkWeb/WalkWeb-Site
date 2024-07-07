@@ -18,7 +18,7 @@ class AccountRegistrationPageHandlerTest extends AbstractTest
      */
     public function testAccountRegistrationPageHandlerSuccess(): void
     {
-        $request = new Request(['REQUEST_URI' => '/registration']);
+        $request = new Request(['REQUEST_URI' => '/registration/main']);
         $response = $this->app->handle($request);
 
         self::assertMatchesRegularExpression('/Регистрация/', $response->getBody());
