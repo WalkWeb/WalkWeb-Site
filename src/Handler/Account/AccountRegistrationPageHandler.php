@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Handler\Account;
 
+use App\Domain\Account\AccountException;
+use App\Domain\Account\AccountInterface;
 use WalkWeb\NW\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
@@ -22,9 +24,19 @@ class AccountRegistrationPageHandler extends AbstractHandler
     {
         // TODO Проверка на то, что пользователь уже авторизован
 
+        $ref = $request->ref;
+
+        if (mb_strlen($ref) > AccountInterface::REF_MAX_LENGTH) {
+            return $this->render('account/registration', [
+                'csrfToken' => $this->container->getCsrf()->getCsrfToken(),
+                'error'     => AccountException::INVALID_REF_LENGTH . AccountInterface::REF_MIN_LENGTH . '-' . AccountInterface::REF_MAX_LENGTH,
+                'ref'       => $ref,
+            ]);
+        }
+
         return $this->render('account/registration', [
             'csrfToken' => $this->container->getCsrf()->getCsrfToken(),
-            'ref'       => $request->ref,
+            'ref'       => $ref,
         ]);
     }
 }

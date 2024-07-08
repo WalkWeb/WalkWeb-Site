@@ -2177,62 +2177,6 @@ class AccountFactoryTest extends AbstractTest
                 AccountException::INVALID_EMAIL_SYMBOL,
             ],
 
-            // miss template
-            [
-                [
-                    'login'          => 'NameUser',
-                    'password'       => '123456',
-                    'email'          => 'mail1@mail.com',
-                    'ip'             => '127.0.0.1',
-                    'ref'            => 'ref_link1',
-                    'floor_id'       => 1,
-                    'user_agent'     => 'undefined',
-                ],
-                AccountException::INVALID_TEMPLATE,
-            ],
-            // template invalid type
-            [
-                [
-                    'login'          => 'NameUser',
-                    'password'       => '123456',
-                    'email'          => 'mail1@mail.com',
-                    'template'       => null,
-                    'ip'             => '127.0.0.1',
-                    'ref'            => 'ref_link1',
-                    'floor_id'       => 1,
-                    'user_agent'     => 'undefined',
-                ],
-                AccountException::INVALID_TEMPLATE,
-            ],
-            // template over min length
-            [
-                [
-                    'login'          => 'NameUser',
-                    'password'       => '123456',
-                    'email'          => 'mail1@mail.com',
-                    'template'       => self::generateString(AccountInterface::TEMPLATE_MIN_LENGTH - 1),
-                    'ip'             => '127.0.0.1',
-                    'ref'            => 'ref_link1',
-                    'floor_id'       => 1,
-                    'user_agent'     => 'undefined',
-                ],
-                AccountException::INVALID_TEMPLATE_LENGTH . AccountInterface::TEMPLATE_MIN_LENGTH . '-' . AccountInterface::TEMPLATE_MAX_LENGTH,
-            ],
-            // template over max length
-            [
-                [
-                    'login'          => 'NameUser',
-                    'password'       => '123456',
-                    'email'          => 'mail1@mail.com',
-                    'template'       => self::generateString(AccountInterface::TEMPLATE_MAX_LENGTH + 1),
-                    'ip'             => '127.0.0.1',
-                    'ref'            => 'ref_link1',
-                    'floor_id'       => 1,
-                    'user_agent'     => 'undefined',
-                ],
-                AccountException::INVALID_TEMPLATE_LENGTH . AccountInterface::TEMPLATE_MIN_LENGTH . '-' . AccountInterface::TEMPLATE_MAX_LENGTH,
-            ],
-
             // miss ip
             [
                 [

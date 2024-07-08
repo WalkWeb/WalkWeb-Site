@@ -87,7 +87,7 @@ class AccountFactory
                 false,
                 self::generateString(30),
                 self::generateString(30),
-                self::templateValidate($data),
+                TEMPLATE_DEFAULT,
                 self::ipValidate($data),
                 self::refValidate($data),
                 self::userAgentValidate($data),

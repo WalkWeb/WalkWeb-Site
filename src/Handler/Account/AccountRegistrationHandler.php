@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Handler\Account;
 
+use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountFactory;
+use App\Domain\Account\AccountInterface;
 use App\Domain\Account\AccountRepository;
 use App\Domain\Account\MainCharacter\MainCharacterFactory;
 use App\Domain\Account\MainCharacter\MainCharacterRepository;
@@ -27,6 +29,7 @@ class AccountRegistrationHandler extends AbstractHandler
     public function __invoke(Request $request): Response
     {
         $body = $request->getBody();
+        $ref = $request->ref;
 
         try {
             $csrfToken = $request->csrf;
@@ -34,10 +37,13 @@ class AccountRegistrationHandler extends AbstractHandler
                 throw new AppException('Invalid csrf-token');
             }
 
-            $body['template'] = TEMPLATE_DEFAULT;
+            if (mb_strlen($ref) > AccountInterface::REF_MAX_LENGTH) {
+                throw new AppException(AccountException::INVALID_REF_LENGTH . AccountInterface::REF_MIN_LENGTH . '-' . AccountInterface::REF_MAX_LENGTH);
+            }
+
             $body['ip'] = $this->getIp($request);
             $body['floor_id'] = (int)$body['floor_id'];
-            $body['ref'] = $request->ref;
+            $body['ref'] = $ref;
 
             // TODO Add
             $body['user_agent'] = '';
@@ -63,7 +69,7 @@ class AccountRegistrationHandler extends AbstractHandler
                     'login'     => $body['login'] ?? '',
                     'email'     => $body['email'] ?? '',
                     'floor'     => $body['floor_id'] ?? 1,
-                    'ref'       => $request->ref,
+                    'ref'       => $ref,
                 ]
             );
         }
