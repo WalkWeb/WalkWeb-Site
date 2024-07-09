@@ -8,7 +8,7 @@ use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use App\Domain\Account\Notice\NoticeException;
 use WalkWeb\NW\AppException;
 
-class Level implements LevelInterface
+class MainLevel implements LevelInterface
 {
     private string $accountId;
     private string $characterId;

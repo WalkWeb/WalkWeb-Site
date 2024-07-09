@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Account\MainCharacter;
 
 use App\Domain\Account\MainCharacter\Era\EraFactory;
-use App\Domain\Account\MainCharacter\Level\Level;
+use App\Domain\Account\MainCharacter\Level\MainLevel;
 use App\Domain\Account\MainCharacter\Level\LevelFactory;
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use Ramsey\Uuid\Uuid;
@@ -52,7 +52,7 @@ class MainCharacterFactory
             $id,
             $accountId,
             EraFactory::create(ACTIVE_ERA),
-            new Level($accountId, $id, 1, 0, 0, $sendNoticeAction),
+            new MainLevel($accountId, $id, 1, 0, 0, $sendNoticeAction),
             0,
             0
         );

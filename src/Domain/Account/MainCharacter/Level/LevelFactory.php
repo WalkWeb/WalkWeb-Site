@@ -63,6 +63,6 @@ class LevelFactory
             LevelException::INVALID_STAT_POINTS_VALUE . LevelInterface::MIN_STAT_POINTS . '-' . LevelInterface::MAX_STAT_POINTS
         );
 
-        return new Level($accountId, $characterId, $level, $exp, $statPoints, $sendNoticeAction);
+        return new MainLevel($accountId, $characterId, $level, $exp, $statPoints, $sendNoticeAction);
     }
 }

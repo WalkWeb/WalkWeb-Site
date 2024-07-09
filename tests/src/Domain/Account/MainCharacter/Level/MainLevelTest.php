@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Account\MainCharacter\Level;
 
-use App\Domain\Account\MainCharacter\Level\Level;
+use App\Domain\Account\MainCharacter\Level\MainLevel;
 use App\Domain\Account\MainCharacter\Level\LevelException;
 use App\Domain\Account\MainCharacter\Level\LevelInterface;
-use App\Domain\Account\Notice\Action\SendNoticeAction;
-use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
-use App\Domain\Account\Notice\NoticeRepository;
 use Exception;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 
-class LevelTest extends AbstractTest
+class MainLevelTest extends AbstractTest
 {
     /**
      * Тест на создание объекта Level
@@ -30,7 +27,7 @@ class LevelTest extends AbstractTest
      * @param int $expectedExpBarWeight
      * @throws Exception
      */
-    public function testLevelCreate(
+    public function testMainLevelCreate(
         string $accountId,
         string $characterId,
         int $levelValue,
@@ -41,7 +38,7 @@ class LevelTest extends AbstractTest
         int $expectedExpBarWeight
     ): void
     {
-        $level = new Level(
+        $level = new MainLevel(
             $accountId,
             $characterId,
             $levelValue,
@@ -70,13 +67,13 @@ class LevelTest extends AbstractTest
      *
      * @throws Exception
      */
-    public function testLevelInvalid(): void
+    public function testMainLevelInvalid(): void
     {
         $level = 200;
 
         $this->expectException(AppException::class);
         $this->expectExceptionMessage(LevelException::INVALID_LEVEL . ': ' . $level);
-        new Level(
+        new MainLevel(
             '3544c1bc-8757-47db-9998-6f14522b5252',
             '556d9249-5f5f-47d4-b41c-ca580f6c5e23',
             $level,
@@ -91,9 +88,9 @@ class LevelTest extends AbstractTest
      *
      * @throws Exception
      */
-    public function testLevelAddExpSuccess(): void
+    public function testMainLevelAddExpSuccess(): void
     {
-        $level = new Level(
+        $level = new MainLevel(
             $accountId = self::DEMO_USER,
             '556d9249-5f5f-47d4-b41c-ca580f6c5e23',
             1,
@@ -148,9 +145,9 @@ class LevelTest extends AbstractTest
      *
      * @throws Exception
      */
-    public function testLevelAddExpInvalidExp(): void
+    public function testMainLevelAddExpInvalidExp(): void
     {
-        $level = new Level(
+        $level = new MainLevel(
             '3544c1bc-8757-47db-9998-6f14522b5252',
             '556d9249-5f5f-47d4-b41c-ca580f6c5e23',
             1,
@@ -172,9 +169,9 @@ class LevelTest extends AbstractTest
      *
      * @throws Exception
      */
-    public function testLevelAddOverExp(): void
+    public function testMainLevelAddOverExp(): void
     {
-        $level = new Level(
+        $level = new MainLevel(
             self::DEMO_USER,
             '556d9249-5f5f-47d4-b41c-ca580f6c5e23',
             100,
