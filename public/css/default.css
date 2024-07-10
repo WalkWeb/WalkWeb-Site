@@ -124,6 +124,20 @@ a.post_link:hover {
     font-size: 140%;
 }
 
+.right_content_ava {
+    min-height: 240px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url("/img/default_avatar.jpg");
+}
+
+.right_content_body {
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 110%;
+}
+
 .line {
     width: 100%;
     height: 8px;
@@ -242,4 +256,19 @@ label {
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+a {
+    text-decoration: none;
+    color: #0062cc;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a.to_main {
+    display: block;
+    width: 100%;
+    height: 100%;
 }

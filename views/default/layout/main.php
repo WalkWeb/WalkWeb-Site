@@ -1,3 +1,6 @@
+<?php
+use App\Domain\Auth\AuthInterface;
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -10,14 +13,16 @@
 </head>
 <body>
 <div class="line"></div>
-<div class="box head_image"></div>
+<div class="box head_image">
+    <a href="/" class="to_main"></a>
+</div>
 <div class="box line"></div>
 
 <div class="box flex">
     <div class="head_box">
         <div class="head_menu float_left">
             <ul>
-                <li><a href="#">Интересное</a></li>
+                <li><a href="/">Интересное</a></li>
                 <li><a href="#">Все подряд</a></li>
             </ul>
         </div>
@@ -37,18 +42,27 @@
         <?= $content ?? 'Отсутствует контент для отображения' ?>
     </div>
     <div class="right_box">
-
         <div class="right_content">
             <div class="right_content_head">
-                Заголовок
+                Персона
             </div>
-            Какой-то контент
+            <?php
+            if ($this->container->exist('user')) {
+                /** @var AuthInterface $user */
+                $user = $this->container->get('user');
+                echo '<div class="right_content_ava"></div><div class="right_content_body">';
+                echo "<p>({$user->getLevel()}) {$user->getName()}</p></div>";
+            } else {
+                echo '<div class="right_content_body">
+                        <p>
+                            <a href="/login" title="">Вход</a> / <a href="/registration/main" title="">Регистрация</a>
+                        </p>
+                      </div>';
+            }
+            ?>
         </div>
-
     </div>
 </div>
-
-
 <div class="box line"></div>
 <div class="box footer_image"></div>
 <div class="footer_box">
