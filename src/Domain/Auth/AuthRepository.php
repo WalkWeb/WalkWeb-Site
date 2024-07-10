@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Domain\Auth;
 
 use App\Domain\Account\AccountException;
+use App\Domain\Account\Notice\Action\SendNoticeAction;
+use App\Domain\Account\Notice\NoticeRepository;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 use WalkWeb\NW\Response;
@@ -36,7 +38,9 @@ class AuthRepository
             `accounts`.`notice`,
             `accounts`.`template`,
             
+            `characters_main`.`id` as `character_id`,
             `characters_main`.`level`,
+            `characters_main`.`exp`,
             `characters_main`.`stats_point` as `stat_points`,
        
             `account_energy`.`id` as `energy_id`,
@@ -59,6 +63,8 @@ class AuthRepository
             throw new AppException(AccountException::NOT_FOUND, Response::NOT_FOUND);
         }
 
+        // TODO Переименовать все параметры так, чтобы можно было просто кидать весь массив и все
+
         $data['energy'] = [
             'energy_id'         => $data['energy_id'],
             'energy'            => $data['energy'],
@@ -67,12 +73,22 @@ class AuthRepository
             'energy_residue'    => $data['energy_residue'],
         ];
 
+        $level = [
+            'account_id'            => $data['id'],
+            'character_id'          => $data['character_id'],
+            'character_level'       => $data['level'],
+            'character_exp'         => $data['exp'],
+            'character_stat_points' => $data['stat_points'],
+        ];
+
+        $data['level'] = $level;
+
         $data['notices'] = $this->getNotice($data['notice'] === 1, $data['id']);
 
         // TODO Mocks
         $data['avatar'] = '';
 
-        return AuthFactory::create($data);
+        return AuthFactory::create($data, new SendNoticeAction(new NoticeRepository($this->container)));
     }
 
     /**

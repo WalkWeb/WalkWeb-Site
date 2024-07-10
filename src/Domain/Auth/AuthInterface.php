@@ -6,6 +6,7 @@ namespace App\Domain\Auth;
 
 use App\Domain\Account\Energy\EnergyInterface;
 use App\Domain\Account\Group\AccountGroupInterface;
+use App\Domain\Account\MainCharacter\Level\LevelInterface;
 use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Status\AccountStatusInterface;
 
@@ -77,11 +78,13 @@ interface AuthInterface
      * Часть функционала становится доступной только при достижении определенного уровня, соответственно в данных по
      * авторизации необходимо иметь уровень персонажа
      *
-     * @return int
+     * @return LevelInterface
      */
-    public function getLevel(): int;
+    public function getLevel(): LevelInterface;
 
     /**
+     * TODO delete
+     *
      * Возвращает количество свободных очков параметров основного персонажа
      *
      * @return int

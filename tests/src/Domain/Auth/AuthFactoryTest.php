@@ -6,7 +6,6 @@ namespace Test\src\Domain\Auth;
 
 use App\Domain\Account\Energy\EnergyFactory;
 use App\Domain\Account\Group\AccountGroup;
-use App\Domain\Account\MainCharacter\Level\LevelInterface;
 use App\Domain\Account\Notice\NoticeFactory;
 use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Auth\AuthException;
@@ -25,7 +24,7 @@ class AuthFactoryTest extends AbstractTest
      */
     public function testAuthFactoryCreateSuccess(array $data): void
     {
-        $auth = AuthFactory::create($data);
+        $auth = AuthFactory::create($data, $this->getSendNoticeAction());
 
         self::assertEquals($data['id'], $auth->getId());
         self::assertEquals($data['name'], $auth->getName());
@@ -33,7 +32,7 @@ class AuthFactoryTest extends AbstractTest
         self::assertEquals(new AccountGroup($data['account_group_id']), $auth->getGroup());
         self::assertEquals(new AccountStatus($data['account_status_id']), $auth->getStatus());
         self::assertEquals($data['can_like'], $auth->isCanLike());
-        self::assertEquals($data['level'], $auth->getLevel());
+        self::assertEquals($data['level']['character_level'], $auth->getLevel()->getLevel());
         self::assertEquals($data['stat_points'], $auth->getStatPoints());
         self::assertEquals($data['template'], $auth->getTemplate());
 
@@ -72,7 +71,7 @@ class AuthFactoryTest extends AbstractTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        AuthFactory::create($data);
+        AuthFactory::create($data, $this->getSendNoticeAction());
     }
 
     /**
@@ -115,7 +114,13 @@ class AuthFactoryTest extends AbstractTest
                             'created_at' => '2019-08-18 18:50:00',
                         ],
                     ],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -146,7 +151,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -170,7 +181,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -193,7 +210,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -217,7 +240,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -240,7 +269,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -264,7 +299,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -287,7 +328,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -311,7 +358,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -334,7 +387,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -358,7 +417,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -374,7 +439,13 @@ class AuthFactoryTest extends AbstractTest
                     'account_status_id'      => 1,
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -391,7 +462,13 @@ class AuthFactoryTest extends AbstractTest
                     'energy'                 => 100,
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -414,7 +491,13 @@ class AuthFactoryTest extends AbstractTest
                         'energy_residue'    => 10,
                     ],
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -438,7 +521,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => null,
                     'notices'                => [],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -462,7 +551,13 @@ class AuthFactoryTest extends AbstractTest
                         'energy_residue'    => 10,
                     ],
                     'can_like'               => 1,
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -487,7 +582,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => 'notices',
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -515,7 +616,13 @@ class AuthFactoryTest extends AbstractTest
                         'notice-1',
                         'notice-2',
                     ],
-                    'level'                  => 12,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 'default',
                 ],
@@ -572,56 +679,6 @@ class AuthFactoryTest extends AbstractTest
             ],
 
             [
-                // level меньше минимального значения
-                [
-                    'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
-                    'name'                   => 'AccountName',
-                    'avatar'                 => 'account_avatar.png',
-                    'account_group_id'       => 10,
-                    'account_status_id'      => 1,
-                    'energy'                 => [
-                        'energy_id'         => 'f0c4391a-f16a-4a22-80fb-ac0a02168b1f',
-                        'account_id'        => '68435c80-eb31-4756-a260-a00900e5db9f',
-                        'energy'            => 30,
-                        'energy_bonus'      => 15,
-                        'energy_updated_at' => 1566745426.0000,
-                        'energy_residue'    => 10,
-                    ],
-                    'can_like'               => 1,
-                    'notices'                => [],
-                    'level'                  => LevelInterface::MIN_LEVEL - 1,
-                    'stat_points'            => 5,
-                    'template'               => 'default',
-                ],
-                AuthException::INVALID_LEVEL_VALUE . LevelInterface::MIN_LEVEL . '-' . LevelInterface::MAX_LEVEL,
-            ],
-
-            [
-                // level больше максимального значения
-                [
-                    'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
-                    'name'                   => 'AccountName',
-                    'avatar'                 => 'account_avatar.png',
-                    'account_group_id'       => 10,
-                    'account_status_id'      => 1,
-                    'energy'                 => [
-                        'energy_id'         => 'f0c4391a-f16a-4a22-80fb-ac0a02168b1f',
-                        'account_id'        => '68435c80-eb31-4756-a260-a00900e5db9f',
-                        'energy'            => 30,
-                        'energy_bonus'      => 15,
-                        'energy_updated_at' => 1566745426.0000,
-                        'energy_residue'    => 10,
-                    ],
-                    'can_like'               => 1,
-                    'notices'                => [],
-                    'level'                  => LevelInterface::MAX_LEVEL + 1,
-                    'stat_points'            => 5,
-                    'template'               => 'default',
-                ],
-                AuthException::INVALID_LEVEL_VALUE . LevelInterface::MIN_LEVEL . '-' . LevelInterface::MAX_LEVEL,
-            ],
-
-            [
                 // отсутствует stat_points
                 [
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
@@ -639,7 +696,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 5,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'template'               => 'default',
                 ],
                 AuthException::INVALID_STAT_POINTS,
@@ -663,7 +726,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 5,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => '5',
                     'template'               => 'default',
                 ],
@@ -688,7 +757,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 5,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                 ],
                 AuthException::INVALID_TEMPLATE,
@@ -711,7 +786,13 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'can_like'               => 1,
                     'notices'                => [],
-                    'level'                  => 5,
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
                     'stat_points'            => 5,
                     'template'               => 123,
                 ],

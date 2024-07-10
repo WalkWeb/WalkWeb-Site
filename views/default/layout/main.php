@@ -51,7 +51,7 @@ use App\Domain\Auth\AuthInterface;
                 /** @var AuthInterface $user */
                 $user = $this->container->get('user');
                 echo '<div class="right_content_ava"></div><div class="right_content_body">';
-                echo "<p>({$user->getLevel()}) {$user->getName()}</p></div>";
+                echo "<p>({$user->getLevel()->getLevel()}) {$user->getName()}</p></div>";
             } else {
                 echo '<div class="right_content_body">
                         <p>

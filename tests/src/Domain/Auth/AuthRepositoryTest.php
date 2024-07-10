@@ -23,8 +23,7 @@ class AuthRepositoryTest extends AbstractTest
      * @param int $statusId
      * @param string $energyId
      * @param array $noticesData
-     * @param int $level
-     * @param int $statPoints
+     * @param array $level
      * @throws Exception
      */
     public function testAuthRepositoryGetSuccess(
@@ -34,8 +33,7 @@ class AuthRepositoryTest extends AbstractTest
         int $statusId,
         string $energyId,
         array $noticesData,
-        int $level,
-        int $statPoints
+        array $level
     ): void
     {
         $auth = $this->getRepository()->get($authToken);
@@ -63,8 +61,8 @@ class AuthRepositoryTest extends AbstractTest
             $i++;
         }
 
-        self::assertEquals($level, $auth->getLevel());
-        self::assertEquals($statPoints, $auth->getStatPoints());
+        self::assertEquals($level['character_level'], $auth->getLevel()->getLevel());
+        self::assertEquals($level['character_stat_points'], $auth->getLevel()->getStatPoints());
 
         // TODO Mock
         self::assertEquals('', $auth->getAvatar());
@@ -131,8 +129,13 @@ class AuthRepositoryTest extends AbstractTest
                         'created_at' => '2021-12-25 13:00:00',
                     ],
                 ],
-                1,
-                0
+                'level'                  => [
+                    'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                    'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                    'character_level'       => 1,
+                    'character_exp'         => 0,
+                    'character_stat_points' => 0,
+                ],
             ],
             [
                 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a2',
@@ -141,8 +144,13 @@ class AuthRepositoryTest extends AbstractTest
                 2,
                 '17746e87-4e15-4c60-8b2f-8cb01032c47a',
                 [],
-                2,
-                5,
+                'level'                  => [
+                    'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                    'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                    'character_level'       => 2,
+                    'character_exp'         => 60,
+                    'character_stat_points' => 5,
+                ],
             ],
         ];
     }

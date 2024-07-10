@@ -6,6 +6,7 @@ namespace App\Domain\Auth;
 
 use App\Domain\Account\Energy\EnergyInterface;
 use App\Domain\Account\Group\AccountGroupInterface;
+use App\Domain\Account\MainCharacter\Level\LevelInterface;
 use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Status\AccountStatusInterface;
 
@@ -19,7 +20,7 @@ class Auth implements AuthInterface
     private EnergyInterface $energy;
     private bool $canLike;
     private NoticeCollection $notices;
-    private int $level;
+    private LevelInterface $level;
     private int $statPoints;
     private string $template;
 
@@ -32,7 +33,7 @@ class Auth implements AuthInterface
         EnergyInterface $energy,
         bool $canLike,
         NoticeCollection $notices,
-        int $level,
+        LevelInterface $level,
         int $statPoints,
         string $template
     )
@@ -115,9 +116,9 @@ class Auth implements AuthInterface
     }
 
     /**
-     * @return int
+     * @return LevelInterface
      */
-    public function getLevel(): int
+    public function getLevel(): LevelInterface
     {
         return $this->level;
     }

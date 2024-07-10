@@ -7,9 +7,11 @@ namespace Test\src\Domain\Auth;
 use App\Domain\Account\AccountException;
 use App\Domain\Account\Energy\Energy;
 use App\Domain\Account\Group\AccountGroup;
+use App\Domain\Account\MainCharacter\Level\MainLevel;
 use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Auth\Auth;
+use Exception;
 use Test\AbstractTest;
 
 class AuthTest extends AbstractTest
@@ -17,11 +19,12 @@ class AuthTest extends AbstractTest
     /**
      * Тест на успешное создание объекта Auth
      *
-     * @throws AccountException
+     * @throws Exception
      */
     public function testAuthCreateSuccess(): void
     {
         $id = 'fed7e105-316d-4f9b-bfc4-7d70dba0b680';
+        $characterId = '5585ab44-f75a-4590-a162-e46124aecedc';
         $name = 'Name';
         $avatar = 'avatar.png';
         $group = new AccountGroup(10);
@@ -36,7 +39,7 @@ class AuthTest extends AbstractTest
         );
         $canLike = true;
         $notices = new NoticeCollection();
-        $level = 15;
+        $level = new MainLevel($id, $characterId, 1, 0, 0, $this->getSendNoticeAction());
         $statPoints = 10;
         $template = 'default';
 
@@ -57,7 +60,7 @@ class AuthTest extends AbstractTest
     /**
      * Тест на установку нового значения statPoints
      *
-     * @throws AccountException
+     * @throws Exception
      */
     public function testAuthSetStatPoints(): void
     {
@@ -77,7 +80,14 @@ class AuthTest extends AbstractTest
             ),
             true,
             new NoticeCollection(),
-            5,
+            new MainLevel(
+                '03796f7c-37b1-4b80-a0ed-3316b36c5518',
+                'fb84b694-f169-4770-ae83-9fadb96a9368',
+                1,
+                0,
+                0,
+                $this->getSendNoticeAction()
+            ),
             $statPoints = 0,
             'default'
         );
