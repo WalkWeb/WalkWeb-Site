@@ -1,10 +1,15 @@
 <?php
 
 use App\Domain\Account\AccountInterface;
+use App\Domain\Account\MainCharacter\MainCharacterInterface;
 use WalkWeb\NW\AppException;
 
 if (empty($account) || !($account instanceof AccountInterface)) {
-    throw new AppException('view.account.index: invalid data');
+    throw new AppException('view.account.index: miss account');
+}
+
+if (empty($mainCharacter) || !($mainCharacter instanceof MainCharacterInterface)) {
+    throw new AppException('view.account.index: miss mainCharacter');
 }
 
 $this->title = 'Профиль пользователя ' . $account->getName();
@@ -15,7 +20,7 @@ $canLike = $account->isCanLike() ? 'да' : 'нет';
 
 ?>
 
-<h1><?= $this->title ?></h1>
+<h1><?=$account->getName() ?></h1>
 
 <p>id: <?= $account->getId() ?></p>
 <p>Логин: <?= htmlspecialchars($account->getLogin()) ?></p>
@@ -37,5 +42,13 @@ $canLike = $account->isCanLike() ? 'да' : 'нет';
 <p>Дата регистрации: <?= $account->getCreatedAt()->format('Y-m-d H:i:s') ?></p>
 <p>Последнее обновление данных: <?= $account->getUpdatedAt()->format('Y-m-d H:i:s') ?></p>
 <br />
+<hr>
 <br />
+<p>Уровень: <?= htmlspecialchars($mainCharacter->getLevel()->getLevel()) ?></p>
+<p>Опыта: <?= htmlspecialchars($mainCharacter->getLevel()->getExp()) ?></p>
+<p>Опыта до следующего уровня: <?= htmlspecialchars($mainCharacter->getLevel()->getExpToLevel()) ?></p>
+<p>Эра: <?= htmlspecialchars($mainCharacter->getEra()->getName()) ?></p>
+<p>Бонус к энергии: <?= htmlspecialchars($mainCharacter->getEnergyBonus()) ?></p>
+<p>Бонус к месту на диске: <?= htmlspecialchars($mainCharacter->getUploadBonus()) ?></p>
+<p>Свободных очков для распределения: <?= htmlspecialchars($mainCharacter->getLevel()->getStatPoints()) ?></p>
 <br />

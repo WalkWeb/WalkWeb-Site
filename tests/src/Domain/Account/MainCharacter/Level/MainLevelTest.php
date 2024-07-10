@@ -91,7 +91,7 @@ class MainLevelTest extends AbstractTest
     public function testMainLevelAddExpSuccess(): void
     {
         $level = new MainLevel(
-            $accountId = self::DEMO_USER,
+            $accountId = self::DEMO_CHAT_ADMIN,
             '556d9249-5f5f-47d4-b41c-ca580f6c5e23',
             1,
             0, 0,
@@ -122,22 +122,12 @@ class MainLevelTest extends AbstractTest
         self::assertEquals(1350, $level->getExpToLevel());
         self::assertEquals(8 * LevelInterface::ADD_STAT_POINT, $level->getStatPoints());
 
-        // TODO
-        // Проверяем наличие уведомлений
-//        $reflectionClass = new ReflectionClass($noticeRepository);
-//        $reflectionProperty = $reflectionClass->getProperty('notices');
-//        $reflectionProperty->setAccessible(true);
-//
-//        $notices = $reflectionProperty->getValue($noticeRepository);
-//
-//        self::assertCount(8, $notices);
-//
-//        /** @var NoticeInterface $notice */
-//        foreach ($notices as $notice) {
-//            self::assertEquals($accountId, $notice->getAccountId());
-//            self::assertEquals(LevelInterface::NEW_LEVEL_MESSAGE, $notice->getMessage());
-//            self::assertEquals(NoticeInterface::TYPE_INFO, $notice->getType());
-//        }
+        $data = self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `notices` WHERE account_id = ?',
+            [['type' => 's', 'value' => $accountId]]
+        );
+
+        self::assertCount(8, $data);
     }
 
     /**
