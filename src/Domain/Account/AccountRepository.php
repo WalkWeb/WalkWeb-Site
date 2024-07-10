@@ -34,7 +34,7 @@ class AccountRepository
             'SELECT 
             `id`, `login`, `name`, `password`, `email`, `email_verified`, `reg_complete`, `auth_token`, `verified_token`,
             `template`, `ip`, `ref`, `floor_id`, `status_id`, `group_id`, `energy_id`, `chat_status_id`, `upload`,
-            `notice`, `user_agent`, `can_like`, `created_at`, `updated_at`
+            `notice`, `user_agent`, `can_like`, `main_character_id`, `created_at`, `updated_at`
             FROM `accounts` WHERE `name` = ?',
             [['type' => 's', 'value' => $name]],
             true

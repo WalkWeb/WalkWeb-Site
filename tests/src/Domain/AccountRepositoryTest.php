@@ -48,6 +48,6 @@ class AccountRepositoryTest extends AbstractTest
      */
     private function getRepository(): AccountRepository
     {
-        return new AccountRepository($this->createContainer());
+        return new AccountRepository(self::createContainer());
     }
 }

@@ -52,6 +52,7 @@ class AccountFactory
             self::refValidate($data),
             self::userAgentValidate($data),
             (bool)self::int($data, 'can_like', AccountException::INVALID_CAN_LIKE),
+            self::mainCharacterId($data),
             new Floor(self::int($data, 'floor_id', AccountException::INVALID_FLOOR_ID)),
             new AccountStatus(self::int($data, 'status_id', AccountException::INVALID_STATUS_ID)),
             new AccountGroup(self::int($data, 'group_id', AccountException::INVALID_GROUP_ID)),
@@ -75,7 +76,6 @@ class AccountFactory
             $login = self::loginValidation($data);
             $password = self::passwordValidate($data);
             $password = password_hash($password . $hashKey, PASSWORD_BCRYPT, ['cost' => 10]);
-            $canLike = true;
 
             return new Account(
                 Uuid::uuid4()->toString(),
@@ -91,7 +91,8 @@ class AccountFactory
                 self::ipValidate($data),
                 self::refValidate($data),
                 self::userAgentValidate($data),
-                $canLike,
+                true,
+                '',
                 new Floor(self::int($data, 'floor_id', AccountException::INVALID_FLOOR_ID)),
                 new AccountStatus(AccountStatusInterface::ACTIVE),
                 new AccountGroup(AccountGroupInterface::USER),
@@ -317,5 +318,24 @@ class AccountFactory
         );
 
         return new AccountUpload($upload, AccountInterface::UPLOAD_MAX_BASE);
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     * @throws AppException
+     */
+    private static function mainCharacterId(array $data): string
+    {
+        $mainCharacterId = self::string($data, 'main_character_id', AccountException::INVALID_MAIN_CHAR_ID);
+
+        self::stringMinMaxLength(
+            $mainCharacterId,
+            AccountInterface::MAIN_CHARACTER_MIN_LENGTH,
+            AccountInterface::MAIN_CHARACTER_MAX_LENGTH,
+            AccountException::INVALID_MAIN_CHAR_ID_LENGTH . AccountInterface::MAIN_CHARACTER_MIN_LENGTH . '-' . AccountInterface::MAIN_CHARACTER_MAX_LENGTH
+        );
+
+        return $mainCharacterId;
     }
 }

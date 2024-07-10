@@ -36,6 +36,7 @@ class AccountTest extends AbstractTest
         $ref = 'ref_link';
         $userAgent = 'undefined';
         $canLike = true;
+        $mainCharacterId = 'a47ae54f-6b96-45c7-93ea-d62698a06b01';
         $floor = new Floor(1);
         $status = new AccountStatus(1);
         $group = new AccountGroup(10);
@@ -58,6 +59,7 @@ class AccountTest extends AbstractTest
             $ref,
             $userAgent,
             $canLike,
+            $mainCharacterId,
             $floor,
             $status,
             $group,
@@ -80,6 +82,7 @@ class AccountTest extends AbstractTest
         self::assertEquals($ref, $account->getRef());
         self::assertEquals($userAgent, $account->getUserAgent());
         self::assertEquals($canLike, $account->isCanLike());
+        self::assertEquals($mainCharacterId, $account->getMainCharacterId());
         self::assertEquals($floor, $account->getFloor());
         self::assertEquals($status, $account->getStatus());
         self::assertEquals($group, $account->getGroup());

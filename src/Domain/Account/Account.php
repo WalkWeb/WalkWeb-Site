@@ -26,6 +26,7 @@ class Account implements AccountInterface
     private string $ref;
     private string $userAgent;
     private bool $canLike;
+    private string $mainCharacterId;
     private FloorInterface $floor;
     private AccountStatus $status;
     private AccountGroupInterface $group;
@@ -48,6 +49,7 @@ class Account implements AccountInterface
         string $ref,
         string $userAgent,
         bool $canLike,
+        string $mainCharacterId,
         FloorInterface $floor,
         AccountStatus $status,
         AccountGroupInterface $group,
@@ -70,6 +72,7 @@ class Account implements AccountInterface
         $this->ref = $ref;
         $this->userAgent = $userAgent;
         $this->canLike = $canLike;
+        $this->mainCharacterId = $mainCharacterId;
         $this->floor = $floor;
         $this->status = $status;
         $this->group = $group;
@@ -204,6 +207,14 @@ class Account implements AccountInterface
     public function isCanLike(): bool
     {
         return $this->canLike;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMainCharacterId(): string
+    {
+        return $this->mainCharacterId;
     }
 
     /**

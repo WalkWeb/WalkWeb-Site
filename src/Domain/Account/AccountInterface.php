@@ -46,6 +46,9 @@ interface AccountInterface
     public const USER_AGENT_MIN_LENGTH     = 0;
     public const USER_AGENT_MAX_LENGTH     = 100;
 
+    public const MAIN_CHARACTER_MIN_LENGTH = 0;
+    public const MAIN_CHARACTER_MAX_LENGTH = 36;
+
     public const UPLOAD_MIN_VALUE          = 0;
     public const UPLOAD_MAX_VALUE          = 300*1024*1024;
     public const UPLOAD_MAX_BASE           = 20*1024*1024;
@@ -67,6 +70,7 @@ interface AccountInterface
     public function getRef(): string;
     public function getUserAgent(): string;
     public function isCanLike(): bool;
+    public function getMainCharacterId(): string;
     public function getFloor(): FloorInterface;
     public function getStatus(): AccountStatus;
     public function getGroup(): AccountGroupInterface;
