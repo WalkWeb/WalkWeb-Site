@@ -58,6 +58,8 @@ class AccountRegistrationHandler extends AbstractHandler
             $mainCharacter = MainCharacterFactory::createNew($account->getId(), $sendNoticeAction);
             $mainCharacterRepository->add($mainCharacter);
 
+            $repository->setMainCharacterId($account, $mainCharacter);
+
             return $this->render('account/registration_complete');
 
         } catch (AppException $e) {

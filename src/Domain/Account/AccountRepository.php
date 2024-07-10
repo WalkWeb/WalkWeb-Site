@@ -8,6 +8,7 @@ use App\Domain\Account\DTO\LoginRequest;
 use App\Domain\Account\Energy\EnergyFactory;
 use App\Domain\Account\Energy\EnergyInterface;
 use App\Domain\Account\Energy\EnergyRepository;
+use App\Domain\Account\MainCharacter\MainCharacterInterface;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 use WalkWeb\NW\Response;
@@ -121,6 +122,22 @@ class AccountRepository
         }
 
         return null;
+    }
+
+    /**
+     * @param AccountInterface $account
+     * @param MainCharacterInterface $mainCharacter
+     * @throws AppException
+     */
+    public function setMainCharacterId(AccountInterface $account, MainCharacterInterface $mainCharacter): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `accounts` SET `main_character_id` = ? WHERE `id` = ?',
+            [
+                ['type' => 's', 'value' => $mainCharacter->getId()],
+                ['type' => 's', 'value' => $account->getId()],
+            ]
+        );
     }
 
     /**

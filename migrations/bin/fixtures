@@ -330,6 +330,37 @@ try {
         ('2e437627-7b06-456a-b0c6-e70150492910', '1e3a3b27-12da-4c73-a3a7-b83092705b10', 1, 1, 0,   0, 0, 0);
     ");
 
+    $db->query("
+        UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492901' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b01';
+    ");
+    $db->query("
+        UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492902' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b02';
+    ");
+    $db->query("
+        UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492903' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b03';
+    ");
+    $db->query("
+        UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492904' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b04';
+    ");
+    $db->query("
+        UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492905' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b05';
+    ");
+    $db->query("
+        UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492906' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b06';
+    ");
+    $db->query("
+        UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492907' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b07';
+    ");
+    $db->query("
+        UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492908' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b08';
+    ");
+    $db->query("
+        UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492909' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b09';
+    ");
+    $db->query("
+        UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492910' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b10';
+    ");
+
     echo "Fixtures Load\n";
     return 0;
 } catch (Exception $e) {

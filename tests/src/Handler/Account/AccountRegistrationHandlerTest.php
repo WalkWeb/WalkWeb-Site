@@ -70,6 +70,16 @@ class AccountRegistrationHandlerTest extends AbstractTest
         self::assertEquals(0, $mainCharacter['energy_bonus']);
         self::assertEquals(0, $mainCharacter['upload_bonus']);
         self::assertEquals(0, $mainCharacter['stats_point']);
+
+        // check set main_character_id
+
+        $data = self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT `main_character_id` FROM `accounts` WHERE `id` = ?',
+            [['type' => 's', 'value' => $account['id']]],
+            true
+        );
+
+        self::assertEquals($data['main_character_id'], $mainCharacter['id']);
     }
 
     /**
