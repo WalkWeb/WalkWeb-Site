@@ -24,12 +24,9 @@ class MainCharacterFactory
      */
     public static function create(array $data, SendNoticeActionInterface $sendNoticeAction): MainCharacterInterface
     {
-        $characterId = self::string($data, 'character_id', MainCharacterException::INVALID_ID);
-        $accountId = self::string($data, 'account_id', MainCharacterException::INVALID_ACCOUNT_ID);
-
         return new MainCharacter(
-            self::uuid($characterId, MainCharacterException::INVALID_ID_VALUE),
-            self::uuid($accountId, MainCharacterException::INVALID_ACCOUNT_ID_VALUE),
+            self::uuid($data, 'character_id', MainCharacterException::INVALID_ID),
+            self::uuid($data, 'account_id', MainCharacterException::INVALID_ACCOUNT_ID),
             EraFactory::create(self::int($data, 'era_id', MainCharacterException::INVALID_ERA_ID)),
             LevelFactory::create($data, $sendNoticeAction),
             self::int($data, 'energy_bonus', MainCharacterException::INVALID_ENERGY_BONUS),
@@ -46,7 +43,10 @@ class MainCharacterFactory
     public static function createNew(string $accountId, SendNoticeActionInterface $sendNoticeAction): MainCharacterInterface
     {
         $id = Uuid::uuid4()->toString();
-        self::uuid($accountId, MainCharacterException::INVALID_ACCOUNT_ID_VALUE);
+
+        if (!Uuid::isValid($accountId)) {
+            throw new AppException(MainCharacterException::INVALID_ACCOUNT_ID_VALUE);
+        }
 
         return new MainCharacter(
             $id,

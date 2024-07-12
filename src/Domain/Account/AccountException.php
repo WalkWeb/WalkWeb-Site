@@ -15,8 +15,7 @@ class AccountException extends Exception
     public const INVALID_LOGIN_OR_PASSWORD     = 'Invalid login or password';
 
     // id
-    public const INVALID_ID                    = 'Incorrect parameter "id", it required and type string';
-    public const INVALID_ID_VALUE              = 'Incorrect parameter "id", excepted uuid';
+    public const INVALID_ID                    = 'Incorrect parameter "id", it required and type string (uuid)';
     // login
     public const INVALID_LOGIN                 = 'Incorrect parameter "login", it required and type string';
     public const INVALID_LOGIN_LENGTH          = 'Incorrect parameter "login", should be min-max length: ';
@@ -72,9 +71,7 @@ class AccountException extends Exception
     public const INVALID_UPLOAD                = 'Incorrect parameter "upload", excepted int';
     public const INVALID_UPLOAD_VALUE          = 'Incorrect parameter "upload", should be min-max value: ';
     // created_at
-    public const INVALID_CREATED_AT            = 'Incorrect parameter "created_at", it required and type string';
-    public const INVALID_CREATED_AT_VALUE      = 'Incorrect parameter "created_at", expected date';
+    public const INVALID_CREATED_AT            = 'Incorrect parameter "created_at", it required and type string (date format)';
     // updated_at
-    public const INVALID_UPDATED_AT            = 'Incorrect parameter "created_at", it required and type string';
-    public const INVALID_UPDATED_AT_VALUE      = 'Incorrect parameter "created_at", expected date';
+    public const INVALID_UPDATED_AT            = 'Incorrect parameter "created_at", it required and type string (date format)';
 }

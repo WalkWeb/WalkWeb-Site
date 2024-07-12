@@ -32,13 +32,8 @@ class AccountFactory
      */
     public static function createFromDB(array $data): AccountInterface
     {
-        $id = self::string($data, 'id', AccountException::INVALID_ID);
-
-        $createdAt = self::string($data, 'created_at', AccountException::INVALID_CREATED_AT);
-        $updatedAt = self::string($data, 'updated_at', AccountException::INVALID_UPDATED_AT);
-
         return new Account(
-            self::uuid($id, AccountException::INVALID_ID_VALUE),
+            self::uuid($data, 'id', AccountException::INVALID_ID),
             self::loginValidation($data),
             self::nameValidation($data),
             self::passwordValidate($data),
@@ -57,8 +52,8 @@ class AccountFactory
             new AccountStatus(self::int($data, 'status_id', AccountException::INVALID_STATUS_ID)),
             new AccountGroup(self::int($data, 'group_id', AccountException::INVALID_GROUP_ID)),
             self::uploadValidate($data),
-            self::date($createdAt, AccountException::INVALID_CREATED_AT_VALUE),
-            self::date($updatedAt, AccountException::INVALID_CREATED_AT_VALUE),
+            self::date($data, 'created_at', AccountException::INVALID_CREATED_AT),
+            self::date($data, 'updated_at', AccountException::INVALID_UPDATED_AT),
         );
     }
 

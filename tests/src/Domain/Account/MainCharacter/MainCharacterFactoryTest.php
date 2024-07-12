@@ -68,6 +68,18 @@ class MainCharacterFactoryTest extends AbstractTest
     }
 
     /**
+     * Test on failure create new MainCharacter - received invalid uuid account id
+     *
+     * @throws AppException
+     */
+    public function testMainCharacterFactoryCreateNewInvalidAccountId(): void
+    {
+        $this->expectException(AppException::class);
+        $this->expectExceptionMessage(MainCharacterException::INVALID_ACCOUNT_ID_VALUE);
+        MainCharacterFactory::createNew('invalid_uuid', $this->getSendNoticeAction());
+    }
+
+    /**
      * @return array
      */
     public function successDataProvider(): array
@@ -130,7 +142,7 @@ class MainCharacterFactoryTest extends AbstractTest
                     'upload_bonus'          => 0,
                     'character_stat_points' => 0,
                 ],
-                MainCharacterException::INVALID_ID_VALUE,
+                MainCharacterException::INVALID_ID,
             ],
 
             // miss account_id
@@ -172,7 +184,7 @@ class MainCharacterFactoryTest extends AbstractTest
                     'upload_bonus'          => 0,
                     'character_stat_points' => 0,
                 ],
-                MainCharacterException::INVALID_ACCOUNT_ID_VALUE,
+                MainCharacterException::INVALID_ACCOUNT_ID,
             ],
             // miss era_id
             [

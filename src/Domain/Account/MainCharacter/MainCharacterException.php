@@ -11,11 +11,10 @@ class MainCharacterException extends Exception
     public const NOT_FOUND                = 'MainCharacter not found';
 
     // id
-    public const INVALID_ID               = 'Incorrect parameter "character_id", it required and type string';
-    public const INVALID_ID_VALUE         = 'Incorrect parameter "character_id", excepted uuid';
+    public const INVALID_ID               = 'Incorrect parameter "character_id", it required and type string (uuid)';
 
     // account_id
-    public const INVALID_ACCOUNT_ID       = 'Incorrect parameter "account_id", it required and type string';
+    public const INVALID_ACCOUNT_ID       = 'Incorrect parameter "account_id", it required and type string (uuid)';
     public const INVALID_ACCOUNT_ID_VALUE = 'Incorrect parameter "account_id", excepted uuid';
 
     // era_id

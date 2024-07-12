@@ -239,7 +239,7 @@ class AccountFactoryTest extends AbstractTest
                     'created_at'        => '2020-12-25 11:00:00',
                     'updated_at'        => '2020-12-25 11:00:00',
                 ],
-                AccountException::INVALID_ID_VALUE,
+                AccountException::INVALID_ID,
             ],
             // miss login
             [
@@ -1938,7 +1938,7 @@ class AccountFactoryTest extends AbstractTest
                     'created_at'        => '2020-99-99 11:00:00',
                     'updated_at'        => '2020-12-25 11:00:00',
                 ],
-                AccountException::INVALID_CREATED_AT_VALUE,
+                AccountException::INVALID_CREATED_AT,
             ],
 
             // miss updated_at
@@ -2019,7 +2019,7 @@ class AccountFactoryTest extends AbstractTest
                     'created_at'        => '2020-12-25 11:00:00',
                     'updated_at'        => '2020-99-99 11:00:00',
                 ],
-                AccountException::INVALID_UPDATED_AT_VALUE,
+                AccountException::INVALID_UPDATED_AT,
             ],
 
             // miss main_character_id
