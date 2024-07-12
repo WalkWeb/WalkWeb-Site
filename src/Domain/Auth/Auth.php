@@ -23,6 +23,7 @@ class Auth implements AuthInterface
     private LevelInterface $level;
     private int $statPoints;
     private string $template;
+    private bool $emailVerified;
 
     public function __construct(
         string $id,
@@ -35,7 +36,8 @@ class Auth implements AuthInterface
         NoticeCollection $notices,
         LevelInterface $level,
         int $statPoints,
-        string $template
+        string $template,
+        bool $emailVerified
     )
     {
         $this->id = $id;
@@ -49,6 +51,7 @@ class Auth implements AuthInterface
         $this->level = $level;
         $this->statPoints = $statPoints;
         $this->template = $template;
+        $this->emailVerified = $emailVerified;
     }
 
     /**
@@ -145,5 +148,13 @@ class Auth implements AuthInterface
     public function getTemplate(): string
     {
         return $this->template;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmailVerified(): bool
+    {
+        return $this->emailVerified;
     }
 }

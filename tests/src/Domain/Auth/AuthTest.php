@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Auth;
 
-use App\Domain\Account\AccountException;
 use App\Domain\Account\Energy\Energy;
 use App\Domain\Account\Group\AccountGroup;
 use App\Domain\Account\MainCharacter\Level\MainLevel;
@@ -42,8 +41,9 @@ class AuthTest extends AbstractTest
         $level = new MainLevel($id, $characterId, 1, 0, 0, $this->getSendNoticeAction());
         $statPoints = 10;
         $template = 'default';
+        $emailVerified = true;
 
-        $auth = new Auth($id, $name, $avatar, $group, $status, $energy, $canLike, $notices, $level, $statPoints, $template);
+        $auth = new Auth($id, $name, $avatar, $group, $status, $energy, $canLike, $notices, $level, $statPoints, $template, $emailVerified);
 
         self::assertEquals($id, $auth->getId());
         self::assertEquals($name, $auth->getName());
@@ -55,6 +55,7 @@ class AuthTest extends AbstractTest
         self::assertEquals($level, $auth->getLevel());
         self::assertEquals($statPoints, $auth->getStatPoints());
         self::assertEquals($template, $auth->getTemplate());
+        self::assertEquals($emailVerified, $auth->isEmailVerified());
     }
 
     /**
@@ -89,7 +90,8 @@ class AuthTest extends AbstractTest
                 $this->getSendNoticeAction()
             ),
             $statPoints = 0,
-            'default'
+            'default',
+            false
         );
 
         self::assertEquals($statPoints, $auth->getStatPoints());

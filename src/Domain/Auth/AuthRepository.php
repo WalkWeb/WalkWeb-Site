@@ -37,6 +37,7 @@ class AuthRepository
             `accounts`.`can_like`,
             `accounts`.`notice`,
             `accounts`.`template`,
+            `accounts`.`email_verified`,
             
             `characters_main`.`id` as `character_id`,
             `characters_main`.`level`,

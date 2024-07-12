@@ -30,30 +30,19 @@ class AuthFactory
     public static function create(array $data, SendNoticeActionInterface $sendNoticeAction): AuthInterface
     {
         try {
-            self::string($data, 'id', AuthException::INVALID_ID);
-            self::string($data, 'name', AuthException::INVALID_NAME);
-            self::string($data, 'avatar', AuthException::INVALID_AVATAR);
-            self::int($data, 'account_group_id', AuthException::INVALID_ACCOUNT_GROUP_ID);
-            self::int($data, 'account_status_id', AuthException::INVALID_ACCOUNT_STATUS_ID);
-            self::array($data, 'energy', AuthException::INVALID_ENERGY_DATA);
-            self::int($data, 'can_like', AuthException::INVALID_CAN_LIKE);
-            self::array($data, 'notices', AuthException::INVALID_NOTICES_DATA);
-            self::array($data, 'level', AuthException::INVALID_LEVEL);
-            self::int($data, 'stat_points', AuthException::INVALID_STAT_POINTS);
-            self::string($data, 'template', AuthException::INVALID_TEMPLATE);
-
             return new Auth(
-                $data['id'],
-                $data['name'],
-                $data['avatar'],
-                new AccountGroup($data['account_group_id']),
-                new AccountStatus($data['account_status_id']),
-                EnergyFactory::createFromDB($data['energy']),
-                (bool)$data['can_like'],
-                NoticeCollectionFactory::create($data['notices']),
-                LevelFactory::create($data['level'], $sendNoticeAction),
-                $data['stat_points'],
-                $data['template'],
+                self::string($data, 'id', AuthException::INVALID_ID),
+                self::string($data, 'name', AuthException::INVALID_NAME),
+                self::string($data, 'avatar', AuthException::INVALID_AVATAR),
+                new AccountGroup(self::int($data, 'account_group_id', AuthException::INVALID_ACCOUNT_GROUP_ID)),
+                new AccountStatus(self::int($data, 'account_status_id', AuthException::INVALID_ACCOUNT_STATUS_ID)),
+                EnergyFactory::createFromDB(self::array($data, 'energy', AuthException::INVALID_ENERGY_DATA)),
+                (bool)self::int($data, 'can_like', AuthException::INVALID_CAN_LIKE),
+                NoticeCollectionFactory::create(self::array($data, 'notices', AuthException::INVALID_NOTICES_DATA)),
+                LevelFactory::create(self::array($data, 'level', AuthException::INVALID_LEVEL), $sendNoticeAction),
+                self::int($data, 'stat_points', AuthException::INVALID_STAT_POINTS),
+                self::string($data, 'template', AuthException::INVALID_TEMPLATE),
+                (bool)self::int($data, 'email_verified', AuthException::INVALID_EMAIL_VERIFIED)
             );
         } catch (Exception $e) {
             throw new AppException($e->getMessage());

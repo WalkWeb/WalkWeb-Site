@@ -104,4 +104,11 @@ interface AuthInterface
      * @return string
      */
     public function getTemplate(): string;
+
+    /**
+     * Подтвержден ли email
+     *      *
+     * @return bool
+     */
+    public function isEmailVerified(): bool;
 }
