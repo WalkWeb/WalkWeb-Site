@@ -6,6 +6,8 @@ namespace Test\src\Handler\Account;
 
 use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountInterface;
+use App\Domain\Account\Notice\Action\SendNoticeAction;
+use App\Domain\Account\Notice\NoticeInterface;
 use Exception;
 use Test\AbstractTest;
 use WalkWeb\NW\App;
@@ -80,6 +82,19 @@ class AccountRegistrationHandlerTest extends AbstractTest
         );
 
         self::assertEquals($data['main_character_id'], $mainCharacter['id']);
+
+        // check notice
+
+        $data = self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `notices` WHERE `account_id` = ?',
+            [['type' => 's', 'value' => $account['id']]],
+        );
+
+        self::assertCount(1, $data);
+        self::assertEquals(NoticeInterface::TYPE_INFO, $data[0]['type']);
+        self::assertEquals($account['id'], $data[0]['account_id']);
+        self::assertEquals(SendNoticeAction::REGISTER_START, $data[0]['message']);
+        self::assertEquals(0, $data[0]['view']);
     }
 
     /**

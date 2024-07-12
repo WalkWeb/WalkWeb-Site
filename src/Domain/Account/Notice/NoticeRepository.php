@@ -41,6 +41,8 @@ class NoticeRepository implements NoticeRepositoryInterface
     }
 
     /**
+     * TODO `view` = 1
+     *
      * @param string $accountId
      * @return NoticeCollection
      * @throws AppException

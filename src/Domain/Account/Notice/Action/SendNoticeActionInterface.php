@@ -9,6 +9,8 @@ use App\Domain\Account\Notice\NoticeInterface;
 
 interface SendNoticeActionInterface
 {
+    public const REGISTER_START = 'Начало регистрации на портале';
+
     /**
      * Создает и сохраняет уведомление для пользователя
      *
