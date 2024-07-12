@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace App\Handler\Account;
 
 use App\Domain\Account\AccountRepository;
-use App\Domain\Account\MainCharacter\MainCharacterRepository;
-use App\Domain\Account\Notice\Action\SendNoticeAction;
-use App\Domain\Account\Notice\NoticeRepository;
 use Exception;
 use WalkWeb\NW\AbstractHandler;
 use WalkWeb\NW\AppException;
@@ -25,12 +22,9 @@ class AccountPageHandler extends AbstractHandler
     {
         try {
             $repository = new AccountRepository($this->container);
-            $mainCharacterRepository = new MainCharacterRepository($this->container);
-            $noticeSenderAction = new SendNoticeAction(new NoticeRepository($this->container));
 
             return $this->render('account/index', [
-                'account'       => $account = $repository->get($request->getAttribute('name')),
-                'mainCharacter' => $mainCharacterRepository->get($account->getMainCharacterId(), $noticeSenderAction),
+                'account' => $account = $repository->get($request->getAttribute('name')),
             ]);
 
         } catch (Exception $e) {

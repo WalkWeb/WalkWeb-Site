@@ -12,6 +12,7 @@ use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Account\Upload\AccountUpload;
 use DateTime;
 use Test\AbstractTest;
+use WalkWeb\NW\AppException;
 
 class AccountTest extends AbstractTest
 {
@@ -36,7 +37,6 @@ class AccountTest extends AbstractTest
         $ref = 'ref_link';
         $userAgent = 'undefined';
         $canLike = true;
-        $mainCharacterId = 'a47ae54f-6b96-45c7-93ea-d62698a06b01';
         $floor = new Floor(1);
         $status = new AccountStatus(1);
         $group = new AccountGroup(10);
@@ -59,13 +59,13 @@ class AccountTest extends AbstractTest
             $ref,
             $userAgent,
             $canLike,
-            $mainCharacterId,
             $floor,
             $status,
             $group,
             $upload,
             $createdAt,
-            $updatedAt
+            $updatedAt,
+            null,
         );
 
         self::assertEquals($id, $account->getId());
@@ -82,7 +82,6 @@ class AccountTest extends AbstractTest
         self::assertEquals($ref, $account->getRef());
         self::assertEquals($userAgent, $account->getUserAgent());
         self::assertEquals($canLike, $account->isCanLike());
-        self::assertEquals($mainCharacterId, $account->getMainCharacterId());
         self::assertEquals($floor, $account->getFloor());
         self::assertEquals($status, $account->getStatus());
         self::assertEquals($group, $account->getGroup());
@@ -96,5 +95,9 @@ class AccountTest extends AbstractTest
         self::assertTrue($account->isEmailVerified());
         self::assertTrue($account->isRegComplete());
         self::assertEquals($newTemplate, $account->getTemplate());
+
+        $this->expectException(AppException::class);
+        $this->expectExceptionMessage(AccountException::MISS_MAIN_CHARACTER);
+        $account->getMainCharacter();
     }
 }

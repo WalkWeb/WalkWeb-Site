@@ -6,9 +6,11 @@ namespace App\Domain\Account;
 
 use App\Domain\Account\Floor\FloorInterface;
 use App\Domain\Account\Group\AccountGroupInterface;
+use App\Domain\Account\MainCharacter\MainCharacterInterface;
 use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Account\Upload\AccountUpload;
 use DateTimeInterface;
+use WalkWeb\NW\AppException;
 
 class Account implements AccountInterface
 {
@@ -26,7 +28,7 @@ class Account implements AccountInterface
     private string $ref;
     private string $userAgent;
     private bool $canLike;
-    private string $mainCharacterId;
+    private ?MainCharacterInterface $mainCharacter;
     private FloorInterface $floor;
     private AccountStatus $status;
     private AccountGroupInterface $group;
@@ -49,13 +51,13 @@ class Account implements AccountInterface
         string $ref,
         string $userAgent,
         bool $canLike,
-        string $mainCharacterId,
         FloorInterface $floor,
         AccountStatus $status,
         AccountGroupInterface $group,
         AccountUpload $upload,
         DateTimeInterface $createdAt,
-        DateTimeInterface $updatedAt
+        DateTimeInterface $updatedAt,
+        ?MainCharacterInterface $mainCharacter
     )
     {
         $this->id = $id;
@@ -72,13 +74,13 @@ class Account implements AccountInterface
         $this->ref = $ref;
         $this->userAgent = $userAgent;
         $this->canLike = $canLike;
-        $this->mainCharacterId = $mainCharacterId;
         $this->floor = $floor;
         $this->status = $status;
         $this->group = $group;
         $this->upload = $upload;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+        $this->mainCharacter = $mainCharacter;
     }
 
     /**
@@ -210,11 +212,16 @@ class Account implements AccountInterface
     }
 
     /**
-     * @return string
+     * @return MainCharacterInterface
+     * @throws AppException
      */
-    public function getMainCharacterId(): string
+    public function getMainCharacter(): MainCharacterInterface
     {
-        return $this->mainCharacterId;
+        if ($this->mainCharacter === null) {
+            throw new AppException(AccountException::MISS_MAIN_CHARACTER);
+        }
+
+        return $this->mainCharacter;
     }
 
     /**

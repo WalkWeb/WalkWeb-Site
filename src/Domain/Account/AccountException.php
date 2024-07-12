@@ -13,6 +13,7 @@ class AccountException extends Exception
     public const NAME_ALREADY_EXIST            = 'User with this name already exists';
     public const EMAIL_ALREADY_EXIST           = 'User with this email already exists';
     public const INVALID_LOGIN_OR_PASSWORD     = 'Invalid login or password';
+    public const MISS_MAIN_CHARACTER           = 'Miss main character';
 
     // id
     public const INVALID_ID                    = 'Incorrect parameter "id", it required and type string (uuid)';
@@ -55,9 +56,6 @@ class AccountException extends Exception
     public const INVALID_USER_AGENT_LENGTH     = 'Incorrect parameter "user_agent", should be min-max length: ';
     // can_like
     public const INVALID_CAN_LIKE              = 'Incorrect parameter "can_like", excepted int (0 or 1)';
-    // main_character_id
-    public const INVALID_MAIN_CHAR_ID          = 'Incorrect parameter "main_character_id", it required and type string';
-    public const INVALID_MAIN_CHAR_ID_LENGTH   = 'Incorrect parameter "main_character_id", should be min-max length: ';
     // floor_id
     public const INVALID_FLOOR_ID              = 'Incorrect parameter "floor_id", excepted int';
     public const UNKNOWN_FLOOR_ID              = 'Unknown account floor id';
@@ -70,6 +68,8 @@ class AccountException extends Exception
     // upload
     public const INVALID_UPLOAD                = 'Incorrect parameter "upload", excepted int';
     public const INVALID_UPLOAD_VALUE          = 'Incorrect parameter "upload", should be min-max value: ';
+    // main_character
+    public const INVALID_MAIN_CHARACTER        = 'Incorrect parameter "main_character", excepted array or skip';
     // created_at
     public const INVALID_CREATED_AT            = 'Incorrect parameter "created_at", it required and type string (date format)';
     // updated_at

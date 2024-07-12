@@ -7,6 +7,8 @@ namespace App\Domain\Account;
 use App\Domain\Account\Floor\Floor;
 use App\Domain\Account\Group\AccountGroup;
 use App\Domain\Account\Group\AccountGroupInterface;
+use App\Domain\Account\MainCharacter\MainCharacterFactory;
+use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Account\Status\AccountStatusInterface;
 use App\Domain\Account\Upload\AccountUpload;
@@ -26,12 +28,21 @@ class AccountFactory
      * Create object Account from array (data from database)
      *
      * @param array $data
+     * @param SendNoticeActionInterface $sendNoticeAction
      * @return AccountInterface
-     * @throws AppException
      * @throws AccountException
+     * @throws AppException
      */
-    public static function createFromDB(array $data): AccountInterface
+    public static function createFromDB(array $data, SendNoticeActionInterface $sendNoticeAction): AccountInterface
     {
+        if (array_key_exists('main_character', $data)) {
+            $mainCharacter = MainCharacterFactory::create(
+                self::array($data, 'main_character', AccountException::INVALID_MAIN_CHARACTER), $sendNoticeAction
+            );
+        } else {
+            $mainCharacter = null;
+        }
+
         return new Account(
             self::uuid($data, 'id', AccountException::INVALID_ID),
             self::loginValidation($data),
@@ -47,13 +58,13 @@ class AccountFactory
             self::refValidate($data),
             self::userAgentValidate($data),
             (bool)self::int($data, 'can_like', AccountException::INVALID_CAN_LIKE),
-            self::mainCharacterId($data),
             new Floor(self::int($data, 'floor_id', AccountException::INVALID_FLOOR_ID)),
             new AccountStatus(self::int($data, 'status_id', AccountException::INVALID_STATUS_ID)),
             new AccountGroup(self::int($data, 'group_id', AccountException::INVALID_GROUP_ID)),
             self::uploadValidate($data),
             self::date($data, 'created_at', AccountException::INVALID_CREATED_AT),
             self::date($data, 'updated_at', AccountException::INVALID_UPDATED_AT),
+            $mainCharacter,
         );
     }
 
@@ -87,13 +98,13 @@ class AccountFactory
                 self::refValidate($data),
                 self::userAgentValidate($data),
                 true,
-                '',
                 new Floor(self::int($data, 'floor_id', AccountException::INVALID_FLOOR_ID)),
                 new AccountStatus(AccountStatusInterface::ACTIVE),
                 new AccountGroup(AccountGroupInterface::USER),
                 new AccountUpload(0, AccountInterface::UPLOAD_MAX_BASE),
                 new DateTime(),
                 new DateTime(),
+                null,
             );
         } catch (Exception $e) {
             throw new AppException($e->getMessage());
@@ -313,24 +324,5 @@ class AccountFactory
         );
 
         return new AccountUpload($upload, AccountInterface::UPLOAD_MAX_BASE);
-    }
-
-    /**
-     * @param array $data
-     * @return string
-     * @throws AppException
-     */
-    private static function mainCharacterId(array $data): string
-    {
-        $mainCharacterId = self::string($data, 'main_character_id', AccountException::INVALID_MAIN_CHAR_ID);
-
-        self::stringMinMaxLength(
-            $mainCharacterId,
-            AccountInterface::MAIN_CHARACTER_MIN_LENGTH,
-            AccountInterface::MAIN_CHARACTER_MAX_LENGTH,
-            AccountException::INVALID_MAIN_CHAR_ID_LENGTH . AccountInterface::MAIN_CHARACTER_MIN_LENGTH . '-' . AccountInterface::MAIN_CHARACTER_MAX_LENGTH
-        );
-
-        return $mainCharacterId;
     }
 }
