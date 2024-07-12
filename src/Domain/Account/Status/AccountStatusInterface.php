@@ -9,6 +9,8 @@ interface AccountStatusInterface
     public const ACTIVE  = 1;
     public const BLOCKED = 2;
 
+    // TODO NOT_VERIFIED = 3;
+
     /**
      * Возвращает ID статуса аккаунта
      *
