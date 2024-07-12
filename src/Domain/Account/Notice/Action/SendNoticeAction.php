@@ -26,18 +26,18 @@ class SendNoticeAction implements SendNoticeActionInterface
      * @param string $accountId
      * @param string $message
      * @param int $type
-     * @param bool $view
+     * @param bool $print
      * @return NoticeInterface
      * @throws NoticeException
      */
-    public function send(string $accountId, string $message, int $type = NoticeInterface::TYPE_INFO, bool $view = true): NoticeInterface
+    public function send(string $accountId, string $message, int $type = NoticeInterface::TYPE_INFO, bool $print = true): NoticeInterface
     {
         $notice = new Notice(
             (string)Uuid::uuid4(),
             $type,
             $accountId,
             $message,
-            $view,
+            !$print,
             new DateTime()
         );
 

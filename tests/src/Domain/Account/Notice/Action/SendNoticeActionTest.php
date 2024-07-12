@@ -34,7 +34,7 @@ class SendNoticeActionTest extends AbstractTest
         self::assertEquals($notice->getType(), $sendNotice->getType());
         self::assertEquals($notice->getAccountId(), $sendNotice->getAccountId());
         self::assertEquals($notice->getMessage(), $sendNotice->getMessage());
-        self::assertEquals($notice->isView(), $sendNotice->isView());
+        self::assertFalse($sendNotice->isView());
         self::assertEquals(
             $notice->getCreatedAt()->format(self::DATE_FORMAT),
             $sendNotice->getCreatedAt()->format(self::DATE_FORMAT)

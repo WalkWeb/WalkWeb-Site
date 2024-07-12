@@ -94,7 +94,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
         self::assertEquals(NoticeInterface::TYPE_INFO, $data[0]['type']);
         self::assertEquals($account['id'], $data[0]['account_id']);
         self::assertEquals(SendNoticeAction::REGISTER_START, $data[0]['message']);
-        self::assertEquals(0, $data[0]['view']);
+        self::assertEquals(1, $data[0]['view']);
     }
 
     /**
