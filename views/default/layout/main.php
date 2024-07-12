@@ -1,5 +1,8 @@
 <?php
 use App\Domain\Auth\AuthInterface;
+
+$this->title = 'WalkWeb — Интересное';
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -50,8 +53,24 @@ use App\Domain\Auth\AuthInterface;
             if ($this->container->exist('user')) {
                 /** @var AuthInterface $user */
                 $user = $this->container->get('user');
-                echo '<div class="right_content_ava"></div><div class="right_content_body">';
-                echo "<p>({$user->getLevel()->getLevel()}) {$user->getName()}</p></div>";
+                echo '<div class="right_content_ava" style="background-image: url(/img/default_avatar.jpg);"></div>
+                      <div class="exp_background"></div>
+                      <div class="exp_fill" style="width: ' . $user->getLevel()->getExpBarWeight() . '%"></div>
+                      <div class="exp_text">
+                      <p><abbr title="Ваш опыт">' . $user->getLevel()->getExpAtLevel() . '/' . $user->getLevel()->getExpToLevel() . '</abbr></p>
+                      </div>
+                      <div class="right_content_body">
+                      <p><span class="lvl">' . $user->getLevel()->getLevel() . '</span> <a href="/u/' . $user->getName() . '" class="profile_link" title="Профиль">' . $user->getName() . '</a></p>
+                      </div>
+                      <div class="energy_background"></div>
+                      <div class="energy_fill" style="width: ' . $user->getEnergy()->getEnergyWeight() . '%;"></div>
+                      <div class="energy_text">
+                      <p><abbr title="Ваша энергия">' . $user->getEnergy()->getEnergy() . '/' . $user->getEnergy()->getMaxEnergy() . '</abbr></p>
+                      </div>
+                      <div class="residue_background"></div>
+                      <div class="residue_fill" style="width: ' . $user->getEnergy()->getRestoreWeight() . '%;"></div>';
+
+
             } else {
                 echo '<div class="right_content_body">
                         <p>

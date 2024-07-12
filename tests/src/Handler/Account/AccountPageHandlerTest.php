@@ -19,7 +19,7 @@ class AccountPageHandlerTest extends AbstractTest
         $request = new Request(['REQUEST_URI' => '/u/DemoUser']);
         $response = $this->app->handle($request);
 
-        self::assertMatchesRegularExpression('/Профиль пользователя DemoUser/', $response->getBody());
+        self::assertMatchesRegularExpression('/Логин: DemoUser/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
     }
 
