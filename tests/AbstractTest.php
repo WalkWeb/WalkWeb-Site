@@ -52,7 +52,7 @@ abstract class AbstractTest extends TestCase
     /**
      * @throws AppException
      */
-    public function setDown(): void
+    public function tearDown(): void
     {
         self::getContainer()->getConnectionPool()->getConnection()->rollback();
     }

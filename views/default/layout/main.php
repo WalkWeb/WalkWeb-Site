@@ -34,7 +34,7 @@ $this->title = 'WalkWeb — Интересное';
                 <li><a href="#">Добавить пост</a></li>
                 <li><a href="/login">Вход</a></li>
                 <li><a href="/registration/main">Регистрация</a></li>
-                <li><a href="#">Статистика</a></li>
+                <li><a href="/statistic">Статистика</a></li>
             </ul>
         </div>
     </div>
