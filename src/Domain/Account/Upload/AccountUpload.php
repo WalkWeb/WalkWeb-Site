@@ -7,7 +7,6 @@ namespace App\Domain\Account\Upload;
 class AccountUpload implements UploadInterface
 {
     private int $upload;
-
     private int $uploadMax;
 
     public function __construct(int $upload, int $uploadMax)

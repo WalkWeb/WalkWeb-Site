@@ -22,10 +22,11 @@ class AccountFactoryTest extends AbstractTest
      *
      * @dataProvider createFromDBSuccessDataProvider
      * @param array $data
+     * @param int $expectedMaxUpload
      * @throws AccountException
      * @throws AppException
      */
-    public function testAccountFactoryCreateFromDBSuccess(array $data): void
+    public function testAccountFactoryCreateFromDBSuccess(array $data, int $expectedMaxUpload): void
     {
         $account = AccountFactory::createFromDB($data, $this->getSendNoticeAction());
 
@@ -45,8 +46,7 @@ class AccountFactoryTest extends AbstractTest
         self::assertEquals($data['status_id'], $account->getStatus()->getId());
         self::assertEquals($data['group_id'], $account->getGroup()->getId());
         self::assertEquals($data['upload'], $account->getUpload()->getUpload());
-        self::assertEquals(AccountInterface::UPLOAD_MAX_BASE, $account->getUpload()->getUploadMax());
-        self::assertEquals(AccountInterface::UPLOAD_MAX_BASE - $data['upload'], $account->getUpload()->getUploadRemainder());
+
         self::assertEquals($data['user_agent'], $account->getUserAgent());
         self::assertEquals((bool)$data['can_like'], $account->isCanLike());
         self::assertEquals($data['created_at'], $account->getCreatedAt()->format(self::DATE_FORMAT));
@@ -61,6 +61,12 @@ class AccountFactoryTest extends AbstractTest
             self::assertEquals($data['main_character']['energy_bonus'], $account->getMainCharacter()->getEnergyBonus());
             self::assertEquals($data['main_character']['upload_bonus'], $account->getMainCharacter()->getUploadBonus());
             self::assertEquals($data['main_character']['character_stat_points'], $account->getMainCharacter()->getLevel()->getStatPoints());
+
+            self::assertEquals($expectedMaxUpload, $account->getUpload()->getUploadMax());
+            self::assertEquals($expectedMaxUpload - $data['upload'], $account->getUpload()->getUploadRemainder());
+        } else {
+            self::assertEquals(AccountInterface::UPLOAD_MAX_BASE, $account->getUpload()->getUploadMax());
+            self::assertEquals(AccountInterface::UPLOAD_MAX_BASE - $data['upload'], $account->getUpload()->getUploadRemainder());
         }
     }
 
@@ -160,6 +166,7 @@ class AccountFactoryTest extends AbstractTest
                     'created_at'        => '2020-12-25 11:00:00',
                     'updated_at'        => '2020-12-25 11:00:00',
                 ],
+                0,
             ],
             [
                 // + main character
@@ -195,6 +202,43 @@ class AccountFactoryTest extends AbstractTest
                         'character_stat_points' => 0,
                     ],
                 ],
+                AccountInterface::UPLOAD_MAX_BASE,
+            ],
+            [
+                // upload bonus
+                [
+                    'id'                => self::DEMO_USER,
+                    'login'             => 'LoginUser',
+                    'name'              => 'NameUser',
+                    'password'          => '$2y$10$QjmBAUvgcu4nAmEnqEEHAebsA3GKS.4V0ngNIvk8t7adq0S/n7Uea',
+                    'email'             => 'mail1@mail.com',
+                    'email_verified'    => 1,
+                    'reg_complete'      => 1,
+                    'auth_token'        => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a5',
+                    'verified_token'    => 'ISUgTBiTjVht2PIVQqSR52hmeXNs2Z',
+                    'template'          => 'default',
+                    'ip'                => '127.0.0.1',
+                    'ref'               => 'ref_link1',
+                    'floor_id'          => 1,
+                    'status_id'         => 1,
+                    'group_id'          => 10,
+                    'upload'            => 0,
+                    'user_agent'        => 'undefined',
+                    'can_like'          => 1,
+                    'created_at'        => '2020-12-25 11:00:00',
+                    'updated_at'        => '2020-12-25 11:00:00',
+                    'main_character'    => [
+                        'character_id'          => 'e7c3effa-1dbf-42af-a105-17eb06c7a6e0',
+                        'account_id'            => self::DEMO_USER,
+                        'era_id'                => 1,
+                        'character_level'       => 5,
+                        'character_exp'         => 0,
+                        'energy_bonus'          => 0,
+                        'upload_bonus'          => 3,
+                        'character_stat_points' => 0,
+                    ],
+                ],
+                AccountInterface::UPLOAD_MAX_BASE + (4 * AccountInterface::UPLOAD_PER_LEVEL) + (3 * AccountInterface::UPLOAD_PER_STAT),
             ],
         ];
     }

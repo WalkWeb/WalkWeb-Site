@@ -8,6 +8,7 @@ use App\Domain\Account\Floor\Floor;
 use App\Domain\Account\Group\AccountGroup;
 use App\Domain\Account\Group\AccountGroupInterface;
 use App\Domain\Account\MainCharacter\MainCharacterFactory;
+use App\Domain\Account\MainCharacter\MainCharacterInterface;
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Account\Status\AccountStatusInterface;
@@ -61,7 +62,7 @@ class AccountFactory
             new Floor(self::int($data, 'floor_id', AccountException::INVALID_FLOOR_ID)),
             new AccountStatus(self::int($data, 'status_id', AccountException::INVALID_STATUS_ID)),
             new AccountGroup(self::int($data, 'group_id', AccountException::INVALID_GROUP_ID)),
-            self::uploadValidate($data),
+            self::uploadValidate($data, $mainCharacter),
             self::date($data, 'created_at', AccountException::INVALID_CREATED_AT),
             self::date($data, 'updated_at', AccountException::INVALID_UPDATED_AT),
             $mainCharacter,
@@ -309,10 +310,11 @@ class AccountFactory
 
     /**
      * @param array $data
+     * @param MainCharacterInterface|null $mainCharacter
      * @return AccountUpload
      * @throws AppException
      */
-    private static function uploadValidate(array $data): AccountUpload
+    private static function uploadValidate(array $data, ?MainCharacterInterface $mainCharacter = null): AccountUpload
     {
         $upload = self::int($data, 'upload', AccountException::INVALID_UPLOAD);
 
@@ -323,6 +325,13 @@ class AccountFactory
             AccountException::INVALID_UPLOAD_VALUE . AccountInterface::UPLOAD_MIN_VALUE . '-' . AccountInterface::UPLOAD_MAX_VALUE
         );
 
-        return new AccountUpload($upload, AccountInterface::UPLOAD_MAX_BASE);
+        $uploadMax = $mainCharacter === null ? AccountInterface::UPLOAD_MAX_BASE :
+            AccountInterface::UPLOAD_MAX_BASE +
+            ($mainCharacter->getLevel()->getLevel() - 1) * AccountInterface::UPLOAD_PER_LEVEL +
+            $mainCharacter->getUploadBonus() * AccountInterface::UPLOAD_PER_STAT;
+
+        //var_dump($uploadMax);
+
+        return new AccountUpload($upload, $uploadMax);
     }
 }
