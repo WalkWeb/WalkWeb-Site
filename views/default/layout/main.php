@@ -32,8 +32,12 @@ $this->title = 'WalkWeb — Интересное';
         <div class="head_menu float_right">
             <ul>
                 <li><a href="#">Добавить пост</a></li>
-                <li><a href="/login">Вход</a></li>
-                <li><a href="/registration/main">Регистрация</a></li>
+                <?php
+                if (!$this->container->exist('user')) {
+                    echo '<li><a href="/login">Вход</a></li>
+                          <li><a href="/registration/main">Регистрация</a></li>';
+                }
+                ?>
                 <li><a href="/statistic">Статистика</a></li>
             </ul>
         </div>
