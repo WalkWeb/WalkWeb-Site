@@ -39,8 +39,8 @@ class AuthTest extends AbstractTest
         );
         $canLike = true;
         $notices = new NoticeCollection();
-        $level = new MainLevel($id, $characterId, 1, 0, 0, $this->getSendNoticeAction());
         $statPoints = 10;
+        $level = new MainLevel($id, $characterId, 1, 0, $statPoints, $this->getSendNoticeAction());
         $template = 'default';
         $emailVerified = true;
         $upload = new AccountUpload(0, 10000);
@@ -55,7 +55,6 @@ class AuthTest extends AbstractTest
             $canLike,
             $notices,
             $level,
-            $statPoints,
             $template,
             $emailVerified,
             $upload
@@ -69,53 +68,9 @@ class AuthTest extends AbstractTest
         self::assertEquals($energy, $auth->getEnergy());
         self::assertEquals($canLike, $auth->isCanLike());
         self::assertEquals($level, $auth->getLevel());
-        self::assertEquals($statPoints, $auth->getStatPoints());
+        self::assertEquals($statPoints, $auth->getLevel()->getStatPoints());
         self::assertEquals($template, $auth->getTemplate());
         self::assertEquals($emailVerified, $auth->isEmailVerified());
         self::assertEquals($upload, $auth->getUpload());
-    }
-
-    /**
-     * Тест на установку нового значения statPoints
-     *
-     * @throws Exception
-     */
-    public function testAuthSetStatPoints(): void
-    {
-        $auth = new Auth(
-            'abc',
-            'name',
-            'avatar',
-            new AccountGroup(10),
-            new AccountStatus(2),
-            new Energy(
-                '8d3af2e4-b706-4956-b59f-6d39526dc6dc',
-                100,
-                150,
-                (float)microtime(true),
-                (float)microtime(true),
-                0
-            ),
-            true,
-            new NoticeCollection(),
-            new MainLevel(
-                '03796f7c-37b1-4b80-a0ed-3316b36c5518',
-                'fb84b694-f169-4770-ae83-9fadb96a9368',
-                1,
-                0,
-                0,
-                $this->getSendNoticeAction()
-            ),
-            $statPoints = 0,
-            'default',
-            false,
-            new AccountUpload(0, 10000)
-        );
-
-        self::assertEquals($statPoints, $auth->getStatPoints());
-
-        $auth->setStatPoints($newStatPoints = 5);
-
-        self::assertEquals($newStatPoints, $auth->getStatPoints());
     }
 }

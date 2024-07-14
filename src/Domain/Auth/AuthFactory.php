@@ -45,7 +45,6 @@ class AuthFactory
                 (bool)self::int($data, 'can_like', AuthException::INVALID_CAN_LIKE),
                 NoticeCollectionFactory::create(self::array($data, 'notices', AuthException::INVALID_NOTICES_DATA)),
                 $level,
-                self::int($data, 'stat_points', AuthException::INVALID_STAT_POINTS),
                 self::string($data, 'template', AuthException::INVALID_TEMPLATE),
                 (bool)self::int($data, 'email_verified', AuthException::INVALID_EMAIL_VERIFIED),
                 self::uploadValidate($data, $level, $uploadBonus)

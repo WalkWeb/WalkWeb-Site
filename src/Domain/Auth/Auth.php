@@ -22,7 +22,6 @@ class Auth implements AuthInterface
     private bool $canLike;
     private NoticeCollection $notices;
     private LevelInterface $level;
-    private int $statPoints;
     private string $template;
     private bool $emailVerified;
     private UploadInterface $upload;
@@ -37,7 +36,6 @@ class Auth implements AuthInterface
         bool $canLike,
         NoticeCollection $notices,
         LevelInterface $level,
-        int $statPoints,
         string $template,
         bool $emailVerified,
         UploadInterface $upload
@@ -52,7 +50,6 @@ class Auth implements AuthInterface
         $this->canLike = $canLike;
         $this->notices = $notices;
         $this->level = $level;
-        $this->statPoints = $statPoints;
         $this->template = $template;
         $this->emailVerified = $emailVerified;
         $this->upload = $upload;
@@ -128,22 +125,6 @@ class Auth implements AuthInterface
     public function getLevel(): LevelInterface
     {
         return $this->level;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatPoints(): int
-    {
-        return $this->statPoints;
-    }
-
-    /**
-     * @param int $statPoints
-     */
-    public function setStatPoints(int $statPoints): void
-    {
-        $this->statPoints = $statPoints;
     }
 
     /**

@@ -84,22 +84,6 @@ interface AuthInterface
     public function getLevel(): LevelInterface;
 
     /**
-     * TODO delete
-     *
-     * Возвращает количество свободных очков параметров основного персонажа
-     *
-     * @return int
-     */
-    public function getStatPoints(): int;
-
-    /**
-     * Устанавливает новое количество свободных очков параметров основного персонажа
-     *
-     * @param int $statPoints
-     */
-    public function setStatPoints(int $statPoints): void;
-
-    /**
      * Возвращает используемый пользователем шаблон сайта
      *
      * @return string
