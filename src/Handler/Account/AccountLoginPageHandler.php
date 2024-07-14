@@ -22,7 +22,12 @@ class AccountLoginPageHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
-        // TODO Проверка на то, что пользователь уже авторизован
+        if ($this->container->exist('user')) {
+            return $this->render('account/login', [
+                'error'     => self::ALREADY_AUTH,
+                'csrfToken' => $this->container->getCsrf()->getCsrfToken(),
+            ]);
+        }
 
         return $this->render('account/login', [
             'csrfToken' => $this->container->getCsrf()->getCsrfToken(),

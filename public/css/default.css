@@ -353,5 +353,7 @@ a.profile_link:hover {
     text-decoration: underline;
 }
 
-
+span.red {
+    color: #a71d2a;
+}
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Test\src\Handler\Account;
 
+use App\Domain\Account\AccountInterface;
+use App\Handler\Account\AccountLoginPageHandler;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
@@ -21,7 +23,22 @@ class AccountLoginPageHandlerTest extends AbstractTest
         $request = new Request(['REQUEST_URI' => '/login']);
         $response = $this->app->handle($request);
 
-        self::assertMatchesRegularExpression('/Вход/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertMatchesRegularExpression('/Вход/', $response->getBody());
+    }
+
+    /**
+     * Тест на ситуацию, когда уже авторизованный пользователь открывает страницу авторизации
+     *
+     * @throws AppException
+     */
+    public function testLoginPageHandlerAlreadyAuth(): void
+    {
+        $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
+        $request = new Request(['REQUEST_URI' => '/login'], [], [AccountInterface::AUTH_TOKEN => $token]);
+        $response = $this->app->handle($request);
+
+        self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertMatchesRegularExpression('/' . AccountLoginPageHandler::ALREADY_AUTH . '/', $response->getBody());
     }
 }

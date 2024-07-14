@@ -9,9 +9,9 @@ echo "<h1>{$this->title}</h1>";
 
 if (!empty($error)) {
     if ($error === AccountLoginPageHandler::ALREADY_AUTH) {
-        echo "<p>$error</p>";
+        echo "<p><span class='red'>$error</span></p>";
     } else {
-        echo "<p>$error</p>";
+        echo "<p><span class='red'>$error</span></p>";
 
         echo '<form method="POST" action="' .$postAction . '">
                 <label>Логин:
