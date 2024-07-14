@@ -46,6 +46,8 @@ class AccountRegistrationHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
+        // TODO Проверка на уже существующую авторизацию
+
         try {
             $csrfToken = $request->csrf;
 

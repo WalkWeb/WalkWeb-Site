@@ -22,7 +22,9 @@ class AccountRegistrationPageHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
-        // TODO Проверка на то, что пользователь уже авторизован
+        if ($this->container->exist('user')) {
+            return $this->redirect('/');
+        }
 
         $ref = $request->ref;
 

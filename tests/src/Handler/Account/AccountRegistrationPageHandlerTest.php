@@ -22,7 +22,7 @@ class AccountRegistrationPageHandlerTest extends AbstractTest
     public function testAccountRegistrationPageHandlerSuccess(): void
     {
         $request = new Request(['REQUEST_URI' => '/registration/main']);
-        $response = $this->app->handle($request);
+        $response = $this->createApp()->handle($request);
 
         self::assertMatchesRegularExpression('/Регистрация/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
@@ -35,10 +35,26 @@ class AccountRegistrationPageHandlerTest extends AbstractTest
     {
         $ref = self::generateString(AccountInterface::REF_MAX_LENGTH + 1);
         $request = new Request(['REQUEST_URI' => "/registration/$ref"]);
-        $response = $this->app->handle($request);
+        $response = $this->createApp()->handle($request);
 
         $error = AccountException::INVALID_REF_LENGTH . AccountInterface::REF_MIN_LENGTH . '-' . AccountInterface::REF_MAX_LENGTH;
         self::assertMatchesRegularExpression("/$error/", $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
+    }
+
+    /**
+     * Тест на ситуацию, когда авторизованный пользователь пытается открыть страницу регистрации - его переадресовывает
+     * на главную
+     *
+     * @throws AppException
+     */
+    public function testUserRegistrationHandlerAlreadyAuth(): void
+    {
+        $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
+        $request = new Request(['REQUEST_URI' => '/registration/main'], [], [AccountInterface::AUTH_TOKEN => $token]);
+
+        $response = $this->createApp()->handle($request);
+
+        self::assertEquals(Response::FOUND, $response->getStatusCode());
     }
 }
