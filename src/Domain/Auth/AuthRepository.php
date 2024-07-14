@@ -38,10 +38,12 @@ class AuthRepository
             `accounts`.`notice`,
             `accounts`.`template`,
             `accounts`.`email_verified`,
+            `accounts`.`upload`,
             
             `characters_main`.`id` as `character_id`,
             `characters_main`.`level`,
             `characters_main`.`exp`,
+            `characters_main`.`upload_bonus`,
             `characters_main`.`stats_point` as `stat_points`,
        
             `account_energy`.`id` as `energy_id`,

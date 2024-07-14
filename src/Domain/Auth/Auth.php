@@ -9,6 +9,7 @@ use App\Domain\Account\Group\AccountGroupInterface;
 use App\Domain\Account\MainCharacter\Level\LevelInterface;
 use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Status\AccountStatusInterface;
+use App\Domain\Account\Upload\UploadInterface;
 
 class Auth implements AuthInterface
 {
@@ -24,6 +25,7 @@ class Auth implements AuthInterface
     private int $statPoints;
     private string $template;
     private bool $emailVerified;
+    private UploadInterface $upload;
 
     public function __construct(
         string $id,
@@ -37,7 +39,8 @@ class Auth implements AuthInterface
         LevelInterface $level,
         int $statPoints,
         string $template,
-        bool $emailVerified
+        bool $emailVerified,
+        UploadInterface $upload
     )
     {
         $this->id = $id;
@@ -52,6 +55,7 @@ class Auth implements AuthInterface
         $this->statPoints = $statPoints;
         $this->template = $template;
         $this->emailVerified = $emailVerified;
+        $this->upload = $upload;
     }
 
     /**
@@ -156,5 +160,13 @@ class Auth implements AuthInterface
     public function isEmailVerified(): bool
     {
         return $this->emailVerified;
+    }
+
+    /**
+     * @return UploadInterface
+     */
+    public function getUpload(): UploadInterface
+    {
+        return $this->upload;
     }
 }

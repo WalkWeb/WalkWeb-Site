@@ -21,4 +21,7 @@ class AuthException extends Exception
     public const INVALID_STAT_POINTS            = 'Incorrect "stat_points" data, excepted int';
     public const INVALID_TEMPLATE               = 'Incorrect "template" data, excepted string';
     public const INVALID_EMAIL_VERIFIED         = 'Incorrect "email_verified" parameter, it required and type int';
+    public const INVALID_UPLOAD_BONUS           = 'Incorrect "upload_bonus" parameter, it required and type int';
+    public const INVALID_UPLOAD                 = 'Incorrect parameter "upload", excepted int';
+    public const INVALID_UPLOAD_VALUE           = 'Incorrect parameter "upload", should be min-max value: ';
 }

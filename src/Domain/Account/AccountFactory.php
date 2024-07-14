@@ -330,8 +330,6 @@ class AccountFactory
             ($mainCharacter->getLevel()->getLevel() - 1) * AccountInterface::UPLOAD_PER_LEVEL +
             $mainCharacter->getUploadBonus() * AccountInterface::UPLOAD_PER_STAT;
 
-        //var_dump($uploadMax);
-
         return new AccountUpload($upload, $uploadMax);
     }
 }

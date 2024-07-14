@@ -9,6 +9,7 @@ use App\Domain\Account\Group\AccountGroupInterface;
 use App\Domain\Account\MainCharacter\Level\LevelInterface;
 use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Status\AccountStatusInterface;
+use App\Domain\Account\Upload\UploadInterface;
 
 /**
  * Auth - это особая модель (такой таблицы нет), которая создается при аутентификации пользователя. Хранит в себе
@@ -107,8 +108,15 @@ interface AuthInterface
 
     /**
      * Подтвержден ли email
-     *      *
+     *
      * @return bool
      */
     public function isEmailVerified(): bool;
+
+    /**
+     * Данные по занятому и оставшемуся месту на диске
+     *
+     * @return UploadInterface
+     */
+    public function getUpload(): UploadInterface;
 }

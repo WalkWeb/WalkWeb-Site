@@ -9,6 +9,7 @@ use App\Domain\Account\Group\AccountGroup;
 use App\Domain\Account\MainCharacter\Level\MainLevel;
 use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Status\AccountStatus;
+use App\Domain\Account\Upload\AccountUpload;
 use App\Domain\Auth\Auth;
 use Exception;
 use Test\AbstractTest;
@@ -42,8 +43,23 @@ class AuthTest extends AbstractTest
         $statPoints = 10;
         $template = 'default';
         $emailVerified = true;
+        $upload = new AccountUpload(0, 10000);
 
-        $auth = new Auth($id, $name, $avatar, $group, $status, $energy, $canLike, $notices, $level, $statPoints, $template, $emailVerified);
+        $auth = new Auth(
+            $id,
+            $name,
+            $avatar,
+            $group,
+            $status,
+            $energy,
+            $canLike,
+            $notices,
+            $level,
+            $statPoints,
+            $template,
+            $emailVerified,
+            $upload
+        );
 
         self::assertEquals($id, $auth->getId());
         self::assertEquals($name, $auth->getName());
@@ -56,6 +72,7 @@ class AuthTest extends AbstractTest
         self::assertEquals($statPoints, $auth->getStatPoints());
         self::assertEquals($template, $auth->getTemplate());
         self::assertEquals($emailVerified, $auth->isEmailVerified());
+        self::assertEquals($upload, $auth->getUpload());
     }
 
     /**
@@ -91,7 +108,8 @@ class AuthTest extends AbstractTest
             ),
             $statPoints = 0,
             'default',
-            false
+            false,
+            new AccountUpload(0, 10000)
         );
 
         self::assertEquals($statPoints, $auth->getStatPoints());
