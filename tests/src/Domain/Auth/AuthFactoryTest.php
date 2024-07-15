@@ -41,7 +41,7 @@ class AuthFactoryTest extends AbstractTest
         self::assertEquals($data['upload'], $auth->getUpload()->getUpload());
         self::assertEquals($expectedMaxUpload, $auth->getUpload()->getUploadMax());
 
-        $exceptedEnergy = EnergyFactory::createFromDB($data['energy']);
+        $exceptedEnergy = EnergyFactory::create($data['energy']);
 
         self::assertEquals($exceptedEnergy->getId(), $auth->getEnergy()->getId());
         self::assertEquals($exceptedEnergy->getEnergy(), $auth->getEnergy()->getEnergy());

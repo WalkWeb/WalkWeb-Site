@@ -43,7 +43,7 @@ class EnergyRepository
 
         $data['energy_updated_at'] = (float)$data['energy_updated_at'];
 
-        return EnergyFactory::createFromDB($data);
+        return EnergyFactory::create($data);
     }
 
     /**

@@ -19,7 +19,7 @@ class EnergyFactory
      * @return EnergyInterface
      * @throws AppException
      */
-    public static function createFromDB(array $data): EnergyInterface
+    public static function create(array $data): EnergyInterface
     {
         self::string($data, 'energy_id', EnergyException::INCORRECT_ENERGY_ID_DATA);
         self::int($data, 'energy', EnergyException::INCORRECT_ENERGY_DATA);

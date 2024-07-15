@@ -22,9 +22,9 @@ class EnergyFactoryTest extends AbstractTest
      * @param int $expectedResidue
      * @throws AppException
      */
-    public function testEnergyFactoryCreateFromDBSuccess(array $data, int $expectedEnergy, int $expectedResidue): void
+    public function testEnergyFactoryCreateSuccess(array $data, int $expectedEnergy, int $expectedResidue): void
     {
-        $energy = EnergyFactory::createFromDB($data);
+        $energy = EnergyFactory::create($data);
 
         self::assertEquals($data['energy_id'], $energy->getId());
         self::assertEquals($expectedEnergy, $energy->getEnergy());
@@ -46,11 +46,11 @@ class EnergyFactoryTest extends AbstractTest
      * @param string $error
      * @throws AppException
      */
-    public function testEnergyFactoryCreateFromDBFail(array $data, string $error): void
+    public function testEnergyFactoryCreateFail(array $data, string $error): void
     {
         $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
-        EnergyFactory::createFromDB($data);
+        EnergyFactory::create($data);
     }
 
     /**

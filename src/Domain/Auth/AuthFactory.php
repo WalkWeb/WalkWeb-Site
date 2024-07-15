@@ -41,7 +41,7 @@ class AuthFactory
                 self::string($data, 'avatar', AuthException::INVALID_AVATAR),
                 new AccountGroup(self::int($data, 'account_group_id', AuthException::INVALID_ACCOUNT_GROUP_ID)),
                 new AccountStatus(self::int($data, 'account_status_id', AuthException::INVALID_ACCOUNT_STATUS_ID)),
-                EnergyFactory::createFromDB(self::array($data, 'energy', AuthException::INVALID_ENERGY_DATA)),
+                EnergyFactory::create(self::array($data, 'energy', AuthException::INVALID_ENERGY_DATA)),
                 (bool)self::int($data, 'can_like', AuthException::INVALID_CAN_LIKE),
                 NoticeCollectionFactory::create(self::array($data, 'notices', AuthException::INVALID_NOTICES_DATA)),
                 $level,
