@@ -29,7 +29,7 @@ class NoticeRepositoryTest extends AbstractTest
         $notice = $this->getRepository()->get($id);
 
         self::assertEquals($id, $notice->getId());
-        self::assertEquals(1, $notice->getType());
+        self::assertEquals(1, $notice->getTypeId());
         self::assertEquals(self::DEMO_USER, $notice->getAccountId());
         self::assertEquals('notice message 1', $notice->getMessage());
         self::assertFalse($notice->isView());
@@ -81,7 +81,7 @@ class NoticeRepositoryTest extends AbstractTest
         $noticeDb = $repository->get($notice->getId());
 
         self::assertEquals($notice->getId(), $noticeDb->getId());
-        self::assertEquals($notice->getType(), $noticeDb->getType());
+        self::assertEquals($notice->getTypeId(), $noticeDb->getTypeId());
         self::assertEquals($notice->getAccountId(), $noticeDb->getAccountId());
         self::assertEquals($notice->getMessage(), $noticeDb->getMessage());
         self::assertEquals($notice->isView(), $noticeDb->isView());

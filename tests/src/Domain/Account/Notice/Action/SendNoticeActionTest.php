@@ -31,7 +31,7 @@ class SendNoticeActionTest extends AbstractTest
         $notice = $this->getRepository()->get($sendNotice->getId());
 
         self::assertEquals($notice->getId(), $sendNotice->getId());
-        self::assertEquals($notice->getType(), $sendNotice->getType());
+        self::assertEquals($notice->getTypeId(), $sendNotice->getTypeId());
         self::assertEquals($notice->getAccountId(), $sendNotice->getAccountId());
         self::assertEquals($notice->getMessage(), $sendNotice->getMessage());
         self::assertFalse($sendNotice->isView());

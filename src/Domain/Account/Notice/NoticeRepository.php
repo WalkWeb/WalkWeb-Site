@@ -116,7 +116,7 @@ class NoticeRepository implements NoticeRepositoryInterface
             'INSERT INTO `notices` (`id`, `type`, `account_id`, `message`, `view`, `created_at`) VALUES (?, ?, ?, ?, ?, ?)',
             [
                 ['type' => 's', 'value' => $notice->getId()],
-                ['type' => 'i', 'value' => $notice->getType()],
+                ['type' => 'i', 'value' => $notice->getTypeId()],
                 ['type' => 's', 'value' => $notice->getAccountId()],
                 ['type' => 's', 'value' => $notice->getMessage()],
                 ['type' => 'i', 'value' => (int)$notice->isView()],

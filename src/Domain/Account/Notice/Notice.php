@@ -8,8 +8,15 @@ use DateTimeInterface;
 
 class Notice implements NoticeInterface
 {
+    private static array $map = [
+        self::TYPE_INFO     => 'Info',
+        self::TYPE_WARNING  => 'Warning',
+        self::TYPE_SUCCESS  => 'Success',
+    ];
+
     private string $id;
-    private int $type;
+    private int $typeId;
+    private string $type;
     private string $accountId;
     private string $message;
     private bool $view;
@@ -17,7 +24,7 @@ class Notice implements NoticeInterface
 
     /**
      * @param string $id
-     * @param int $type
+     * @param int $typeId
      * @param string $accountId
      * @param string $message
      * @param bool $view
@@ -26,7 +33,7 @@ class Notice implements NoticeInterface
      */
     public function __construct(
         string $id,
-        int $type,
+        int $typeId,
         string $accountId,
         string $message,
         bool $view,
@@ -38,7 +45,7 @@ class Notice implements NoticeInterface
         $this->message = $message;
         $this->view = $view;
         $this->createdAt = $createdAt;
-        $this->setType($type);
+        $this->setType($typeId);
     }
 
     /**
@@ -52,7 +59,15 @@ class Notice implements NoticeInterface
     /**
      * @return int
      */
-    public function getType(): int
+    public function getTypeId(): int
+    {
+        return $this->typeId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
     {
         return $this->type;
     }
@@ -90,15 +105,16 @@ class Notice implements NoticeInterface
     }
 
     /**
-     * @param int $type
+     * @param int $id
      * @throws NoticeException
      */
-    private function setType(int $type): void
+    private function setType(int $id): void
     {
-        if (!in_array($type, [self::TYPE_INFO, self::TYPE_WARNING, self::TYPE_SUCCESS], true)) {
-            throw new NoticeException(NoticeException::UNKNOWN_TYPE . ': ' . $type);
+        if (!array_key_exists($id, self::$map)) {
+            throw new NoticeException(NoticeException::UNKNOWN_TYPE . ': ' . $id);
         }
 
-        $this->type = $type;
+        $this->typeId = $id;
+        $this->type = self::$map[$id];
     }
 }

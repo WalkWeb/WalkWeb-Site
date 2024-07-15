@@ -25,7 +25,7 @@ class NoticeFactoryTest extends AbstractTest
         $notice = $this->getFactory()->create($data);
 
         self::assertEquals($data['id'], $notice->getId());
-        self::assertEquals($data['type'], $notice->getType());
+        self::assertEquals($data['type'], $notice->getTypeId());
         self::assertEquals($data['account_id'], $notice->getAccountId());
         self::assertEquals($data['message'], $notice->getMessage());
         self::assertEquals($data['view'], $notice->isView());
