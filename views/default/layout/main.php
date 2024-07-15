@@ -17,7 +17,7 @@ $this->title = 'WalkWeb — Интересное';
 <body>
 <div class="line"></div>
 <div class="box head_image">
-    <a href="/" class="to_main"></a>
+    <a href="/" class="full"></a>
 </div>
 <div class="box line"></div>
 
@@ -57,7 +57,9 @@ $this->title = 'WalkWeb — Интересное';
             if ($this->container->exist('user')) {
                 /** @var AuthInterface $user */
                 $user = $this->container->get('user');
-                echo '<div class="right_content_ava" style="background-image: url(/img/default_avatar.jpg);"></div>
+                echo '<div class="right_content_ava" style="background-image: url(/img/default_avatar.jpg);">
+                      <a href="/u/' . $user->getName() . '" class="full"></a>
+                      </div>
                       <div class="exp_background"></div>
                       <div class="exp_fill" style="width: ' . $user->getLevel()->getExpBarWeight() . '%"></div>
                       <div class="exp_text">

@@ -126,7 +126,8 @@ a.post_link:hover {
 }
 
 .right_content_ava {
-    min-height: 240px;
+    width: 100%;
+    height: 240px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -267,7 +268,7 @@ a:hover {
     text-decoration: underline;
 }
 
-a.to_main {
+a.full {
     display: block;
     width: 100%;
     height: 100%;
