@@ -59,6 +59,44 @@ class NoticeRepository implements NoticeRepositoryInterface
     }
 
     /**
+     * @param string $accountId
+     * @param int $offset
+     * @param int $limit
+     * @return NoticeCollection
+     * @throws AppException
+     * @throws AuthException
+     * @throws NoticeException
+     */
+    public function getAll(string $accountId, int $offset, int $limit): NoticeCollection
+    {
+        return NoticeCollectionFactory::create(
+            $this->container->getConnectionPool()->getConnection()->query(
+                'SELECT `id`, `type`, `account_id`, `message`, `view`, `created_at` 
+                FROM `notices` WHERE `account_id` = ? LIMIT ? OFFSET ?',
+                [
+                    ['type' => 's', 'value' => $accountId],
+                    ['type' => 'i', 'value' => $limit],
+                    ['type' => 'i', 'value' => $offset],
+                ]
+            )
+        );
+    }
+
+    /**
+     * @param string $accountId
+     * @return int
+     * @throws AppException
+     */
+    public function getTotal(string $accountId): int
+    {
+        return $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT count(`id`) as `total` FROM `notices` WHERE `account_id` = ?',
+            [['type' => 's', 'value' => $accountId]],
+            true
+        )['total'];
+    }
+
+    /**
      * @param NoticeInterface $notice
      * @throws AppException
      */

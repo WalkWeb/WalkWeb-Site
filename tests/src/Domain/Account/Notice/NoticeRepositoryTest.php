@@ -145,6 +145,44 @@ class NoticeRepositoryTest extends AbstractTest
     }
 
     /**
+     * Test on get all notices for account
+     *
+     * @dataProvider getAllDataProvider
+     * @param string $accountId
+     * @param int $offset
+     * @param int $limit
+     * @param array $noticesData
+     * @throws AppException
+     * @throws NoticeException
+     */
+    public function testNoticeRepositoryGetAll(string $accountId, int $offset, int $limit, array $noticesData): void
+    {
+        $notices = $this->getRepository()->getAll($accountId, $offset, $limit);
+
+        self::assertSameSize($noticesData, $notices);
+
+        $i = 0;
+        foreach ($notices as $notice) {
+            self::assertEquals(
+                NoticeFactory::create($noticesData[$i]),
+                $notice
+            );
+            $i++;
+        }
+    }
+
+    /**
+     * @dataProvider totalDataProvider
+     * @param string $accountId
+     * @param int $expectedTotal
+     * @throws AppException
+     */
+    public function testNoticeRepositoryGetTotal(string $accountId, int $expectedTotal): void
+    {
+        self::assertEquals($expectedTotal, $this->getRepository()->getTotal($accountId));
+    }
+
+    /**
      * @return NoticeRepositoryInterface
      * @throws AppException
      */
@@ -193,6 +231,151 @@ class NoticeRepositoryTest extends AbstractTest
             [
                 'a29393e0-34b4-4419-9c13-f4e8a1b54cf2',
                 [],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllDataProvider(): array
+    {
+        return [
+            // get all
+            [
+                self::DEMO_USER,
+                0,
+                10,
+                [
+                    [
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af1',
+                        'type'       => 1,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 1',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 11:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af2',
+                        'type'       => 2,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 2',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 12:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af3',
+                        'type'       => 3,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 3',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 13:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af4',
+                        'type'       => 1,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 4',
+                        'view'       => 1,
+                        'created_at' => '2021-12-25 14:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af5',
+                        'type'       => 1,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 5',
+                        'view'       => 1,
+                        'created_at' => '2021-12-25 15:00:00',
+                    ],
+                ],
+            ],
+            // check limit
+            [
+                self::DEMO_USER,
+                0,
+                2,
+                [
+                    [
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af1',
+                        'type'       => 1,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 1',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 11:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af2',
+                        'type'       => 2,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 2',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 12:00:00',
+                    ],
+                ],
+            ],
+            // check offset
+            [
+                self::DEMO_USER,
+                2,
+                10,
+                [
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af3',
+                        'type'       => 3,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 3',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 13:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af4',
+                        'type'       => 1,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 4',
+                        'view'       => 1,
+                        'created_at' => '2021-12-25 14:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af5',
+                        'type'       => 1,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 5',
+                        'view'       => 1,
+                        'created_at' => '2021-12-25 15:00:00',
+                    ],
+                ],
+            ],
+            // nothing
+            [
+                'a29393e0-34b4-4419-9c13-f4e8a1b54cf2',
+                0,
+                10,
+                [],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function totalDataProvider(): array
+    {
+        return [
+            [
+                self::DEMO_USER,
+                5,
+            ],
+            [
+                self::DEMO_CHAT_ADMIN,
+                0,
             ],
         ];
     }
