@@ -15,14 +15,18 @@ class AccountUploadTest extends AbstractTest
      * @dataProvider successDataProvider
      * @param int $upload
      * @param int $uploadMax
+     * @param int $uploadBarWeight
      */
-    public function testAccountUploadCreateSuccess(int $upload, int $uploadMax): void
+    public function testAccountUploadCreateSuccess(int $upload, int $uploadMax, int $uploadBarWeight): void
     {
         $accountUpload = new AccountUpload($upload, $uploadMax);
 
         self::assertEquals($upload, $accountUpload->getUpload());
+        self::assertEquals(round($upload / 1048576, 1), $accountUpload->getUploadMb());
         self::assertEquals($uploadMax, $accountUpload->getUploadMax());
+        self::assertEquals(round($uploadMax / 1048576, 1), $accountUpload->getUploadMaxMb());
         self::assertEquals($uploadMax - $upload, $accountUpload->getUploadRemainder());
+        self::assertEquals($uploadBarWeight, $accountUpload->getUploadBarWeight());
     }
 
     /**
@@ -34,14 +38,17 @@ class AccountUploadTest extends AbstractTest
             [
                 50,
                 100,
+                50,
             ],
             [
                 0,
+                10,
                 0,
             ],
             [
                 1000,
                 1000,
+                100,
             ],
         ];
     }

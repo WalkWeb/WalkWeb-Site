@@ -335,6 +335,27 @@ abbr {
     border-radius: 0 0 4px 4px;
 }
 
+.upload_background {
+    width: 200px;
+    height: 16px;
+    background: #389107;
+}
+
+.upload_fill {
+    height: 100%;
+    background: #50bd14;
+}
+
+.upload_text {
+    width: 200px;
+    min-height: 16px;
+    margin-top: -16px;
+    text-align: center;
+    color: #0b425f;
+    font-size: 80%;
+    line-height: 16px;
+}
+
 span.lvl {
     color: #ddd;
     background: #555;

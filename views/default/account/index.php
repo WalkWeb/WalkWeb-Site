@@ -32,9 +32,6 @@ $canLike = $account->isCanLike() ? 'да' : 'нет';
     Пол: <?= $account->getFloor()->getName() ?><br />
     Статус: <?= $account->getStatus()->getName() ?><br />
     Группа: <?= $account->getGroup()->getName() ?><br />
-    Занятое место на диске: <?= $account->getUpload()->getUpload() ?><br />
-    Доступно место на диске: <?= $account->getUpload()->getUploadMax() ?><br />
-    Осталось места на диске: <?= $account->getUpload()->getUploadRemainder() ?><br />
     Дата регистрации: <?= $account->getCreatedAt()->format('Y-m-d H:i:s') ?><br />
     Последнее обновление данных: <?= $account->getUpdatedAt()->format('Y-m-d H:i:s') ?>
 </p>
@@ -51,3 +48,15 @@ $canLike = $account->isCanLike() ? 'да' : 'нет';
     Свободных очков для распределения: <?= htmlspecialchars($account->getMainCharacter()->getLevel()->getStatPoints()) ?>
 </p>
 <br />
+<hr>
+<br />
+<p>
+    Занятое место на диске: <?= $account->getUpload()->getUpload() ?><br />
+    Доступно место на диске: <?= $account->getUpload()->getUploadMax() ?><br />
+    Осталось места на диске: <?= $account->getUpload()->getUploadRemainder() ?><br />
+</p>
+
+<div class="upload_background">
+    <div class="upload_fill" style="width: <?= $account->getUpload()->getUploadBarWeight() ?>%"></div>
+</div>
+<div class="upload_text"><?= $account->getUpload()->getUploadMb() ?> мб / <?= $account->getUpload()->getUploadMaxMb() ?> мб</div>
