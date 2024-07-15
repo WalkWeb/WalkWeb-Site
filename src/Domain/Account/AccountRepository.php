@@ -94,7 +94,7 @@ class AccountRepository
             ];
         }
 
-        return AccountFactory::createFromDB($data, new SendNoticeAction(new NoticeRepository($this->container)));
+        return AccountFactory::create($data, new SendNoticeAction(new NoticeRepository($this->container)));
     }
 
     /**

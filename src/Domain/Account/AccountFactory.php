@@ -34,7 +34,7 @@ class AccountFactory
      * @throws AccountException
      * @throws AppException
      */
-    public static function createFromDB(array $data, SendNoticeActionInterface $sendNoticeAction): AccountInterface
+    public static function create(array $data, SendNoticeActionInterface $sendNoticeAction): AccountInterface
     {
         if (array_key_exists('main_character', $data)) {
             $mainCharacter = MainCharacterFactory::create(

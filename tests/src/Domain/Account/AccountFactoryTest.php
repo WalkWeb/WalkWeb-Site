@@ -20,15 +20,15 @@ class AccountFactoryTest extends AbstractTest
     /**
      * Test on success create object Account from array (database)
      *
-     * @dataProvider createFromDBSuccessDataProvider
+     * @dataProvider createSuccessDataProvider
      * @param array $data
      * @param int $expectedMaxUpload
      * @throws AccountException
      * @throws AppException
      */
-    public function testAccountFactoryCreateFromDBSuccess(array $data, int $expectedMaxUpload): void
+    public function testAccountFactoryCreateSuccess(array $data, int $expectedMaxUpload): void
     {
-        $account = AccountFactory::createFromDB($data, $this->getSendNoticeAction());
+        $account = AccountFactory::create($data, $this->getSendNoticeAction());
 
         self::assertEquals($data['id'], $account->getId());
         self::assertEquals($data['login'], $account->getLogin());
@@ -73,17 +73,17 @@ class AccountFactoryTest extends AbstractTest
     /**
      * Test on fail create object Account from array (database)
      *
-     * @dataProvider createFromDBFailDataProvider
+     * @dataProvider createFailDataProvider
      * @param array $data
      * @param string $error
      * @throws AccountException
      * @throws AppException
      */
-    public function testAccountFactoryCreateFromDBFail(array $data, string $error): void
+    public function testAccountFactoryCreateFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        AccountFactory::createFromDB($data, $this->getSendNoticeAction());
+        AccountFactory::create($data, $this->getSendNoticeAction());
     }
 
     /**
@@ -139,7 +139,7 @@ class AccountFactoryTest extends AbstractTest
     /**
      * @return array
      */
-    public function createFromDBSuccessDataProvider(): array
+    public function createSuccessDataProvider(): array
     {
         return [
             [
@@ -247,7 +247,7 @@ class AccountFactoryTest extends AbstractTest
      * @return array
      * @throws Exception
      */
-    public function createFromDBFailDataProvider(): array
+    public function createFailDataProvider(): array
     {
         return [
             // miss id
