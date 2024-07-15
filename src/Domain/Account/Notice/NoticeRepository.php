@@ -72,7 +72,7 @@ class NoticeRepository implements NoticeRepositoryInterface
         return NoticeCollectionFactory::create(
             $this->container->getConnectionPool()->getConnection()->query(
                 'SELECT `id`, `type`, `account_id`, `message`, `view`, `created_at` 
-                FROM `notices` WHERE `account_id` = ? LIMIT ? OFFSET ?',
+                FROM `notices` WHERE `account_id` = ? ORDER BY `created_at` DESC LIMIT ? OFFSET ?',
                 [
                     ['type' => 's', 'value' => $accountId],
                     ['type' => 'i', 'value' => $limit],
@@ -129,4 +129,7 @@ class NoticeRepository implements NoticeRepositoryInterface
             [['type' => 's', 'value' => $notice->getAccountId()]]
         );
     }
+
+    // TODO inactive()
+    // TODO inactiveAll()
 }

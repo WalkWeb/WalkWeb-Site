@@ -248,30 +248,13 @@ class NoticeRepositoryTest extends AbstractTest
                 10,
                 [
                     [
-                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af1',
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af5',
                         'type'       => 1,
                         'account_id' => self::DEMO_USER,
-                        'message'    => 'notice message 1',
-                        'view'       => 0,
-                        'created_at' => '2021-12-25 11:00:00',
-                    ],
-                    [
-
-                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af2',
-                        'type'       => 2,
-                        'account_id' => self::DEMO_USER,
-                        'message'    => 'notice message 2',
-                        'view'       => 0,
-                        'created_at' => '2021-12-25 12:00:00',
-                    ],
-                    [
-
-                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af3',
-                        'type'       => 3,
-                        'account_id' => self::DEMO_USER,
-                        'message'    => 'notice message 3',
-                        'view'       => 0,
-                        'created_at' => '2021-12-25 13:00:00',
+                        'message'    => 'notice message 5',
+                        'view'       => 1,
+                        'created_at' => '2021-12-25 15:00:00',
                     ],
                     [
 
@@ -284,12 +267,29 @@ class NoticeRepositoryTest extends AbstractTest
                     ],
                     [
 
-                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af5',
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af3',
+                        'type'       => 3,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 3',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 13:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af2',
+                        'type'       => 2,
+                        'account_id' => self::DEMO_USER,
+                        'message'    => 'notice message 2',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 12:00:00',
+                    ],
+                    [
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af1',
                         'type'       => 1,
                         'account_id' => self::DEMO_USER,
-                        'message'    => 'notice message 5',
-                        'view'       => 1,
-                        'created_at' => '2021-12-25 15:00:00',
+                        'message'    => 'notice message 1',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 11:00:00',
                     ],
                 ],
             ],
@@ -300,21 +300,22 @@ class NoticeRepositoryTest extends AbstractTest
                 2,
                 [
                     [
-                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af1',
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af5',
                         'type'       => 1,
                         'account_id' => self::DEMO_USER,
-                        'message'    => 'notice message 1',
-                        'view'       => 0,
-                        'created_at' => '2021-12-25 11:00:00',
+                        'message'    => 'notice message 5',
+                        'view'       => 1,
+                        'created_at' => '2021-12-25 15:00:00',
                     ],
                     [
 
-                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af2',
-                        'type'       => 2,
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af4',
+                        'type'       => 1,
                         'account_id' => self::DEMO_USER,
-                        'message'    => 'notice message 2',
-                        'view'       => 0,
-                        'created_at' => '2021-12-25 12:00:00',
+                        'message'    => 'notice message 4',
+                        'view'       => 1,
+                        'created_at' => '2021-12-25 14:00:00',
                     ],
                 ],
             ],
@@ -335,21 +336,20 @@ class NoticeRepositoryTest extends AbstractTest
                     ],
                     [
 
-                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af4',
-                        'type'       => 1,
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af2',
+                        'type'       => 2,
                         'account_id' => self::DEMO_USER,
-                        'message'    => 'notice message 4',
-                        'view'       => 1,
-                        'created_at' => '2021-12-25 14:00:00',
+                        'message'    => 'notice message 2',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 12:00:00',
                     ],
                     [
-
-                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af5',
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af1',
                         'type'       => 1,
                         'account_id' => self::DEMO_USER,
-                        'message'    => 'notice message 5',
-                        'view'       => 1,
-                        'created_at' => '2021-12-25 15:00:00',
+                        'message'    => 'notice message 1',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 11:00:00',
                     ],
                 ],
             ],

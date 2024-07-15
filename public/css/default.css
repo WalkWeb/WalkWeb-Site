@@ -196,7 +196,7 @@ a.post_link:hover {
 
 h1 {
     font-family: 'Open Sans', sans-serif;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     text-align: center;
 }
 
@@ -378,3 +378,68 @@ span.red {
     color: #a71d2a;
 }
 
+.notice_box {
+    margin-bottom: 20px;
+    border: 1px solid #d8d6d0;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    display: flex;
+}
+
+.notice_box p {
+    padding: 5px;
+    margin: 0;
+}
+.notice_info {
+    width: 15%;
+    min-width: 80px;
+    background-color: #e8e5df;
+    border-color: #d8d6d0;
+    text-align: center;
+}
+
+.notice_message {
+    width: 60%;
+}
+
+.notice_date {
+    width: 25%;
+    min-width: 80px;
+    background-color: #e8e5df;
+    border-color: #d8d6d0;
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    font-family: Verdana, sans-serif;
+}
+
+.pagination span {
+    display: block;
+    background: #363539;
+    border: 1px solid #dddddd;
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+}
+
+.pagination a {
+    display: block;
+    color: #4f4e53;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    text-decoration: none;
+    margin-left: -1px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+}
+
+.pagination a:hover {
+    background: #999;
+}

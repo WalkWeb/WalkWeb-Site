@@ -28,11 +28,15 @@ interface NoticeInterface
     public function getId(): string;
 
     /**
+     * TODO rename to getTypeId
+     *
      * Возвращает тип уведомления
      *
      * @return int
      */
     public function getType(): int;
+
+    // TODO getType: string
 
     /**
      * Возвращает ID аккаунта, к которому относится данное уведомление
