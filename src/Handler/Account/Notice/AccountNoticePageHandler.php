@@ -29,10 +29,6 @@ class AccountNoticePageHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
-        if (!$this->container->exist('user')) {
-            return $this->redirect('/login');
-        }
-
         /** @var AuthInterface $user */
         $user = $this->container->getUser();
         $repository = new NoticeRepository($this->container);

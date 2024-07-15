@@ -9,13 +9,14 @@ $routes->post('account.registration', '/registration/{ref}', 'App\\Handler\\Acco
 $routes->get('account.login', '/login', 'App\\Handler\\Account\\AccountLoginPageHandler');
 $routes->post('account.login', '/login', 'App\\Handler\\Account\\AccountLoginHandler');
 $routes->get('account.verified.email', '/verified/email', 'App\\Handler\\Account\\VerifiedEmailPageHandler');
-$routes->get('account.notice.list', '/notices/{page}', 'App\\Handler\\Account\\Notice\\AccountNoticePageHandler', ['page' => '\d+']);
+$routes->get('account.notice.list', '/notices/{page}', 'App\\Handler\\Account\\Notice\\AccountNoticePageHandler', ['page' => '\d+'])
+    ->addMiddleware('App\\Middleware\\OnlyAuthMiddleware', 50);
 
 $routes->get('statistic', '/statistic', 'App\\Handler\\StatisticHandler');
 
 $routes
-    ->addMiddleware('App\\Middleware\\StatisticsMiddleware')
-    ->addMiddleware('App\\Middleware\\AuthMiddleware')
+    ->addMiddleware('App\\Middleware\\StatisticsMiddleware', 10)
+    ->addMiddleware('App\\Middleware\\AuthMiddleware', 100)
 ;
 
 return new WalkWeb\NW\Route\Router($routes);
