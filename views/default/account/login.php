@@ -21,6 +21,9 @@ if (!empty($error)) {
                     <input class="form" name="password" autocomplete="off" value="" type="password">
                 </label>
                 <label>
+                    <input type="hidden" name="redirect_url" value="' . ($redirectUrl ?? '') . '">
+                </label>
+                <label>
                     <input type="hidden" name="csrf" value="' . ($csrfToken ?? '') . '">
                 </label>
 
@@ -34,6 +37,9 @@ if (!empty($error)) {
             </label>
             <label>Пароль:
                 <input class="form" name="password" autocomplete="off" value="" type="password">
+            </label>
+            <label>
+                <input type="hidden" name="redirect_url" value="' . ($redirectUrl ?? '') . '">
             </label>
             <label>
                 <input type="hidden" name="csrf" value="' . ($csrfToken ?? '') . '">

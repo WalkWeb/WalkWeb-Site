@@ -22,15 +22,19 @@ class AccountLoginPageHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
+        $redirectUrl = $this->getRedirectUrl($request);
+
         if ($this->container->exist('user')) {
             return $this->render('account/login', [
-                'error'     => self::ALREADY_AUTH,
-                'csrfToken' => $this->container->getCsrf()->getCsrfToken(),
-            ]);
+                'error'       => self::ALREADY_AUTH,
+                'csrfToken'   => $this->container->getCsrf()->getCsrfToken(),
+                'redirectUrl' => $redirectUrl,
+            ])->withHeader(self::REDIRECT_HEADER, $redirectUrl);
         }
 
         return $this->render('account/login', [
-            'csrfToken' => $this->container->getCsrf()->getCsrfToken(),
-        ]);
+            'csrfToken'   => $this->container->getCsrf()->getCsrfToken(),
+            'redirectUrl' => $redirectUrl,
+        ])->withHeader(self::REDIRECT_HEADER, $redirectUrl);
     }
 }
