@@ -23,7 +23,7 @@ class AccountRepositoryTest extends AbstractTest
 
         self::assertEquals(
             $name,
-            $this->getRepository()->get($name)->getName()
+            $this->getRepository()->get($name, $this->getSendNoticeAction())->getName()
         );
     }
 
@@ -39,7 +39,7 @@ class AccountRepositoryTest extends AbstractTest
 
         $this->expectException(AppException::class);
         $this->expectExceptionMessage(AccountException::NOT_FOUND);
-        $this->getRepository()->get($name);
+        $this->getRepository()->get($name, $this->getSendNoticeAction());
     }
 
     /**

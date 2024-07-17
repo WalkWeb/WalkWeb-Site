@@ -11,6 +11,8 @@ use App\Domain\Account\Notice\NoticeRepositoryInterface;
 use DateTime;
 use Ramsey\Uuid\Uuid;
 
+// TODO Добавить в контейнер
+
 class SendNoticeAction implements SendNoticeActionInterface
 {
     private NoticeRepositoryInterface $noticeRepository;

@@ -9,8 +9,7 @@ use App\Domain\Account\Energy\EnergyFactory;
 use App\Domain\Account\Energy\EnergyInterface;
 use App\Domain\Account\Energy\EnergyRepository;
 use App\Domain\Account\MainCharacter\MainCharacterInterface;
-use App\Domain\Account\Notice\Action\SendNoticeAction;
-use App\Domain\Account\Notice\NoticeRepository;
+use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 use WalkWeb\NW\Response;
@@ -26,11 +25,12 @@ class AccountRepository
 
     /**
      * @param string $name
+     * @param SendNoticeActionInterface $sendNoticeAction
      * @return AccountInterface
      * @throws AccountException
      * @throws AppException
      */
-    public function get(string $name): AccountInterface
+    public function get(string $name, SendNoticeActionInterface $sendNoticeAction): AccountInterface
     {
         $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT 
@@ -94,7 +94,7 @@ class AccountRepository
             ];
         }
 
-        return AccountFactory::create($data, new SendNoticeAction(new NoticeRepository($this->container)));
+        return AccountFactory::create($data, $sendNoticeAction);
     }
 
     /**

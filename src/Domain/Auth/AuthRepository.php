@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Auth;
 
 use App\Domain\Account\AccountException;
-use App\Domain\Account\Notice\Action\SendNoticeAction;
-use App\Domain\Account\Notice\NoticeRepository;
+use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 use WalkWeb\NW\Response;
@@ -22,10 +21,11 @@ class AuthRepository
 
     /**
      * @param string $authToken
+     * @param SendNoticeActionInterface $sendNoticeAction
      * @return AuthInterface|null
      * @throws AppException
      */
-    public function get(string $authToken): ?AuthInterface
+    public function get(string $authToken, SendNoticeActionInterface $sendNoticeAction): ?AuthInterface
     {
         $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT 
@@ -91,7 +91,7 @@ class AuthRepository
         // TODO Mocks
         $data['avatar'] = '';
 
-        return AuthFactory::create($data, new SendNoticeAction(new NoticeRepository($this->container)));
+        return AuthFactory::create($data, $sendNoticeAction);
     }
 
     /**

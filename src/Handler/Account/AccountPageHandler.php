@@ -24,12 +24,19 @@ class AccountPageHandler extends AbstractHandler
             $repository = new AccountRepository($this->container);
 
             return $this->render('account/index', [
-                'account' => $account = $repository->get($request->getAttribute('name')),
+                'account' => $account = $repository->get(
+                    $request->getAttribute('name'),
+                    $this->getSendNoticeAction()
+                ),
             ]);
 
         } catch (Exception $e) {
             // TODO Нужно доработать ошибку во фреймворке и заменить на renderErrorPage()
-            return $this->render('errors/custom_404', ['error' => 'Пользователь не найден'], Response::NOT_FOUND);
+            return $this->render(
+                'errors/custom_404',
+                ['error' => 'Пользователь не найден'],
+                Response::NOT_FOUND
+            );
         }
     }
 }

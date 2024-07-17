@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Middleware;
 
 use App\Domain\Account\AccountInterface;
+use App\Domain\Account\Notice\Action\SendNoticeAction;
+use App\Domain\Account\Notice\NoticeRepository;
 use App\Domain\Auth\AuthRepository;
 use WalkWeb\NW\AbstractMiddleware;
 use WalkWeb\NW\AppException;
@@ -23,7 +25,7 @@ class AuthMiddleware extends AbstractMiddleware
     {
         if ($authToken = $this->container->getCookies()->get(AccountInterface::AUTH_TOKEN)) {
             $repository = new AuthRepository($this->container);
-            if ($user = $repository->get($authToken)) {
+            if ($user = $repository->get($authToken, new SendNoticeAction(new NoticeRepository($this->container)))) {
                 // TODO
                 //$this->container->setTemplate($user->getTemplate());
                 $this->container->set('user', $user);

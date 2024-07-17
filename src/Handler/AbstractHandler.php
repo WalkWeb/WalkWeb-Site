@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use App\Domain\Account\Notice\Action\SendNoticeAction;
+use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
+use App\Domain\Account\Notice\NoticeRepository;
 use App\Domain\Auth\AuthInterface;
 use WalkWeb\NW\AppException;
 
@@ -11,6 +14,8 @@ abstract class AbstractHandler extends \WalkWeb\NW\AbstractHandler
 {
     public const MISS_USER    = 'Miss user';
     public const INVALID_USER = 'Invalid user';
+
+    private ?SendNoticeActionInterface $sendNoticeAction = null;
 
     /**
      * @return AuthInterface
@@ -31,5 +36,15 @@ abstract class AbstractHandler extends \WalkWeb\NW\AbstractHandler
         return $user;
     }
 
-    // TODO getSendNoticeAction()
+    /**
+     * @return SendNoticeActionInterface
+     */
+    public function getSendNoticeAction(): SendNoticeActionInterface
+    {
+        if ($this->sendNoticeAction === null) {
+            $this->sendNoticeAction = new SendNoticeAction(new NoticeRepository($this->container));
+        }
+
+        return $this->sendNoticeAction;
+    }
 }

@@ -36,7 +36,7 @@ class AuthRepositoryTest extends AbstractTest
         array $level
     ): void
     {
-        $auth = $this->getRepository()->get($authToken);
+        $auth = $this->getRepository()->get($authToken, $this->getSendNoticeAction());
 
         self::assertEquals($id, $auth->getId());
         self::assertEquals($name, $auth->getName());
@@ -77,7 +77,7 @@ class AuthRepositoryTest extends AbstractTest
     {
         $this->expectException(AppException::class);
         $this->expectExceptionMessage(AccountException::NOT_FOUND);
-        $this->getRepository()->get('unknown_token');
+        $this->getRepository()->get('unknown_token', $this->getSendNoticeAction());
     }
 
     /**
