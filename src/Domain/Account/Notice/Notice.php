@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace App\Domain\Account\Notice;
 
 use DateTimeInterface;
+use WalkWeb\NW\Traits\DateTrait;
 
 class Notice implements NoticeInterface
 {
+    use DateTrait;
+
     private static array $map = [
         self::TYPE_INFO     => 'Info',
         self::TYPE_WARNING  => 'Warning',
@@ -102,6 +105,14 @@ class Notice implements NoticeInterface
     public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getElapsedCreatedAt(): string
+    {
+        return self::getElapsedTime($this->createdAt);
     }
 
     /**

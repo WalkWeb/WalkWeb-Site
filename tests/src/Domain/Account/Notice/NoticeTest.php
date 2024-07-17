@@ -23,7 +23,7 @@ class NoticeTest extends AbstractTest
         $accountId = '3a08a6c4-ebca-4444-bff5-0eac1634fa15';
         $message = 'Notice message';
         $view = true;
-        $createdAt = new DateTime('2019-08-12 14:00:00');
+        $createdAt = new DateTime();
 
         $notice = new Notice($id, $typeId, $accountId, $message, $view, $createdAt);
 
@@ -34,6 +34,7 @@ class NoticeTest extends AbstractTest
         self::assertEquals($message, $notice->getMessage());
         self::assertEquals($view, $notice->isView());
         self::assertEquals($createdAt, $notice->getCreatedAt());
+        self::assertEquals('только что', $notice->getElapsedCreatedAt());
     }
 
     /**

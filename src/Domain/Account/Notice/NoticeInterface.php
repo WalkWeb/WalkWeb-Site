@@ -68,4 +68,11 @@ interface NoticeInterface
      * @return DateTimeInterface
      */
     public function getCreatedAt(): DateTimeInterface;
+
+    /**
+     * Возвращает как давно было создано уведомление
+     *
+     * @return string
+     */
+    public function getElapsedCreatedAt(): string;
 }
