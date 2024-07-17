@@ -6,7 +6,7 @@ namespace App\Handler\Account;
 
 use App\Domain\Account\AccountRepository;
 use Exception;
-use WalkWeb\NW\AbstractHandler;
+use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
@@ -28,7 +28,6 @@ class AccountPageHandler extends AbstractHandler
             ]);
 
         } catch (Exception $e) {
-
             // TODO Нужно доработать ошибку во фреймворке и заменить на renderErrorPage()
             return $this->render('errors/custom_404', ['error' => 'Пользователь не найден'], Response::NOT_FOUND);
         }

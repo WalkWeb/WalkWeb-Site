@@ -58,6 +58,8 @@ abstract class AbstractTest extends TestCase
     }
 
     /**
+     * TODO private
+     *
      * @return Container
      * @throws AppException
      */

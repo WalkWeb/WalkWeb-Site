@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Handler;
+namespace Test\Mock;
 
+use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
-class MainHandler extends AbstractHandler
+class TestHandler extends AbstractHandler
 {
     /**
-     * Print main page
-     *
      * @param Request $request
      * @return Response
      * @throws AppException

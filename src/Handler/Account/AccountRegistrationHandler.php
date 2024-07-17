@@ -17,7 +17,7 @@ use App\Domain\Account\Notice\NoticeException;
 use App\Domain\Account\Notice\NoticeInterface;
 use App\Domain\Account\Notice\NoticeRepository;
 use Exception;
-use WalkWeb\NW\AbstractHandler;
+use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;

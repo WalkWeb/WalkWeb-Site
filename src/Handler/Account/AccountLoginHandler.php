@@ -8,7 +8,7 @@ use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountInterface;
 use App\Domain\Account\AccountRepository;
 use App\Domain\Account\DTO\LoginRequestFactory;
-use WalkWeb\NW\AbstractHandler;
+use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;

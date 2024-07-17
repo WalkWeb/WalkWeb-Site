@@ -6,7 +6,6 @@ namespace App\Handler;
 
 use App\Domain\Statistic\Statistic;
 use App\Domain\Statistic\StatisticRepository;
-use WalkWeb\NW\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;

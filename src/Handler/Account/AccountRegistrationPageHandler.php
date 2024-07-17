@@ -6,7 +6,7 @@ namespace App\Handler\Account;
 
 use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountInterface;
-use WalkWeb\NW\AbstractHandler;
+use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;

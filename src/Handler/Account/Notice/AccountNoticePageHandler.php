@@ -7,8 +7,7 @@ namespace App\Handler\Account\Notice;
 use App\Domain\Account\Notice\NoticeException;
 use App\Domain\Account\Notice\NoticeRepository;
 use App\Domain\Auth\AuthException;
-use App\Domain\Auth\AuthInterface;
-use WalkWeb\NW\AbstractHandler;
+use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
@@ -29,8 +28,7 @@ class AccountNoticePageHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
-        /** @var AuthInterface $user */
-        $user = $this->container->getUser();
+        $user = $this->getUser();
         $repository = new NoticeRepository($this->container);
         $page = $request->page;
         $perPage = 10;
