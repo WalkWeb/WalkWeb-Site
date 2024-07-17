@@ -113,4 +113,20 @@ class AuthRepository
 
         return [];
     }
+
+    /**
+     * @param AuthInterface $account
+     * @throws AppException
+     */
+    public function saveVerified(AuthInterface $account): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `accounts` SET `email_verified` = ?, `reg_complete` = ? WHERE `id` = ?',
+            [
+                ['type' => 'i', 'value' => (int)$account->isEmailVerified()],
+                ['type' => 'i', 'value' => 1], // TODO
+                ['type' => 's', 'value' => $account->getId()],
+            ],
+        );
+    }
 }

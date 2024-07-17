@@ -21,7 +21,7 @@ class AccountLoginPageHandlerTest extends AbstractTest
     public function testAccountLoginPageHandlerSuccess(): void
     {
         $request = new Request(['REQUEST_URI' => '/login']);
-        $response = $this->app->handle($request);
+        $response = $this->createApp()->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Вход/', $response->getBody());
@@ -36,7 +36,7 @@ class AccountLoginPageHandlerTest extends AbstractTest
     {
         $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
         $request = new Request(['REQUEST_URI' => '/login'], [], [AccountInterface::AUTH_TOKEN => $token]);
-        $response = $this->app->handle($request);
+        $response = $this->createApp()->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/' . AccountLoginPageHandler::ALREADY_AUTH . '/', $response->getBody());

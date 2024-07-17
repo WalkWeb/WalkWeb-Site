@@ -154,6 +154,11 @@ class Auth implements AuthInterface
         return $this->emailVerified;
     }
 
+    public function emailVerified(): void
+    {
+        $this->emailVerified = true;
+    }
+
     /**
      * @return UploadInterface
      */

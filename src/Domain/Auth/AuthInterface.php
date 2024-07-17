@@ -105,6 +105,11 @@ interface AuthInterface
     public function isEmailVerified(): bool;
 
     /**
+     * Указывает, что email подтвержден
+     */
+    public function emailVerified(): void;
+
+    /**
      * Данные по занятому и оставшемуся месту на диске
      *
      * @return UploadInterface

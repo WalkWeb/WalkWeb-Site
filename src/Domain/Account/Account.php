@@ -139,6 +139,7 @@ class Account implements AccountInterface
         return $this->emailVerified;
     }
 
+    // TODO delete
     public function emailVerified(): void
     {
         $this->emailVerified = true;
