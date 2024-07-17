@@ -90,6 +90,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -147,6 +148,7 @@ class AuthFactoryTest extends AbstractTest
                 [
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -179,6 +181,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => 123,
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -210,6 +213,7 @@ class AuthFactoryTest extends AbstractTest
                 [
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -242,6 +246,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => true,
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -273,6 +278,7 @@ class AuthFactoryTest extends AbstractTest
                 [
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -305,6 +311,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => ['account_avatar.png'],
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -337,6 +344,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_status_id'      => 1,
                     'energy'                 => [
                         'energy_id'         => 'f0c4391a-f16a-4a22-80fb-ac0a02168b1f',
@@ -368,6 +376,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 'success',
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -400,6 +409,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'energy'                 => [
                         'energy_id'         => 'f0c4391a-f16a-4a22-80fb-ac0a02168b1f',
@@ -431,6 +441,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => '1',
                     'energy'                 => [
@@ -463,6 +474,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'can_like'               => 1,
@@ -487,6 +499,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => 100,
@@ -512,6 +525,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -543,6 +557,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -576,6 +591,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -608,6 +624,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -641,6 +658,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -677,6 +695,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -703,6 +722,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -730,6 +750,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -761,6 +782,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -794,6 +816,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -842,6 +865,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -892,6 +916,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -940,6 +965,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -989,6 +1015,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -1038,6 +1065,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -1088,6 +1116,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -1136,6 +1165,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [

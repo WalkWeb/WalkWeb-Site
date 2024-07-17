@@ -16,6 +16,7 @@ class Auth implements AuthInterface
     private string $id;
     private string $name;
     private string $avatar;
+    private string $verifiedToken;
     private AccountGroupInterface $group;
     private AccountStatusInterface $status;
     private EnergyInterface $energy;
@@ -30,6 +31,7 @@ class Auth implements AuthInterface
         string $id,
         string $name,
         string $avatar,
+        string $verifiedToken,
         AccountGroupInterface $group,
         AccountStatusInterface $status,
         EnergyInterface $energy,
@@ -44,6 +46,7 @@ class Auth implements AuthInterface
         $this->id = $id;
         $this->name = $name;
         $this->avatar = $avatar;
+        $this->verifiedToken = $verifiedToken;
         $this->group = $group;
         $this->status = $status;
         $this->energy = $energy;
@@ -77,6 +80,14 @@ class Auth implements AuthInterface
     public function getAvatar(): string
     {
         return $this->avatar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVerifiedToken(): string
+    {
+        return $this->verifiedToken;
     }
 
     /**

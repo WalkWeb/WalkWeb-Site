@@ -16,11 +16,11 @@ interface AccountInterface
     public const AUTH_TOKEN                = 'auth';
 
     public const LOGIN_MIN_LENGTH          = 4;
-    public const LOGIN_MAX_LENGTH          = 14;
+    public const LOGIN_MAX_LENGTH          = 20;
     public const LOGIN_PARENT              = '/^[a-zA-Z0-9а-яА-ЯёЁ\-_]*$/u';
 
     public const NAME_MIN_LENGTH           = 4;
-    public const NAME_MAX_LENGTH           = 14;
+    public const NAME_MAX_LENGTH           = 20;
     public const NAME_PARENT               = '/^[a-zA-Z0-9а-яА-ЯёЁ\-_]*$/u';
 
     public const PASSWORD_MIN_LENGTH       = 5;

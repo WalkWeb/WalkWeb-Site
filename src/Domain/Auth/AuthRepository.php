@@ -32,6 +32,7 @@ class AuthRepository
  
             `accounts`.`id`, 
             `accounts`.`name`, 
+            `accounts`.`verified_token`, 
             `accounts`.`group_id` as `account_group_id`, 
             `accounts`.`status_id` as `account_status_id`, 
             `accounts`.`can_like`,

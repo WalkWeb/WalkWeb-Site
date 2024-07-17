@@ -23,4 +23,6 @@ class AuthException extends Exception
     public const INVALID_UPLOAD_BONUS           = 'Incorrect "upload_bonus" parameter, it required and type int';
     public const INVALID_UPLOAD                 = 'Incorrect parameter "upload", excepted int';
     public const INVALID_UPLOAD_VALUE           = 'Incorrect parameter "upload", should be min-max value: ';
+    public const INVALID_VERIFIED_TOKEN        = 'Incorrect parameter "verified_token", it required and type string';
+    public const INVALID_VERIFIED_TOKEN_LENGTH = 'Incorrect parameter "verified_token", should be min-max length: ';
 }

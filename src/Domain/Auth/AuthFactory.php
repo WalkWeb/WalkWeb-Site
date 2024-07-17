@@ -39,6 +39,7 @@ class AuthFactory
                 self::string($data, 'id', AuthException::INVALID_ID),
                 self::string($data, 'name', AuthException::INVALID_NAME),
                 self::string($data, 'avatar', AuthException::INVALID_AVATAR),
+                self::verifiedTokenValidate($data),
                 new AccountGroup(self::int($data, 'account_group_id', AuthException::INVALID_ACCOUNT_GROUP_ID)),
                 new AccountStatus(self::int($data, 'account_status_id', AuthException::INVALID_ACCOUNT_STATUS_ID)),
                 EnergyFactory::create(self::array($data, 'energy', AuthException::INVALID_ENERGY_DATA)),
@@ -78,5 +79,24 @@ class AuthFactory
             $uploadBonus * AccountInterface::UPLOAD_PER_STAT;
 
         return new AccountUpload($upload, $uploadMax);
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     * @throws AppException
+     */
+    private static function verifiedTokenValidate(array $data): string
+    {
+        $verifiedToken = self::string($data, 'verified_token', AuthException::INVALID_VERIFIED_TOKEN);
+
+        self::stringMinMaxLength(
+            $verifiedToken,
+            AccountInterface::AUTH_TOKEN_MIN_LENGTH,
+            AccountInterface::AUTH_TOKEN_MAX_LENGTH,
+            AuthException::INVALID_VERIFIED_TOKEN_LENGTH . AccountInterface::AUTH_TOKEN_MIN_LENGTH . '-' . AccountInterface::AUTH_TOKEN_MAX_LENGTH
+        );
+
+        return $verifiedToken;
     }
 }

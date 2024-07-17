@@ -41,6 +41,13 @@ interface AuthInterface
     public function getAvatar(): string;
 
     /**
+     * Возвращает токен верификации действия
+     *
+     * @return string
+     */
+    public function getVerifiedToken(): string;
+
+    /**
      * Группа пользователя
      *
      * @return AccountGroupInterface
