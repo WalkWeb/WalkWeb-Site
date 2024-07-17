@@ -23,7 +23,7 @@ class AccountLoginHandlerTest extends AbstractTest
     {
         $request = new Request(
             ['REQUEST_URI' => '/login', 'REQUEST_METHOD' => 'POST'],
-            ['login' => 'DemoUser', 'password' => '12345'],
+            ['login' => 'DemoUser', 'password' => '12345', 'redirect_url' => ''],
         );
         $response = $this->app->handle($request);
         $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
@@ -45,7 +45,7 @@ class AccountLoginHandlerTest extends AbstractTest
     {
         $request = new Request(
             ['REQUEST_URI' => '/login', 'REQUEST_METHOD' => 'POST'],
-            ['login' => $login, 'password' => $password],
+            ['login' => $login, 'password' => $password, 'redirect_url' => ''],
         );
         $response = $this->app->handle($request);
 
@@ -61,7 +61,7 @@ class AccountLoginHandlerTest extends AbstractTest
     {
         $request = new Request(
             ['REQUEST_URI' => '/login', 'REQUEST_METHOD' => 'POST'],
-            ['login' => 'DemoUser', 'password' => '12345'],
+            ['login' => 'DemoUser', 'password' => '12345', 'redirect_url' => ''],
         );
 
         $router = require __DIR__ . '/../../../../routes/web.php';

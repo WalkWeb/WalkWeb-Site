@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Mock;
 
+use App\Domain\Auth\AuthInterface;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
@@ -19,5 +20,14 @@ class TestHandler extends AbstractHandler
     public function __invoke(Request $request): Response
     {
         return $this->render('index');
+    }
+
+    /**
+     * @return AuthInterface
+     * @throws AppException
+     */
+    public function getUser(): AuthInterface
+    {
+        return parent::getUser();
     }
 }

@@ -6,13 +6,17 @@ namespace App\Domain\Account\DTO;
 
 class LoginRequest
 {
+    public const REDIRECT_MAX_LENGTH = 100;
+
     private string $login;
     private string $password;
+    private string $redirectUrl;
 
-    public function __construct(string $login, string $password)
+    public function __construct(string $login, string $password, string $redirectUrl)
     {
         $this->login = $login;
         $this->password = $password;
+        $this->redirectUrl = $redirectUrl;
     }
 
     /**
@@ -29,5 +33,13 @@ class LoginRequest
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRedirectUrl(): string
+    {
+        return $this->redirectUrl;
     }
 }

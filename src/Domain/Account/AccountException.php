@@ -74,4 +74,7 @@ class AccountException extends Exception
     public const INVALID_CREATED_AT            = 'Incorrect parameter "created_at", it required and type string (date format)';
     // updated_at
     public const INVALID_UPDATED_AT            = 'Incorrect parameter "created_at", it required and type string (date format)';
+    // redirect_url
+    public const INVALID_REDIRECT_URL          = 'Incorrect parameter "redirect_url", it required and type string';
+    public const INVALID_REDIRECT_URL_LENGTH   = 'Incorrect parameter "redirect_url", should be min-max length: ';
 }

@@ -20,9 +20,19 @@ class LoginRequestFactory
      */
     public static function create(array $data): LoginRequest
     {
+        $redirectUrl = self::string($data, 'redirect_url', AccountException::INVALID_REDIRECT_URL);
+
+        self::stringMinMaxLength(
+            $redirectUrl,
+            0,
+            LoginRequest::REDIRECT_MAX_LENGTH,
+            AccountException::INVALID_REDIRECT_URL_LENGTH . '0-' . LoginRequest::REDIRECT_MAX_LENGTH
+        );
+
         return new LoginRequest(
             self::loginValidation($data),
             self::passwordValidate($data),
+            $redirectUrl
         );
     }
 
