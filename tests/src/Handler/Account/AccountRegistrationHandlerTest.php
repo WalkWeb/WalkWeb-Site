@@ -44,8 +44,8 @@ class AccountRegistrationHandlerTest extends AbstractTest
 
         $response = $this->app->handle($request);
 
-        self::assertMatchesRegularExpression('/Вы успешно зарегистрировались!/', $response->getBody());
-        self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertEquals(Response::FOUND, $response->getStatusCode());
+        self::assertEquals('/verified/email', $response->getHeaders()['Location']);
 
         $account = self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT * FROM `accounts` WHERE `login` = ?',

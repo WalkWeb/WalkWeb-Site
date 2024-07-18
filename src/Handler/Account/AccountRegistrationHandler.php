@@ -62,9 +62,11 @@ class AccountRegistrationHandler extends AbstractHandler
             $account = $this->createAccount($request);
             $mainCharacter = $this->createMainCharacter($account);
             $this->accountRepository->setMainCharacterId($account, $mainCharacter);
+            $this->container->getCookies()->set(AccountInterface::AUTH_TOKEN, $account->getAuthToken());
+            $this->sendMail($account);
             $this->sendNotice($account);
 
-            return $this->render('account/registration_complete');
+            return $this->redirect('/verified/email');
 
         } catch (Exception $e) {
             $body = $request->getBody();
@@ -113,6 +115,25 @@ class AccountRegistrationHandler extends AbstractHandler
         $mainCharacter = MainCharacterFactory::createNew($account->getId(), $this->sendNoticeAction);
         $this->mainCharacterRepository->add($mainCharacter);
         return $mainCharacter;
+    }
+
+    /**
+     * @param AccountInterface $account
+     * @throws AppException
+     */
+    private function sendMail(AccountInterface $account): void
+    {
+        $url = HOST . 'check/email/' . $account->getVerifiedToken();
+        $appName = APP_NAME;
+
+        $this->container->getMailer()->send(
+            $account->getEmail(),
+            "Подтверждение регистрации на $appName",
+            "<p>Кто-то (возможно, вы) зарегистрировался на $appName, если это были вы - для завершения регистрации перейдите 
+                        по ссылке <a href='$url'>$url</a></p>
+                        <p>Если вы не регистрировались на $appName, то просто проигнорируйте это письмо.</p>
+                        <p>В любом случае не передавайте третьим лицам ссылку из письма.</p>",
+        );
     }
 
     /**
