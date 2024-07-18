@@ -42,8 +42,8 @@ class VerifiedEmailPageHandlerTest extends AbstractTest
         $response = $this->createApp()->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
-        self::assertMatchesRegularExpression('/Необходима авторизация/', $response->getBody());
-        self::assertMatchesRegularExpression('/Перейти на страницу авторизации/', $response->getBody());
+        self::assertMatchesRegularExpression('/form/', $response->getBody());
+        self::assertMatchesRegularExpression("/\/verified\/email/", $response->getBody());
     }
 
     /**

@@ -36,7 +36,7 @@ class AccountLoginHandler extends AbstractHandler
             $repository = new AccountRepository($this->container);
             if ($token = $repository->auth($loginRequest, KEY)) {
                 $this->container->getCookies()->set(AccountInterface::AUTH_TOKEN, $token);
-                return $this->redirect('/');
+                return $this->redirect($loginRequest->getRedirectUrl());
             }
 
             return $this->render('account/login', ['error' => AccountException::INVALID_LOGIN_OR_PASSWORD]);

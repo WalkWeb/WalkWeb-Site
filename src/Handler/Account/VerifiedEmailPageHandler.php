@@ -27,11 +27,11 @@ class VerifiedEmailPageHandler extends AbstractHandler
     public function __invoke(Request $request): Response
     {
         if (!$this->container->exist('user')) {
-            $this->title = 'Необходима авторизация';
-            $message = '<p>Необходима авторизация</p>
-                        <p><a href="/login">Перейти на страницу авторизации</a></p>';
-
-            return $this->render('account/email_verified', ['message' => $message]);
+            return $this
+                ->render('account/login', [
+                    'csrfToken'   => $this->container->getCsrf()->getCsrfToken(),
+                    'redirectUrl' => $request->getUri(),
+                ]);
         }
 
         if ($this->container->getUser()->isEmailVerified()) {
