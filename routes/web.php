@@ -11,8 +11,7 @@ $routes->post('account.login', '/login', 'App\\Handler\\Account\\AccountLoginHan
 $routes->get('account.logout', '/logout', 'App\\Handler\\Account\\AccountLogoutHandler');
 $routes->get('account.verified.email', '/verified/email', 'App\\Handler\\Account\\VerifiedEmailPageHandler');
 $routes->get('account.check.email', '/check/email/{token}', 'App\\Handler\\Account\\AccountCheckMailHandler', ['token' => '[a-zA-Z0-9-]+']);
-$routes->get('account.notice.list', '/notices/{page}', 'App\\Handler\\Account\\Notice\\AccountNoticePageHandler', ['page' => '\d+'])
-    ->addMiddleware('App\\Middleware\\OnlyAuthMiddleware', 50);
+$routes->get('account.notice.list', '/notices/{page}', 'App\\Handler\\Account\\Notice\\AccountNoticePageHandler', ['page' => '\d+']);
 
 $routes->get('statistic', '/statistic', 'App\\Handler\\StatisticHandler');
 

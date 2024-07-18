@@ -9,6 +9,8 @@ use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use App\Domain\Account\Notice\NoticeRepository;
 use App\Domain\Auth\AuthInterface;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Request;
+use WalkWeb\NW\Response;
 
 abstract class AbstractHandler extends \WalkWeb\NW\AbstractHandler
 {
@@ -46,5 +48,23 @@ abstract class AbstractHandler extends \WalkWeb\NW\AbstractHandler
         }
 
         return $this->sendNoticeAction;
+    }
+
+    /**
+     * @param Request $request
+     * @return Response|null
+     * @throws AppException
+     */
+    protected function checkAuth(Request $request): ?Response
+    {
+        if (!$this->container->exist('user')) {
+            return $this
+                ->render('account/login', [
+                    'csrfToken'   => $this->container->getCsrf()->getCsrfToken(),
+                    'redirectUrl' => $request->getUri(),
+                ]);
+        }
+
+        return null;
     }
 }

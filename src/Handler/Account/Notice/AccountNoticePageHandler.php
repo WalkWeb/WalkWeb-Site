@@ -28,6 +28,10 @@ class AccountNoticePageHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
+        if ($loginResponse = $this->checkAuth($request)) {
+            return $loginResponse;
+        }
+
         $user = $this->getUser();
         $repository = new NoticeRepository($this->container);
         $page = $request->page;

@@ -26,12 +26,8 @@ class VerifiedEmailPageHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
-        if (!$this->container->exist('user')) {
-            return $this
-                ->render('account/login', [
-                    'csrfToken'   => $this->container->getCsrf()->getCsrfToken(),
-                    'redirectUrl' => $request->getUri(),
-                ]);
+        if ($loginResponse = $this->checkAuth($request)) {
+            return $loginResponse;
         }
 
         if ($this->container->getUser()->isEmailVerified()) {

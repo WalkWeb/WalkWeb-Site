@@ -54,8 +54,9 @@ class AccountNoticePageHandlerTest extends AbstractTest
         $request = new Request(['REQUEST_URI' => '/notices/1']);
         $response = $this->createApp()->handle($request);
 
-        self::assertEquals(Response::FOUND, $response->getStatusCode());
-        self::assertEquals('/login', $response->getHeaders()['Location']);
+        self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertMatchesRegularExpression('/form/', $response->getBody());
+        self::assertMatchesRegularExpression("/\/notices\/1/", $response->getBody());
     }
 
     /**
