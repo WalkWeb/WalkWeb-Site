@@ -39,10 +39,16 @@ class AccountLoginHandler extends AbstractHandler
                 return $this->redirect($loginRequest->getRedirectUrl());
             }
 
-            return $this->render('account/login', ['error' => AccountException::INVALID_LOGIN_OR_PASSWORD]);
+            return $this->render('account/login', [
+                'error'     => AccountException::INVALID_LOGIN_OR_PASSWORD,
+                'csrfToken' => $this->container->getCsrf()->getCsrfToken(),
+            ]);
 
         } catch (AppException $e) {
-            return $this->render('account/login', ['error' => $e->getMessage()]);
+            return $this->render('account/login', [
+                'error'     => $e->getMessage(),
+                'csrfToken' => $this->container->getCsrf()->getCsrfToken(),
+            ]);
         }
     }
 }

@@ -9,14 +9,11 @@ use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use App\Domain\Account\Notice\NoticeRepository;
 use App\Domain\Auth\AuthInterface;
 use WalkWeb\NW\AppException;
-use WalkWeb\NW\Request;
 
 abstract class AbstractHandler extends \WalkWeb\NW\AbstractHandler
 {
     public const MISS_USER    = 'Miss user';
     public const INVALID_USER = 'Invalid user';
-
-    public const REDIRECT_HEADER = 'X-Redirect-Url';
 
     private ?SendNoticeActionInterface $sendNoticeAction = null;
 
@@ -49,22 +46,5 @@ abstract class AbstractHandler extends \WalkWeb\NW\AbstractHandler
         }
 
         return $this->sendNoticeAction;
-    }
-
-    /**
-     * @param Request $request
-     * @return string
-     */
-    protected function getRedirectUrl(Request $request): string
-    {
-        if (array_key_exists('HTTP_X_REDIRECT_URL', $request->getServer())) {
-            return (string)$request->getServer()['HTTP_X_REDIRECT_URL'];
-        }
-
-        if (array_key_exists(self::REDIRECT_HEADER, $request->getServer())) {
-            return (string)$request->getServer()[self::REDIRECT_HEADER];
-        }
-
-        return '';
     }
 }
