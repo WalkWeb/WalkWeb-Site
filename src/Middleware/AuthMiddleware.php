@@ -29,10 +29,14 @@ class AuthMiddleware extends AbstractMiddleware
                 // TODO
                 //$this->container->setTemplate($user->getTemplate());
                 $this->container->set('user', $user);
+            } else {
+                $this->container->getCookies()->delete(AccountInterface::AUTH_TOKEN);
             }
         }
 
         // TODO Check ban user
+
+        // TODO Check no end register user
 
         return $handler($request);
     }

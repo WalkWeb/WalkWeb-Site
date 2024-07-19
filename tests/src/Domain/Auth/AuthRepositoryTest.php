@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Auth;
 
-use App\Domain\Account\AccountException;
 use App\Domain\Account\Notice\NoticeFactory;
 use App\Domain\Auth\AuthRepository;
 use Exception;
@@ -75,9 +74,7 @@ class AuthRepositoryTest extends AbstractTest
      */
     public function testAuthRepositoryGetNotFound(): void
     {
-        $this->expectException(AppException::class);
-        $this->expectExceptionMessage(AccountException::NOT_FOUND);
-        $this->getRepository()->get('unknown_token', $this->getSendNoticeAction());
+        self::assertNull($this->getRepository()->get('unknown_token', $this->getSendNoticeAction()));
     }
 
     /**

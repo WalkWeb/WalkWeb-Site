@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Auth;
 
-use App\Domain\Account\AccountException;
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
-use WalkWeb\NW\Response;
 
 class AuthRepository
 {
@@ -64,7 +62,7 @@ class AuthRepository
         );
 
         if (!$data) {
-            throw new AppException(AccountException::NOT_FOUND, Response::NOT_FOUND);
+            return null;
         }
 
         // TODO Переименовать все параметры так, чтобы можно было просто кидать весь массив и все
