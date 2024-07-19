@@ -7,6 +7,7 @@ namespace App\Middleware;
 use App\Domain\Account\AccountInterface;
 use App\Domain\Account\Notice\Action\SendNoticeAction;
 use App\Domain\Account\Notice\NoticeRepository;
+use App\Domain\Account\Status\AccountStatusInterface;
 use App\Domain\Auth\AuthRepository;
 use WalkWeb\NW\AbstractMiddleware;
 use WalkWeb\NW\AppException;
@@ -29,12 +30,18 @@ class AuthMiddleware extends AbstractMiddleware
                 // TODO
                 //$this->container->setTemplate($user->getTemplate());
                 $this->container->set('user', $user);
+
+                if ($request->getUri() !== '/banned' && $request->getUri() !== '/logout' && $user->getStatus()->getId() === AccountStatusInterface::BLOCKED) {
+                    // TODO Вынести в метод AbstractMiddleware
+                    $response = new Response('', Response::FOUND);
+                    $response->withHeader('Location', '/banned');
+                    return $response;
+                }
+
             } else {
                 $this->container->getCookies()->delete(AccountInterface::AUTH_TOKEN);
             }
         }
-
-        // TODO Check ban user
 
         // TODO Check no end register user
 

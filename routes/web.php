@@ -12,6 +12,7 @@ $routes->get('account.logout', '/logout', 'App\\Handler\\Account\\AccountLogoutH
 $routes->get('account.verified.email', '/verified/email', 'App\\Handler\\Account\\VerifiedEmailPageHandler');
 $routes->get('account.check.email', '/check/email/{token}', 'App\\Handler\\Account\\AccountCheckMailHandler', ['token' => '[a-zA-Z0-9-]+']);
 $routes->get('account.notice.list', '/notices/{page}', 'App\\Handler\\Account\\Notice\\AccountNoticePageHandler', ['page' => '\d+']);
+$routes->get('account.banned', '/banned', 'App\\Handler\\Account\\AccountBannedPageHandler');
 
 $routes->get('statistic', '/statistic', 'App\\Handler\\StatisticHandler');
 

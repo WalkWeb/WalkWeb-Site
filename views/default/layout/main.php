@@ -1,7 +1,7 @@
 <?php
 use App\Domain\Auth\AuthInterface;
 
-$this->title = 'WalkWeb — Интересное';
+$title = $this->title ?: 'WalkWeb — Интересное';
 
 ?>
 <!DOCTYPE html>

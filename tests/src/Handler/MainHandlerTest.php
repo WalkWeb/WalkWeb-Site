@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\src\Handler;
 
+use App\Domain\Account\AccountInterface;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
@@ -16,13 +17,28 @@ class MainHandlerTest extends AbstractTest
      *
      * @throws AppException
      */
-    public function testMainPage(): void
+    public function testMainPageSuccess(): void
     {
         $request = new Request(['REQUEST_URI' => '/']);
         $response = $this->app->handle($request);
 
         self::assertMatchesRegularExpression('/Заголовок поста #1/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
+    }
+
+    /**
+     * Тест на ситуацию, когда заблокированный пользователь пытается открыть главную страницу - его переадресует на
+     * страницу с информацией о том, что его аккаунт заблокирован
+     *
+     * @throws AppException
+     */
+    public function testMainPageBannedUser(): void
+    {
+        $request = new Request(['REQUEST_URI' => '/'], [], [AccountInterface::AUTH_TOKEN => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a2']);
+        $response = $this->app->handle($request);
+
+        self::assertEquals(Response::FOUND, $response->getStatusCode());
+        self::assertEquals('/banned', $response->getHeaders()['Location']);
     }
 
     /**
