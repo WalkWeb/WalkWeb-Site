@@ -489,3 +489,84 @@ span.red {
 .pagination a:hover {
     background: #999;
 }
+
+.up_notice_box {
+    position: fixed;
+    width: 50%;
+    max-width: 600px;
+    min-width: 200px;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 10px;
+}
+
+#up_open_notice:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+#up_open_notice {
+    float: right;
+    width: 35px;
+    height: 35px;
+    background-image: url(/img/templates/default/notice.svg);
+    background-size: cover;
+    opacity: 0.8;
+}
+
+#up_open_notice p {
+    padding: 20px 0 0 20px;
+}
+
+#up_open_notice span {
+    color: #fff;
+    padding: 2px 6px;
+    background: #444;
+    border-radius: 100%;
+    font-size: 80%;
+}
+
+#up_notice_content {
+    display: none;
+}
+
+.up_notice_row {
+    background: #363539;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #464549;
+    border-radius: 5px;
+    display: flex;
+    -webkit-box-shadow: 0 3px 5px 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: 0 3px 5px 0 rgba(0,0,0,0.75);
+    box-shadow: 0 3px 5px 0 rgba(0,0,0,0.75);
+}
+
+.up_notice_row_l {
+    width: 96%;
+    font-size: 120%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #f4f1ea;
+}
+
+.up_notice_row_r {
+    width: 4%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.up_notice_row_r span {
+    font-size: 200%;
+    line-height: 50%;
+    color: #a11;
+}
+
+.up_notice_row_r span:hover {
+    color: #f11;
+    cursor: pointer;
+}

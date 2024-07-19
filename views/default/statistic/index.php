@@ -3,7 +3,7 @@
 use App\Domain\Statistic\StatisticInterface;
 use WalkWeb\NW\AppException;
 
-$this->title = 'WalkWeb — Статистика';
+$this->title = APP_NAME . ' — Статистика';
 
 if (empty($statistic) || !($statistic instanceof StatisticInterface)) {
     throw new AppException('Statistic page: miss $statistic');

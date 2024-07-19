@@ -4,7 +4,7 @@ use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Notice\NoticeInterface;
 use WalkWeb\NW\AppException;
 
-$this->title = 'WalkWeb — Ваши уведомления';
+$this->title = APP_NAME . ' — Ваши уведомления';
 
 if (empty($notices) || !($notices instanceof NoticeCollection)) {
     throw new AppException('Account notice page: miss $notices');

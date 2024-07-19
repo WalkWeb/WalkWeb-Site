@@ -27,7 +27,7 @@ class VerifiedEmailPageHandlerTest extends AbstractTest
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Подтвердите ваш email/', $response->getBody());
-        self::assertMatchesRegularExpression('/Вам необходимо подтвердить ваш email/', $response->getBody());
+        self::assertMatchesRegularExpression('/Вам необходимо подтвердить email чтобы активировать аккаунт/', $response->getBody());
     }
 
     /**

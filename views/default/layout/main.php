@@ -1,7 +1,7 @@
 <?php
 use App\Domain\Auth\AuthInterface;
 
-$title = $this->title ?: 'WalkWeb — Интересное';
+$title = $this->title ?: APP_NAME . ' — Интересное';
 
 ?>
 <!DOCTYPE html>
@@ -13,6 +13,8 @@ $title = $this->title ?: 'WalkWeb — Интересное';
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <link rel="stylesheet" type="text/css" href="/css/default.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/app.js?v=1.00"></script>
 </head>
 <body>
 <div class="line"></div>
@@ -95,5 +97,33 @@ $title = $this->title ?: 'WalkWeb — Интересное';
         <p>Footer content</p>
     </div>
 </div>
+<?php
+if ($this->container->exist('user')) {
+    /** @var AuthInterface $user */
+    $user = $this->container->getUser();
+
+    if ($count = count($user->getNotices())) {
+
+        echo '<div class="up_notice_box">
+                <div id="up_open_notice" onclick="openNotice()">
+                    <p><span>' . $count . '</span></p>
+                </div>
+                <div id="up_notice_content">';
+
+        foreach ($user->getNotices() as $notice) {
+            echo    '<div class="up_notice_row" id="notice_' . $notice->getId() . '">
+                        <div class="up_notice_row_l">
+                            <p>' . $notice->getMessage() . '</p>
+                        </div>
+                        <div class="up_notice_row_r">
+                            <span onclick="closeNotice(\'' . $notice->getId() . '\')">×</span>
+                        </div>
+                    </div>';
+        }
+
+        echo '</div></div>';
+    }
+}
+?>
 </body>
 </html>

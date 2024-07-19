@@ -25,6 +25,7 @@ class AccountCheckMailHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
+        // TODO
         if (!$this->container->exist('user')) {
             $this->title = 'Необходима авторизация';
             $message = '<p>Необходима авторизация</p>

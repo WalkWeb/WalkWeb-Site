@@ -39,7 +39,8 @@ class VerifiedEmailPageHandler extends AbstractHandler
         }
 
         $this->title = 'Подтвердите ваш email';
-        $message = '<p>Вам необходимо подтвердить ваш email. Инструкция по активации отправлена на email указанный при регистрации.</p>
+        $message = '<p>Вам необходимо подтвердить email чтобы активировать аккаунт. Инструкция по активации 
+                    отправлена на email указанный при регистрации.</p>
                     <p>Если вам не пришло письмо – свяжитесь с нашей службой поддержки.</p>';
 
         return $this->render('account/email_verified', ['message' => $message]);
