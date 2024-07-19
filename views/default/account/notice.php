@@ -11,8 +11,9 @@ if (empty($notices) || !($notices instanceof NoticeCollection)) {
 }
 
 $pagination = $pagination ?? '';
+$total = $total ?? 0;
 
-echo "<h1>Ваши уведомления</h1>";
+echo "<h3>Уведомления ($total)</h3>";
 
 if (count($notices) > 0) {
     foreach ($notices as $notice) {

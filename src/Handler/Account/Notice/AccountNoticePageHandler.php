@@ -46,6 +46,7 @@ class AccountNoticePageHandler extends AbstractHandler
 
         return $this->render('account/notice', [
             'notices'    => $repository->getAll($user->getId(), $offset, $perPage),
+            'total'      => $total,
             'pagination' => $this->getPages($total, $page, '/notices/', $perPage),
         ]);
     }

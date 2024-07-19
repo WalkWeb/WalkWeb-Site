@@ -197,8 +197,15 @@ a.post_link:hover {
 
 h1 {
     font-family: 'Open Sans', sans-serif;
+    font-size: 170%;
     margin-bottom: 40px;
     text-align: center;
+}
+
+h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 120%;
+    margin-bottom: 20px;
 }
 
 button {
