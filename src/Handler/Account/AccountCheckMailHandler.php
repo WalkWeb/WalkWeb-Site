@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Handler\Account;
 
+use App\Domain\Account\Notice\NoticeException;
+use App\Domain\Account\Notice\NoticeInterface;
+use App\Domain\Auth\AuthInterface;
 use App\Domain\Auth\AuthRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
@@ -18,6 +21,7 @@ class AccountCheckMailHandler extends AbstractHandler
      * @param Request $request
      * @return Response
      * @throws AppException
+     * @throws NoticeException
      */
     public function __invoke(Request $request): Response
     {
@@ -46,7 +50,22 @@ class AccountCheckMailHandler extends AbstractHandler
         $user->emailVerified();
         $repository = new AuthRepository($this->container);
         $repository->saveVerified($user);
+        $this->addNotice($user);
 
         return $this->redirect('/verified/email');
+    }
+
+    /**
+     * @param AuthInterface $user
+     * @throws NoticeException
+     */
+    private function addNotice(AuthInterface $user): void
+    {
+        $this->getSendNoticeAction()->send(
+            $user->getId(),
+            NoticeInterface::EMAIL_APPROVE,
+            NoticeInterface::TYPE_SUCCESS,
+            false
+        );
     }
 }

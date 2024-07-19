@@ -14,6 +14,9 @@ use DateTimeInterface;
  */
 interface NoticeInterface
 {
+    public const REGISTER_START = 'Начало регистрации на портале';
+    public const EMAIL_APPROVE  = 'Email успешно подтвержден';
+
     public const TYPE_INFO    = 1;
     public const TYPE_WARNING = 2;
     public const TYPE_SUCCESS = 3;

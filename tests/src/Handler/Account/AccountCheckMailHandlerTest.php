@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Test\src\Handler\Account;
 
 use App\Domain\Account\AccountInterface;
+use App\Domain\Account\Notice\NoticeInterface;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
@@ -50,6 +51,19 @@ class AccountCheckMailHandlerTest extends AbstractTest
 
         self::assertEquals(1, $data['email_verified']);
         self::assertEquals(1, $data['reg_complete']);
+
+        // check notice
+
+        $notice = self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `notices` WHERE `account_id` = ?',
+            [['type' => 's', 'value' => $data['id']]],
+        );
+
+        self::assertCount(1, $notice);
+        self::assertEquals(NoticeInterface::TYPE_SUCCESS, $notice[0]['type']);
+        self::assertEquals($data['id'], $notice[0]['account_id']);
+        self::assertEquals(NoticeInterface::EMAIL_APPROVE, $notice[0]['message']);
+        self::assertEquals(1, $notice[0]['view']);
     }
 
     /**

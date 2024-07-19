@@ -144,7 +144,7 @@ class AccountRegistrationHandler extends AbstractHandler
     {
         $this->sendNoticeAction->send(
             $account->getId(),
-            SendNoticeAction::REGISTER_START,
+            NoticeInterface::REGISTER_START,
             NoticeInterface::TYPE_INFO,
             false
         );
