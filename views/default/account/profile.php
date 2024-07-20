@@ -60,3 +60,7 @@ $canLike = $account->isCanLike() ? 'да' : 'нет';
     <div class="upload_fill" style="width: <?= $account->getUpload()->getUploadBarWeight() ?>%"></div>
 </div>
 <div class="upload_text"><?= $account->getUpload()->getUploadMb() ?> мб / <?= $account->getUpload()->getUploadMaxMb() ?> мб</div>
+<br />
+<hr>
+<br />
+<p><a href="/logout" class="button">Выйти</a></p>

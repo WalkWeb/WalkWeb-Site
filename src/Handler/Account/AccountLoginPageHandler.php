@@ -26,13 +26,13 @@ class AccountLoginPageHandler extends AbstractHandler
             return $this->render('account/login', [
                 'error'       => self::ALREADY_AUTH,
                 'csrfToken'   => $this->container->getCsrf()->getCsrfToken(),
-                'redirectUrl' => '',
+                'redirectUrl' => '/',
             ]);
         }
 
         return $this->render('account/login', [
             'csrfToken'   => $this->container->getCsrf()->getCsrfToken(),
-            'redirectUrl' => '',
+            'redirectUrl' => '/',
         ]);
     }
 }
