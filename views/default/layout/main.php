@@ -121,6 +121,12 @@ if ($this->container->exist('user')) {
                     </div>';
         }
 
+        if ($count > 2) {
+            echo '<div class="up_notice_car">
+                    <p><span onclick="closeAllNotice()">закрыть все</span></p>
+                  </div>';
+        }
+
         echo '</div></div>';
     }
 }

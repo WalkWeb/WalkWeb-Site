@@ -143,5 +143,15 @@ class NoticeRepository implements NoticeRepositoryInterface
         );
     }
 
-    // TODO closeAllByAccountId()
+    /**
+     * @param string $accountId
+     * @throws AppException
+     */
+    public function closeAllByAccountId(string $accountId): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `notices` SET `view` = 1 WHERE `account_id` = ?',
+            [['type' => 's', 'value' => $accountId]]
+        );
+    }
 }

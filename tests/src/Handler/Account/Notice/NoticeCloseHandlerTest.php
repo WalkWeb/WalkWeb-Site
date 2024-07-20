@@ -71,7 +71,7 @@ class NoticeCloseHandlerTest extends AbstractTest
         $response = $this->app->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
-        self::assertEquals(self::jsonEncode(['success' => false, 'error' => 'Вы не авторизованы']), $response->getBody());
+        self::assertJsonError('Вы не авторизованы', $response);
 
         // Проверяем, что данные в базе не изменились
         $data = $container->getConnectionPool()->getConnection()->query(
@@ -96,7 +96,7 @@ class NoticeCloseHandlerTest extends AbstractTest
         $response = $this->app->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
-        self::assertEquals(self::jsonEncode(['success' => false, 'error' => 'Уведомление не найдено']), $response->getBody());
+        self::assertJsonError('Уведомление не найдено', $response);
     }
 
     /**
@@ -122,7 +122,7 @@ class NoticeCloseHandlerTest extends AbstractTest
         $response = $this->app->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
-        self::assertEquals(self::jsonEncode(['success' => false, 'error' => 'Вы обращаетесь к чужому уведомлению']), $response->getBody());
+        self::assertJsonError('Вы обращаетесь к чужому уведомлению', $response);
 
         // Проверяем, что данные в базе не изменились
         $data = $container->getConnectionPool()->getConnection()->query(

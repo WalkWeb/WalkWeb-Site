@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
 use WalkWeb\NW\App;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
+use WalkWeb\NW\Response;
 use WalkWeb\NW\Runtime;
 use WalkWeb\NW\Traits\StringTrait;
 
@@ -133,5 +134,15 @@ abstract class AbstractTest extends TestCase
         } catch (Exception $e) {
             throw new AppException($e->getMessage());
         }
+    }
+
+    /**
+     * @param string $error
+     * @param Response $response
+     * @throws AppException
+     */
+    protected static function assertJsonError(string $error, Response $response): void
+    {
+        self::assertEquals(self::jsonEncode(['success' => false, 'error' => $error]), $response->getBody());
     }
 }

@@ -567,13 +567,25 @@ span.red {
     align-items: center;
 }
 
-.up_notice_row_r span {
+.up_notice_row_r, .up_notice_car span {
     font-size: 200%;
     line-height: 50%;
     color: #a11;
 }
 
-.up_notice_row_r span:hover {
+.up_notice_row_r, .up_notice_car span:hover {
     color: #f11;
     cursor: pointer;
+}
+
+.up_notice_car {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.up_notice_car p {
+    text-align: center;
+    font-size: 50%;
+    font-family: 'Open Sans', sans-serif;
 }
