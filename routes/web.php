@@ -15,6 +15,7 @@ $routes->get('account.notice.list', '/notices/{page}', 'App\\Handler\\Account\\N
 $routes->post('account.notice.close', '/notice/close/{id}', 'App\\Handler\\Account\\Notice\\NoticeCloseHandler', ['id' => '[a-zA-Z0-9-]+']);
 $routes->post('account.notice.close.all', '/notice/all/close', 'App\\Handler\\Account\\Notice\\NoticeCloseAllHandler');
 $routes->get('account.banned', '/banned', 'App\\Handler\\Account\\AccountBannedPageHandler');
+$routes->get('account.profile', '/profile', 'App\\Handler\\Account\\Profile\\ProfilePageHandler');
 
 $routes->get('statistic', '/statistic', 'App\\Handler\\StatisticHandler');
 

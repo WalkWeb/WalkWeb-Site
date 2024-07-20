@@ -4,10 +4,10 @@ use App\Domain\Account\AccountInterface;
 use WalkWeb\NW\AppException;
 
 if (empty($account) || !($account instanceof AccountInterface)) {
-    throw new AppException('view.account.index: miss account');
+    throw new AppException('view.account.profile: miss account');
 }
 
-$this->title = APP_ENV .  ' — Профиль пользователя ' . $account->getName();
+$this->title = APP_NAME . ' — Ваш профиль';
 
 $emailVerified = $account->isEmailVerified() ? 'да' : 'нет';
 $regComplete = $account->isRegComplete() ? 'да' : 'нет';

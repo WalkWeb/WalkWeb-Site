@@ -60,7 +60,7 @@ $title = $this->title ?: APP_NAME . ' — Интересное';
                 /** @var AuthInterface $user */
                 $user = $this->container->get('user');
                 echo '<div class="right_content_ava" style="background-image: url(/img/default_avatar.jpg);">
-                      <a href="/u/' . $user->getName() . '" class="full"></a>
+                      <a href="/profile" class="full"></a>
                       </div>
                       <div class="exp_background"></div>
                       <div class="exp_fill" style="width: ' . $user->getLevel()->getExpBarWeight() . '%"></div>

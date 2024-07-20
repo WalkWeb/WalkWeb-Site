@@ -24,10 +24,7 @@ class AccountPageHandler extends AbstractHandler
             $repository = new AccountRepository($this->container);
 
             return $this->render('account/index', [
-                'account' => $account = $repository->get(
-                    $request->getAttribute('name'),
-                    $this->getSendNoticeAction()
-                ),
+                'account' => $repository->get($request->getAttribute('name'), $this->getSendNoticeAction()),
             ]);
 
         } catch (Exception $e) {

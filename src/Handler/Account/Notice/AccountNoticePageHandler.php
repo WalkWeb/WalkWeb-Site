@@ -18,6 +18,8 @@ class AccountNoticePageHandler extends AbstractHandler
     use PaginationTrait;
 
     /**
+     * TODO Перенести в Profile
+     *
      * Print notice list page
      *
      * @param Request $request
