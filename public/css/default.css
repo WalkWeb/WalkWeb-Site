@@ -464,6 +464,7 @@ span.red {
 }
 
 .pagination {
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     font-family: Verdana, sans-serif;
@@ -589,3 +590,35 @@ span.red {
     font-size: 50%;
     font-family: 'Open Sans', sans-serif;
 }
+
+table {
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+    /*border: 1px solid #555;*/
+}
+
+th {
+    border: 1px solid #555;
+    background: #ddd;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 100%;
+    color: #333;
+    padding: 4px;
+}
+
+td {
+    border: 1px solid #555;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 100%;
+    color: #333;
+    padding: 4px;
+}
+
+td.avatar {
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+}
+
+
