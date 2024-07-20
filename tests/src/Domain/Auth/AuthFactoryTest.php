@@ -31,6 +31,8 @@ class AuthFactoryTest extends AbstractTest
         self::assertEquals($data['id'], $auth->getId());
         self::assertEquals($data['name'], $auth->getName());
         self::assertEquals($data['avatar'], $auth->getAvatar());
+        self::assertEquals($data['verified_token'], $auth->getVerifiedToken());
+        self::assertEquals($data['main_character_id'], $auth->getMainCharacterId());
         self::assertEquals(new AccountGroup($data['account_group_id']), $auth->getGroup());
         self::assertEquals(new AccountStatus($data['account_status_id']), $auth->getStatus());
         self::assertEquals($data['can_like'], $auth->isCanLike());
@@ -91,6 +93,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -149,6 +152,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -182,6 +186,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -214,6 +219,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -247,6 +253,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => true,
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -279,6 +286,7 @@ class AuthFactoryTest extends AbstractTest
                     'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
                     'name'                   => 'AccountName',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -312,6 +320,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => ['account_avatar.png'],
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -345,6 +354,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_status_id'      => 1,
                     'energy'                 => [
                         'energy_id'         => 'f0c4391a-f16a-4a22-80fb-ac0a02168b1f',
@@ -377,6 +387,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 'success',
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -410,6 +421,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'energy'                 => [
                         'energy_id'         => 'f0c4391a-f16a-4a22-80fb-ac0a02168b1f',
@@ -442,6 +454,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => '1',
                     'energy'                 => [
@@ -475,6 +488,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'can_like'               => 1,
@@ -500,6 +514,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => 100,
@@ -526,6 +541,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -558,6 +574,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -592,6 +609,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -625,6 +643,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -659,6 +678,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -696,6 +716,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -723,6 +744,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -751,6 +773,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -783,6 +806,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -817,6 +841,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -866,6 +891,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -917,6 +943,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -966,6 +993,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -1016,6 +1044,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -1066,6 +1095,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -1117,6 +1147,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -1166,6 +1197,7 @@ class AuthFactoryTest extends AbstractTest
                     'name'                   => 'AccountName',
                     'avatar'                 => 'account_avatar.png',
                     'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
                     'account_group_id'       => 10,
                     'account_status_id'      => 1,
                     'energy'                 => [
@@ -1208,6 +1240,158 @@ class AuthFactoryTest extends AbstractTest
                     'upload_bonus'           => null,
                 ],
                 AuthException::INVALID_UPLOAD_BONUS,
+            ],
+            // miss main_character_id
+            [
+                [
+                    'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
+                    'name'                   => 'AccountName',
+                    'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'account_group_id'       => 10,
+                    'account_status_id'      => 1,
+                    'energy'                 => [
+                        'energy_id'         => 'f0c4391a-f16a-4a22-80fb-ac0a02168b1f',
+                        'account_id'        => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'energy'            => 30,
+                        'energy_bonus'      => 15,
+                        'energy_updated_at' => 1566745426.0000,
+                        'energy_residue'    => 10,
+                    ],
+                    'can_like'               => 1,
+                    'notices'                => [
+                        [
+                            'id'         => '7d9593ce-b4c0-483f-a8ac-df0f021cf8ce',
+                            'type'       => 1,
+                            'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
+                            'message'    => 'message #1',
+                            'view'       => 0,
+                            'created_at' => '2019-08-12 14:00:00',
+                        ],
+                        [
+                            'id'         => 'cede1b4e-787b-4f9a-b005-786599990f9c',
+                            'type'       => 2,
+                            'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
+                            'message'    => 'message #2',
+                            'view'       => 0,
+                            'created_at' => '2019-08-18 18:50:00',
+                        ],
+                    ],
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
+                    'template'               => 'default',
+                    'email_verified'         => 0,
+                    'upload'                 => 1000,
+                    'upload_bonus'           => 3,
+                ],
+                AuthException::INVALID_MAIN_CHARACTER_ID,
+            ],
+            // main_character_id invalid type
+            [
+                [
+                    'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
+                    'name'                   => 'AccountName',
+                    'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => 111,
+                    'account_group_id'       => 10,
+                    'account_status_id'      => 1,
+                    'energy'                 => [
+                        'energy_id'         => 'f0c4391a-f16a-4a22-80fb-ac0a02168b1f',
+                        'account_id'        => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'energy'            => 30,
+                        'energy_bonus'      => 15,
+                        'energy_updated_at' => 1566745426.0000,
+                        'energy_residue'    => 10,
+                    ],
+                    'can_like'               => 1,
+                    'notices'                => [
+                        [
+                            'id'         => '7d9593ce-b4c0-483f-a8ac-df0f021cf8ce',
+                            'type'       => 1,
+                            'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
+                            'message'    => 'message #1',
+                            'view'       => 0,
+                            'created_at' => '2019-08-12 14:00:00',
+                        ],
+                        [
+                            'id'         => 'cede1b4e-787b-4f9a-b005-786599990f9c',
+                            'type'       => 2,
+                            'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
+                            'message'    => 'message #2',
+                            'view'       => 0,
+                            'created_at' => '2019-08-18 18:50:00',
+                        ],
+                    ],
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
+                    'template'               => 'default',
+                    'email_verified'         => 0,
+                    'upload'                 => 1000,
+                    'upload_bonus'           => 3,
+                ],
+                AuthException::INVALID_MAIN_CHARACTER_ID,
+            ],
+            // main_character_id invalid uuid
+            [
+                [
+                    'id'                     => '68435c80-eb31-4756-a260-a00900e5db9f',
+                    'name'                   => 'AccountName',
+                    'avatar'                 => 'account_avatar.png',
+                    'verified_token'         => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
+                    'main_character_id'      => '2bccd10d-b2a3-4838-aca9-963582d529',
+                    'account_group_id'       => 10,
+                    'account_status_id'      => 1,
+                    'energy'                 => [
+                        'energy_id'         => 'f0c4391a-f16a-4a22-80fb-ac0a02168b1f',
+                        'account_id'        => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'energy'            => 30,
+                        'energy_bonus'      => 15,
+                        'energy_updated_at' => 1566745426.0000,
+                        'energy_residue'    => 10,
+                    ],
+                    'can_like'               => 1,
+                    'notices'                => [
+                        [
+                            'id'         => '7d9593ce-b4c0-483f-a8ac-df0f021cf8ce',
+                            'type'       => 1,
+                            'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
+                            'message'    => 'message #1',
+                            'view'       => 0,
+                            'created_at' => '2019-08-12 14:00:00',
+                        ],
+                        [
+                            'id'         => 'cede1b4e-787b-4f9a-b005-786599990f9c',
+                            'type'       => 2,
+                            'account_id' => 'f40647f9-3ed7-4251-9662-94189df0eb25',
+                            'message'    => 'message #2',
+                            'view'       => 0,
+                            'created_at' => '2019-08-18 18:50:00',
+                        ],
+                    ],
+                    'level'                  => [
+                        'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
+                        'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
+                        'character_level'       => 1,
+                        'character_exp'         => 0,
+                        'character_stat_points' => 0,
+                    ],
+                    'template'               => 'default',
+                    'email_verified'         => 0,
+                    'upload'                 => 1000,
+                    'upload_bonus'           => 3,
+                ],
+                AuthException::INVALID_MAIN_CHARACTER_ID,
             ],
         ];
     }

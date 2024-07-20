@@ -48,6 +48,13 @@ interface AuthInterface
     public function getVerifiedToken(): string;
 
     /**
+     * Возвращает id актуального основного персонажа
+     *
+     * @return string
+     */
+    public function getMainCharacterId(): string;
+
+    /**
      * Группа пользователя
      *
      * @return AccountGroupInterface

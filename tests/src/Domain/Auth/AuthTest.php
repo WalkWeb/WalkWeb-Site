@@ -28,6 +28,7 @@ class AuthTest extends AbstractTest
         $name = 'Name';
         $avatar = 'avatar.png';
         $verifiedToken = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3';
+        $mainCharacterId = '6c5d3aa9-2973-45ec-8828-d77468c8d22f';
         $group = new AccountGroup(10);
         $status = new AccountStatus(2);
         $energy = new Energy(
@@ -51,6 +52,7 @@ class AuthTest extends AbstractTest
             $name,
             $avatar,
             $verifiedToken,
+            $mainCharacterId,
             $group,
             $status,
             $energy,
@@ -66,6 +68,7 @@ class AuthTest extends AbstractTest
         self::assertEquals($name, $auth->getName());
         self::assertEquals($avatar, $auth->getAvatar());
         self::assertEquals($verifiedToken, $auth->getVerifiedToken());
+        self::assertEquals($mainCharacterId, $auth->getMainCharacterId());
         self::assertEquals($group, $auth->getGroup());
         self::assertEquals($status, $auth->getStatus());
         self::assertEquals($energy, $auth->getEnergy());

@@ -39,7 +39,7 @@ class AuthRepository
             `accounts`.`email_verified`,
             `accounts`.`upload`,
             
-            `characters_main`.`id` as `character_id`,
+            `characters_main`.`id` as `main_character_id`,
             `characters_main`.`level`,
             `characters_main`.`exp`,
             `characters_main`.`upload_bonus`,
@@ -77,7 +77,7 @@ class AuthRepository
 
         $level = [
             'account_id'            => $data['id'],
-            'character_id'          => $data['character_id'],
+            'character_id'          => $data['main_character_id'],
             'character_level'       => $data['level'],
             'character_exp'         => $data['exp'],
             'character_stat_points' => $data['stat_points'],

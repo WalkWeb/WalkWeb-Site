@@ -40,6 +40,7 @@ class AuthFactory
                 self::string($data, 'name', AuthException::INVALID_NAME),
                 self::string($data, 'avatar', AuthException::INVALID_AVATAR),
                 self::verifiedTokenValidate($data),
+                self::uuid($data, 'main_character_id', AuthException::INVALID_MAIN_CHARACTER_ID),
                 new AccountGroup(self::int($data, 'account_group_id', AuthException::INVALID_ACCOUNT_GROUP_ID)),
                 new AccountStatus(self::int($data, 'account_status_id', AuthException::INVALID_ACCOUNT_STATUS_ID)),
                 EnergyFactory::create(self::array($data, 'energy', AuthException::INVALID_ENERGY_DATA)),
