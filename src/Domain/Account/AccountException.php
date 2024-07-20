@@ -17,6 +17,14 @@ class AccountException extends Exception
 
     // id
     public const INVALID_ID                    = 'Incorrect parameter "id", it required and type string (uuid)';
+    // avatar
+    public const INVALID_AVATAR                = 'Incorrect parameter "avatar", it required and type string';
+    // level
+    public const INVALID_LEVEL                 = 'Incorrect parameter "level", it required and type int';
+    // exp
+    public const INVALID_EXP                   = 'Incorrect parameter "exp", it required and type int';
+    // carma
+    public const INVALID_CARMA                 = 'Incorrect parameter "carma", it required and type int';
     // login
     public const INVALID_LOGIN                 = 'Incorrect parameter "login", it required and type string';
     public const INVALID_LOGIN_LENGTH          = 'Incorrect parameter "login", should be min-max length: ';

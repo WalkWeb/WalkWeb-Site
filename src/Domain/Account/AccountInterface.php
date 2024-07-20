@@ -13,6 +13,8 @@ use DateTimeInterface;
 
 interface AccountInterface
 {
+    // TODO min-max avatar length
+
     public const AUTH_TOKEN                = 'auth';
 
     public const LOGIN_MIN_LENGTH          = 4;
