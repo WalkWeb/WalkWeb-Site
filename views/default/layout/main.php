@@ -40,6 +40,7 @@ $title = $this->title ?: APP_NAME . ' — Интересное';
                           <li><a href="/registration/main">Регистрация</a></li>';
                 }
                 ?>
+                <li><a href="#">Рейтинги</a></li>
                 <li><a href="/statistic">Статистика</a></li>
             </ul>
         </div>
