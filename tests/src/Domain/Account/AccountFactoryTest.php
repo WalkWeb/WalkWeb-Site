@@ -89,6 +89,8 @@ class AccountFactoryTest extends AbstractTest
     /**
      * Test on success create object Account from array (registration form)
      *
+     * TODO Тест иногда падает из-за разницы во времени на 1 секунду, можно делать не точное сравнение, а разницу, и смотреть, что разница не более 1 секунды
+     *
      * @dataProvider createNewSuccessDataProvider
      * @param array $data
      * @throws AppException

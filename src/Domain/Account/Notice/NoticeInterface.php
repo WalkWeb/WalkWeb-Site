@@ -66,6 +66,11 @@ interface NoticeInterface
     public function isView(): bool;
 
     /**
+     * "Закрывает" уведомление - отмечает его как показанное
+     */
+    public function close(): void;
+
+    /**
      * Возвращает дату создания уведомления
      *
      * @return DateTimeInterface

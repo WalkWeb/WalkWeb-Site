@@ -18,11 +18,12 @@
         }
     ],
     "require": {
-        "walkweb/dw-framework-core": "1.0.20",
+        "walkweb/dw-framework-core": "1.0.21",
         "ramsey/uuid": "^4.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.6",
-        "phpstan/phpstan": "^1.11"
+        "phpstan/phpstan": "^1.11",
+        "ext-json": "*"
     }
 }

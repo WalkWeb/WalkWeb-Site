@@ -7,6 +7,7 @@ namespace Test;
 use App\Domain\Account\Notice\Action\SendNoticeAction;
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use App\Domain\Account\Notice\NoticeRepository;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use WalkWeb\NW\App;
 use WalkWeb\NW\AppException;
@@ -46,6 +47,7 @@ abstract class AbstractTest extends TestCase
 
         $router = require __DIR__ . '/../routes/web.php';
         self::getContainer()->getConnectionPool()->getConnection()->autocommit(false);
+        self::getContainer()->unset('user');
         $this->app = new App($router, self::getContainer());
     }
 
@@ -117,5 +119,19 @@ abstract class AbstractTest extends TestCase
     protected function getSendNoticeAction(): SendNoticeActionInterface
     {
         return new SendNoticeAction(new NoticeRepository(self::getContainer()));
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     * @throws AppException
+     */
+    protected static function jsonEncode(array $data): string
+    {
+        try {
+            return json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+        } catch (Exception $e) {
+            throw new AppException($e->getMessage());
+        }
     }
 }

@@ -34,6 +34,7 @@ class NoticeRepository implements NoticeRepositoryInterface
         );
 
         if (!$data) {
+            // TODO NotFoundException
             throw new AppException(NoticeException::NOT_FOUND, Response::NOT_FOUND);
         }
 
@@ -130,6 +131,17 @@ class NoticeRepository implements NoticeRepositoryInterface
         );
     }
 
-    // TODO inactive()
-    // TODO inactiveAll()
+    /**
+     * @param NoticeInterface $notice
+     * @throws AppException
+     */
+    public function close(NoticeInterface $notice): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `notices` SET `view` = 1 WHERE `id` = ?',
+            [['type' => 's', 'value' => $notice->getId()]]
+        );
+    }
+
+    // TODO closeAllByAccountId()
 }

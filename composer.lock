@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e8ad1bcab6a64931b9d0590be69cc2b",
+    "content-hash": "9b05e91187a5248eaa71c4c4c272d0b6",
     "packages": [
         {
             "name": "brick/math",
@@ -572,16 +572,16 @@
         },
         {
             "name": "walkweb/dw-framework-core",
-            "version": "1.0.20",
+            "version": "1.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WalkWeb/DW-Framework-Core.git",
-                "reference": "1027c9c98c7547bd7f691f22fb69be76079b0f60"
+                "reference": "df2c0a5d6f664c2b78fe69e9c8c79763505ad867"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WalkWeb/DW-Framework-Core/zipball/1027c9c98c7547bd7f691f22fb69be76079b0f60",
-                "reference": "1027c9c98c7547bd7f691f22fb69be76079b0f60",
+                "url": "https://api.github.com/repos/WalkWeb/DW-Framework-Core/zipball/df2c0a5d6f664c2b78fe69e9c8c79763505ad867",
+                "reference": "df2c0a5d6f664c2b78fe69e9c8c79763505ad867",
                 "shasum": ""
             },
             "require": {
@@ -616,9 +616,9 @@
             "description": "Core Micro MVC Framework",
             "support": {
                 "issues": "https://github.com/WalkWeb/DW-Framework-Core/issues",
-                "source": "https://github.com/WalkWeb/DW-Framework-Core/tree/1.0.20"
+                "source": "https://github.com/WalkWeb/DW-Framework-Core/tree/1.0.21"
             },
-            "time": "2024-07-16T13:04:16+00:00"
+            "time": "2024-07-20T07:50:28+00:00"
         }
     ],
     "packages-dev": [
@@ -2427,6 +2427,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": [],
+    "platform-dev": {
+        "ext-json": "*"
+    },
     "plugin-api-version": "2.6.0"
 }

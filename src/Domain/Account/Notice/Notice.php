@@ -99,6 +99,11 @@ class Notice implements NoticeInterface
         return $this->view;
     }
 
+    public function close(): void
+    {
+        $this->view = true;
+    }
+
     /**
      * @return DateTimeInterface
      */
