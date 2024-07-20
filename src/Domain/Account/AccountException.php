@@ -14,6 +14,8 @@ class AccountException extends Exception
     public const EMAIL_ALREADY_EXIST           = 'User with this email already exists';
     public const INVALID_LOGIN_OR_PASSWORD     = 'Invalid login or password';
     public const MISS_MAIN_CHARACTER           = 'Miss main character';
+    public const ALREADY_EXIST                 = 'AccountCollection: account to be added already exists';
+    public const EXPECTED_ARRAY                = 'AccountCollectionFactory: expected array data';
 
     // id
     public const INVALID_ID                    = 'Incorrect parameter "id", it required and type string (uuid)';
