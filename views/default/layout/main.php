@@ -15,6 +15,7 @@ $title = $this->title ?: APP_NAME . ' — Интересное';
     <link rel="stylesheet" type="text/css" href="/css/default.css">
     <script src="/js/jquery.js"></script>
     <script src="/js/app.js?v=1.00"></script>
+    <link rel="icon" type="image/x-icon" href="/icon64.png">
 </head>
 <body>
 <div class="line"></div>
