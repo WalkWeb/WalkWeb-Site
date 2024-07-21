@@ -5,7 +5,7 @@
 
 body {
     color: #333333;
-    background-color: #F4F1EA;
+    background-color: #f4f1ea;
 }
 
 .box {
@@ -184,7 +184,6 @@ a.post_link:hover {
 
 .footer_box {
     background-color: #363539;
-    height: 100px;
 }
 
 .footer_content {
@@ -193,6 +192,12 @@ a.post_link:hover {
 
 .footer_content p {
     color: #999;
+    font-size: 90%;
+}
+
+.footer_content a {
+    font-family: 'Open Sans', sans-serif;
+    color: #94918a;
 }
 
 h1 {

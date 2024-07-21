@@ -95,7 +95,12 @@ $title = $this->title ?: APP_NAME . ' — Интересное';
 <div class="box footer_image"></div>
 <div class="footer_box">
     <div class="box footer_content">
-        <p>Footer content</p>
+        <p>
+            <a href="#">О проекте WalkWeb</a><br />
+            <a href="/users/1">Пользователи</a><br />
+            <a href="#">Функционал</a><br />
+            <a href="#">Правила</a>
+        </p>
     </div>
 </div>
 <?php
