@@ -63,3 +63,6 @@ define('MAIL_CONFIG', [
 
 /** Текущая актуальная эра */
 define('ACTIVE_ERA', 1);
+
+/** Количество секунд на восстановление 1 энергии */
+define('ENERGY_RESTORE', 60);

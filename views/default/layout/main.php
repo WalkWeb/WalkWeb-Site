@@ -72,13 +72,12 @@ $title = $this->title ?: APP_NAME . ' — Интересное';
                       <p><span class="lvl">' . $user->getLevel()->getLevel() . '</span> <a href="/u/' . $user->getName() . '" class="profile_link" title="Профиль">' . $user->getName() . '</a></p>
                       </div>
                       <div class="energy_background"></div>
-                      <div class="energy_fill" style="width: ' . $user->getEnergy()->getEnergyWeight() . '%;"></div>
+                      <div class="energy_fill" id="energy_bar_div" style="width: ' . $user->getEnergy()->getEnergyWeight() . '%;"></div>
                       <div class="energy_text">
-                      <p><abbr title="Ваша энергия">' . $user->getEnergy()->getEnergy() . '/' . $user->getEnergy()->getMaxEnergy() . '</abbr></p>
+                      <p><abbr title="Ваша энергия"><span id="energy">' . $user->getEnergy()->getEnergy() . '</span>/<span id="energy_max">' . $user->getEnergy()->getMaxEnergy() . '</span></abbr></p>
                       </div>
                       <div class="residue_background"></div>
-                      <div class="residue_fill" style="width: ' . $user->getEnergy()->getRestoreWeight() . '%;"></div>';
-
+                      <div class="residue_fill" id="second_bar_div" style="width: ' . $user->getEnergy()->getRestoreWeight() . '%;"></div>';
 
             } else {
                 echo '<div class="right_content_body">
@@ -130,6 +129,19 @@ if ($this->container->exist('user')) {
 
         echo '</div></div>';
     }
+
+    echo
+        '<script>
+            let interval = 1000;
+            let expected = Date.now() + interval;
+            let energy = ' . $user->getEnergy()->getEnergy() . ';
+            let energy_max = ' . $user->getEnergy()->getMaxEnergy() . ';
+            let second = ' . $user->getEnergy()->getResidue() . ';
+            let second_max = ' . ENERGY_RESTORE . ';
+            let energy_bar;
+            let second_bar;
+        </script>
+        <script src="/js/energy.js?v=1.0"></script>';
 }
 ?>
 </body>
