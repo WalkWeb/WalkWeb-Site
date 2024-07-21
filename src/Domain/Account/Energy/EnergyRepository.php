@@ -62,4 +62,21 @@ class EnergyRepository
             ],
         );
     }
+
+    /**
+     * @param EnergyInterface $energy
+     * @throws AppException
+     */
+    public function save(EnergyInterface $energy): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `account_energy` SET `energy` = ?, `updated_at` = ?, `residue` = ? WHERE `id` = ?',
+            [
+                ['type' => 'i', 'value' => $energy->getEnergy()],
+                ['type' => 's', 'value' => $energy->getUpdatedAt()],
+                ['type' => 'i', 'value' => $energy->getResidue()],
+                ['type' => 's', 'value' => $energy->getId()],
+            ],
+        );
+    }
 }

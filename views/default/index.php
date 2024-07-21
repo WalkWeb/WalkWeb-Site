@@ -1,4 +1,8 @@
+<?php
 
+$this->title = APP_NAME . ' — Интересное';
+
+?>
 <div class="post_box">
     <a href="#" class="post_link">
         Заголовок поста #1

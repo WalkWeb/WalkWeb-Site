@@ -22,6 +22,7 @@ $routes->get('statistic', '/statistic', 'App\\Handler\\StatisticHandler');
 
 // TODO temporary methods
 $routes->get('account.add.exp', '/add/exp', 'App\\Handler\\Temporary\\AddExpHandler');
+$routes->post('account.reduced.energy', '/reduced/energy', 'App\\Handler\\Temporary\\ReducedEnergyHandler');
 
 $routes
     ->addMiddleware('App\\Middleware\\StatisticsMiddleware', 10)

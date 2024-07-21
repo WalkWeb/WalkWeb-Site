@@ -70,6 +70,7 @@ interface EnergyInterface
      *
      * @param int $value
      * @return string
+     * @throws EnergyException
      */
     public function editEnergy(int $value): string;
 

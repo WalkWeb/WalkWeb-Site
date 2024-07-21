@@ -127,6 +127,7 @@ class Energy implements EnergyInterface
 
         $this->addEnergy($value);
         $this->updated = true;
+        $this->updatedAt = round((float)microtime(true), 4);
         return self::SUCCESS_REDUCED;
     }
 

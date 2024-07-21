@@ -17,7 +17,10 @@ $canLike = $account->isCanLike() ? 'да' : 'нет';
 
 <h1><?=$account->getName() ?></h1>
 
-<p><a href="/add/exp" class="button">Добавить 60 опыта</a></p>
+<p>
+    <a href="/add/exp" class="button">Добавить 60 опыта</a>
+    <a class="button" onclick="reducedEnergy()">-40 энергии</a>
+</p>
 
 <p>
     id: <?= $account->getId() ?><br />
