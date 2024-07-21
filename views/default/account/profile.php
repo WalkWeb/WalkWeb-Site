@@ -17,6 +17,8 @@ $canLike = $account->isCanLike() ? 'да' : 'нет';
 
 <h1><?=$account->getName() ?></h1>
 
+<p><a href="/add/exp" class="button">Добавить 60 опыта</a></p>
+
 <p>
     id: <?= $account->getId() ?><br />
     Логин: <?= htmlspecialchars($account->getLogin()) ?><br />

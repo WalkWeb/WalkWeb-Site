@@ -20,6 +20,9 @@ $routes->get('account.list', '/users/{page}', 'App\\Handler\\Account\\AccountLis
 
 $routes->get('statistic', '/statistic', 'App\\Handler\\StatisticHandler');
 
+// TODO temporary methods
+$routes->get('account.add.exp', '/add/exp', 'App\\Handler\\Temporary\\AddExpHandler');
+
 $routes
     ->addMiddleware('App\\Middleware\\StatisticsMiddleware', 10)
     ->addMiddleware('App\\Middleware\\AuthMiddleware', 100)

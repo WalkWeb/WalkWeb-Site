@@ -22,8 +22,8 @@ class MainHandlerTest extends AbstractTest
         $request = new Request(['REQUEST_URI' => '/']);
         $response = $this->app->handle($request);
 
-        self::assertMatchesRegularExpression('/Заголовок поста #1/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertMatchesRegularExpression('/Заголовок поста #1/', $response->getBody());
     }
 
     /**
@@ -68,7 +68,7 @@ class MainHandlerTest extends AbstractTest
 </html>
 EOT;
 
-        self::assertEquals($expectedContent, $response->getBody());
         self::assertEquals(Response::NOT_FOUND, $response->getStatusCode());
+        self::assertEquals($expectedContent, $response->getBody());
     }
 }

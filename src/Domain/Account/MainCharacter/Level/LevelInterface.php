@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Account\MainCharacter\Level;
 
-use Exception;
+use App\Domain\Account\Notice\NoticeException;
+use WalkWeb\NW\AppException;
 
 interface LevelInterface
 {
@@ -79,7 +80,9 @@ interface LevelInterface
      * stat points
      *
      * @param int $addExp
-     * @throws Exception
+     * @throws LevelException
+     * @throws NoticeException
+     * @throws AppException
      */
     public function addExp(int $addExp): void;
 
