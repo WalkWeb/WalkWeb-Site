@@ -16,7 +16,7 @@ class Version_2024_07_23_22_49_15_89
     public function run(ConnectionPool $connectionPool): void
     {
         $connectionPool->getConnection()->query('
-            CREATE TABLE `avatars` (
+            CREATE TABLE `characters` (
                 `id`                VARCHAR(36) PRIMARY KEY,
                 `character_main_id` VARCHAR(36) NOT NULL,
                 `season_id`         TINYINT UNSIGNED NOT NULL,
