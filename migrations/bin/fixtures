@@ -331,6 +331,20 @@ try {
     ");
 
     $db->query("
+        INSERT INTO `characters` (`id`, `character_main_id`, `season_id`, `genesis_id`, `profession_id`, `floor_id`, `avatar_id`, `level`, `exp`, `stats_point`, `skill_point`) VALUES
+        ('277bbc70-cb4a-49a9-8de2-3fd5c1308c01', '2e437627-7b06-456a-b0c6-e70150492901', 1, 1, 1, 1, 1, 1, 0, 0, 0),
+        ('277bbc70-cb4a-49a9-8de2-3fd5c1308c02', '2e437627-7b06-456a-b0c6-e70150492902', 1, 1, 1, 2, 7, 1, 0, 0, 0),
+        ('277bbc70-cb4a-49a9-8de2-3fd5c1308c03', '2e437627-7b06-456a-b0c6-e70150492903', 1, 2, 2, 1, 13, 1, 0, 0, 0),
+        ('277bbc70-cb4a-49a9-8de2-3fd5c1308c04', '2e437627-7b06-456a-b0c6-e70150492904', 1, 2, 2, 2, 19, 1, 0, 0, 0),
+        ('277bbc70-cb4a-49a9-8de2-3fd5c1308c05', '2e437627-7b06-456a-b0c6-e70150492905', 1, 3, 3, 1, 25, 1, 0, 0, 0),
+        ('277bbc70-cb4a-49a9-8de2-3fd5c1308c06', '2e437627-7b06-456a-b0c6-e70150492906', 1, 3, 3, 2, 31, 1, 0, 0, 0),
+        ('277bbc70-cb4a-49a9-8de2-3fd5c1308c07', '2e437627-7b06-456a-b0c6-e70150492907', 1, 4, 4, 1, 37, 1, 0, 0, 0),
+        ('277bbc70-cb4a-49a9-8de2-3fd5c1308c08', '2e437627-7b06-456a-b0c6-e70150492908', 1, 4, 4, 2, 44, 1, 0, 0, 0),
+        ('277bbc70-cb4a-49a9-8de2-3fd5c1308c09', '2e437627-7b06-456a-b0c6-e70150492909', 1, 5, 5, 1, 49, 1, 0, 0, 0),
+        ('277bbc70-cb4a-49a9-8de2-3fd5c1308c10', '2e437627-7b06-456a-b0c6-e70150492910', 1, 6, 6, 1, 61, 1, 0, 0, 0);
+    ");
+
+    $db->query("
         UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492901' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b01';
     ");
     $db->query("
@@ -359,6 +373,47 @@ try {
     ");
     $db->query("
         UPDATE `accounts` SET `main_character_id` = '2e437627-7b06-456a-b0c6-e70150492910' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b10';
+    ");
+
+
+    $db->query("
+        UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c01' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b01';
+    ");
+
+    $db->query("
+        UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c02' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b02';
+    ");
+
+    $db->query("
+        UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c03' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b03';
+    ");
+
+    $db->query("
+        UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c04' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b04';
+    ");
+
+    $db->query("
+        UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c05' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b05';
+    ");
+
+    $db->query("
+        UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c06' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b06';
+    ");
+
+    $db->query("
+        UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c07' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b07';
+    ");
+
+    $db->query("
+        UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c08' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b08';
+    ");
+
+    $db->query("
+        UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c09' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b09';
+    ");
+
+    $db->query("
+        UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c10' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b10';
     ");
 
     echo "Fixtures Load\n";
