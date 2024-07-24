@@ -22,7 +22,7 @@ class MainLevelFactoryTest extends AbstractTest
      * @param int $expectedExpBarWeight
      * @throws Exception
      */
-    public function testLevelFactoryCreateSuccess(
+    public function testMainLevelFactoryCreateSuccess(
         array $data,
         int $expectedExpToLevel,
         int $expectedExpAtLevel,
@@ -50,7 +50,7 @@ class MainLevelFactoryTest extends AbstractTest
      * @param string $error
      * @throws Exception
      */
-    public function testLevelFactoryCreateFail(array $data, string $error): void
+    public function testMainLevelFactoryCreateFail(array $data, string $error): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
