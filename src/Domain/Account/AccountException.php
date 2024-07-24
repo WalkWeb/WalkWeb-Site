@@ -16,6 +16,7 @@ class AccountException extends Exception
     public const MISS_MAIN_CHARACTER           = 'Miss main character';
     public const ALREADY_EXIST                 = 'AccountCollection: account to be added already exists';
     public const EXPECTED_ARRAY                = 'AccountCollectionFactory: expected array data';
+    public const UNKNOWN_THEME_ID              = 'Unknown theme id';
 
     // id
     public const INVALID_ID                    = 'Incorrect parameter "id", it required and type string (uuid)';
