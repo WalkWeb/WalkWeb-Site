@@ -10,7 +10,7 @@ use App\Domain\Account\MainCharacter\Level\LevelInterface;
 use Exception;
 use Test\AbstractTest;
 
-class LevelFactoryTest extends AbstractTest
+class MainLevelFactoryTest extends AbstractTest
 {
     /**
      * Тест на успешное создание объекта Level на основе массива параметров
