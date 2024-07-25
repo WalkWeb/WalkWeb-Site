@@ -49,12 +49,16 @@ class AuthRepository
             `account_energy`.`energy` as `energy`,
             `account_energy`.`bonus` as `energy_bonus`,
             `account_energy`.`updated_at` as `energy_updated_at`,
-            `account_energy`.`residue` as `energy_residue`
+            `account_energy`.`residue` as `energy_residue`,
+
+            `avatars`.`origin_rul` as `avatar`
 
             FROM `accounts`
                 
-            JOIN `account_energy` on `accounts`.`energy_id` = `account_energy`.`id`
-            JOIN `characters_main` on `accounts`.`id` = `characters_main`.`account_id`
+            JOIN `account_energy` ON `accounts`.`energy_id` = `account_energy`.`id`
+            JOIN `characters_main` ON `accounts`.`id` = `characters_main`.`account_id`
+            JOIN `characters` ON `accounts`.`character_id`
+            JOIN `avatars` ON `characters`.`avatar_id` = `avatars`.`id`
 
             WHERE `accounts`.`auth_token` = ?',
             [['type' => 's', 'value' => $authToken]],
@@ -86,9 +90,6 @@ class AuthRepository
         $data['level'] = $level;
 
         $data['notices'] = $this->getNotice($data['notice'] === 1, $data['id']);
-
-        // TODO Mocks
-        $data['avatar'] = '';
 
         return AuthFactory::create($data, $sendNoticeAction);
     }

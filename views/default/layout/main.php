@@ -61,7 +61,7 @@ $title = $this->title ?: APP_NAME . ' — Интересное';
             if ($this->container->exist('user')) {
                 /** @var AuthInterface $user */
                 $user = $this->container->get('user');
-                echo '<div class="right_content_ava" style="background-image: url(/img/default_avatar.jpg);">
+                echo '<div class="right_content_ava" style="background-image: url(' . $user->getAvatar() . ');">
                       <a href="/profile" class="full"></a>
                       </div>
                       <div class="exp_background"></div>

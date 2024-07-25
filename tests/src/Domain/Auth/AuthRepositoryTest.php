@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Auth;
 
+use App\Domain\Account\Notice\NoticeException;
 use App\Domain\Account\Notice\NoticeFactory;
 use App\Domain\Auth\AuthRepository;
 use Exception;
@@ -23,7 +24,9 @@ class AuthRepositoryTest extends AbstractTest
      * @param string $energyId
      * @param array $noticesData
      * @param array $level
-     * @throws Exception
+     * @param string $avatar
+     * @throws AppException
+     * @throws NoticeException
      */
     public function testAuthRepositoryGetSuccess(
         string $authToken,
@@ -32,7 +35,8 @@ class AuthRepositoryTest extends AbstractTest
         int $statusId,
         string $energyId,
         array $noticesData,
-        array $level
+        array $level,
+        string $avatar
     ): void
     {
         $auth = $this->getRepository()->get($authToken, $this->getSendNoticeAction());
@@ -63,8 +67,7 @@ class AuthRepositoryTest extends AbstractTest
         self::assertEquals($level['character_level'], $auth->getLevel()->getLevel());
         self::assertEquals($level['character_stat_points'], $auth->getLevel()->getStatPoints());
 
-        // TODO Mock
-        self::assertEquals('', $auth->getAvatar());
+        self::assertEquals($avatar, $auth->getAvatar());
     }
 
     /**
@@ -133,6 +136,7 @@ class AuthRepositoryTest extends AbstractTest
                     'character_exp'         => 0,
                     'character_stat_points' => 0,
                 ],
+                '/img/avatars/it/analyst/male/01.jpg',
             ],
             [
                 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a2',
@@ -148,6 +152,7 @@ class AuthRepositoryTest extends AbstractTest
                     'character_exp'         => 60,
                     'character_stat_points' => 5,
                 ],
+                '/img/avatars/it/analyst/male/01.jpg',
             ],
         ];
     }
