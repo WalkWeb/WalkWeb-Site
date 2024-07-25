@@ -12,6 +12,7 @@ class CharacterException extends Exception
 
     public const INVALID_ID                = 'Incorrect parameter "character_id", it required and type string (uuid)';
     public const INVALID_ACCOUNT_ID        = 'Incorrect parameter "account_id", it required and type string (uuid)';
+    public const INVALID_ACCOUNT_NAME      = 'Incorrect parameter "account_name", it required and type string';
     public const INVALID_MAIN_CHARACTER_ID = 'Incorrect parameter "main_character_id", it required and type string (uuid)';
     public const INVALID_AVATAR            = 'Incorrect parameter "avatar", it required and type string';
     public const INVALID_SEASON_ID         = 'Incorrect parameter "season_id", it required and type int';

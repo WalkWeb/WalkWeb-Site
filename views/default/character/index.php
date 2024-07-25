@@ -11,6 +11,10 @@ if (empty($character) || !($character instanceof CharacterInterface)) {
 
 ?>
 
+<p>
+    <a href="/u/<?= $character->getAccountName() ?>"><?= $character->getAccountName() ?></a>
+</p>
+
 <h1><?= $this->title ?></h1>
 
 <p class="center">

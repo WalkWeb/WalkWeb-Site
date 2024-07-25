@@ -28,6 +28,7 @@ class CharacterFactory
         return new Character(
             self::uuid($data, 'character_id', CharacterException::INVALID_ID),
             self::uuid($data, 'account_id', CharacterException::INVALID_ACCOUNT_ID),
+            self::string($data, 'account_name', CharacterException::INVALID_ACCOUNT_NAME),
             self::uuid($data, 'main_character_id', CharacterException::INVALID_MAIN_CHARACTER_ID),
             self::string($data, 'avatar', CharacterException::INVALID_AVATAR),
             new Season(self::int($data, 'season_id', CharacterException::INVALID_SEASON_ID)),

@@ -25,6 +25,7 @@ class CharacterFactoryTest extends AbstractTest
         // character
         self::assertEquals($data['character_id'], $character->getId());
         self::assertEquals($data['account_id'], $character->getAccountId());
+        self::assertEquals($data['account_name'], $character->getAccountName());
         self::assertEquals($data['main_character_id'], $character->getMainCharacterId());
         self::assertEquals($data['avatar'], $character->getAvatar());
         self::assertEquals($data['season_id'], $character->getSeason()->getId());
@@ -77,6 +78,7 @@ class CharacterFactoryTest extends AbstractTest
                     // character
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2303',
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 1,
@@ -112,6 +114,7 @@ class CharacterFactoryTest extends AbstractTest
             [
                 [
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2303',
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 1,
@@ -137,6 +140,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => 123,
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2303',
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 1,
@@ -162,6 +166,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958xxx',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2303',
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 1,
@@ -186,6 +191,7 @@ class CharacterFactoryTest extends AbstractTest
             // miss account_id
             [
                 [
+                    'account_name'           => 'AccountName',
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2303',
                     'avatar'                 => 'avatar-1.png',
@@ -212,6 +218,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => 10.5,
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2303',
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 1,
@@ -237,6 +244,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492xxx',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2303',
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 1,
@@ -263,6 +271,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 1,
                     'floor_id'               => 1,
@@ -287,6 +296,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => null,
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 1,
@@ -312,6 +322,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2xxx',
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 1,
@@ -337,6 +348,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2123',
                     'season_id'              => 1,
                     'floor_id'               => 1,
@@ -361,6 +373,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2123',
                     'avatar'                 => true,
                     'season_id'              => 1,
@@ -386,6 +399,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2123',
                     'avatar'                 => 'avatar-1.png',
                     'floor_id'               => 1,
@@ -410,6 +424,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2123',
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 'First',
@@ -435,6 +450,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2123',
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 1,
@@ -459,6 +475,7 @@ class CharacterFactoryTest extends AbstractTest
                 [
                     'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
                     'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 'AccountName',
                     'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2123',
                     'avatar'                 => 'avatar-1.png',
                     'season_id'              => 1,
@@ -478,6 +495,65 @@ class CharacterFactoryTest extends AbstractTest
                     'character_skill_points' => 2,
                 ],
                 CharacterException::INVALID_FLOOR_ID,
+            ],
+            // miss account_name
+            [
+                [
+                    // character
+                    'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
+                    'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2303',
+                    'avatar'                 => 'avatar-1.png',
+                    'season_id'              => 1,
+                    'floor_id'               => 1,
+                    // genesis
+                    'genesis_id'             => 4,
+                    'theme_id'               => 1,
+                    'genesis_icon'           => 'genesis-4.png',
+                    'genesis_plural'         => 'Trainees',
+                    'genesis_single'         => 'Intern',
+                    // profession
+                    'profession_id'          => 4,
+                    'profession_icon'        => 'profession-4.png',
+                    'profession_name_male'   => 'profession_male',
+                    'profession_name_female' => 'profession_female',
+                    // level
+                    'character_level'        => 1,
+                    'character_exp'          => 0,
+                    'character_stat_points'  => 5,
+                    'character_skill_points' => 2,
+                ],
+                CharacterException::INVALID_ACCOUNT_NAME,
+            ],
+            // account_name invalid type
+            [
+                [
+                    // character
+                    'character_id'           => '47e7495d-36d6-457d-8a1a-94575b958a18',
+                    'account_id'             => '2441c114-af0c-48cb-978c-83f394492585',
+                    'account_name'           => 123,
+                    'main_character_id'      => '7fb2de36-e91b-4a24-ace8-ffbe235d2303',
+                    'avatar'                 => 'avatar-1.png',
+                    'season_id'              => 1,
+                    'floor_id'               => 1,
+                    // genesis
+                    'genesis_id'             => 4,
+                    'theme_id'               => 1,
+                    'genesis_icon'           => 'genesis-4.png',
+                    'genesis_plural'         => 'Trainees',
+                    'genesis_single'         => 'Intern',
+                    // profession
+                    'profession_id'          => 4,
+                    'profession_icon'        => 'profession-4.png',
+                    'profession_name_male'   => 'profession_male',
+                    'profession_name_female' => 'profession_female',
+                    // level
+                    'character_level'        => 1,
+                    'character_exp'          => 0,
+                    'character_stat_points'  => 5,
+                    'character_skill_points' => 2,
+                ],
+                CharacterException::INVALID_ACCOUNT_NAME,
             ],
         ];
     }

@@ -14,6 +14,7 @@ class Character implements CharacterInterface
 {
     private string $id;
     private string $accountId;
+    private string $accountName;
     private string $characterMainId;
     private string $avatar;
     private SeasonInterface $season;
@@ -25,6 +26,7 @@ class Character implements CharacterInterface
     public function __construct(
         string $id,
         string $accountId,
+        string $accountName,
         string $characterMainId,
         string $avatar,
         SeasonInterface $season,
@@ -35,6 +37,7 @@ class Character implements CharacterInterface
     ) {
         $this->id = $id;
         $this->accountId = $accountId;
+        $this->accountName = $accountName;
         $this->characterMainId = $characterMainId;
         $this->avatar = $avatar;
         $this->season = $season;
@@ -58,6 +61,14 @@ class Character implements CharacterInterface
     public function getAccountId(): string
     {
         return $this->accountId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccountName(): string
+    {
+        return $this->accountName;
     }
 
     /**

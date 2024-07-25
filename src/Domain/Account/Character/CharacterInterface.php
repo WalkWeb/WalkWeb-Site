@@ -12,10 +12,9 @@ use App\Domain\Account\Character\Level\LevelInterface;
 
 interface CharacterInterface
 {
-    // TODO getAccountName()
-
     public function getId(): string;
     public function getAccountId(): string;
+    public function getAccountName(): string;
     public function getMainCharacterId(): string;
     public function getAvatar(): string;
     public function getSeason(): SeasonInterface;

@@ -34,6 +34,7 @@ class CharacterRepository
             `characters`.`stats_point` as `character_stat_points`,
             `characters`.`skill_point` as `character_skill_points`,
             `characters_main`.`account_id`,
+            `accounts`.`name` as `account_name`,
             `characters`.`character_main_id` as `main_character_id`,
             `avatars`.`origin_rul` as `avatar`,
             `characters`.`season_id`,
@@ -50,6 +51,7 @@ class CharacterRepository
             
             FROM `characters` 
 
+            JOIN `accounts` ON `characters`.`id` = `accounts`.`character_id`
             JOIN `characters_main` ON `characters`.`character_main_id` = `characters_main`.`id`
             JOIN `avatars` ON `characters`.`avatar_id` = `avatars`.`id`
             JOIN `professions` ON `characters`.`profession_id` = `professions`.`id`
