@@ -12,6 +12,8 @@ use App\Domain\Account\Character\Level\LevelInterface;
 
 interface CharacterInterface
 {
+    // TODO getAccountName()
+
     public function getId(): string;
     public function getAccountId(): string;
     public function getMainCharacterId(): string;

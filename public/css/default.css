@@ -103,6 +103,10 @@ a.post_link:hover {
     text-align: center;
 }
 
+.vertical_center {
+    vertical-align: middle;
+}
+
 .right_box {
     width: 330px;
 }

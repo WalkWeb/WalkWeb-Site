@@ -18,6 +18,8 @@ $routes->get('account.banned', '/banned', 'App\\Handler\\Account\\AccountBannedP
 $routes->get('account.profile', '/profile', 'App\\Handler\\Account\\Profile\\ProfilePageHandler');
 $routes->get('account.list', '/users/{page}', 'App\\Handler\\Account\\AccountListPageHandler', ['page' => '\d+']);
 
+$routes->get('character.get', '/c/{id}', 'App\\Handler\\Character\\CharacterPageHandler', ['id' => '[a-zA-Z0-9-]+']);
+
 $routes->get('statistic', '/statistic', 'App\\Handler\\StatisticHandler');
 
 // TODO temporary methods
