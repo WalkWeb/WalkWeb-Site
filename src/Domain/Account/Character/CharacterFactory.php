@@ -30,6 +30,7 @@ class CharacterFactory
             self::uuid($data, 'account_id', CharacterException::INVALID_ACCOUNT_ID),
             self::string($data, 'account_name', CharacterException::INVALID_ACCOUNT_NAME),
             self::uuid($data, 'main_character_id', CharacterException::INVALID_MAIN_CHARACTER_ID),
+            self::int($data, 'avatar_id', CharacterException::INVALID_AVATAR_ID),
             self::string($data, 'avatar', CharacterException::INVALID_AVATAR),
             new Season(self::int($data, 'season_id', CharacterException::INVALID_SEASON_ID)),
             GenesisFactory::create($data),

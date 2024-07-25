@@ -36,6 +36,7 @@ class CharacterRepository
             `characters_main`.`account_id`,
             `accounts`.`name` as `account_name`,
             `characters`.`character_main_id` as `main_character_id`,
+            `avatars`.`id` as `avatar_id`,
             `avatars`.`origin_rul` as `avatar`,
             `characters`.`season_id`,
             `characters`.`floor_id`,

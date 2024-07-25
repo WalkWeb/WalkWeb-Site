@@ -16,6 +16,7 @@ interface CharacterInterface
     public function getAccountId(): string;
     public function getAccountName(): string;
     public function getMainCharacterId(): string;
+    public function getAvatarId(): int;
     public function getAvatar(): string;
     public function getSeason(): SeasonInterface;
     public function getGenesis(): GenesisInterface;

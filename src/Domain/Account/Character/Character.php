@@ -16,6 +16,7 @@ class Character implements CharacterInterface
     private string $accountId;
     private string $accountName;
     private string $characterMainId;
+    private int $avatarId;
     private string $avatar;
     private SeasonInterface $season;
     private GenesisInterface $genesis;
@@ -28,6 +29,7 @@ class Character implements CharacterInterface
         string $accountId,
         string $accountName,
         string $characterMainId,
+        int $avatarId,
         string $avatar,
         SeasonInterface $season,
         GenesisInterface $genesis,
@@ -39,6 +41,7 @@ class Character implements CharacterInterface
         $this->accountId = $accountId;
         $this->accountName = $accountName;
         $this->characterMainId = $characterMainId;
+        $this->avatarId = $avatarId;
         $this->avatar = $avatar;
         $this->season = $season;
         $this->genesis = $genesis;
@@ -77,6 +80,14 @@ class Character implements CharacterInterface
     public function getMainCharacterId(): string
     {
         return $this->characterMainId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAvatarId(): int
+    {
+        return $this->avatarId;
     }
 
     /**

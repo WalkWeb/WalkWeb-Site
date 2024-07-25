@@ -27,7 +27,9 @@ if (empty($character) || !($character instanceof CharacterInterface)) {
 
 <p>
     ID: <?= $character->getId() ?><br />
+    Avatar ID: <?= $character->getAvatarId() ?><br />
     Account ID: <?= $character->getAccountId() ?><br />
+    Account Name: <?= $character->getAccountName() ?><br />
     Main Character ID: <?= $character->getMainCharacterId() ?><br />
     Season ID: <?= $character->getSeason()->getId() ?><br />
     Season Name: <?= $character->getSeason()->getName() ?><br />
