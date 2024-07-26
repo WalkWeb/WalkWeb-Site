@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Account\Floor;
 
 use App\Domain\Account\AccountException;
+use WalkWeb\NW\AppException;
 
 class Floor implements FloorInterface
 {
@@ -19,7 +20,7 @@ class Floor implements FloorInterface
 
     /**
      * @param int $id
-     * @throws AccountException
+     * @throws AppException
      */
     public function __construct(int $id)
     {
@@ -45,12 +46,12 @@ class Floor implements FloorInterface
 
     /**
      * @param int $id
-     * @throws AccountException
+     * @throws AppException
      */
     private function setName(int $id): void
     {
         if (!array_key_exists($id, self::$map)) {
-            throw new AccountException(AccountException::UNKNOWN_FLOOR_ID . ': ' . $id);
+            throw new AppException(AccountException::UNKNOWN_FLOOR_ID . ': ' . $id);
         }
 
         $this->name = self::$map[$id];

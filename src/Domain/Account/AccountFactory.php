@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Account;
 
+use App\Domain\Account\DTO\CreateAccountRequest;
 use App\Domain\Account\Floor\Floor;
 use App\Domain\Account\Group\AccountGroup;
 use App\Domain\Account\Group\AccountGroupInterface;
@@ -14,7 +15,6 @@ use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Account\Status\AccountStatusInterface;
 use App\Domain\Account\Upload\AccountUpload;
 use DateTime;
-use Exception;
 use Ramsey\Uuid\Uuid;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\StringTrait;
@@ -70,46 +70,59 @@ class AccountFactory
     }
 
     /**
-     * Create object Account from data register page
+     * Create object Account on register page
      *
-     * @param array $data
+     * @param CreateAccountRequest $request
      * @param string $hashKey
      * @return AccountInterface
      * @throws AppException
      */
-    public static function createNew(array $data, string $hashKey): AccountInterface
+    public static function createNew(CreateAccountRequest $request, string $hashKey): AccountInterface
     {
-        try {
-            $login = self::loginValidation($data);
-            $password = self::passwordValidate($data);
-            $password = password_hash($password . $hashKey, PASSWORD_BCRYPT, ['cost' => 10]);
+        return new Account(
+            Uuid::uuid4()->toString(),
+            $request->getLogin(),
+            $request->getLogin(),
+            password_hash($request->getPassword(). $hashKey, PASSWORD_BCRYPT, ['cost' => 10]),
+            $request->getEmail(),
+            false,
+            false,
+            self::generateString(30),
+            self::generateString(30),
+            TEMPLATE_DEFAULT,
+            $request->getIp(),
+            $request->getReferral(),
+            $request->getUserAgent(),
+            true,
+            new Floor($request->getFloor()),
+            new AccountStatus(AccountStatusInterface::ACTIVE),
+            new AccountGroup(AccountGroupInterface::USER),
+            new AccountUpload(0, AccountInterface::UPLOAD_MAX_BASE),
+            new DateTime(),
+            new DateTime(),
+            null,
+        );
+    }
 
-            return new Account(
-                Uuid::uuid4()->toString(),
-                $login,
-                $login,
-                $password,
-                self::emailValidate($data),
-                false,
-                false,
-                self::generateString(30),
-                self::generateString(30),
-                TEMPLATE_DEFAULT,
-                self::ipValidate($data),
-                self::refValidate($data),
-                self::userAgentValidate($data),
-                true,
-                new Floor(self::int($data, 'floor_id', AccountException::INVALID_FLOOR_ID)),
-                new AccountStatus(AccountStatusInterface::ACTIVE),
-                new AccountGroup(AccountGroupInterface::USER),
-                new AccountUpload(0, AccountInterface::UPLOAD_MAX_BASE),
-                new DateTime(),
-                new DateTime(),
-                null,
-            );
-        } catch (Exception $e) {
-            throw new AppException($e->getMessage());
-        }
+    /**
+     * @param array $data
+     * @return CreateAccountRequest
+     * @throws AppException
+     */
+    public static function createRequest(array $data): CreateAccountRequest
+    {
+        return new CreateAccountRequest(
+            self::loginValidation($data),
+            self::emailValidate($data),
+            self::passwordValidate($data),
+            self::int($data, 'floor_id', AccountException::INVALID_FLOOR_ID),
+            self::int($data, 'genesis_id', AccountException::INVALID_GENESIS_ID),
+            self::int($data, 'profession_id', AccountException::INVALID_PROFESSION_ID),
+            self::int($data, 'avatar_id', AccountException::INVALID_AVATAR_ID),
+            self::refValidate($data),
+            self::userAgentValidate($data),
+            self::ipValidate($data),
+        );
     }
 
     /**

@@ -121,23 +121,4 @@ class CreateAccountRequest
     {
         return $this->ip;
     }
-
-    /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return [
-            'login'         => $this->login,
-            'email'         => $this->email,
-            'password'      => $this->password,
-            'floor_id'      => $this->floor,
-            'genesis_id'    => $this->genesis,
-            'profession_id' => $this->profession,
-            'avatar_id'     => $this->avatar,
-            'ref'           => $this->referral,
-            'user_agent'    => $this->userAgent,
-            'ip'            => $this->ip,
-        ];
-    }
 }

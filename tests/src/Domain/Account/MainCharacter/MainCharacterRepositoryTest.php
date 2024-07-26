@@ -6,6 +6,7 @@ namespace Test\src\Domain\Account\MainCharacter;
 
 use App\Domain\Account\AccountFactory;
 use App\Domain\Account\AccountRepository;
+use App\Domain\Account\DTO\CreateAccountRequest;
 use App\Domain\Account\MainCharacter\MainCharacterException;
 use App\Domain\Account\MainCharacter\MainCharacterFactory;
 use App\Domain\Account\MainCharacter\MainCharacterRepository;
@@ -80,14 +81,14 @@ class MainCharacterRepositoryTest extends AbstractTest
      * Test on add new MainCharacter
      *
      * @dataProvider addDataProvider
-     * @param array $data
+     * @param CreateAccountRequest $request
      * @throws AppException
      */
-    public function testMainCharacterRepositoryAddSuccess(array $data): void
+    public function testMainCharacterRepositoryAddSuccess(CreateAccountRequest $request): void
     {
         $container = self::getContainer();
         $sendNotice = $this->getSendNoticeAction();
-        $account = AccountFactory::createNew($data, 'hash_key');
+        $account = AccountFactory::createNew($request, 'hash_key');
         $accountRepository = new AccountRepository($container);
         $mainCharacterRepository = new MainCharacterRepository($container);
 
@@ -174,16 +175,18 @@ class MainCharacterRepositoryTest extends AbstractTest
     {
         return [
             [
-                [
-                    'login'          => 'User',
-                    'password'       => '123456',
-                    'email'          => 'mail1@gmail.com',
-                    'template'       => 'default',
-                    'ip'             => '127.0.0.1',
-                    'ref'            => 'ref_link1',
-                    'floor_id'       => 1,
-                    'user_agent'     => 'undefined',
-                ]
+                new CreateAccountRequest(
+                    'User',
+                    'mail1@gmail.com',
+                    '123456',
+                    1,
+                    3,
+                    3,
+                    16,
+                    'ref_link1',
+                    'undefined',
+                    '127.0.0.1',
+                ),
             ],
         ];
     }

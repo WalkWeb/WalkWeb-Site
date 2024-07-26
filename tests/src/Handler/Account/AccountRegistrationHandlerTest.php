@@ -19,26 +19,20 @@ class AccountRegistrationHandlerTest extends AbstractTest
     /**
      * @dataProvider successDataProvider
      * @param array $server
-     * @param string $login
-     * @param string $email
-     * @param string $password
-     * @param string $floorId
-     * @param string $ip
-     * @param string $ref
+     * @param array $body
+     * @param string $expectedReferral
+     * @param string $expectedIp
      * @throws AppException
      */
     public function testAccountRegistrationHandlerSuccess(
         array $server,
-        string $login,
-        string $email,
-        string $password,
-        string $floorId,
-        string $ip,
-        string $ref
+        array $body,
+        string $expectedReferral,
+        string $expectedIp
     ): void
     {
         $request = new Request(
-            $server, ['login' => $login, 'email' => $email, 'password' => $password, 'floor_id' => $floorId],
+            $server, $body,
         );
 
         $response = $this->app->handle($request);
@@ -48,16 +42,16 @@ class AccountRegistrationHandlerTest extends AbstractTest
 
         $account = self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT * FROM `accounts` WHERE `login` = ?',
-            [['type' => 's', 'value' => $login]],
+            [['type' => 's', 'value' => $body['login']]],
             true
         );
 
-        self::assertEquals($login, $account['login']);
-        self::assertEquals($login, $account['name']);
-        self::assertEquals($email, $account['email']);
-        self::assertEquals((int)$floorId, $account['floor_id']);
-        self::assertEquals($ip, $account['ip']);
-        self::assertEquals($ref, $account['ref']);
+        self::assertEquals($body['login'], $account['login']);
+        self::assertEquals($body['login'], $account['name']);
+        self::assertEquals($body['email'], $account['email']);
+        self::assertEquals((int)$body['floor_id'], $account['floor_id']);
+        self::assertEquals($expectedIp, $account['ip']);
+        self::assertEquals($expectedReferral, $account['ref']);
 
         $mainCharacter = self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT * FROM `characters_main` WHERE `account_id` = ?',
@@ -101,14 +95,17 @@ class AccountRegistrationHandlerTest extends AbstractTest
      */
     public function testAccountRegistrationHandlerLoginAlreadyExist(): void
     {
-        $login = 'DemoUser';
-        $email = 'mail@mail.com';
-        $password = '12345';
-        $floorId = '1';
-
         $request = new Request(
             ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
-            ['login' => $login, 'email' => $email, 'password' => $password, 'floor_id' => $floorId],
+            [
+                'login'         => 'DemoUser',
+                'email'         => 'mail@mail.com',
+                'password'      => '12345',
+                'floor_id'      => '1',
+                'genesis_id'    => '4',
+                'profession_id' => '3',
+                'avatar_id'     => '21',
+            ],
         );
 
         $response = $this->app->handle($request);
@@ -127,14 +124,17 @@ class AccountRegistrationHandlerTest extends AbstractTest
      */
     public function testAccountRegistrationHandlerNameAlreadyExist(): void
     {
-        $login = 'NameModerator';
-        $email = 'mail@mail.com';
-        $password = '12345';
-        $floorId = '1';
-
         $request = new Request(
             ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
-            ['login' => $login, 'email' => $email, 'password' => $password, 'floor_id' => $floorId],
+            [
+                'login'         => 'NameModerator',
+                'email'         => 'mail@mail.com',
+                'password'      => '12345',
+                'floor_id'      => '1',
+                'genesis_id'    => '4',
+                'profession_id' => '3',
+                'avatar_id'     => '21',
+            ],
         );
 
         $response = $this->app->handle($request);
@@ -153,14 +153,17 @@ class AccountRegistrationHandlerTest extends AbstractTest
      */
     public function testAccountRegistrationHandlerEmailAlreadyExist(): void
     {
-        $login = 'User-2';
-        $email = 'mail1@mail.com';
-        $password = '12345';
-        $floorId = '1';
-
         $request = new Request(
             ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
-            ['login' => $login, 'email' => $email, 'password' => $password, 'floor_id' => $floorId],
+            [
+                'login'         => 'User-2',
+                'email'         => 'mail1@mail.com',
+                'password'      => '12345',
+                'floor_id'      => '1',
+                'genesis_id'    => '4',
+                'profession_id' => '3',
+                'avatar_id'     => '21',
+            ],
         );
 
         $response = $this->app->handle($request);
@@ -217,39 +220,59 @@ class AccountRegistrationHandlerTest extends AbstractTest
         return [
             [
                 ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
-                'User-10',
-                '10mail@mail.com',
-                '12345',
-                '1',
-                'undefined',
+                [
+                    'login'         => 'login',
+                    'email'         => 'email@mail.com',
+                    'password'      => 'password',
+                    'floor_id'      => 2,
+                    'genesis_id'    => 3,
+                    'profession_id' => 3,
+                    'avatar_id'     => 21,
+                ],
                 'main',
+                'undefined',
             ],
             [
                 ['REQUEST_URI' => '/registration/ref100', 'REQUEST_METHOD' => 'POST', 'HTTP_CLIENT_IP' => '0.0.0.0'],
-                'User-20',
-                '20mail@mail.com',
-                '12345',
-                '2',
-                '0.0.0.0',
+                [
+                    'login'         => 'login',
+                    'email'         => 'email@mail.com',
+                    'password'      => 'password',
+                    'floor_id'      => 2,
+                    'genesis_id'    => 3,
+                    'profession_id' => 3,
+                    'avatar_id'     => 21,
+                ],
                 'ref100',
+                '0.0.0.0',
             ],
             [
                 ['REQUEST_URI' => '/registration/default', 'REQUEST_METHOD' => 'POST', 'HTTP_X_FORWARDED_FOR' => '1.1.1.1'],
-                'User-30',
-                '30mail@mail.com',
-                '123456',
-                '1',
-                '1.1.1.1',
+                [
+                    'login'         => 'login',
+                    'email'         => 'email@mail.com',
+                    'password'      => 'password',
+                    'floor_id'      => 2,
+                    'genesis_id'    => 3,
+                    'profession_id' => 3,
+                    'avatar_id'     => 21,
+                ],
                 'default',
+                '1.1.1.1',
             ],
             [
                 ['REQUEST_URI' => '/registration/aaa', 'REQUEST_METHOD' => 'POST', 'REMOTE_ADDR' => '2.2.2.2'],
-                'User-40',
-                '40mail@mail.com',
-                '12345',
-                '1',
-                '2.2.2.2',
+                [
+                    'login'         => 'login',
+                    'email'         => 'email@mail.com',
+                    'password'      => 'password',
+                    'floor_id'      => 2,
+                    'genesis_id'    => 3,
+                    'profession_id' => 3,
+                    'avatar_id'     => 21,
+                ],
                 'aaa',
+                '2.2.2.2',
             ],
         ];
     }

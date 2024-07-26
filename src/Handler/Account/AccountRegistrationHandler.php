@@ -59,8 +59,6 @@ class AccountRegistrationHandler extends AbstractHandler
                 throw new AppException(AccountException::INVALID_REF_LENGTH . AccountInterface::REF_MIN_LENGTH . '-' . AccountInterface::REF_MAX_LENGTH);
             }
 
-            // TODO Add CreateAccountRequest
-
             $account = $this->createAccount($request);
             $mainCharacter = $this->createMainCharacter($account);
             $this->accountRepository->setMainCharacterId($account, $mainCharacter);
@@ -96,13 +94,17 @@ class AccountRegistrationHandler extends AbstractHandler
         $body = $request->getBody();
 
         $body['ip'] = $this->getIp($request);
+        // TODO Check exist floor_id genesis_id avatar_id
         $body['floor_id'] = (int)$body['floor_id'];
+        $body['genesis_id'] = (int)$body['genesis_id'];
+        $body['avatar_id'] = (int)$body['avatar_id'];
         $body['ref'] = $request->ref;
+        $body['profession_id'] = $body['genesis_id']; // TODO Mock
+        $body['user_agent'] = ''; // TODO Mock
 
-        // TODO Add
-        $body['user_agent'] = '';
+        $dto = AccountFactory::createRequest($body);
 
-        $account = AccountFactory::createNew($body, KEY);
+        $account = AccountFactory::createNew($dto, KEY);
         $this->accountRepository->add($account);
         return $account;
     }
