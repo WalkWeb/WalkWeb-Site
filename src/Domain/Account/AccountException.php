@@ -60,7 +60,7 @@ class AccountException extends Exception
     public const INVALID_IP                    = 'Incorrect parameter "ip", it required and type string';
     public const INVALID_IP_LENGTH             = 'Incorrect parameter "ip", should be min-max length: ';
     // ref
-    public const INVALID_REF                   = 'Incorrect parameter "ref", it required and type string';
+    public const INVALID_REF                   = 'Incorrect parameter "ref", it required and type string'; // TODO rename to referral
     public const INVALID_REF_LENGTH            = 'Incorrect parameter "ref", should be min-max length: ';
     // ref
     public const INVALID_USER_AGENT            = 'Incorrect parameter "user_agent", it required and type string';
@@ -88,4 +88,10 @@ class AccountException extends Exception
     // redirect_url
     public const INVALID_REDIRECT_URL          = 'Incorrect parameter "redirect_url", it required and type string';
     public const INVALID_REDIRECT_URL_LENGTH   = 'Incorrect parameter "redirect_url", should be min-max length: ';
+    // genesis_id
+    public const INVALID_GENESIS_ID             = 'Incorrect parameter "genesis_id", excepted int';
+    // profession_id
+    public const INVALID_PROFESSION_ID          = 'Incorrect parameter "profession_id", excepted int';
+    // avatar_id
+    public const INVALID_AVATAR_ID              = 'Incorrect parameter "avatar_id", excepted int';
 }

@@ -59,6 +59,8 @@ class AccountRegistrationHandler extends AbstractHandler
                 throw new AppException(AccountException::INVALID_REF_LENGTH . AccountInterface::REF_MIN_LENGTH . '-' . AccountInterface::REF_MAX_LENGTH);
             }
 
+            // TODO Add CreateAccountRequest
+
             $account = $this->createAccount($request);
             $mainCharacter = $this->createMainCharacter($account);
             $this->accountRepository->setMainCharacterId($account, $mainCharacter);
