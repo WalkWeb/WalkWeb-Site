@@ -15,6 +15,7 @@ class CreateAccountRequest
     private int $avatar;
     private string $referral;
     private string $userAgent;
+    private string $ip;
 
     public function __construct(
         string $login,
@@ -25,7 +26,8 @@ class CreateAccountRequest
         int $profession,
         int $avatar,
         string $referral,
-        string $userAgent
+        string $userAgent,
+        string $ip
     )
     {
         $this->login = $login;
@@ -37,6 +39,7 @@ class CreateAccountRequest
         $this->avatar = $avatar;
         $this->referral = $referral;
         $this->userAgent = $userAgent;
+        $this->ip = $ip;
     }
 
     /**
@@ -109,5 +112,32 @@ class CreateAccountRequest
     public function getUserAgent(): string
     {
         return $this->userAgent;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIp(): string
+    {
+        return $this->ip;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'login'         => $this->login,
+            'email'         => $this->email,
+            'password'      => $this->password,
+            'floor_id'      => $this->floor,
+            'genesis_id'    => $this->genesis,
+            'profession_id' => $this->profession,
+            'avatar_id'     => $this->avatar,
+            'ref'           => $this->referral,
+            'user_agent'    => $this->userAgent,
+            'ip'            => $this->ip,
+        ];
     }
 }

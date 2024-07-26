@@ -29,6 +29,7 @@ class CreateAccountRequestFactory
             self::int($data, 'avatar_id', AccountException::INVALID_AVATAR_ID),
             self::string($data, 'ref', AccountException::INVALID_REF),
             self::string($data, 'user_agent', AccountException::INVALID_USER_AGENT),
+            self::string($data, 'ip', AccountException::INVALID_IP),
         );
     }
 }

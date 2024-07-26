@@ -29,6 +29,9 @@ class CreateAccountRequestFactoryTest extends AbstractTest
         self::assertEquals($data['avatar_id'], $request->getAvatar());
         self::assertEquals($data['ref'], $request->getReferral());
         self::assertEquals($data['user_agent'], $request->getUserAgent());
+        self::assertEquals($data['ip'], $request->getIp());
+
+        self::assertEquals($data, $request->toArray());
     }
 
     /**
@@ -61,6 +64,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
             ],
         ];
@@ -83,6 +87,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_LOGIN,
             ],
@@ -98,6 +103,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_LOGIN,
             ],
@@ -113,6 +119,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_EMAIL,
             ],
@@ -128,6 +135,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_EMAIL,
             ],
@@ -143,6 +151,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_PASSWORD,
             ],
@@ -158,6 +167,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_PASSWORD,
             ],
@@ -173,6 +183,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_FLOOR_ID,
             ],
@@ -188,6 +199,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_FLOOR_ID,
             ],
@@ -203,6 +215,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_GENESIS_ID,
             ],
@@ -218,6 +231,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_GENESIS_ID,
             ],
@@ -233,6 +247,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_PROFESSION_ID,
             ],
@@ -248,6 +263,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_PROFESSION_ID,
             ],
@@ -263,6 +279,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'profession_id' => 3,
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_AVATAR_ID,
             ],
@@ -278,6 +295,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => '21',
                     'ref'           => 'referral',
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_AVATAR_ID,
             ],
@@ -293,6 +311,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'profession_id' => 3,
                     'avatar_id'     => 21,
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_REF,
             ],
@@ -308,6 +327,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => null,
                     'user_agent'    => 'user info',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_REF,
             ],
@@ -323,6 +343,7 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'profession_id' => 3,
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_USER_AGENT,
             ],
@@ -338,8 +359,41 @@ class CreateAccountRequestFactoryTest extends AbstractTest
                     'avatar_id'     => 21,
                     'ref'           => 'referral',
                     'user_agent'    => true,
+                    'ip'            => '127.0.0.1',
                 ],
                 AccountException::INVALID_USER_AGENT,
+            ],
+
+            // miss ip
+            [
+                [
+                    'login'         => 'login',
+                    'email'         => 'email',
+                    'password'      => 'password',
+                    'floor_id'      => 2,
+                    'genesis_id'    => 3,
+                    'profession_id' => 3,
+                    'avatar_id'     => 21,
+                    'ref'           => 'referral',
+                    'user_agent'    => 'user info',
+                ],
+                AccountException::INVALID_IP,
+            ],
+            // ip invalid type
+            [
+                [
+                    'login'         => 'login',
+                    'email'         => 'email',
+                    'password'      => 'password',
+                    'floor_id'      => 2,
+                    'genesis_id'    => 3,
+                    'profession_id' => 3,
+                    'avatar_id'     => 21,
+                    'ref'           => 'referral',
+                    'user_agent'    => 'user info',
+                    'ip'            => 12.32,
+                ],
+                AccountException::INVALID_IP,
             ],
         ];
     }
