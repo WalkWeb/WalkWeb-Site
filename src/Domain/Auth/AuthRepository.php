@@ -51,7 +51,7 @@ class AuthRepository
             `account_energy`.`updated_at` as `energy_updated_at`,
             `account_energy`.`residue` as `energy_residue`,
 
-            `avatars`.`origin_rul` as `avatar`
+            `avatars`.`origin_url` as `avatar`
 
             FROM `accounts`
                 

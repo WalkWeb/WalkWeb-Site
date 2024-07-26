@@ -20,15 +20,15 @@ class Version_2024_07_23_22_16_25_83
                 `id`         MEDIUMINT UNSIGNED PRIMARY KEY,
                 `genesis_id` TINYINT UNSIGNED NOT NULL,
                 `floor_id`   TINYINT UNSIGNED NOT NULL,
-                `origin_rul` VARCHAR(90) NOT NULL,
-                `small_rul`  VARCHAR(90) NOT NULL,
+                `origin_url` VARCHAR(90) NOT NULL,
+                `small_url`  VARCHAR(90) NOT NULL,
                 FOREIGN KEY (`genesis_id`) REFERENCES `genesis`(`id`),
                 FOREIGN KEY (`floor_id`) REFERENCES `floors`(`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ');
 
         $connectionPool->getConnection()->query("
-            INSERT INTO `avatars`(`id`, `genesis_id`, `floor_id`, `origin_rul`, `small_rul`) VALUES
+            INSERT INTO `avatars`(`id`, `genesis_id`, `floor_id`, `origin_url`, `small_url`) VALUES
             (1, 1, 1, '/img/avatars/it/analyst/male/01.jpg', '/img/avatars/it/analyst/male/01s.jpg'),
             (2, 1, 1, '/img/avatars/it/analyst/male/02.jpg', '/img/avatars/it/analyst/male/02s.jpg'),
             (3, 1, 1, '/img/avatars/it/analyst/male/03.jpg', '/img/avatars/it/analyst/male/03s.jpg'),
