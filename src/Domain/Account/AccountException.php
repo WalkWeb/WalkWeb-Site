@@ -88,10 +88,14 @@ class AccountException extends Exception
     // redirect_url
     public const INVALID_REDIRECT_URL          = 'Incorrect parameter "redirect_url", it required and type string';
     public const INVALID_REDIRECT_URL_LENGTH   = 'Incorrect parameter "redirect_url", should be min-max length: ';
+
+    // for create request
+    // floor_id
+    public const INVALID_REQUEST_FLOOR_ID       = 'Incorrect parameter "floor_id", excepted string';
     // genesis_id
-    public const INVALID_GENESIS_ID             = 'Incorrect parameter "genesis_id", excepted int';
+    public const INVALID_GENESIS_ID             = 'Incorrect parameter "genesis_id", excepted string';
     // profession_id
-    public const INVALID_PROFESSION_ID          = 'Incorrect parameter "profession_id", excepted int';
+    public const INVALID_PROFESSION_ID          = 'Incorrect parameter "profession_id", excepted string';
     // avatar_id
-    public const INVALID_AVATAR_ID              = 'Incorrect parameter "avatar_id", excepted int';
+    public const INVALID_AVATAR_ID              = 'Incorrect parameter "avatar_id", excepted string';
 }

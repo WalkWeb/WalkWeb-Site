@@ -94,12 +94,7 @@ class AccountRegistrationHandler extends AbstractHandler
         $body = $request->getBody();
 
         $body['ip'] = $this->getIp($request);
-        // TODO Check exist floor_id genesis_id avatar_id
-        $body['floor_id'] = (int)$body['floor_id'];
-        $body['genesis_id'] = (int)$body['genesis_id'];
-        $body['avatar_id'] = (int)$body['avatar_id'];
         $body['ref'] = $request->ref;
-        $body['profession_id'] = $body['genesis_id']; // TODO Mock
         $body['user_agent'] = ''; // TODO Mock
 
         $dto = AccountFactory::createRequest($body);
