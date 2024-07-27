@@ -8,6 +8,7 @@ use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountFactory;
 use App\Domain\Account\AccountInterface;
 use App\Domain\Account\AccountRepository;
+use App\Domain\Account\DTO\CreateAccountRequest;
 use App\Domain\Account\MainCharacter\MainCharacterFactory;
 use App\Domain\Account\MainCharacter\MainCharacterInterface;
 use App\Domain\Account\MainCharacter\MainCharacterRepository;
@@ -59,7 +60,8 @@ class AccountRegistrationHandler extends AbstractHandler
                 throw new AppException(AccountException::INVALID_REF_LENGTH . AccountInterface::REF_MIN_LENGTH . '-' . AccountInterface::REF_MAX_LENGTH);
             }
 
-            $account = $this->createAccount($request);
+            $requestDto = $this->createRequest($request);
+            $account = $this->createAccount($requestDto);
             $mainCharacter = $this->createMainCharacter($account);
             $this->accountRepository->setMainCharacterId($account, $mainCharacter);
             $this->container->getCookies()->set(AccountInterface::AUTH_TOKEN, $account->getAuthToken());
@@ -86,10 +88,10 @@ class AccountRegistrationHandler extends AbstractHandler
 
     /**
      * @param Request $request
-     * @return AccountInterface
+     * @return CreateAccountRequest
      * @throws AppException
      */
-    private function createAccount(Request $request): AccountInterface
+    private function createRequest(Request $request): CreateAccountRequest
     {
         $body = $request->getBody();
 
@@ -97,9 +99,17 @@ class AccountRegistrationHandler extends AbstractHandler
         $body['ref'] = $request->ref;
         $body['user_agent'] = ''; // TODO Mock
 
-        $dto = AccountFactory::createRequest($body);
+        return AccountFactory::createRequest($body);
+    }
 
-        $account = AccountFactory::createNew($dto, KEY);
+    /**
+     * @param CreateAccountRequest $request
+     * @return AccountInterface
+     * @throws AppException
+     */
+    private function createAccount(CreateAccountRequest $request): AccountInterface
+    {
+        $account = AccountFactory::createNew($request, KEY);
         $this->accountRepository->add($account);
         return $account;
     }
