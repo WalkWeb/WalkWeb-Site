@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Account\Character;
 
-use App\Domain\Account\AccountException;
+use App\Domain\Account\MainCharacter\MainCharacterInterface;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 
@@ -20,7 +20,6 @@ class CharacterRepository
     /**
      * @param string $id
      * @return CharacterInterface|null
-     * @throws AccountException
      * @throws AppException
      */
     public function get(string $id): ?CharacterInterface
@@ -68,5 +67,35 @@ class CharacterRepository
         }
 
         return CharacterFactory::create($data);
+    }
+
+    /**
+     * @param CharacterInterface $character
+     * @param MainCharacterInterface $mainCharacter
+     * @throws AppException
+     */
+    public function add(
+        CharacterInterface $character, MainCharacterInterface $mainCharacter): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'INSERT INTO `characters` (
+                    `id`, `character_main_id`, `season_id`, `genesis_id`, `profession_id`, `avatar_id`, `floor_id`,
+                    `level`, `exp`, `stats_point`, `skill_point`
+                    
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [
+                ['type' => 's', 'value' => $character->getId()],
+                ['type' => 's', 'value' => $mainCharacter->getId()],
+                ['type' => 'i', 'value' => $character->getSeason()->getId()],
+                ['type' => 'i', 'value' => $character->getGenesis()->getId()],
+                ['type' => 'i', 'value' => $character->getProfession()->getId()],
+                ['type' => 'i', 'value' => $character->getAvatarId()],
+                ['type' => 'i', 'value' => $character->getFloor()->getId()],
+                ['type' => 'i', 'value' => $character->getLevel()->getLevel()],
+                ['type' => 'i', 'value' => $character->getLevel()->getExp()],
+                ['type' => 'i', 'value' => $character->getLevel()->getStatPoints()],
+                ['type' => 'i', 'value' => $character->getLevel()->getSkillPoints()],
+            ]
+        );
     }
 }

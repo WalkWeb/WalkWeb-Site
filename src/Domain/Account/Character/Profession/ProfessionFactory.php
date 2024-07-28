@@ -13,6 +13,9 @@ class ProfessionFactory
     use ValidationTrait;
 
     /**
+     * TODO Можно оптимизировать - опционально передавать Genesis, и если он есть - то не нужны дополнительные параметры
+     * TODO и можно уменьшить запрос в ProfessionRepository
+     *
      * @param array $data
      * @return ProfessionInterface
      * @throws AppException

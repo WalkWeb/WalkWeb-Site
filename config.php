@@ -64,5 +64,11 @@ define('MAIL_CONFIG', [
 /** Текущая актуальная эра */
 define('ACTIVE_ERA', 1);
 
+/** Текущий актуальный сезон */
+define('ACTIVE_SEASON', 1);
+
+/** Тема проект */
+define('THEME', 1);
+
 /** Количество секунд на восстановление 1 энергии */
 define('ENERGY_RESTORE', 60);

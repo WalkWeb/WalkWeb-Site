@@ -6,6 +6,7 @@ namespace Test\src\Handler\Account;
 
 use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountInterface;
+use App\Domain\Account\Character\CharacterException;
 use App\Domain\Account\Notice\NoticeInterface;
 use Exception;
 use Test\AbstractTest;
@@ -53,6 +54,8 @@ class AccountRegistrationHandlerTest extends AbstractTest
         self::assertEquals($expectedIp, $account['ip']);
         self::assertEquals($expectedReferral, $account['ref']);
 
+        // check main_character
+
         $mainCharacter = self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT * FROM `characters_main` WHERE `account_id` = ?',
             [['type' => 's', 'value' => $account['id']]],
@@ -75,6 +78,35 @@ class AccountRegistrationHandlerTest extends AbstractTest
         );
 
         self::assertEquals($data['main_character_id'], $mainCharacter['id']);
+
+        // check character
+
+        $character = self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `characters` WHERE `character_main_id` = ?',
+            [['type' => 's', 'value' => $data['main_character_id']]],
+            true
+        );
+
+        self::assertEquals($data['main_character_id'], $character['character_main_id']);
+        self::assertEquals(ACTIVE_SEASON, $character['season_id']);
+        self::assertEquals($body['genesis_id'], $character['genesis_id']);
+        self::assertEquals($body['profession_id'], $character['profession_id']);
+        self::assertEquals($body['avatar_id'], $character['avatar_id']);
+        self::assertEquals($body['floor_id'], $character['floor_id']);
+        self::assertEquals(1, $character['level']);
+        self::assertEquals(0, $character['exp']);
+        self::assertEquals(0, $character['stats_point']);
+        self::assertEquals(0, $character['skill_point']);
+
+        // check set character_id
+
+        $data = self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT `character_id` FROM `accounts` WHERE `id` = ?',
+            [['type' => 's', 'value' => $account['id']]],
+            true
+        );
+
+        self::assertEquals($data['character_id'], $character['id']);
 
         // check notice
 
@@ -180,6 +212,78 @@ class AccountRegistrationHandlerTest extends AbstractTest
     /**
      * @throws AppException
      */
+    public function testAccountRegistrationHandlerUnknownGenesis(): void
+    {
+        $request = new Request(
+            ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
+            [
+                'login'         => 'User-50',
+                'email'         => 'dufo@mail.com',
+                'password'      => '12345',
+                'floor_id'      => '1',
+                'genesis_id'    => '54',
+                'profession_id' => '3',
+                'avatar_id'     => '31',
+            ],
+        );
+
+        $response = $this->app->handle($request);
+
+        self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertMatchesRegularExpression('/' . CharacterException::UNKNOWN_GENESIS_ID . '/', $response->getBody());
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testAccountRegistrationHandlerUnknownProfession(): void
+    {
+        $request = new Request(
+            ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
+            [
+                'login'         => 'User-50',
+                'email'         => 'dufo@mail.com',
+                'password'      => '12345',
+                'floor_id'      => '1',
+                'genesis_id'    => '1',
+                'profession_id' => '6',
+                'avatar_id'     => '31',
+            ],
+        );
+
+        $response = $this->app->handle($request);
+
+        self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertMatchesRegularExpression('/' . CharacterException::UNKNOWN_PROFESSION_ID . '/', $response->getBody());
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testAccountRegistrationHandlerUnknownAvatar(): void
+    {
+        $request = new Request(
+            ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
+            [
+                'login'         => 'User-50',
+                'email'         => 'dufo@mail.com',
+                'password'      => '12345',
+                'floor_id'      => '1',
+                'genesis_id'    => '1',
+                'profession_id' => '1',
+                'avatar_id'     => '40',
+            ],
+        );
+
+        $response = $this->app->handle($request);
+
+        self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertMatchesRegularExpression('/' . CharacterException::UNKNOWN_AVATAR_ID . '/', $response->getBody());
+    }
+
+    /**
+     * @throws AppException
+     */
     public function testAccountRegistrationHandlerInvalidCsrfToken(): void
     {
         $request = new Request(
@@ -227,7 +331,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                     'floor_id'      => '2',
                     'genesis_id'    => '3',
                     'profession_id' => '3',
-                    'avatar_id'     => '21',
+                    'avatar_id'     => '31',
                 ],
                 'main',
                 'undefined',
@@ -241,7 +345,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                     'floor_id'      => '2',
                     'genesis_id'    => '3',
                     'profession_id' => '3',
-                    'avatar_id'     => '21',
+                    'avatar_id'     => '32',
                 ],
                 'ref100',
                 '0.0.0.0',
@@ -255,7 +359,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                     'floor_id'      => '2',
                     'genesis_id'    => '3',
                     'profession_id' => '3',
-                    'avatar_id'     => '21',
+                    'avatar_id'     => '33',
                 ],
                 'default',
                 '1.1.1.1',
@@ -269,7 +373,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                     'floor_id'      => '2',
                     'genesis_id'    => '3',
                     'profession_id' => '3',
-                    'avatar_id'     => '21',
+                    'avatar_id'     => '34',
                 ],
                 'aaa',
                 '2.2.2.2',

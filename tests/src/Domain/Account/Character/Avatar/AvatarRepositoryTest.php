@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Account\Character\Avatar;
 
-use App\Domain\Account\AccountException;
 use App\Domain\Account\Character\Avatar\AvatarRepository;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
@@ -12,14 +11,13 @@ use WalkWeb\NW\AppException;
 class AvatarRepositoryTest extends AbstractTest
 {
     /**
-     * @dataProvider successDataProvider
+     * @dataProvider getSuccessDataProvider
      * @param int $id
      * @param int $genesisId
      * @param int $floorId
      * @param string $originUrl
      * @param string $smallUrl
      * @throws AppException
-     * @throws AccountException
      */
     public function testAvatarRepositoryGetSuccess(
         int $id,
@@ -39,7 +37,6 @@ class AvatarRepositoryTest extends AbstractTest
     }
 
     /**
-     * @throws AccountException
      * @throws AppException
      */
     public function testAvatarRepositoryGetNotFound(): void
@@ -48,9 +45,43 @@ class AvatarRepositoryTest extends AbstractTest
     }
 
     /**
+     * @dataProvider getForRegisterSuccessDataProvider
+     * @param int $id
+     * @param int $genesisId
+     * @param int $floorId
+     * @param string $originUrl
+     * @param string $smallUrl
+     * @throws AppException
+     */
+    public function testAvatarRepositoryGetForRegisterSuccess(
+        int $id,
+        int $genesisId,
+        int $floorId,
+        string $originUrl,
+        string $smallUrl
+    ): void
+    {
+        $avatar = $this->getRepository()->getForRegister($id, $genesisId, $floorId);
+
+        self::assertEquals($id, $avatar->getId());
+        self::assertEquals($genesisId, $avatar->getGenesis()->getId());
+        self::assertEquals($floorId, $avatar->getFloor()->getId());
+        self::assertEquals($originUrl, $avatar->getOriginUrl());
+        self::assertEquals($smallUrl, $avatar->getSmallUrl());
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testAvatarRepositoryGetForRegisterNotFound(): void
+    {
+        self::assertNull($this->getRepository()->getForRegister(43, 1, 1));
+    }
+
+    /**
      * @return array
      */
-    public function successDataProvider(): array
+    public function getSuccessDataProvider(): array
     {
         return [
             [
@@ -66,6 +97,29 @@ class AvatarRepositoryTest extends AbstractTest
                 2,
                 '/img/avatars/it/designer/female/03.jpg',
                 '/img/avatars/it/designer/female/03s.jpg',
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getForRegisterSuccessDataProvider(): array
+    {
+        return [
+            [
+                31,
+                3,
+                2,
+                '/img/avatars/it/devops/female/01.jpg',
+                '/img/avatars/it/devops/female/01s.jpg',
+            ],
+            [
+                13,
+                2,
+                1,
+                '/img/avatars/it/designer/male/01.jpg',
+                '/img/avatars/it/designer/male/01s.jpg',
             ],
         ];
     }

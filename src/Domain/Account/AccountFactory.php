@@ -111,17 +111,12 @@ class AccountFactory
      */
     public static function createRequest(array $data): CreateAccountRequest
     {
-        $genesis = (int)self::string($data, 'genesis_id', AccountException::INVALID_GENESIS_ID);
-
-        // TODO Mock
-        $profession = $genesis;
-
         return new CreateAccountRequest(
             self::loginValidation($data),
             self::emailValidate($data),
             self::passwordValidate($data),
             (int)self::string($data, 'floor_id', AccountException::INVALID_REQUEST_FLOOR_ID),
-            $profession,
+            (int)self::string($data, 'genesis_id', AccountException::INVALID_GENESIS_ID),
             (int)self::string($data, 'profession_id', AccountException::INVALID_PROFESSION_ID),
             (int)self::string($data, 'avatar_id', AccountException::INVALID_AVATAR_ID),
             self::refValidate($data),

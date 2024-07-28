@@ -35,7 +35,7 @@ if (empty($floor)) {
     <label>Пароль:
         <input class="form" name="password" autocomplete="off" value="" type="password">
     </label>
-    <label>Профессия:
+    <label>Genesis:
         <select name="genesis_id" class="form">
             <option value="1">Аналитик</option>
             <option value="2">Дизайнер</option>
@@ -44,6 +44,9 @@ if (empty($floor)) {
             <option value="5">Программист</option>
             <option value="6">Менеджер</option>
         </select>
+    </label>
+    <label>Profession:
+        <input class="form" name="profession_id" autocomplete="off" value="">
     </label>
     <label>Аватар:
         <input class="form" name="avatar_id" autocomplete="off" value="">

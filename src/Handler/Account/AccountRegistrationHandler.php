@@ -8,6 +8,13 @@ use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountFactory;
 use App\Domain\Account\AccountInterface;
 use App\Domain\Account\AccountRepository;
+use App\Domain\Account\Character\Avatar\AvatarRepository;
+use App\Domain\Account\Character\CharacterException;
+use App\Domain\Account\Character\CharacterFactory;
+use App\Domain\Account\Character\CharacterInterface;
+use App\Domain\Account\Character\CharacterRepository;
+use App\Domain\Account\Character\Genesis\GenesisRepository;
+use App\Domain\Account\Character\Profession\ProfessionRepository;
 use App\Domain\Account\DTO\CreateAccountRequest;
 use App\Domain\Account\MainCharacter\MainCharacterFactory;
 use App\Domain\Account\MainCharacter\MainCharacterInterface;
@@ -29,13 +36,30 @@ class AccountRegistrationHandler extends AbstractHandler
     private SendNoticeActionInterface $sendNoticeAction;
     private AccountRepository $accountRepository;
     private MainCharacterRepository $mainCharacterRepository;
+    private CharacterRepository $characterRepository;
+    private GenesisRepository $genesisRepository;
+    private ProfessionRepository $professionRepository;
+    private AvatarRepository $avatarRepository;
 
-    public function __construct(Container $container)
+    public function __construct(
+        Container $container,
+        SendNoticeAction $sendNoticeAction = null,
+        AccountRepository $accountRepository = null,
+        MainCharacterRepository $mainCharacterRepository = null,
+        CharacterRepository $characterRepository = null,
+        GenesisRepository $genesisRepository = null,
+        ProfessionRepository $professionRepository = null,
+        AvatarRepository $avatarRepository = null
+    )
     {
         parent::__construct($container);
-        $this->sendNoticeAction = new SendNoticeAction(new NoticeRepository($this->container));
-        $this->accountRepository = new AccountRepository($this->container);
-        $this->mainCharacterRepository = new MainCharacterRepository($this->container);
+        $this->sendNoticeAction = $sendNoticeAction ?? new SendNoticeAction(new NoticeRepository($this->container));
+        $this->accountRepository = $accountRepository ?? new AccountRepository($this->container);
+        $this->mainCharacterRepository = $mainCharacterRepository ?? new MainCharacterRepository($this->container);
+        $this->characterRepository = $characterRepository ?? new CharacterRepository($this->container);
+        $this->genesisRepository = $genesisRepository ?? new GenesisRepository($this->container);
+        $this->professionRepository = $professionRepository ?? new ProfessionRepository($this->container);
+        $this->avatarRepository = $avatarRepository ?? new AvatarRepository($this->container);
     }
 
     /**
@@ -48,6 +72,7 @@ class AccountRegistrationHandler extends AbstractHandler
     public function __invoke(Request $request): Response
     {
         // TODO Проверка на уже существующую авторизацию
+        // TODO Добавить откат транзакции, если что-то пошло не так
 
         try {
             $csrfToken = $request->csrf;
@@ -63,7 +88,9 @@ class AccountRegistrationHandler extends AbstractHandler
             $requestDto = $this->createRequest($request);
             $account = $this->createAccount($requestDto);
             $mainCharacter = $this->createMainCharacter($account);
+            $character = $this->createCharacter($requestDto, $account, $mainCharacter);
             $this->accountRepository->setMainCharacterId($account, $mainCharacter);
+            $this->accountRepository->setCharacterId($account, $character);
             $this->container->getCookies()->set(AccountInterface::AUTH_TOKEN, $account->getAuthToken());
             $this->sendMail($account);
             $this->sendNotice($account);
@@ -124,6 +151,42 @@ class AccountRegistrationHandler extends AbstractHandler
         $mainCharacter = MainCharacterFactory::createNew($account->getId(), $this->sendNoticeAction);
         $this->mainCharacterRepository->add($mainCharacter);
         return $mainCharacter;
+    }
+
+    /**
+     * @param CreateAccountRequest $request
+     * @param AccountInterface $account
+     * @param MainCharacterInterface $mainCharacter
+     * @return CharacterInterface
+     * @throws AppException
+     */
+    private function createCharacter(
+        CreateAccountRequest $request,
+        AccountInterface $account,
+        MainCharacterInterface $mainCharacter
+    ): CharacterInterface
+    {
+        $genesis = $this->genesisRepository->get($request->getGenesis(), THEME);
+
+        if (!$genesis) {
+            throw new AppException(CharacterException::UNKNOWN_GENESIS_ID);
+        }
+
+        $profession = $this->professionRepository->get($request->getProfession(), $genesis->getId());
+
+        if (!$profession) {
+            throw new AppException(CharacterException::UNKNOWN_PROFESSION_ID);
+        }
+
+        $avatar = $this->avatarRepository->getForRegister($request->getAvatar(), $genesis->getId(), $request->getFloor());
+
+        if (!$avatar) {
+            throw new AppException(CharacterException::UNKNOWN_AVATAR_ID);
+        }
+
+        $character = CharacterFactory::createNew($request, $account, $mainCharacter, $genesis, $profession, $avatar);
+        $this->characterRepository->add($character, $mainCharacter);
+        return $character;
     }
 
     /**

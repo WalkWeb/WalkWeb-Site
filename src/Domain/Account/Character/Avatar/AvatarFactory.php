@@ -17,7 +17,6 @@ class AvatarFactory
     /**
      * @param array $data
      * @return AvatarInterface
-     * @throws AccountException
      * @throws AppException
      */
     public static function create(array $data): AvatarInterface

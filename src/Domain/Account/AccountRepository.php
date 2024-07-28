@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Account;
 
+use App\Domain\Account\Character\CharacterInterface;
 use App\Domain\Account\DTO\LoginRequest;
 use App\Domain\Account\Energy\EnergyFactory;
 use App\Domain\Account\Energy\EnergyInterface;
@@ -185,6 +186,22 @@ class AccountRepository
             'UPDATE `accounts` SET `main_character_id` = ? WHERE `id` = ?',
             [
                 ['type' => 's', 'value' => $mainCharacter->getId()],
+                ['type' => 's', 'value' => $account->getId()],
+            ]
+        );
+    }
+
+    /**
+     * @param AccountInterface $account
+     * @param CharacterInterface $character
+     * @throws AppException
+     */
+    public function setCharacterId(AccountInterface $account, CharacterInterface $character): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `accounts` SET `character_id` = ? WHERE `id` = ?',
+            [
+                ['type' => 's', 'value' => $character->getId()],
                 ['type' => 's', 'value' => $account->getId()],
             ]
         );
