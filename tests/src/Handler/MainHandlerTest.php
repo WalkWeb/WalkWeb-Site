@@ -13,14 +13,16 @@ use WalkWeb\NW\Response;
 class MainHandlerTest extends AbstractTest
 {
     /**
-     * Тест на получение главной страницы
+     * Тесты на получение главной страницы
      *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testMainPageSuccess(): void
+    public function testMainPageSuccess(string $template): void
     {
         $request = new Request(['REQUEST_URI' => '/']);
-        $response = $this->app->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Заголовок поста #1/', $response->getBody());
@@ -70,5 +72,20 @@ EOT;
 
         self::assertEquals(Response::NOT_FOUND, $response->getStatusCode());
         self::assertEquals($expectedContent, $response->getBody());
+    }
+
+    /**
+     * @return array
+     */
+    public function templateDataProvider(): array
+    {
+        return [
+            [
+                'default',
+            ],
+            [
+                'inferno',
+            ],
+        ];
     }
 }

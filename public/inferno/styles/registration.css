@@ -1,0 +1,337 @@
+
+.r_l_reg img {
+    width: 140px;
+    height: auto;
+    margin: 2px 4px;
+}
+
+.r_l_reg img:hover {
+    cursor: url("/images/cursor-7.png"), auto;
+    -webkit-box-shadow: 0 0 3px 0 #F6FF1C;
+    box-shadow: 0 0 3px 0 #F6FF1C;
+}
+
+.r_ava_input {
+    display: none;
+}
+
+.r_ava_input[type=radio]:checked + label > img {
+    -webkit-box-shadow: 0 0 3px 0 #F6FF1C;
+    box-shadow: 0 0 3px 0 #F6FF1C;
+}
+
+.r_races_cont {
+    width: 90%;
+    height: 200px;
+    text-align: center;
+    margin: 30px auto 60px auto;
+}
+
+.r_classes_cont {
+    width: 75%;
+    height: 200px;
+    text-align: center;
+    margin: 20px auto 60px auto;
+}
+
+.r_16 {
+    width: 16.6%;
+}
+
+.r_20 {
+    width: 20%;
+}
+
+.rcbox {
+    height: 200px;
+    float: left;
+    font-size: 18px;
+}
+
+.rcbox span.r_race_icon {
+    display: block;
+    width: 160px;
+    height: 160px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 10px auto;
+    opacity: 0.7;
+}
+
+.rcbox span.r_race_icon:hover {
+    cursor: url("/images/cursor-7.png"), auto;
+}
+
+.rcbox span.r_class_icon {
+    display: block;
+    width: 160px;
+    height: 160px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 10px auto;
+    opacity: 0.7;
+}
+
+.rcbox span.r_class_icon:hover {
+    cursor: url("/images/cursor-7.png"), auto;
+}
+
+.r_humans {
+    background-image: url(/images/icon/races/human.png);
+}
+
+.r_elves {
+    background-image: url(/images/icon/races/elf.png);
+}
+
+.r_orcs {
+    background-image: url(/images/icon/races/orc.png);
+}
+
+.r_dwarfs {
+    background-image: url(/images/icon/races/dwarf.png);
+}
+
+.r_angels {
+    background-image: url(/images/icon/races/angels.png);
+}
+
+.r_demons {
+    background-image: url(/images/icon/races/demons.png);
+}
+
+input:checked + span + span {
+    color: rgba(227, 129, 9, 1);
+}
+
+input:checked + .r_race_icon {
+    opacity: 1;
+}
+
+input:checked + .r_class_icon {
+    opacity: 1;
+}
+
+.dnone {
+    display: none;
+}
+
+.regcenter {
+    margin: 50px 0 50px 0;
+    width: 100%;
+    text-align: center;
+    clear: both;
+}
+
+.r_paladin {
+    background-image: url('/images/icon/classes/b001.png');
+}
+
+.r_killer {
+    background-image: url('/images/icon/classes/b001.png');
+}
+
+.r_ranger {
+    background-image: url('/images/icon/classes/b001.png');
+}
+
+.r_elemental_mage {
+    background-image: url('/images/icon/classes/b001.png');
+}
+
+.r_priest {
+    background-image: url('/images/icon/classes/b001.png');
+}
+
+.r_n_c_c {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 50px;
+}
+
+.r_n_l {
+    float: left;
+    width: 22%;
+    height: 250px;
+}
+
+.r_n_r {
+    float: right;
+    width: 35%;
+    height: 250px;
+}
+
+.r_n_c {
+    margin-left: 22%;
+    margin-right: 35%;
+    height: 250px;
+}
+
+.r_n_c_l {
+    float: left;
+    width: 50%;
+    height: 250px;
+}
+
+.r_n_c_r {
+    float: right;
+    width: 50%;
+    height: 250px;
+}
+
+.r_n_c_l p {
+    padding: 4px 20px 4px 50px;
+    margin: 0;
+    font-size: 140%;
+    text-align: justify;
+    -moz-text-align-last: justify;
+    text-align-last: justify;
+}
+
+.r_n_c_r p {
+    padding: 4px 30px 4px 30px;
+    margin: 0;
+    font-size: 140%;
+    text-align: justify;
+    -moz-text-align-last: justify;
+    text-align-last: justify;
+}
+
+.r_n_r p {
+    margin: 0;
+    padding: 0;
+    font-size: 120%;
+}
+
+.r_n_r img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.r_n_r td {
+    padding: 5px 0 5px 0;
+}
+
+.r_class {
+    margin: 0 10px 25px 0;
+    text-align: right;
+}
+
+.r_class input {
+    display: none;
+}
+
+.r_class span {
+    font-size: 180%;
+}
+
+.r_class input:checked + span {
+    color: rgba(227, 129, 9, 1);
+}
+
+.r_s_hidden {
+    opacity: 0;
+}
+
+.r_ava_c {
+    padding-left: 30px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 0 auto;
+}
+
+
+
+/* Стили блока логина/пароля/почты/пола */
+
+.reg_m {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.reg_m_l {
+    float: left;
+    width: 30%;
+}
+
+.reg_m_r {
+    float: right;
+    width: 30%;
+}
+
+.reg_m_c {
+    margin: 0 30%;
+}
+
+.reg_b {
+    width: 100%;
+    height: 40px;
+}
+
+.reg_b p {
+    font-family: Arial, sans-serif;
+    font-size: 130%;
+    color: #a9825d;
+    line-height: 130%;
+    padding: 5px;
+}
+
+.reg_b_c {
+    width: 100%;
+    height: 40px;
+}
+
+.reg_b_c label {
+    display: block;
+    width: 100%;
+}
+
+.reg_b_c input {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+
+    font-size: 140%;
+    color: #d9b569;
+}
+
+.reg_b_floor {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 120%;
+    color: #d9b569;
+}
+
+.reg_b_floor label {
+    display: inline-block;
+    padding: 5px;
+}
+
+.reg_b_floor label:hover {
+    cursor: pointer;
+}
+
+.reg_b_floor input:checked + span.labelfloor {
+    color: rgba(227, 129, 9, 1);
+}
+
+.reg_b_floor input[type="radio"] {
+    display: none;
+}
+
+#reg_img_loading {
+    display: none;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+}
+
+.reg_form {
+    min-height: 1050px;
+}
+

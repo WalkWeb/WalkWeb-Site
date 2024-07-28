@@ -74,26 +74,29 @@ abstract class AbstractTest extends TestCase
     }
 
     /**
+     * @param string $template
      * @return App
      * @throws AppException
      */
-    protected function createApp(): App
+    protected function createApp(string $template = TEMPLATE_DEFAULT): App
     {
         $router = require __DIR__ . '/../routes/web.php';
-        return new App($router, self::createContainer());
+        return new App($router, self::createContainer(APP_ENV, VIEW_DIR, MIGRATION_DIR, $template));
     }
 
     /**
      * @param string $appEnv
      * @param string $viewDir
      * @param string $migrationDir
+     * @param string $template
      * @return Container
      * @throws AppException
      */
     protected static function createContainer(
         string $appEnv = APP_ENV,
         string $viewDir = VIEW_DIR,
-        string $migrationDir = MIGRATION_DIR
+        string $migrationDir = MIGRATION_DIR,
+        string $template = TEMPLATE_DEFAULT
     ): Container
     {
         $container = new Container(
@@ -106,7 +109,7 @@ abstract class AbstractTest extends TestCase
             CACHE_DIR,
             $viewDir,
             $migrationDir,
-            TEMPLATE_DEFAULT,
+            $template,
         );
         $container->set(Runtime::class, new Runtime());
 
