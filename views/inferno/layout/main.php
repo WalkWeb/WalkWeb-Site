@@ -7,6 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" type="text/css" href="/inferno/styles/inferno.css?ver=1.00">
+    <link rel="icon" type="image/x-icon" href="/dw-icon-64.png">
 </head>
 <body id="app">
 <div id="main_box">

@@ -6,7 +6,7 @@
 }
 
 .r_l_reg img:hover {
-    cursor: url("/images/cursor-7.png"), auto;
+    cursor: url('/inferno/images/cursor-7.png'), auto;
     -webkit-box-shadow: 0 0 3px 0 #F6FF1C;
     box-shadow: 0 0 3px 0 #F6FF1C;
 }
@@ -60,7 +60,7 @@
 }
 
 .rcbox span.r_race_icon:hover {
-    cursor: url("/images/cursor-7.png"), auto;
+    cursor: url('/inferno/images/cursor-7.png'), auto;
 }
 
 .rcbox span.r_class_icon {
@@ -75,31 +75,31 @@
 }
 
 .rcbox span.r_class_icon:hover {
-    cursor: url("/images/cursor-7.png"), auto;
+    cursor: url('/inferno/images/cursor-7.png'), auto;
 }
 
 .r_humans {
-    background-image: url(/images/icon/races/human.png);
+    background-image: url('/icon/races/human.png');
 }
 
 .r_elves {
-    background-image: url(/images/icon/races/elf.png);
+    background-image: url('/icon/races/elf.png');
 }
 
 .r_orcs {
-    background-image: url(/images/icon/races/orc.png);
+    background-image: url('/icon/races/orc.png');
 }
 
 .r_dwarfs {
-    background-image: url(/images/icon/races/dwarf.png);
+    background-image: url('/icon/races/dwarf.png');
 }
 
 .r_angels {
-    background-image: url(/images/icon/races/angels.png);
+    background-image: url('/icon/races/angels.png');
 }
 
 .r_demons {
-    background-image: url(/images/icon/races/demons.png);
+    background-image: url('/icon/races/demons.png');
 }
 
 input:checked + span + span {
@@ -123,26 +123,6 @@ input:checked + .r_class_icon {
     width: 100%;
     text-align: center;
     clear: both;
-}
-
-.r_paladin {
-    background-image: url('/images/icon/classes/b001.png');
-}
-
-.r_killer {
-    background-image: url('/images/icon/classes/b001.png');
-}
-
-.r_ranger {
-    background-image: url('/images/icon/classes/b001.png');
-}
-
-.r_elemental_mage {
-    background-image: url('/images/icon/classes/b001.png');
-}
-
-.r_priest {
-    background-image: url('/images/icon/classes/b001.png');
 }
 
 .r_n_c_c {
