@@ -55,10 +55,10 @@ class AuthRepository
 
             FROM `accounts`
                 
-            JOIN `account_energy` ON `accounts`.`energy_id` = `account_energy`.`id`
-            JOIN `characters_main` ON `accounts`.`id` = `characters_main`.`account_id`
-            JOIN `characters` ON `accounts`.`character_id`
-            JOIN `avatars` ON `characters`.`avatar_id` = `avatars`.`id`
+            LEFT JOIN `account_energy` ON `accounts`.`energy_id` = `account_energy`.`id`
+            LEFT JOIN `characters_main` ON `accounts`.`id` = `characters_main`.`account_id`
+            LEFT JOIN `characters` ON `accounts`.`character_id` = `characters`.`id`
+            LEFT JOIN `avatars` ON `characters`.`avatar_id` = `avatars`.`id`
 
             WHERE `accounts`.`auth_token` = ?',
             [['type' => 's', 'value' => $authToken]],

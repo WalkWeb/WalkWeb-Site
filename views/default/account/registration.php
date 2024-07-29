@@ -60,7 +60,7 @@ if (empty($floor)) {
         <span>женский</span>
     </label>
     <label>
-        <input class="form" type="hidden" name="csrf" value="<?= $csrfToken ?? '' ?>">
+        <input type="hidden" name="csrf" value="<?= $csrfToken ?? '' ?>">
     </label>
     <button type="submit">Зарегистрироваться</button>
 </form>

@@ -152,7 +152,7 @@ class AuthRepositoryTest extends AbstractTest
                     'character_exp'         => 60,
                     'character_stat_points' => 5,
                 ],
-                '/img/avatars/it/analyst/male/01.jpg',
+                '/img/avatars/it/analyst/female/01.jpg',
             ],
         ];
     }

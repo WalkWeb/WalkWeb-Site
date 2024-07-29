@@ -20,7 +20,7 @@ $action = '/registration/' . ($ref ?? 'undefined');
 </div>
 
 <br /><br />
-<?= !empty($message) ? '<p class="center"><span class="red">' . $message . '</span></p><br />' : '' ?>
+<?= !empty($error) ? '<p class="center"><span class="red">' . $error . '</span></p><br />' : '' ?>
 
 <form method="POST" action="<?= $action ?>" class="reg_form" onsubmit="reg_send();">
 
@@ -41,7 +41,7 @@ $action = '/registration/' . ($ref ?? 'undefined');
         </div>
         <div class="reg_m_c">
             <div class="reg_b_c">
-                <label><input name="login" id="login_id" autocomplete="off" onkeypress="cLogin()" onfocus="cLogin()" onkeyup="cLogin()"></label>
+                <label><input name="login" id="login_id" autocomplete="off" onkeypress="cLogin()" onfocus="cLogin()" onkeyup="cLogin()" value="<?= empty($login) ? '' : $login ?>"></label>
             </div>
             <div class="reg_b_c">
                 <label><input name="password" id="pass_id" type="password" onkeypress="cPass()" onfocus="cPass()" onkeyup="cPass()"></label>
@@ -50,7 +50,7 @@ $action = '/registration/' . ($ref ?? 'undefined');
                 <label><input name="password" id="repass_id" type="password" onkeypress="rePass()" onfocus="rePass()" onkeyup="rePass()"></label>
             </div>
             <div class="reg_b_c">
-                <label><input name="email" id="email_id" autocomplete="off" onkeypress="cMail()" onfocus="cMail()" onkeyup="cMail()"></label>
+                <label><input name="email" id="email_id" autocomplete="off" onkeypress="cMail()" onfocus="cMail()" onkeyup="cMail()" value="<?= empty($email) ? '' : $email ?>"></label>
             </div>
             <div class="reg_b_floor">
                 <label class="rfloor">
@@ -65,13 +65,10 @@ $action = '/registration/' . ($ref ?? 'undefined');
         </div>
     </div>
 
-    <?php
-
-    require_once DIR . '/views/inferno/character/_create.php';
-
-    ?>
+    <?php require_once DIR . '/views/inferno/character/_create.php'; ?>
 
     <input type="hidden" name="ref" value="<?= ($ref ?? 'undefined') ?>">
+    <input type="hidden" name="csrf" value="<?= $csrfToken ?? '' ?>">
 
     <div id="reg_fields"></div>
 

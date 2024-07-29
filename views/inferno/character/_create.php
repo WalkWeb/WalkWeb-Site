@@ -4,37 +4,37 @@
 <div class="r_races_cont">
     <div class="rcbox r_16" align="center">
         <label>
-            <input type="radio" name="genesis_id" value="1" class="dnone" onclick="raceChange(this.value)" checked>
+            <input type="radio" name="genesis_id" value="7" class="dnone" onclick="raceChange(this.value)" checked>
             <span id="ava-1" class="r_race_icon r_humans"></span> <span>Люди</span>
         </label>
     </div>
     <div class="rcbox r_16" align="center">
         <label>
-            <input type="radio" name="genesis_id" value="2" class="dnone" onclick="raceChange(this.value)">
+            <input type="radio" name="genesis_id" value="8" class="dnone" onclick="raceChange(this.value)">
             <span id="ava-2" class="r_race_icon r_elves"></span> <span>Эльфы</span>
         </label>
     </div>
     <div class="rcbox r_16" align="center">
         <label>
-            <input type="radio" name="genesis_id" value="3" class="dnone" onclick="raceChange(this.value)">
+            <input type="radio" name="genesis_id" value="9" class="dnone" onclick="raceChange(this.value)">
             <span id="ava-3" class="r_race_icon r_orcs"></span> <span>Орки</span>
         </label>
     </div>
     <div class="rcbox r_16" align="center">
         <label>
-            <input type="radio" name="genesis_id" value="4" class="dnone" onclick="raceChange(this.value)">
+            <input type="radio" name="genesis_id" value="10" class="dnone" onclick="raceChange(this.value)">
             <span id="ava-4" class="r_race_icon r_dwarfs"></span> <span>Гномы</span>
         </label>
     </div>
     <div class="rcbox r_16" align="center">
         <label>
-            <input type="radio" name="genesis_id" value="5" class="dnone" onclick="raceChange(this.value)">
+            <input type="radio" name="genesis_id" value="11" class="dnone" onclick="raceChange(this.value)">
             <span id="ava-5" class="r_race_icon r_angels"></span> <span>Ангелы</span>
         </label>
     </div>
     <div class="rcbox r_16" align="center">
         <label>
-            <input type="radio" name="genesis_id" value="6" class="dnone" onclick="raceChange(this.value)">
+            <input type="radio" name="genesis_id" value="12" class="dnone" onclick="raceChange(this.value)">
             <span id="ava-6" class="r_race_icon r_demons"></span> <span>Демоны</span>
         </label>
     </div>

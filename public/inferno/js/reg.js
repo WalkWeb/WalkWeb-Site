@@ -100,9 +100,9 @@ function isEmail(mail) {
 }
 
 
-let _race = '1';
+let _race = '7';
 let _floor = '1';
-let _class = '1';
+let _class = '7';
 
 function raceChange(value) {
     _race = value;
@@ -127,7 +127,7 @@ function floorChange(value) {
 function setClassBonuses()
 {
     // Паладин
-    if (_class === '1') {
+    if (_class === '7') {
         document.getElementById('stats_list').innerHTML =
             baseStats(25, 20, 20, 15, 25, 15, 5, 5) + derivedStats(140, 80, 84, 88);
 
@@ -139,7 +139,7 @@ function setClassBonuses()
 
     }
     // Убийца
-    if (_class === '2') {
+    if (_class === '8') {
         document.getElementById('stats_list').innerHTML =
             baseStats(20, 15, 25, 15, 25, 15, 5, 10) + derivedStats(140, 80, 84, 78, 'Шанс критического удара -20%, сила критического удара +100%');
 
@@ -151,7 +151,7 @@ function setClassBonuses()
 
     }
     // Рейнджер
-    if (_class === '3') {
+    if (_class === '9') {
         document.getElementById('stats_list').innerHTML =
             baseStats(20, 15, 30, 15, 25, 15, 5, 5) + derivedStats(140, 80, 84, 78);
 
@@ -163,7 +163,7 @@ function setClassBonuses()
 
     }
     // Маг Стихий
-    if (_class === '4') {
+    if (_class === '10') {
         document.getElementById('stats_list').innerHTML =
             baseStats(15, 25, 15, 20, 20, 25, 5, 5) + derivedStats(120, 110, 74, 83);
 
@@ -175,7 +175,7 @@ function setClassBonuses()
 
     }
     // Жрец
-    if (_class === '5') {
+    if (_class === '11') {
         document.getElementById('stats_list').innerHTML =
             baseStats(15, 20, 15, 20, 20, 25, 10, 5) + derivedStats(108, 121, 74, 78, 'Здоровье -10%, Мана +10%');
 
@@ -187,7 +187,7 @@ function setClassBonuses()
 
     }
     // Хранитель
-    if (_class === '6') {
+    if (_class === '12') {
         document.getElementById('stats_list').innerHTML =
             baseStats(25, 15, 25, 10, 25, 15, 10, 5) + derivedStats(140, 80, 84, 83);
 
@@ -199,7 +199,7 @@ function setClassBonuses()
 
     }
     // Дневной охотник
-    if (_class === '7') {
+    if (_class === '13') {
         document.getElementById('stats_list').innerHTML =
             baseStats(20, 15, 30, 10, 20, 15, 10, 10) + derivedStats(120, 80, 74, 78, 'Защита +20%, Магическая защита -20%');
 
@@ -211,7 +211,7 @@ function setClassBonuses()
 
     }
     // Ночной охотник
-    if (_class === '8') {
+    if (_class === '14') {
         document.getElementById('stats_list').innerHTML =
             baseStats(15, 15, 40, 10, 15, 20, 10, 5) + derivedStats(100, 95, 64, 73, 'Защита -20%, Магическая защита +20%');
 
@@ -223,7 +223,7 @@ function setClassBonuses()
 
     }
     // Заклинатель
-    if (_class === '9') {
+    if (_class === '15') {
         document.getElementById('stats_list').innerHTML =
             baseStats(10, 25, 25, 15, 15, 25, 10, 5) + derivedStats(100, 110, 64, 78);
 
@@ -235,7 +235,7 @@ function setClassBonuses()
 
     }
     // Оракул
-    if (_class === '10') {
+    if (_class === '16') {
         document.getElementById('stats_list').innerHTML =
             baseStats(10, 20, 25, 15, 15, 25, 15, 5) + derivedStats(100, 110, 64, 73);
 
@@ -246,20 +246,8 @@ function setClassBonuses()
         );
 
     }
-    // Разрушитель
-    if (_class === '11') {
-        document.getElementById('stats_list').innerHTML =
-            baseStats(45, 10, 15, 10, 30, 10, 5, 5) + derivedStats(160, 65, 94, 98);
-
-        document.getElementById('ability_list').innerHTML = ability(
-            '523', 'Гнев — Вложив весь свой гнев, разрушитель делает сильный удар, наносящий увеличенный урон',
-            '248', 'Грязный прием — Разрушитель делает удар по кистям противника, уменьшая скорость атаки и защиту цели на несколько ходов',
-            '219', 'Боевой клич — Когда бой затянулся разрушитель использует боевой клич, увеличивающий свой и без того не малый урон на несколько ходов'
-        );
-
-    }
     // Титан
-    if (_class === '12') {
+    if (_class === '17') {
         document.getElementById('stats_list').innerHTML =
             baseStats(30, 10, 15, 10, 40, 15, 5, 5) + derivedStats(240, 40, 114, 83, 'Здоровье +20%, Мана -50%');
 
@@ -270,8 +258,20 @@ function setClassBonuses()
         );
 
     }
+    // Разрушитель
+    if (_class === '18') {
+        document.getElementById('stats_list').innerHTML =
+            baseStats(45, 10, 15, 10, 30, 10, 5, 5) + derivedStats(160, 65, 94, 98);
+
+        document.getElementById('ability_list').innerHTML = ability(
+            '523', 'Гнев — Вложив весь свой гнев, разрушитель делает сильный удар, наносящий увеличенный урон',
+            '248', 'Грязный прием — Разрушитель делает удар по кистям противника, уменьшая скорость атаки и защиту цели на несколько ходов',
+            '219', 'Боевой клич — Когда бой затянулся разрушитель использует боевой клич, увеличивающий свой и без того не малый урон на несколько ходов'
+        );
+
+    }
     // Берсерк
-    if (_class === '13') {
+    if (_class === '19') {
         document.getElementById('stats_list').innerHTML =
             baseStats(35, 10, 20, 10, 30, 15, 5, 5) + derivedStats(160, 80, 94, 88, 'Регенерация здоровья +2%, Регенерация маны -2%, Расход выносливости -1');
 
@@ -283,7 +283,7 @@ function setClassBonuses()
 
     }
     // Шаман
-    if (_class === '14') {
+    if (_class === '20') {
         document.getElementById('stats_list').innerHTML =
             baseStats(30, 20, 10, 15, 25, 20, 5, 5) + derivedStats(140, 95, 84, 93);
 
@@ -295,7 +295,7 @@ function setClassBonuses()
 
     }
     // Боевой маг
-    if (_class === '15') {
+    if (_class === '21') {
         document.getElementById('stats_list').innerHTML =
             baseStats(25, 20, 10, 15, 25, 25, 5, 5) + derivedStats(140, 110, 84, 88);
 
@@ -307,7 +307,7 @@ function setClassBonuses()
 
     }
     // Страж
-    if (_class === '16') {
+    if (_class === '22') {
         document.getElementById('stats_list').innerHTML =
             baseStats(30, 10, 15, 10, 40, 10, 5, 10) + derivedStats(200, 65, 114, 83);
 
@@ -319,7 +319,7 @@ function setClassBonuses()
 
     }
     // Искатель сокровищ
-    if (_class === '17') {
+    if (_class === '23') {
         document.getElementById('stats_list').innerHTML =
             baseStats(25, 10, 25, 10, 25, 10, 5, 20) + derivedStats(126, 59, 84, 78, 'Здоровье -10%, Мана -10%, Количество находимого золота +50%');
 
@@ -331,7 +331,7 @@ function setClassBonuses()
 
     }
     // Арбалетчик
-    if (_class === '18') {
+    if (_class === '24') {
         document.getElementById('stats_list').innerHTML =
             baseStats(25, 15, 15, 15, 30, 15, 5, 10) + derivedStats(160, 80, 94, 83);
 
@@ -343,7 +343,7 @@ function setClassBonuses()
 
     }
     // Алхимик
-    if (_class === '19') {
+    if (_class === '25') {
         document.getElementById('stats_list').innerHTML =
             baseStats(20, 20, 10, 15, 30, 20, 5, 10) + derivedStats(160, 238, 94, 83, 'Мана +100%, Регенерация маны -3%');
 
@@ -355,7 +355,7 @@ function setClassBonuses()
 
     }
     // Отшельник
-    if (_class === '20') {
+    if (_class === '26') {
         document.getElementById('stats_list').innerHTML =
             baseStats(20, 20, 10, 15, 25, 20, 5, 15) + derivedStats(140, 95, 84, 83);
 
@@ -367,7 +367,7 @@ function setClassBonuses()
 
     }
     // Архангел
-    if (_class === '21') {
+    if (_class === '27') {
         document.getElementById('stats_list').innerHTML =
             baseStats(25, 20, 15, 10, 30, 15, 10, 5) + derivedStats(160, 56, 94, 88, 'Блок +12%, Магический блок +12%, Мана -30%, Регенерация маны -1%');
 
@@ -379,7 +379,7 @@ function setClassBonuses()
 
     }
     // Малахим
-    if (_class === '22') {
+    if (_class === '28') {
         document.getElementById('stats_list').innerHTML =
             baseStats(20, 20, 15, 10, 30, 20, 10, 5) + derivedStats(160, 95, 94, 83);
 
@@ -391,7 +391,7 @@ function setClassBonuses()
 
     }
     // Феникс
-    if (_class === '23') {
+    if (_class === '29') {
         document.getElementById('stats_list').innerHTML =
             baseStats(20, 20, 15, 10, 30, 20, 10, 5) + derivedStats(160, 95, 94, 83);
 
@@ -403,7 +403,7 @@ function setClassBonuses()
 
     }
     // Серафим
-    if (_class === '24') {
+    if (_class === '30') {
         document.getElementById('stats_list').innerHTML =
             baseStats(15, 35, 10, 15, 15, 20, 15, 5) + derivedStats(80, 95, 64, 93, 'Здоровье -20%, Регенерация маны +1%, Ментальный барьер +30%');
 
@@ -415,7 +415,7 @@ function setClassBonuses()
 
     }
     // Арелим
-    if (_class === '25') {
+    if (_class === '31') {
         document.getElementById('stats_list').innerHTML =
             baseStats(15, 25, 10, 15, 20, 25, 15, 5) + derivedStats(120, 110, 74, 83);
 
@@ -427,7 +427,7 @@ function setClassBonuses()
 
     }
     // Рыцарь ада
-    if (_class === '26') {
+    if (_class === '32') {
         document.getElementById('stats_list').innerHTML =
             baseStats(30, 20, 20, 15, 20, 15, 5, 5) + derivedStats(120, 80, 74, 93, 'Общий множитель наносимого урона: -20%, Общий множитель получаемого урона: -20%');
 
@@ -439,7 +439,7 @@ function setClassBonuses()
 
     }
     // Мститель
-    if (_class === '27') {
+    if (_class === '33') {
         document.getElementById('stats_list').innerHTML =
             baseStats(35, 20, 15, 15, 25, 10, 5, 5) + derivedStats(140, 65, 84, 98);
 
@@ -451,7 +451,7 @@ function setClassBonuses()
 
     }
     // Архонт
-    if (_class === '28') {
+    if (_class === '34') {
         document.getElementById('stats_list').innerHTML =
             baseStats(25, 20, 15, 15, 25, 20, 5, 5) + derivedStats(112, 76, 84, 88, 'Здоровье -20%, Мана -20%, Вампиризм 10%');
 
@@ -463,7 +463,7 @@ function setClassBonuses()
 
     }
     // Душегуб
-    if (_class === '29') {
+    if (_class === '35') {
         document.getElementById('stats_list').innerHTML =
             baseStats(20, 30, 15, 20, 15, 20, 5, 5) + derivedStats(100, 95, 64, 93);
 
@@ -475,7 +475,7 @@ function setClassBonuses()
 
     }
     // Инкуб/Суккуб
-    if (_class === '30') {
+    if (_class === '36') {
         document.getElementById('stats_list').innerHTML =
             baseStats(20, 20, 15, 15, 20, 15, 15, 10) + derivedStats(120, 80, 74, 83);
 
@@ -489,368 +489,656 @@ function setClassBonuses()
 }
 
 function setAvatars() {
-    if (_race === '1' && _floor === '1') {
+    if (_race === '7' && _floor === '1') {
         humanMaleAvatars();
     }
-    if (_race === '2' && _floor === '1') {
+    if (_race === '8' && _floor === '1') {
         elfMaleAvatars();
     }
-    if (_race === '3' && _floor === '1') {
+    if (_race === '9' && _floor === '1') {
         orcMaleAvatars();
     }
-    if (_race === '4' && _floor === '1') {
+    if (_race === '10' && _floor === '1') {
         dwarfMaleAvatars();
     }
-    if (_race === '5' && _floor === '1') {
+    if (_race === '11' && _floor === '1') {
         angelMaleAvatars();
     }
-    if (_race === '6' && _floor === '1') {
+    if (_race === '12' && _floor === '1') {
         demonMaleAvatars();
     }
-    if (_race === '1' && _floor === '2') {
+    if (_race === '7' && _floor === '2') {
         humanFemaleAvatars();
     }
-    if (_race === '2' && _floor === '2') {
+    if (_race === '8' && _floor === '2') {
         elfFemaleAvatars();
     }
-    if (_race === '3' && _floor === '2') {
+    if (_race === '9' && _floor === '2') {
         orcFemaleAvatars();
     }
-    if (_race === '4' && _floor === '2') {
+    if (_race === '10' && _floor === '2') {
         dwarfFemaleAvatars();
     }
-    if (_race === '5' && _floor === '2') {
+    if (_race === '11' && _floor === '2') {
         angelFemaleAvatars();
     }
-    if (_race === '6' && _floor === '2') {
+    if (_race === '12' && _floor === '2') {
         demonFemaleAvatars();
     }
 }
 
 function setClasses() {
-    if (_race === '1' && _floor === '1') {
+    if (_race === '7' && _floor === '1') {
         humansMaleClasses();
-        _class = '1';
+        _class = '7';
     }
-    if (_race === '2' && _floor === '1') {
+    if (_race === '8' && _floor === '1') {
         elfsMaleClasses();
-        _class = '6';
+        _class = '12';
     }
-    if (_race === '3' && _floor === '1') {
+    if (_race === '9' && _floor === '1') {
         orcsMaleClasses();
-        _class = '11';
+        _class = '17';
     }
-    if (_race === '4' && _floor === '1') {
+    if (_race === '10' && _floor === '1') {
         dwarfsMaleClasses();
-        _class = '16';
+        _class = '22';
     }
-    if (_race === '5' && _floor === '1') {
+    if (_race === '11' && _floor === '1') {
         angelsMaleClasses();
-        _class = '21';
+        _class = '27';
     }
-    if (_race === '6' && _floor === '1') {
+    if (_race === '12' && _floor === '1') {
         demonsMaleClasses();
-        _class = '26';
+        _class = '32';
     }
-    if (_race === '1' && _floor === '2') {
+    if (_race === '7' && _floor === '2') {
         humansFemaleClasses();
-        _class = '1';
+        _class = '7';
     }
-    if (_race === '2' && _floor === '2') {
+    if (_race === '8' && _floor === '2') {
         elfsFemaleClasses();
-        _class = '6';
+        _class = '12';
     }
-    if (_race === '3' && _floor === '2') {
+    if (_race === '9' && _floor === '2') {
         orcsFemaleClasses();
-        _class = '11';
+        _class = '17';
     }
-    if (_race === '4' && _floor === '2') {
+    if (_race === '10' && _floor === '2') {
         dwarfsFemaleClasses();
-        _class = '16';
+        _class = '22';
     }
-    if (_race === '5' && _floor === '2') {
+    if (_race === '11' && _floor === '2') {
         angelsFemaleClasses();
-        _class = '21';
+        _class = '27';
     }
-    if (_race === '6' && _floor === '2') {
+    if (_race === '12' && _floor === '2') {
         demonsFemaleClasses();
-        _class = '26';
+        _class = '32';
     }
 }
 
 function humanMaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava1" type="radio" name="avatar_id" value="1" class="r_ava_input" checked><label for="ava1" class="r_l_reg"><img src="/img/avatars/game/humans/human001.jpg" alt="" /></label></span><span><input id="ava13" type="radio" name="avatar_id" value="13" class="r_ava_input"><label for="ava13" class="r_l_reg"><img src="/img/avatars/game/humans/human003.jpg" alt="" /></label></span><span><input id="ava25" type="radio" name="avatar_id" value="25" class="r_ava_input"><label for="ava25" class="r_l_reg"><img src="/img/avatars/game/humans/human005.jpg" alt="" /></label></span><span><input id="ava37" type="radio" name="avatar_id" value="37" class="r_ava_input"><label for="ava37" class="r_l_reg"><img src="/img/avatars/game/humans/human007.jpg" alt="" /></label></span><span><input id="ava49" type="radio" name="avatar_id" value="49" class="r_ava_input"><label for="ava49" class="r_l_reg"><img src="/img/avatars/game/humans/human009.jpg" alt="" /></label></span><span><input id="ava61" type="radio" name="avatar_id" value="61" class="r_ava_input"><label for="ava61" class="r_l_reg"><img src="/img/avatars/game/humans/human011.jpg" alt="" /></label></span><span><input id="ava73" type="radio" name="avatar_id" value="73" class="r_ava_input"><label for="ava73" class="r_l_reg"><img src="/img/avatars/game/humans/human013.jpg" alt="" /></label></span><span><input id="ava85" type="radio" name="avatar_id" value="85" class="r_ava_input"><label for="ava85" class="r_l_reg"><img src="/img/avatars/game/humans/human015.jpg" alt="" /></label></span><span><input id="ava97" type="radio" name="avatar_id" value="97" class="r_ava_input"><label for="ava97" class="r_l_reg"><img src="/img/avatars/game/humans/human017.jpg" alt="" /></label></span><span><input id="ava109" type="radio" name="avatar_id" value="109" class="r_ava_input"><label for="ava109" class="r_l_reg"><img src="/img/avatars/game/humans/human019.jpg" alt="" /></label></span><span><input id="ava121" type="radio" name="avatar_id" value="121" class="r_ava_input"><label for="ava121" class="r_l_reg"><img src="/img/avatars/game/humans/human021.jpg" alt="" /></label></span><span><input id="ava133" type="radio" name="avatar_id" value="133" class="r_ava_input"><label for="ava133" class="r_l_reg"><img src="/img/avatars/game/humans/human023.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava1" type="radio" name="avatar_id" value="73" class="r_ava_input" checked>' +
+        '<label for="ava1" class="r_l_reg"><img src="/img/avatars/game/humans/human001.jpg" alt="" /></label></span>' +
+        '<span><input id="ava13" type="radio" name="avatar_id" value="75" class="r_ava_input">' +
+        '<label for="ava13" class="r_l_reg"><img src="/img/avatars/game/humans/human003.jpg" alt="" /></label></span>' +
+        '<span><input id="ava25" type="radio" name="avatar_id" value="77" class="r_ava_input">' +
+        '<label for="ava25" class="r_l_reg"><img src="/img/avatars/game/humans/human005.jpg" alt="" /></label></span>' +
+        '<span><input id="ava37" type="radio" name="avatar_id" value="79" class="r_ava_input">' +
+        '<label for="ava37" class="r_l_reg"><img src="/img/avatars/game/humans/human007.jpg" alt="" /></label></span>' +
+        '<span><input id="ava49" type="radio" name="avatar_id" value="81" class="r_ava_input">' +
+        '<label for="ava49" class="r_l_reg"><img src="/img/avatars/game/humans/human009.jpg" alt="" /></label></span>' +
+        '<span><input id="ava61" type="radio" name="avatar_id" value="83" class="r_ava_input">' +
+        '<label for="ava61" class="r_l_reg"><img src="/img/avatars/game/humans/human011.jpg" alt="" /></label></span>' +
+        '<span><input id="ava73" type="radio" name="avatar_id" value="85" class="r_ava_input">' +
+        '<label for="ava73" class="r_l_reg"><img src="/img/avatars/game/humans/human013.jpg" alt="" /></label></span>' +
+        '<span><input id="ava85" type="radio" name="avatar_id" value="87" class="r_ava_input">' +
+        '<label for="ava85" class="r_l_reg"><img src="/img/avatars/game/humans/human015.jpg" alt="" /></label></span>' +
+        '<span><input id="ava97" type="radio" name="avatar_id" value="89" class="r_ava_input">' +
+        '<label for="ava97" class="r_l_reg"><img src="/img/avatars/game/humans/human017.jpg" alt="" /></label></span>' +
+        '<span><input id="ava109" type="radio" name="avatar_id" value="91" class="r_ava_input">' +
+        '<label for="ava109" class="r_l_reg"><img src="/img/avatars/game/humans/human019.jpg" alt="" /></label></span>' +
+        '<span><input id="ava121" type="radio" name="avatar_id" value="93" class="r_ava_input">' +
+        '<label for="ava121" class="r_l_reg"><img src="/img/avatars/game/humans/human021.jpg" alt="" /></label></span>' +
+        '<span><input id="ava133" type="radio" name="avatar_id" value="95" class="r_ava_input">' +
+        '<label for="ava133" class="r_l_reg"><img src="/img/avatars/game/humans/human023.jpg" alt="" /></label></span>';
 }
 
 function humanFemaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava2" type="radio" name="avatar_id" value="2" class="r_ava_input" checked><label for="ava2" class="r_l_reg"><img src="/img/avatars/game/humans/human002.jpg" alt="" /></label></span><span><input id="ava14" type="radio" name="avatar_id" value="14" class="r_ava_input"><label for="ava14" class="r_l_reg"><img src="/img/avatars/game/humans/human004.jpg" alt="" /></label></span><span><input id="ava26" type="radio" name="avatar_id" value="26" class="r_ava_input"><label for="ava26" class="r_l_reg"><img src="/img/avatars/game/humans/human006.jpg" alt="" /></label></span><span><input id="ava38" type="radio" name="avatar_id" value="38" class="r_ava_input"><label for="ava38" class="r_l_reg"><img src="/img/avatars/game/humans/human008.jpg" alt="" /></label></span><span><input id="ava50" type="radio" name="avatar_id" value="50" class="r_ava_input"><label for="ava50" class="r_l_reg"><img src="/img/avatars/game/humans/human010.jpg" alt="" /></label></span><span><input id="ava62" type="radio" name="avatar_id" value="62" class="r_ava_input"><label for="ava62" class="r_l_reg"><img src="/img/avatars/game/humans/human012.jpg" alt="" /></label></span><span><input id="ava74" type="radio" name="avatar_id" value="74" class="r_ava_input"><label for="ava74" class="r_l_reg"><img src="/img/avatars/game/humans/human014.jpg" alt="" /></label></span><span><input id="ava86" type="radio" name="avatar_id" value="86" class="r_ava_input"><label for="ava86" class="r_l_reg"><img src="/img/avatars/game/humans/human016.jpg" alt="" /></label></span><span><input id="ava98" type="radio" name="avatar_id" value="98" class="r_ava_input"><label for="ava98" class="r_l_reg"><img src="/img/avatars/game/humans/human018.jpg" alt="" /></label></span><span><input id="ava110" type="radio" name="avatar_id" value="110" class="r_ava_input"><label for="ava110" class="r_l_reg"><img src="/img/avatars/game/humans/human020.jpg" alt="" /></label></span><span><input id="ava122" type="radio" name="avatar_id" value="122" class="r_ava_input"><label for="ava122" class="r_l_reg"><img src="/img/avatars/game/humans/human022.jpg" alt="" /></label></span><span><input id="ava134" type="radio" name="avatar_id" value="134" class="r_ava_input"><label for="ava134" class="r_l_reg"><img src="/img/avatars/game/humans/human024.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava2" type="radio" name="avatar_id" value="74" class="r_ava_input" checked>' +
+        '<label for="ava2" class="r_l_reg"><img src="/img/avatars/game/humans/human002.jpg" alt="" /></label></span>' +
+        '<span><input id="ava14" type="radio" name="avatar_id" value="76" class="r_ava_input">' +
+        '<label for="ava14" class="r_l_reg"><img src="/img/avatars/game/humans/human004.jpg" alt="" /></label></span>' +
+        '<span><input id="ava26" type="radio" name="avatar_id" value="78" class="r_ava_input">' +
+        '<label for="ava26" class="r_l_reg"><img src="/img/avatars/game/humans/human006.jpg" alt="" /></label></span>' +
+        '<span><input id="ava38" type="radio" name="avatar_id" value="80" class="r_ava_input">' +
+        '<label for="ava38" class="r_l_reg"><img src="/img/avatars/game/humans/human008.jpg" alt="" /></label></span>' +
+        '<span><input id="ava50" type="radio" name="avatar_id" value="82" class="r_ava_input">' +
+        '<label for="ava50" class="r_l_reg"><img src="/img/avatars/game/humans/human010.jpg" alt="" /></label></span>' +
+        '<span><input id="ava62" type="radio" name="avatar_id" value="84" class="r_ava_input">' +
+        '<label for="ava62" class="r_l_reg"><img src="/img/avatars/game/humans/human012.jpg" alt="" /></label></span>' +
+        '<span><input id="ava74" type="radio" name="avatar_id" value="86" class="r_ava_input">' +
+        '<label for="ava74" class="r_l_reg"><img src="/img/avatars/game/humans/human014.jpg" alt="" /></label></span>' +
+        '<span><input id="ava86" type="radio" name="avatar_id" value="88" class="r_ava_input">' +
+        '<label for="ava86" class="r_l_reg"><img src="/img/avatars/game/humans/human016.jpg" alt="" /></label></span>' +
+        '<span><input id="ava98" type="radio" name="avatar_id" value="90" class="r_ava_input">' +
+        '<label for="ava98" class="r_l_reg"><img src="/img/avatars/game/humans/human018.jpg" alt="" /></label></span>' +
+        '<span><input id="ava110" type="radio" name="avatar_id" value="92" class="r_ava_input">' +
+        '<label for="ava110" class="r_l_reg"><img src="/img/avatars/game/humans/human020.jpg" alt="" /></label></span>' +
+        '<span><input id="ava122" type="radio" name="avatar_id" value="94" class="r_ava_input">' +
+        '<label for="ava122" class="r_l_reg"><img src="/img/avatars/game/humans/human022.jpg" alt="" /></label></span>' +
+        '<span><input id="ava134" type="radio" name="avatar_id" value="96" class="r_ava_input">' +
+        '<label for="ava134" class="r_l_reg"><img src="/img/avatars/game/humans/human024.jpg" alt="" /></label></span>';
 }
 
 function elfMaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava3" type="radio" name="avatar_id" value="3" class="r_ava_input" checked><label for="ava3" class="r_l_reg"><img src="/img/avatars/game/elfs/elf001.jpg" alt="" /></label></span><span><input id="ava15" type="radio" name="avatar_id" value="15" class="r_ava_input"><label for="ava15" class="r_l_reg"><img src="/img/avatars/game/elfs/elf003.jpg" alt="" /></label></span><span><input id="ava27" type="radio" name="avatar_id" value="27" class="r_ava_input"><label for="ava27" class="r_l_reg"><img src="/img/avatars/game/elfs/elf005.jpg" alt="" /></label></span><span><input id="ava39" type="radio" name="avatar_id" value="39" class="r_ava_input"><label for="ava39" class="r_l_reg"><img src="/img/avatars/game/elfs/elf007.jpg" alt="" /></label></span><span><input id="ava51" type="radio" name="avatar_id" value="51" class="r_ava_input"><label for="ava51" class="r_l_reg"><img src="/img/avatars/game/elfs/elf009.jpg" alt="" /></label></span><span><input id="ava63" type="radio" name="avatar_id" value="63" class="r_ava_input"><label for="ava63" class="r_l_reg"><img src="/img/avatars/game/elfs/elf011.jpg" alt="" /></label></span><span><input id="ava75" type="radio" name="avatar_id" value="75" class="r_ava_input"><label for="ava75" class="r_l_reg"><img src="/img/avatars/game/elfs/elf013.jpg" alt="" /></label></span><span><input id="ava87" type="radio" name="avatar_id" value="87" class="r_ava_input"><label for="ava87" class="r_l_reg"><img src="/img/avatars/game/elfs/elf015.jpg" alt="" /></label></span><span><input id="ava99" type="radio" name="avatar_id" value="99" class="r_ava_input"><label for="ava99" class="r_l_reg"><img src="/img/avatars/game/elfs/elf017.jpg" alt="" /></label></span><span><input id="ava111" type="radio" name="avatar_id" value="111" class="r_ava_input"><label for="ava111" class="r_l_reg"><img src="/img/avatars/game/elfs/elf019.jpg" alt="" /></label></span><span><input id="ava123" type="radio" name="avatar_id" value="123" class="r_ava_input"><label for="ava123" class="r_l_reg"><img src="/img/avatars/game/elfs/elf021.jpg" alt="" /></label></span><span><input id="ava135" type="radio" name="avatar_id" value="135" class="r_ava_input"><label for="ava135" class="r_l_reg"><img src="/img/avatars/game/elfs/elf023.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava3" type="radio" name="avatar_id" value="97" class="r_ava_input" checked>' +
+        '<label for="ava3" class="r_l_reg"><img src="/img/avatars/game/elfs/elf001.jpg" alt="" /></label></span>' +
+        '<span><input id="ava15" type="radio" name="avatar_id" value="99" class="r_ava_input">' +
+        '<label for="ava15" class="r_l_reg"><img src="/img/avatars/game/elfs/elf003.jpg" alt="" /></label></span>' +
+        '<span><input id="ava27" type="radio" name="avatar_id" value="101" class="r_ava_input">' +
+        '<label for="ava27" class="r_l_reg"><img src="/img/avatars/game/elfs/elf005.jpg" alt="" /></label></span>' +
+        '<span><input id="ava39" type="radio" name="avatar_id" value="103" class="r_ava_input">' +
+        '<label for="ava39" class="r_l_reg"><img src="/img/avatars/game/elfs/elf007.jpg" alt="" /></label></span>' +
+        '<span><input id="ava51" type="radio" name="avatar_id" value="105" class="r_ava_input">' +
+        '<label for="ava51" class="r_l_reg"><img src="/img/avatars/game/elfs/elf009.jpg" alt="" /></label></span>' +
+        '<span><input id="ava63" type="radio" name="avatar_id" value="107" class="r_ava_input">' +
+        '<label for="ava63" class="r_l_reg"><img src="/img/avatars/game/elfs/elf011.jpg" alt="" /></label></span>' +
+        '<span><input id="ava75" type="radio" name="avatar_id" value="109" class="r_ava_input">' +
+        '<label for="ava75" class="r_l_reg"><img src="/img/avatars/game/elfs/elf013.jpg" alt="" /></label></span>' +
+        '<span><input id="ava87" type="radio" name="avatar_id" value="111" class="r_ava_input">' +
+        '<label for="ava87" class="r_l_reg"><img src="/img/avatars/game/elfs/elf015.jpg" alt="" /></label></span>' +
+        '<span><input id="ava99" type="radio" name="avatar_id" value="113" class="r_ava_input">' +
+        '<label for="ava99" class="r_l_reg"><img src="/img/avatars/game/elfs/elf017.jpg" alt="" /></label></span>' +
+        '<span><input id="ava111" type="radio" name="avatar_id" value="115" class="r_ava_input">' +
+        '<label for="ava111" class="r_l_reg"><img src="/img/avatars/game/elfs/elf019.jpg" alt="" /></label></span>' +
+        '<span><input id="ava123" type="radio" name="avatar_id" value="117" class="r_ava_input">' +
+        '<label for="ava123" class="r_l_reg"><img src="/img/avatars/game/elfs/elf021.jpg" alt="" /></label></span>' +
+        '<span><input id="ava135" type="radio" name="avatar_id" value="119" class="r_ava_input">' +
+        '<label for="ava135" class="r_l_reg"><img src="/img/avatars/game/elfs/elf023.jpg" alt="" /></label></span>';
 }
 
 function elfFemaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava4" type="radio" name="avatar_id" value="4" class="r_ava_input" checked><label for="ava4" class="r_l_reg"><img src="/img/avatars/game/elfs/elf002.jpg" alt="" /></label></span><span><input id="ava16" type="radio" name="avatar_id" value="16" class="r_ava_input"><label for="ava16" class="r_l_reg"><img src="/img/avatars/game/elfs/elf004.jpg" alt="" /></label></span><span><input id="ava28" type="radio" name="avatar_id" value="28" class="r_ava_input"><label for="ava28" class="r_l_reg"><img src="/img/avatars/game/elfs/elf006.jpg" alt="" /></label></span><span><input id="ava40" type="radio" name="avatar_id" value="40" class="r_ava_input"><label for="ava40" class="r_l_reg"><img src="/img/avatars/game/elfs/elf008.jpg" alt="" /></label></span><span><input id="ava52" type="radio" name="avatar_id" value="52" class="r_ava_input"><label for="ava52" class="r_l_reg"><img src="/img/avatars/game/elfs/elf010.jpg" alt="" /></label></span><span><input id="ava64" type="radio" name="avatar_id" value="64" class="r_ava_input"><label for="ava64" class="r_l_reg"><img src="/img/avatars/game/elfs/elf012.jpg" alt="" /></label></span><span><input id="ava76" type="radio" name="avatar_id" value="76" class="r_ava_input"><label for="ava76" class="r_l_reg"><img src="/img/avatars/game/elfs/elf014.jpg" alt="" /></label></span><span><input id="ava88" type="radio" name="avatar_id" value="88" class="r_ava_input"><label for="ava88" class="r_l_reg"><img src="/img/avatars/game/elfs/elf016.jpg" alt="" /></label></span><span><input id="ava100" type="radio" name="avatar_id" value="100" class="r_ava_input"><label for="ava100" class="r_l_reg"><img src="/img/avatars/game/elfs/elf018.jpg" alt="" /></label></span><span><input id="ava112" type="radio" name="avatar_id" value="112" class="r_ava_input"><label for="ava112" class="r_l_reg"><img src="/img/avatars/game/elfs/elf020.jpg" alt="" /></label></span><span><input id="ava124" type="radio" name="avatar_id" value="124" class="r_ava_input"><label for="ava124" class="r_l_reg"><img src="/img/avatars/game/elfs/elf022.jpg" alt="" /></label></span><span><input id="ava136" type="radio" name="avatar_id" value="136" class="r_ava_input"><label for="ava136" class="r_l_reg"><img src="/img/avatars/game/elfs/elf024.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava4" type="radio" name="avatar_id" value="98" class="r_ava_input" checked>' +
+        '<label for="ava4" class="r_l_reg"><img src="/img/avatars/game/elfs/elf002.jpg" alt="" /></label></span>' +
+        '<span><input id="ava16" type="radio" name="avatar_id" value="100" class="r_ava_input">' +
+        '<label for="ava16" class="r_l_reg"><img src="/img/avatars/game/elfs/elf004.jpg" alt="" /></label></span>' +
+        '<span><input id="ava28" type="radio" name="avatar_id" value="102" class="r_ava_input">' +
+        '<label for="ava28" class="r_l_reg"><img src="/img/avatars/game/elfs/elf006.jpg" alt="" /></label></span>' +
+        '<span><input id="ava40" type="radio" name="avatar_id" value="104" class="r_ava_input">' +
+        '<label for="ava40" class="r_l_reg"><img src="/img/avatars/game/elfs/elf008.jpg" alt="" /></label></span>' +
+        '<span><input id="ava52" type="radio" name="avatar_id" value="106" class="r_ava_input">' +
+        '<label for="ava52" class="r_l_reg"><img src="/img/avatars/game/elfs/elf010.jpg" alt="" /></label></span>' +
+        '<span><input id="ava64" type="radio" name="avatar_id" value="108" class="r_ava_input">' +
+        '<label for="ava64" class="r_l_reg"><img src="/img/avatars/game/elfs/elf012.jpg" alt="" /></label></span>' +
+        '<span><input id="ava76" type="radio" name="avatar_id" value="110" class="r_ava_input">' +
+        '<label for="ava76" class="r_l_reg"><img src="/img/avatars/game/elfs/elf014.jpg" alt="" /></label></span>' +
+        '<span><input id="ava88" type="radio" name="avatar_id" value="112" class="r_ava_input">' +
+        '<label for="ava88" class="r_l_reg"><img src="/img/avatars/game/elfs/elf016.jpg" alt="" /></label></span>' +
+        '<span><input id="ava100" type="radio" name="avatar_id" value="114" class="r_ava_input">' +
+        '<label for="ava100" class="r_l_reg"><img src="/img/avatars/game/elfs/elf018.jpg" alt="" /></label></span>' +
+        '<span><input id="ava112" type="radio" name="avatar_id" value="116" class="r_ava_input">' +
+        '<label for="ava112" class="r_l_reg"><img src="/img/avatars/game/elfs/elf020.jpg" alt="" /></label></span>' +
+        '<span><input id="ava124" type="radio" name="avatar_id" value="118" class="r_ava_input">' +
+        '<label for="ava124" class="r_l_reg"><img src="/img/avatars/game/elfs/elf022.jpg" alt="" /></label></span>' +
+        '<span><input id="ava136" type="radio" name="avatar_id" value="120" class="r_ava_input">' +
+        '<label for="ava136" class="r_l_reg"><img src="/img/avatars/game/elfs/elf024.jpg" alt="" /></label></span>';
 }
 
 function orcMaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava5" type="radio" name="avatar_id" value="5" class="r_ava_input" checked><label for="ava5" class="r_l_reg"><img src="/img/avatars/game/orcs/orc001.jpg" alt="" /></label></span><span><input id="ava17" type="radio" name="avatar_id" value="17" class="r_ava_input"><label for="ava17" class="r_l_reg"><img src="/img/avatars/game/orcs/orc003.jpg" alt="" /></label></span><span><input id="ava29" type="radio" name="avatar_id" value="29" class="r_ava_input"><label for="ava29" class="r_l_reg"><img src="/img/avatars/game/orcs/orc005.jpg" alt="" /></label></span><span><input id="ava41" type="radio" name="avatar_id" value="41" class="r_ava_input"><label for="ava41" class="r_l_reg"><img src="/img/avatars/game/orcs/orc007.jpg" alt="" /></label></span><span><input id="ava53" type="radio" name="avatar_id" value="53" class="r_ava_input"><label for="ava53" class="r_l_reg"><img src="/img/avatars/game/orcs/orc009.jpg" alt="" /></label></span><span><input id="ava65" type="radio" name="avatar_id" value="65" class="r_ava_input"><label for="ava65" class="r_l_reg"><img src="/img/avatars/game/orcs/orc011.jpg" alt="" /></label></span><span><input id="ava77" type="radio" name="avatar_id" value="77" class="r_ava_input"><label for="ava77" class="r_l_reg"><img src="/img/avatars/game/orcs/orc013.jpg" alt="" /></label></span><span><input id="ava89" type="radio" name="avatar_id" value="89" class="r_ava_input"><label for="ava89" class="r_l_reg"><img src="/img/avatars/game/orcs/orc015.jpg" alt="" /></label></span><span><input id="ava101" type="radio" name="avatar_id" value="101" class="r_ava_input"><label for="ava101" class="r_l_reg"><img src="/img/avatars/game/orcs/orc017.jpg" alt="" /></label></span><span><input id="ava113" type="radio" name="avatar_id" value="113" class="r_ava_input"><label for="ava113" class="r_l_reg"><img src="/img/avatars/game/orcs/orc019.jpg" alt="" /></label></span><span><input id="ava125" type="radio" name="avatar_id" value="125" class="r_ava_input"><label for="ava125" class="r_l_reg"><img src="/img/avatars/game/orcs/orc021.jpg" alt="" /></label></span><span><input id="ava137" type="radio" name="avatar_id" value="137" class="r_ava_input"><label for="ava137" class="r_l_reg"><img src="/img/avatars/game/orcs/orc023.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava5" type="radio" name="avatar_id" value="121" class="r_ava_input" checked>' +
+        '<label for="ava5" class="r_l_reg"><img src="/img/avatars/game/orcs/orc001.jpg" alt="" /></label></span>' +
+        '<span><input id="ava17" type="radio" name="avatar_id" value="123" class="r_ava_input">' +
+        '<label for="ava17" class="r_l_reg"><img src="/img/avatars/game/orcs/orc003.jpg" alt="" /></label></span>' +
+        '<span><input id="ava29" type="radio" name="avatar_id" value="125" class="r_ava_input">' +
+        '<label for="ava29" class="r_l_reg"><img src="/img/avatars/game/orcs/orc005.jpg" alt="" /></label></span>' +
+        '<span><input id="ava41" type="radio" name="avatar_id" value="127" class="r_ava_input">' +
+        '<label for="ava41" class="r_l_reg"><img src="/img/avatars/game/orcs/orc007.jpg" alt="" /></label></span>' +
+        '<span><input id="ava53" type="radio" name="avatar_id" value="129" class="r_ava_input">' +
+        '<label for="ava53" class="r_l_reg"><img src="/img/avatars/game/orcs/orc009.jpg" alt="" /></label></span>' +
+        '<span><input id="ava65" type="radio" name="avatar_id" value="131" class="r_ava_input">' +
+        '<label for="ava65" class="r_l_reg"><img src="/img/avatars/game/orcs/orc011.jpg" alt="" /></label></span>' +
+        '<span><input id="ava77" type="radio" name="avatar_id" value="133" class="r_ava_input">' +
+        '<label for="ava77" class="r_l_reg"><img src="/img/avatars/game/orcs/orc013.jpg" alt="" /></label></span>' +
+        '<span><input id="ava89" type="radio" name="avatar_id" value="135" class="r_ava_input">' +
+        '<label for="ava89" class="r_l_reg"><img src="/img/avatars/game/orcs/orc015.jpg" alt="" /></label></span>' +
+        '<span><input id="ava101" type="radio" name="avatar_id" value="137" class="r_ava_input">' +
+        '<label for="ava101" class="r_l_reg"><img src="/img/avatars/game/orcs/orc017.jpg" alt="" /></label></span>' +
+        '<span><input id="ava113" type="radio" name="avatar_id" value="139" class="r_ava_input">' +
+        '<label for="ava113" class="r_l_reg"><img src="/img/avatars/game/orcs/orc019.jpg" alt="" /></label></span>' +
+        '<span><input id="ava125" type="radio" name="avatar_id" value="141" class="r_ava_input">' +
+        '<label for="ava125" class="r_l_reg"><img src="/img/avatars/game/orcs/orc021.jpg" alt="" /></label></span>' +
+        '<span><input id="ava137" type="radio" name="avatar_id" value="143" class="r_ava_input">' +
+        '<label for="ava137" class="r_l_reg"><img src="/img/avatars/game/orcs/orc023.jpg" alt="" /></label></span>';
 }
 
 function orcFemaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava6" type="radio" name="avatar_id" value="6" class="r_ava_input" checked><label for="ava6" class="r_l_reg"><img src="/img/avatars/game/orcs/orc002.jpg" alt="" /></label></span><span><input id="ava18" type="radio" name="avatar_id" value="18" class="r_ava_input"><label for="ava18" class="r_l_reg"><img src="/img/avatars/game/orcs/orc004.jpg" alt="" /></label></span><span><input id="ava30" type="radio" name="avatar_id" value="30" class="r_ava_input"><label for="ava30" class="r_l_reg"><img src="/img/avatars/game/orcs/orc006.jpg" alt="" /></label></span><span><input id="ava42" type="radio" name="avatar_id" value="42" class="r_ava_input"><label for="ava42" class="r_l_reg"><img src="/img/avatars/game/orcs/orc008.jpg" alt="" /></label></span><span><input id="ava54" type="radio" name="avatar_id" value="54" class="r_ava_input"><label for="ava54" class="r_l_reg"><img src="/img/avatars/game/orcs/orc010.jpg" alt="" /></label></span><span><input id="ava66" type="radio" name="avatar_id" value="66" class="r_ava_input"><label for="ava66" class="r_l_reg"><img src="/img/avatars/game/orcs/orc012.jpg" alt="" /></label></span><span><input id="ava78" type="radio" name="avatar_id" value="78" class="r_ava_input"><label for="ava78" class="r_l_reg"><img src="/img/avatars/game/orcs/orc014.jpg" alt="" /></label></span><span><input id="ava90" type="radio" name="avatar_id" value="90" class="r_ava_input"><label for="ava90" class="r_l_reg"><img src="/img/avatars/game/orcs/orc016.jpg" alt="" /></label></span><span><input id="ava102" type="radio" name="avatar_id" value="102" class="r_ava_input"><label for="ava102" class="r_l_reg"><img src="/img/avatars/game/orcs/orc018.jpg" alt="" /></label></span><span><input id="ava114" type="radio" name="avatar_id" value="114" class="r_ava_input"><label for="ava114" class="r_l_reg"><img src="/img/avatars/game/orcs/orc020.jpg" alt="" /></label></span><span><input id="ava126" type="radio" name="avatar_id" value="126" class="r_ava_input"><label for="ava126" class="r_l_reg"><img src="/img/avatars/game/orcs/orc022.jpg" alt="" /></label></span><span><input id="ava138" type="radio" name="avatar_id" value="138" class="r_ava_input"><label for="ava138" class="r_l_reg"><img src="/img/avatars/game/orcs/orc024.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava6" type="radio" name="avatar_id" value="122" class="r_ava_input" checked>' +
+        '<label for="ava6" class="r_l_reg"><img src="/img/avatars/game/orcs/orc002.jpg" alt="" /></label></span>' +
+        '<span><input id="ava18" type="radio" name="avatar_id" value="124" class="r_ava_input">' +
+        '<label for="ava18" class="r_l_reg"><img src="/img/avatars/game/orcs/orc004.jpg" alt="" /></label></span>' +
+        '<span><input id="ava30" type="radio" name="avatar_id" value="126" class="r_ava_input">' +
+        '<label for="ava30" class="r_l_reg"><img src="/img/avatars/game/orcs/orc006.jpg" alt="" /></label></span>' +
+        '<span><input id="ava42" type="radio" name="avatar_id" value="128" class="r_ava_input">' +
+        '<label for="ava42" class="r_l_reg"><img src="/img/avatars/game/orcs/orc008.jpg" alt="" /></label></span>' +
+        '<span><input id="ava54" type="radio" name="avatar_id" value="130" class="r_ava_input">' +
+        '<label for="ava54" class="r_l_reg"><img src="/img/avatars/game/orcs/orc010.jpg" alt="" /></label></span>' +
+        '<span><input id="ava66" type="radio" name="avatar_id" value="132" class="r_ava_input">' +
+        '<label for="ava66" class="r_l_reg"><img src="/img/avatars/game/orcs/orc012.jpg" alt="" /></label></span>' +
+        '<span><input id="ava78" type="radio" name="avatar_id" value="134" class="r_ava_input">' +
+        '<label for="ava78" class="r_l_reg"><img src="/img/avatars/game/orcs/orc014.jpg" alt="" /></label></span>' +
+        '<span><input id="ava90" type="radio" name="avatar_id" value="136" class="r_ava_input">' +
+        '<label for="ava90" class="r_l_reg"><img src="/img/avatars/game/orcs/orc016.jpg" alt="" /></label></span>' +
+        '<span><input id="ava102" type="radio" name="avatar_id" value="138" class="r_ava_input">' +
+        '<label for="ava102" class="r_l_reg"><img src="/img/avatars/game/orcs/orc018.jpg" alt="" /></label></span>' +
+        '<span><input id="ava114" type="radio" name="avatar_id" value="140" class="r_ava_input">' +
+        '<label for="ava114" class="r_l_reg"><img src="/img/avatars/game/orcs/orc020.jpg" alt="" /></label></span>' +
+        '<span><input id="ava126" type="radio" name="avatar_id" value="142" class="r_ava_input">' +
+        '<label for="ava126" class="r_l_reg"><img src="/img/avatars/game/orcs/orc022.jpg" alt="" /></label></span>' +
+        '<span><input id="ava138" type="radio" name="avatar_id" value="144" class="r_ava_input">' +
+        '<label for="ava138" class="r_l_reg"><img src="/img/avatars/game/orcs/orc024.jpg" alt="" /></label></span>';
 }
 
 function dwarfMaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava7" type="radio" name="avatar_id" value="7" class="r_ava_input" checked><label for="ava7" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf001.jpg" alt="" /></label></span><span><input id="ava19" type="radio" name="avatar_id" value="19" class="r_ava_input"><label for="ava19" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf003.jpg" alt="" /></label></span><span><input id="ava31" type="radio" name="avatar_id" value="31" class="r_ava_input"><label for="ava31" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf005.jpg" alt="" /></label></span><span><input id="ava43" type="radio" name="avatar_id" value="43" class="r_ava_input"><label for="ava43" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf007.jpg" alt="" /></label></span><span><input id="ava55" type="radio" name="avatar_id" value="55" class="r_ava_input"><label for="ava55" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf009.jpg" alt="" /></label></span><span><input id="ava67" type="radio" name="avatar_id" value="67" class="r_ava_input"><label for="ava67" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf011.jpg" alt="" /></label></span><span><input id="ava79" type="radio" name="avatar_id" value="79" class="r_ava_input"><label for="ava79" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf013.jpg" alt="" /></label></span><span><input id="ava91" type="radio" name="avatar_id" value="91" class="r_ava_input"><label for="ava91" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf015.jpg" alt="" /></label></span><span><input id="ava103" type="radio" name="avatar_id" value="103" class="r_ava_input"><label for="ava103" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf017.jpg" alt="" /></label></span><span><input id="ava115" type="radio" name="avatar_id" value="115" class="r_ava_input"><label for="ava115" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf019.jpg" alt="" /></label></span><span><input id="ava127" type="radio" name="avatar_id" value="127" class="r_ava_input"><label for="ava127" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf021.jpg" alt="" /></label></span><span><input id="ava139" type="radio" name="avatar_id" value="139" class="r_ava_input"><label for="ava139" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf023.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava7" type="radio" name="avatar_id" value="145" class="r_ava_input" checked>' +
+        '<label for="ava7" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf001.jpg" alt="" /></label></span>' +
+        '<span><input id="ava19" type="radio" name="avatar_id" value="147" class="r_ava_input">' +
+        '<label for="ava19" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf003.jpg" alt="" /></label></span>' +
+        '<span><input id="ava31" type="radio" name="avatar_id" value="149" class="r_ava_input">' +
+        '<label for="ava31" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf005.jpg" alt="" /></label></span>' +
+        '<span><input id="ava43" type="radio" name="avatar_id" value="151" class="r_ava_input">' +
+        '<label for="ava43" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf007.jpg" alt="" /></label></span>' +
+        '<span><input id="ava55" type="radio" name="avatar_id" value="153" class="r_ava_input">' +
+        '<label for="ava55" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf009.jpg" alt="" /></label></span>' +
+        '<span><input id="ava67" type="radio" name="avatar_id" value="155" class="r_ava_input">' +
+        '<label for="ava67" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf011.jpg" alt="" /></label></span>' +
+        '<span><input id="ava79" type="radio" name="avatar_id" value="157" class="r_ava_input">' +
+        '<label for="ava79" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf013.jpg" alt="" /></label></span>' +
+        '<span><input id="ava91" type="radio" name="avatar_id" value="159" class="r_ava_input">' +
+        '<label for="ava91" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf015.jpg" alt="" /></label></span>' +
+        '<span><input id="ava103" type="radio" name="avatar_id" value="161" class="r_ava_input">' +
+        '<label for="ava103" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf017.jpg" alt="" /></label></span>' +
+        '<span><input id="ava115" type="radio" name="avatar_id" value="163" class="r_ava_input">' +
+        '<label for="ava115" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf019.jpg" alt="" /></label></span>' +
+        '<span><input id="ava127" type="radio" name="avatar_id" value="165" class="r_ava_input">' +
+        '<label for="ava127" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf021.jpg" alt="" /></label></span>' +
+        '<span><input id="ava139" type="radio" name="avatar_id" value="167" class="r_ava_input">' +
+        '<label for="ava139" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf023.jpg" alt="" /></label></span>';
 }
 
 function dwarfFemaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava8" type="radio" name="avatar_id" value="8" class="r_ava_input" checked><label for="ava8" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf002.jpg" alt="" /></label></span><span><input id="ava20" type="radio" name="avatar_id" value="20" class="r_ava_input"><label for="ava20" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf004.jpg" alt="" /></label></span><span><input id="ava32" type="radio" name="avatar_id" value="32" class="r_ava_input"><label for="ava32" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf006.jpg" alt="" /></label></span><span><input id="ava44" type="radio" name="avatar_id" value="44" class="r_ava_input"><label for="ava44" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf008.jpg" alt="" /></label></span><span><input id="ava56" type="radio" name="avatar_id" value="56" class="r_ava_input"><label for="ava56" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf010.jpg" alt="" /></label></span><span><input id="ava68" type="radio" name="avatar_id" value="68" class="r_ava_input"><label for="ava68" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf012.jpg" alt="" /></label></span><span><input id="ava80" type="radio" name="avatar_id" value="80" class="r_ava_input"><label for="ava80" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf014.jpg" alt="" /></label></span><span><input id="ava92" type="radio" name="avatar_id" value="92" class="r_ava_input"><label for="ava92" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf016.jpg" alt="" /></label></span><span><input id="ava104" type="radio" name="avatar_id" value="104" class="r_ava_input"><label for="ava104" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf018.jpg" alt="" /></label></span><span><input id="ava116" type="radio" name="avatar_id" value="116" class="r_ava_input"><label for="ava116" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf020.jpg" alt="" /></label></span><span><input id="ava128" type="radio" name="avatar_id" value="128" class="r_ava_input"><label for="ava128" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf022.jpg" alt="" /></label></span><span><input id="ava140" type="radio" name="avatar_id" value="140" class="r_ava_input"><label for="ava140" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf024.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava8" type="radio" name="avatar_id" value="146" class="r_ava_input" checked>' +
+        '<label for="ava8" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf002.jpg" alt="" /></label></span>' +
+        '<span><input id="ava20" type="radio" name="avatar_id" value="148" class="r_ava_input">' +
+        '<label for="ava20" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf004.jpg" alt="" /></label></span>' +
+        '<span><input id="ava32" type="radio" name="avatar_id" value="150" class="r_ava_input">' +
+        '<label for="ava32" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf006.jpg" alt="" /></label></span>' +
+        '<span><input id="ava44" type="radio" name="avatar_id" value="152" class="r_ava_input">' +
+        '<label for="ava44" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf008.jpg" alt="" /></label></span>' +
+        '<span><input id="ava56" type="radio" name="avatar_id" value="154" class="r_ava_input">' +
+        '<label for="ava56" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf010.jpg" alt="" /></label></span>' +
+        '<span><input id="ava68" type="radio" name="avatar_id" value="156" class="r_ava_input">' +
+        '<label for="ava68" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf012.jpg" alt="" /></label></span>' +
+        '<span><input id="ava80" type="radio" name="avatar_id" value="158" class="r_ava_input">' +
+        '<label for="ava80" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf014.jpg" alt="" /></label></span>' +
+        '<span><input id="ava92" type="radio" name="avatar_id" value="160" class="r_ava_input">' +
+        '<label for="ava92" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf016.jpg" alt="" /></label></span>' +
+        '<span><input id="ava104" type="radio" name="avatar_id" value="162" class="r_ava_input">' +
+        '<label for="ava104" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf018.jpg" alt="" /></label></span>' +
+        '<span><input id="ava116" type="radio" name="avatar_id" value="164" class="r_ava_input">' +
+        '<label for="ava116" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf020.jpg" alt="" /></label></span>' +
+        '<span><input id="ava128" type="radio" name="avatar_id" value="166" class="r_ava_input">' +
+        '<label for="ava128" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf022.jpg" alt="" /></label></span>' +
+        '<span><input id="ava140" type="radio" name="avatar_id" value="168" class="r_ava_input">' +
+        '<label for="ava140" class="r_l_reg"><img src="/img/avatars/game/dwarfs/dwarf024.jpg" alt="" /></label></span>';
 }
 
 function angelMaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava9" type="radio" name="avatar_id" value="9" class="r_ava_input" checked><label for="ava9" class="r_l_reg"><img src="/img/avatars/game/angels/angel001.jpg" alt="" /></label></span><span><input id="ava21" type="radio" name="avatar_id" value="21" class="r_ava_input"><label for="ava21" class="r_l_reg"><img src="/img/avatars/game/angels/angel003.jpg" alt="" /></label></span><span><input id="ava33" type="radio" name="avatar_id" value="33" class="r_ava_input"><label for="ava33" class="r_l_reg"><img src="/img/avatars/game/angels/angel005.jpg" alt="" /></label></span><span><input id="ava45" type="radio" name="avatar_id" value="45" class="r_ava_input"><label for="ava45" class="r_l_reg"><img src="/img/avatars/game/angels/angel007.jpg" alt="" /></label></span><span><input id="ava57" type="radio" name="avatar_id" value="57" class="r_ava_input"><label for="ava57" class="r_l_reg"><img src="/img/avatars/game/angels/angel009.jpg" alt="" /></label></span><span><input id="ava69" type="radio" name="avatar_id" value="69" class="r_ava_input"><label for="ava69" class="r_l_reg"><img src="/img/avatars/game/angels/angel011.jpg" alt="" /></label></span><span><input id="ava81" type="radio" name="avatar_id" value="81" class="r_ava_input"><label for="ava81" class="r_l_reg"><img src="/img/avatars/game/angels/angel013.jpg" alt="" /></label></span><span><input id="ava93" type="radio" name="avatar_id" value="93" class="r_ava_input"><label for="ava93" class="r_l_reg"><img src="/img/avatars/game/angels/angel015.jpg" alt="" /></label></span><span><input id="ava105" type="radio" name="avatar_id" value="105" class="r_ava_input"><label for="ava105" class="r_l_reg"><img src="/img/avatars/game/angels/angel017.jpg" alt="" /></label></span><span><input id="ava117" type="radio" name="avatar_id" value="117" class="r_ava_input"><label for="ava117" class="r_l_reg"><img src="/img/avatars/game/angels/angel019.jpg" alt="" /></label></span><span><input id="ava129" type="radio" name="avatar_id" value="129" class="r_ava_input"><label for="ava129" class="r_l_reg"><img src="/img/avatars/game/angels/angel021.jpg" alt="" /></label></span><span><input id="ava141" type="radio" name="avatar_id" value="141" class="r_ava_input"><label for="ava141" class="r_l_reg"><img src="/img/avatars/game/angels/angel023.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava9" type="radio" name="avatar_id" value="169" class="r_ava_input" checked>' +
+        '<label for="ava9" class="r_l_reg"><img src="/img/avatars/game/angels/angel001.jpg" alt="" /></label></span>' +
+        '<span><input id="ava21" type="radio" name="avatar_id" value="171" class="r_ava_input">' +
+        '<label for="ava21" class="r_l_reg"><img src="/img/avatars/game/angels/angel003.jpg" alt="" /></label></span>' +
+        '<span><input id="ava33" type="radio" name="avatar_id" value="173" class="r_ava_input">' +
+        '<label for="ava33" class="r_l_reg"><img src="/img/avatars/game/angels/angel005.jpg" alt="" /></label></span>' +
+        '<span><input id="ava45" type="radio" name="avatar_id" value="175" class="r_ava_input">' +
+        '<label for="ava45" class="r_l_reg"><img src="/img/avatars/game/angels/angel007.jpg" alt="" /></label></span>' +
+        '<span><input id="ava57" type="radio" name="avatar_id" value="177" class="r_ava_input">' +
+        '<label for="ava57" class="r_l_reg"><img src="/img/avatars/game/angels/angel009.jpg" alt="" /></label></span>' +
+        '<span><input id="ava69" type="radio" name="avatar_id" value="179" class="r_ava_input">' +
+        '<label for="ava69" class="r_l_reg"><img src="/img/avatars/game/angels/angel011.jpg" alt="" /></label></span>' +
+        '<span><input id="ava81" type="radio" name="avatar_id" value="181" class="r_ava_input">' +
+        '<label for="ava81" class="r_l_reg"><img src="/img/avatars/game/angels/angel013.jpg" alt="" /></label></span>' +
+        '<span><input id="ava93" type="radio" name="avatar_id" value="183" class="r_ava_input">' +
+        '<label for="ava93" class="r_l_reg"><img src="/img/avatars/game/angels/angel015.jpg" alt="" /></label></span>' +
+        '<span><input id="ava105" type="radio" name="avatar_id" value="185" class="r_ava_input">' +
+        '<label for="ava105" class="r_l_reg"><img src="/img/avatars/game/angels/angel017.jpg" alt="" /></label></span>' +
+        '<span><input id="ava117" type="radio" name="avatar_id" value="187" class="r_ava_input">' +
+        '<label for="ava117" class="r_l_reg"><img src="/img/avatars/game/angels/angel019.jpg" alt="" /></label></span>' +
+        '<span><input id="ava129" type="radio" name="avatar_id" value="189" class="r_ava_input">' +
+        '<label for="ava129" class="r_l_reg"><img src="/img/avatars/game/angels/angel021.jpg" alt="" /></label></span>' +
+        '<span><input id="ava141" type="radio" name="avatar_id" value="191" class="r_ava_input">' +
+        '<label for="ava141" class="r_l_reg"><img src="/img/avatars/game/angels/angel023.jpg" alt="" /></label></span>';
 }
 
 function angelFemaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava10" type="radio" name="avatar_id" value="10" class="r_ava_input" checked><label for="ava10" class="r_l_reg"><img src="/img/avatars/game/angels/angel002.jpg" alt="" /></label></span><span><input id="ava22" type="radio" name="avatar_id" value="22" class="r_ava_input"><label for="ava22" class="r_l_reg"><img src="/img/avatars/game/angels/angel004.jpg" alt="" /></label></span><span><input id="ava34" type="radio" name="avatar_id" value="34" class="r_ava_input"><label for="ava34" class="r_l_reg"><img src="/img/avatars/game/angels/angel006.jpg" alt="" /></label></span><span><input id="ava46" type="radio" name="avatar_id" value="46" class="r_ava_input"><label for="ava46" class="r_l_reg"><img src="/img/avatars/game/angels/angel008.jpg" alt="" /></label></span><span><input id="ava58" type="radio" name="avatar_id" value="58" class="r_ava_input"><label for="ava58" class="r_l_reg"><img src="/img/avatars/game/angels/angel010.jpg" alt="" /></label></span><span><input id="ava70" type="radio" name="avatar_id" value="70" class="r_ava_input"><label for="ava70" class="r_l_reg"><img src="/img/avatars/game/angels/angel012.jpg" alt="" /></label></span><span><input id="ava82" type="radio" name="avatar_id" value="82" class="r_ava_input"><label for="ava82" class="r_l_reg"><img src="/img/avatars/game/angels/angel014.jpg" alt="" /></label></span><span><input id="ava94" type="radio" name="avatar_id" value="94" class="r_ava_input"><label for="ava94" class="r_l_reg"><img src="/img/avatars/game/angels/angel016.jpg" alt="" /></label></span><span><input id="ava106" type="radio" name="avatar_id" value="106" class="r_ava_input"><label for="ava106" class="r_l_reg"><img src="/img/avatars/game/angels/angel018.jpg" alt="" /></label></span><span><input id="ava118" type="radio" name="avatar_id" value="118" class="r_ava_input"><label for="ava118" class="r_l_reg"><img src="/img/avatars/game/angels/angel020.jpg" alt="" /></label></span><span><input id="ava130" type="radio" name="avatar_id" value="130" class="r_ava_input"><label for="ava130" class="r_l_reg"><img src="/img/avatars/game/angels/angel022.jpg" alt="" /></label></span><span><input id="ava142" type="radio" name="avatar_id" value="142" class="r_ava_input"><label for="ava142" class="r_l_reg"><img src="/img/avatars/game/angels/angel024.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava10" type="radio" name="avatar_id" value="170" class="r_ava_input" checked>' +
+        '<label for="ava10" class="r_l_reg"><img src="/img/avatars/game/angels/angel002.jpg" alt="" /></label></span>' +
+        '<span><input id="ava22" type="radio" name="avatar_id" value="172" class="r_ava_input">' +
+        '<label for="ava22" class="r_l_reg"><img src="/img/avatars/game/angels/angel004.jpg" alt="" /></label></span>' +
+        '<span><input id="ava34" type="radio" name="avatar_id" value="174" class="r_ava_input">' +
+        '<label for="ava34" class="r_l_reg"><img src="/img/avatars/game/angels/angel006.jpg" alt="" /></label></span>' +
+        '<span><input id="ava46" type="radio" name="avatar_id" value="176" class="r_ava_input">' +
+        '<label for="ava46" class="r_l_reg"><img src="/img/avatars/game/angels/angel008.jpg" alt="" /></label></span>' +
+        '<span><input id="ava58" type="radio" name="avatar_id" value="178" class="r_ava_input">' +
+        '<label for="ava58" class="r_l_reg"><img src="/img/avatars/game/angels/angel010.jpg" alt="" /></label></span>' +
+        '<span><input id="ava70" type="radio" name="avatar_id" value="180" class="r_ava_input">' +
+        '<label for="ava70" class="r_l_reg"><img src="/img/avatars/game/angels/angel012.jpg" alt="" /></label></span>' +
+        '<span><input id="ava82" type="radio" name="avatar_id" value="182" class="r_ava_input">' +
+        '<label for="ava82" class="r_l_reg"><img src="/img/avatars/game/angels/angel014.jpg" alt="" /></label></span>' +
+        '<span><input id="ava94" type="radio" name="avatar_id" value="184" class="r_ava_input">' +
+        '<label for="ava94" class="r_l_reg"><img src="/img/avatars/game/angels/angel016.jpg" alt="" /></label></span>' +
+        '<span><input id="ava106" type="radio" name="avatar_id" value="186" class="r_ava_input">' +
+        '<label for="ava106" class="r_l_reg"><img src="/img/avatars/game/angels/angel018.jpg" alt="" /></label></span>' +
+        '<span><input id="ava118" type="radio" name="avatar_id" value="188" class="r_ava_input">' +
+        '<label for="ava118" class="r_l_reg"><img src="/img/avatars/game/angels/angel020.jpg" alt="" /></label></span>' +
+        '<span><input id="ava130" type="radio" name="avatar_id" value="190" class="r_ava_input">' +
+        '<label for="ava130" class="r_l_reg"><img src="/img/avatars/game/angels/angel022.jpg" alt="" /></label></span>' +
+        '<span><input id="ava142" type="radio" name="avatar_id" value="192" class="r_ava_input">' +
+        '<label for="ava142" class="r_l_reg"><img src="/img/avatars/game/angels/angel024.jpg" alt="" /></label></span>';
 }
 
 function demonMaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava11" type="radio" name="avatar_id" value="11" class="r_ava_input" checked><label for="ava11" class="r_l_reg"><img src="/img/avatars/game/demons/demon001.jpg" alt="" /></label></span><span><input id="ava23" type="radio" name="avatar_id" value="23" class="r_ava_input"><label for="ava23" class="r_l_reg"><img src="/img/avatars/game/demons/demon003.jpg" alt="" /></label></span><span><input id="ava35" type="radio" name="avatar_id" value="35" class="r_ava_input"><label for="ava35" class="r_l_reg"><img src="/img/avatars/game/demons/demon005.jpg" alt="" /></label></span><span><input id="ava47" type="radio" name="avatar_id" value="47" class="r_ava_input"><label for="ava47" class="r_l_reg"><img src="/img/avatars/game/demons/demon007.jpg" alt="" /></label></span><span><input id="ava59" type="radio" name="avatar_id" value="59" class="r_ava_input"><label for="ava59" class="r_l_reg"><img src="/img/avatars/game/demons/demon009.jpg" alt="" /></label></span><span><input id="ava71" type="radio" name="avatar_id" value="71" class="r_ava_input"><label for="ava71" class="r_l_reg"><img src="/img/avatars/game/demons/demon011.jpg" alt="" /></label></span><span><input id="ava83" type="radio" name="avatar_id" value="83" class="r_ava_input"><label for="ava83" class="r_l_reg"><img src="/img/avatars/game/demons/demon013.jpg" alt="" /></label></span><span><input id="ava95" type="radio" name="avatar_id" value="95" class="r_ava_input"><label for="ava95" class="r_l_reg"><img src="/img/avatars/game/demons/demon015.jpg" alt="" /></label></span><span><input id="ava107" type="radio" name="avatar_id" value="107" class="r_ava_input"><label for="ava107" class="r_l_reg"><img src="/img/avatars/game/demons/demon017.jpg" alt="" /></label></span><span><input id="ava119" type="radio" name="avatar_id" value="119" class="r_ava_input"><label for="ava119" class="r_l_reg"><img src="/img/avatars/game/demons/demon019.jpg" alt="" /></label></span><span><input id="ava131" type="radio" name="avatar_id" value="131" class="r_ava_input"><label for="ava131" class="r_l_reg"><img src="/img/avatars/game/demons/demon021.jpg" alt="" /></label></span><span><input id="ava143" type="radio" name="avatar_id" value="143" class="r_ava_input"><label for="ava143" class="r_l_reg"><img src="/img/avatars/game/demons/demon023.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava11" type="radio" name="avatar_id" value="193" class="r_ava_input" checked>' +
+        '<label for="ava11" class="r_l_reg"><img src="/img/avatars/game/demons/demon001.jpg" alt="" /></label></span>' +
+        '<span><input id="ava23" type="radio" name="avatar_id" value="195" class="r_ava_input">' +
+        '<label for="ava23" class="r_l_reg"><img src="/img/avatars/game/demons/demon003.jpg" alt="" /></label></span>' +
+        '<span><input id="ava35" type="radio" name="avatar_id" value="197" class="r_ava_input">' +
+        '<label for="ava35" class="r_l_reg"><img src="/img/avatars/game/demons/demon005.jpg" alt="" /></label></span>' +
+        '<span><input id="ava47" type="radio" name="avatar_id" value="199" class="r_ava_input">' +
+        '<label for="ava47" class="r_l_reg"><img src="/img/avatars/game/demons/demon007.jpg" alt="" /></label></span>' +
+        '<span><input id="ava59" type="radio" name="avatar_id" value="201" class="r_ava_input">' +
+        '<label for="ava59" class="r_l_reg"><img src="/img/avatars/game/demons/demon009.jpg" alt="" /></label></span>' +
+        '<span><input id="ava71" type="radio" name="avatar_id" value="203" class="r_ava_input">' +
+        '<label for="ava71" class="r_l_reg"><img src="/img/avatars/game/demons/demon011.jpg" alt="" /></label></span>' +
+        '<span><input id="ava83" type="radio" name="avatar_id" value="205" class="r_ava_input">' +
+        '<label for="ava83" class="r_l_reg"><img src="/img/avatars/game/demons/demon013.jpg" alt="" /></label></span>' +
+        '<span><input id="ava95" type="radio" name="avatar_id" value="207" class="r_ava_input">' +
+        '<label for="ava95" class="r_l_reg"><img src="/img/avatars/game/demons/demon015.jpg" alt="" /></label></span>' +
+        '<span><input id="ava107" type="radio" name="avatar_id" value="209" class="r_ava_input">' +
+        '<label for="ava107" class="r_l_reg"><img src="/img/avatars/game/demons/demon017.jpg" alt="" /></label></span>' +
+        '<span><input id="ava119" type="radio" name="avatar_id" value="211" class="r_ava_input">' +
+        '<label for="ava119" class="r_l_reg"><img src="/img/avatars/game/demons/demon019.jpg" alt="" /></label></span>' +
+        '<span><input id="ava131" type="radio" name="avatar_id" value="213" class="r_ava_input">' +
+        '<label for="ava131" class="r_l_reg"><img src="/img/avatars/game/demons/demon021.jpg" alt="" /></label></span>' +
+        '<span><input id="ava143" type="radio" name="avatar_id" value="215" class="r_ava_input">' +
+        '<label for="ava143" class="r_l_reg"><img src="/img/avatars/game/demons/demon023.jpg" alt="" /></label></span>';
 }
 
 function demonFemaleAvatars() {
-    document.getElementById('avatars_list').innerHTML = '<span><input id="ava12" type="radio" name="avatar_id" value="12" class="r_ava_input" checked><label for="ava12" class="r_l_reg"><img src="/img/avatars/game/demons/demon002.jpg" alt="" /></label></span><span><input id="ava24" type="radio" name="avatar_id" value="24" class="r_ava_input"><label for="ava24" class="r_l_reg"><img src="/img/avatars/game/demons/demon004.jpg" alt="" /></label></span><span><input id="ava36" type="radio" name="avatar_id" value="36" class="r_ava_input"><label for="ava36" class="r_l_reg"><img src="/img/avatars/game/demons/demon006.jpg" alt="" /></label></span><span><input id="ava48" type="radio" name="avatar_id" value="48" class="r_ava_input"><label for="ava48" class="r_l_reg"><img src="/img/avatars/game/demons/demon008.jpg" alt="" /></label></span><span><input id="ava60" type="radio" name="avatar_id" value="60" class="r_ava_input"><label for="ava60" class="r_l_reg"><img src="/img/avatars/game/demons/demon010.jpg" alt="" /></label></span><span><input id="ava72" type="radio" name="avatar_id" value="72" class="r_ava_input"><label for="ava72" class="r_l_reg"><img src="/img/avatars/game/demons/demon012.jpg" alt="" /></label></span><span><input id="ava84" type="radio" name="avatar_id" value="84" class="r_ava_input"><label for="ava84" class="r_l_reg"><img src="/img/avatars/game/demons/demon014.jpg" alt="" /></label></span><span><input id="ava96" type="radio" name="avatar_id" value="96" class="r_ava_input"><label for="ava96" class="r_l_reg"><img src="/img/avatars/game/demons/demon016.jpg" alt="" /></label></span><span><input id="ava108" type="radio" name="avatar_id" value="108" class="r_ava_input"><label for="ava108" class="r_l_reg"><img src="/img/avatars/game/demons/demon018.jpg" alt="" /></label></span><span><input id="ava120" type="radio" name="avatar_id" value="120" class="r_ava_input"><label for="ava120" class="r_l_reg"><img src="/img/avatars/game/demons/demon020.jpg" alt="" /></label></span><span><input id="ava132" type="radio" name="avatar_id" value="132" class="r_ava_input"><label for="ava132" class="r_l_reg"><img src="/img/avatars/game/demons/demon022.jpg" alt="" /></label></span><span><input id="ava144" type="radio" name="avatar_id" value="144" class="r_ava_input"><label for="ava144" class="r_l_reg"><img src="/img/avatars/game/demons/demon024.jpg" alt="" /></label></span>';
+    document.getElementById('avatars_list').innerHTML =
+        '<span><input id="ava12" type="radio" name="avatar_id" value="194" class="r_ava_input" checked>' +
+        '<label for="ava12" class="r_l_reg"><img src="/img/avatars/game/demons/demon002.jpg" alt="" /></label></span>' +
+        '<span><input id="ava24" type="radio" name="avatar_id" value="196" class="r_ava_input">' +
+        '<label for="ava24" class="r_l_reg"><img src="/img/avatars/game/demons/demon004.jpg" alt="" /></label></span>' +
+        '<span><input id="ava36" type="radio" name="avatar_id" value="198" class="r_ava_input">' +
+        '<label for="ava36" class="r_l_reg"><img src="/img/avatars/game/demons/demon006.jpg" alt="" /></label></span>' +
+        '<span><input id="ava48" type="radio" name="avatar_id" value="200" class="r_ava_input">' +
+        '<label for="ava48" class="r_l_reg"><img src="/img/avatars/game/demons/demon008.jpg" alt="" /></label></span>' +
+        '<span><input id="ava60" type="radio" name="avatar_id" value="202" class="r_ava_input">' +
+        '<label for="ava60" class="r_l_reg"><img src="/img/avatars/game/demons/demon010.jpg" alt="" /></label></span>' +
+        '<span><input id="ava72" type="radio" name="avatar_id" value="204" class="r_ava_input">' +
+        '<label for="ava72" class="r_l_reg"><img src="/img/avatars/game/demons/demon012.jpg" alt="" /></label></span>' +
+        '<span><input id="ava84" type="radio" name="avatar_id" value="206" class="r_ava_input">' +
+        '<label for="ava84" class="r_l_reg"><img src="/img/avatars/game/demons/demon014.jpg" alt="" /></label></span>' +
+        '<span><input id="ava96" type="radio" name="avatar_id" value="208" class="r_ava_input">' +
+        '<label for="ava96" class="r_l_reg"><img src="/img/avatars/game/demons/demon016.jpg" alt="" /></label></span>' +
+        '<span><input id="ava108" type="radio" name="avatar_id" value="210" class="r_ava_input">' +
+        '<label for="ava108" class="r_l_reg"><img src="/img/avatars/game/demons/demon018.jpg" alt="" /></label></span>' +
+        '<span><input id="ava120" type="radio" name="avatar_id" value="212" class="r_ava_input">' +
+        '<label for="ava120" class="r_l_reg"><img src="/img/avatars/game/demons/demon020.jpg" alt="" /></label></span>' +
+        '<span><input id="ava132" type="radio" name="avatar_id" value="214" class="r_ava_input">' +
+        '<label for="ava132" class="r_l_reg"><img src="/img/avatars/game/demons/demon022.jpg" alt="" /></label></span>' +
+        '<span><input id="ava144" type="radio" name="avatar_id" value="216" class="r_ava_input">' +
+        '<label for="ava144" class="r_l_reg"><img src="/img/avatars/game/demons/demon024.jpg" alt="" /></label></span>';
 }
 
 function humansMaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="1" onclick="classChange(this.value)" checked><span>Паладин</span>' +
+        '<input type="radio" name="profession_id" value="7" onclick="classChange(this.value)" checked><span>Паладин</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="2" onclick="classChange(this.value)"><span>Убийца</span>' +
+        '<input type="radio" name="profession_id" value="8" onclick="classChange(this.value)"><span>Убийца</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="3" onclick="classChange(this.value)"><span>Рейнджер</span>' +
+        '<input type="radio" name="profession_id" value="9" onclick="classChange(this.value)"><span>Рейнджер</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="4" onclick="classChange(this.value)"><span>Маг Стихий</span>' +
+        '<input type="radio" name="profession_id" value="10" onclick="classChange(this.value)"><span>Маг Стихий</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="5" onclick="classChange(this.value)"><span>Жрец</span>' +
+        '<input type="radio" name="profession_id" value="11" onclick="classChange(this.value)"><span>Жрец</span>' +
         '</label></div>';
 }
 
 function elfsMaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="6" onclick="classChange(this.value)" checked><span>Хранитель</span>' +
+        '<input type="radio" name="profession_id" value="12" onclick="classChange(this.value)" checked><span>Хранитель</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="7" onclick="classChange(this.value)"><span>Дневной охотник</span>' +
+        '<input type="radio" name="profession_id" value="13" onclick="classChange(this.value)"><span>Дневной охотник</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="8" onclick="classChange(this.value)"><span>Ночной охотник</span>' +
+        '<input type="radio" name="profession_id" value="14" onclick="classChange(this.value)"><span>Ночной охотник</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="9" onclick="classChange(this.value)"><span>Заклинатель</span>' +
+        '<input type="radio" name="profession_id" value="15" onclick="classChange(this.value)"><span>Заклинатель</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="10" onclick="classChange(this.value)"><span>Оракул</span>' +
+        '<input type="radio" name="profession_id" value="16" onclick="classChange(this.value)"><span>Оракул</span>' +
         '</label></div>';
 }
 
 function orcsMaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="11" onclick="classChange(this.value)" checked><span>Разрушитель</span>' +
+        '<input type="radio" name="profession_id" value="17" onclick="classChange(this.value)" checked><span>Титан</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="12" onclick="classChange(this.value)"><span>Титан</span>' +
+        '<input type="radio" name="profession_id" value="18" onclick="classChange(this.value)"><span>Разрушитель</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="13" onclick="classChange(this.value)"><span>Берсерк</span>' +
+        '<input type="radio" name="profession_id" value="19" onclick="classChange(this.value)"><span>Берсерк</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="14" onclick="classChange(this.value)"><span>Шаман</span>' +
+        '<input type="radio" name="profession_id" value="20" onclick="classChange(this.value)"><span>Шаман</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="15" onclick="classChange(this.value)"><span>Боевой маг</span>' +
+        '<input type="radio" name="profession_id" value="21" onclick="classChange(this.value)"><span>Боевой маг</span>' +
         '</label></div>';
 }
 
 function dwarfsMaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="16" onclick="classChange(this.value)" checked><span>Страж</span>' +
+        '<input type="radio" name="profession_id" value="22" onclick="classChange(this.value)" checked><span>Страж</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="17" onclick="classChange(this.value)"><span>Искатель сокровищ</span>' +
+        '<input type="radio" name="profession_id" value="23" onclick="classChange(this.value)"><span>Искатель сокровищ</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="18" onclick="classChange(this.value)"><span>Арбалетчик</span>' +
+        '<input type="radio" name="profession_id" value="24" onclick="classChange(this.value)"><span>Арбалетчик</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="19" onclick="classChange(this.value)"><span>Алхимик</span>' +
+        '<input type="radio" name="profession_id" value="25" onclick="classChange(this.value)"><span>Алхимик</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="20" onclick="classChange(this.value)"><span>Отшельник</span>' +
+        '<input type="radio" name="profession_id" value="26" onclick="classChange(this.value)"><span>Отшельник</span>' +
         '</label></div>';
 }
 
 function angelsMaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="21" onclick="classChange(this.value)" checked><span>Архангел</span>' +
+        '<input type="radio" name="profession_id" value="27" onclick="classChange(this.value)" checked><span>Архангел</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="22" onclick="classChange(this.value)"><span>Малахим</span>' +
+        '<input type="radio" name="profession_id" value="28" onclick="classChange(this.value)"><span>Малахим</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="23" onclick="classChange(this.value)"><span>Феникс</span>' +
+        '<input type="radio" name="profession_id" value="29" onclick="classChange(this.value)"><span>Феникс</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="24" onclick="classChange(this.value)"><span>Серафим</span>' +
+        '<input type="radio" name="profession_id" value="30" onclick="classChange(this.value)"><span>Серафим</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="25" onclick="classChange(this.value)"><span>Арелим</span>' +
+        '<input type="radio" name="profession_id" value="31" onclick="classChange(this.value)"><span>Арелим</span>' +
         '</label></div>';
 }
 
 function demonsMaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="26" onclick="classChange(this.value)" checked><span>Рыцарь ада</span>' +
+        '<input type="radio" name="profession_id" value="32" onclick="classChange(this.value)" checked><span>Рыцарь ада</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="27" onclick="classChange(this.value)"><span>Мститель</span>' +
+        '<input type="radio" name="profession_id" value="33" onclick="classChange(this.value)"><span>Мститель</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="28" onclick="classChange(this.value)"><span>Архонт</span>' +
+        '<input type="radio" name="profession_id" value="34" onclick="classChange(this.value)"><span>Архонт</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="29" onclick="classChange(this.value)"><span>Душегуб</span>' +
+        '<input type="radio" name="profession_id" value="35" onclick="classChange(this.value)"><span>Душегуб</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="30" onclick="classChange(this.value)"><span>Инкуб</span>' +
+        '<input type="radio" name="profession_id" value="36" onclick="classChange(this.value)"><span>Инкуб</span>' +
         '</label></div>';
 }
 
 function humansFemaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="1" onclick="classChange(this.value)" checked><span>Паладин</span>' +
+        '<input type="radio" name="profession_id" value="7" onclick="classChange(this.value)" checked><span>Паладин</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="2" onclick="classChange(this.value)"><span>Убийца</span>' +
+        '<input type="radio" name="profession_id" value="8" onclick="classChange(this.value)"><span>Убийца</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="3" onclick="classChange(this.value)"><span>Рейнджер</span>' +
+        '<input type="radio" name="profession_id" value="9" onclick="classChange(this.value)"><span>Рейнджер</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="4" onclick="classChange(this.value)"><span>Маг Стихий</span>' +
+        '<input type="radio" name="profession_id" value="10" onclick="classChange(this.value)"><span>Маг Стихий</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="5" onclick="classChange(this.value)"><span>Жрица</span>' +
+        '<input type="radio" name="profession_id" value="11" onclick="classChange(this.value)"><span>Жрица</span>' +
         '</label></div>';
 }
 
 function elfsFemaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="6" onclick="classChange(this.value)" checked><span>Хранительница</span>' +
+        '<input type="radio" name="profession_id" value="12" onclick="classChange(this.value)" checked><span>Хранительница</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="7" onclick="classChange(this.value)"><span>Дневной охотник</span>' +
+        '<input type="radio" name="profession_id" value="13" onclick="classChange(this.value)"><span>Дневной охотник</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="8" onclick="classChange(this.value)"><span>Ночной охотник</span>' +
+        '<input type="radio" name="profession_id" value="14" onclick="classChange(this.value)"><span>Ночной охотник</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="9" onclick="classChange(this.value)"><span>Заклинательница</span>' +
+        '<input type="radio" name="profession_id" value="15" onclick="classChange(this.value)"><span>Заклинательница</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="10" onclick="classChange(this.value)"><span>Оракул</span>' +
+        '<input type="radio" name="profession_id" value="16" onclick="classChange(this.value)"><span>Оракул</span>' +
         '</label></div>';
 }
 
 function orcsFemaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="11" onclick="classChange(this.value)" checked><span>Разрушительница</span>' +
+        '<input type="radio" name="profession_id" value="17" onclick="classChange(this.value)" checked><span>Титан</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="12" onclick="classChange(this.value)"><span>Титан</span>' +
+        '<input type="radio" name="profession_id" value="18" onclick="classChange(this.value)"><span>Разрушительница</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="13" onclick="classChange(this.value)"><span>Берсерк</span>' +
+        '<input type="radio" name="profession_id" value="19" onclick="classChange(this.value)"><span>Берсерк</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="14" onclick="classChange(this.value)"><span>Шаман</span>' +
+        '<input type="radio" name="profession_id" value="20" onclick="classChange(this.value)"><span>Шаман</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="15" onclick="classChange(this.value)"><span>Боевой маг</span>' +
+        '<input type="radio" name="profession_id" value="21" onclick="classChange(this.value)"><span>Боевой маг</span>' +
         '</label></div>';
 }
 
 function dwarfsFemaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="16" onclick="classChange(this.value)" checked><span>Страж</span>' +
+        '<input type="radio" name="profession_id" value="22" onclick="classChange(this.value)" checked><span>Страж</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="17" onclick="classChange(this.value)"><span>Искательница сокровищ</span>' +
+        '<input type="radio" name="profession_id" value="23" onclick="classChange(this.value)"><span>Искательница сокровищ</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="18" onclick="classChange(this.value)"><span>Арбалетчица</span>' +
+        '<input type="radio" name="profession_id" value="24" onclick="classChange(this.value)"><span>Арбалетчица</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="19" onclick="classChange(this.value)"><span>Алхимик</span>' +
+        '<input type="radio" name="profession_id" value="25" onclick="classChange(this.value)"><span>Алхимик</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="20" onclick="classChange(this.value)"><span>Отшельница</span>' +
+        '<input type="radio" name="profession_id" value="26" onclick="classChange(this.value)"><span>Отшельница</span>' +
         '</label></div>';
 }
 
 function angelsFemaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="21" onclick="classChange(this.value)" checked><span>Архангел</span>' +
+        '<input type="radio" name="profession_id" value="27" onclick="classChange(this.value)" checked><span>Архангел</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="22" onclick="classChange(this.value)"><span>Малахим</span>' +
+        '<input type="radio" name="profession_id" value="28" onclick="classChange(this.value)"><span>Малахим</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="23" onclick="classChange(this.value)"><span>Феникс</span>' +
+        '<input type="radio" name="profession_id" value="29" onclick="classChange(this.value)"><span>Феникс</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="24" onclick="classChange(this.value)"><span>Серафим</span>' +
+        '<input type="radio" name="profession_id" value="30" onclick="classChange(this.value)"><span>Серафим</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="25" onclick="classChange(this.value)"><span>Арелим</span>' +
+        '<input type="radio" name="profession_id" value="31" onclick="classChange(this.value)"><span>Арелим</span>' +
         '</label></div>';
 }
 
 function demonsFemaleClasses() {
     document.getElementById('class_list').innerHTML =
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="26" onclick="classChange(this.value)" checked><span>Рыцарь ада</span>' +
+        '<input type="radio" name="profession_id" value="32" onclick="classChange(this.value)" checked><span>Рыцарь ада</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="27" onclick="classChange(this.value)"><span>Мстительница</span>' +
+        '<input type="radio" name="profession_id" value="33" onclick="classChange(this.value)"><span>Мстительница</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="28" onclick="classChange(this.value)"><span>Архонт</span>' +
+        '<input type="radio" name="profession_id" value="34" onclick="classChange(this.value)"><span>Архонт</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="29" onclick="classChange(this.value)"><span>Душегуб</span>' +
+        '<input type="radio" name="profession_id" value="35" onclick="classChange(this.value)"><span>Душегуб</span>' +
         '</label></div>' +
         '<div class="r_class"><label>' +
-        '<input type="radio" name="profession_id" value="30" onclick="classChange(this.value)"><span>Суккуб</span>' +
+        '<input type="radio" name="profession_id" value="36" onclick="classChange(this.value)"><span>Суккуб</span>' +
         '</label></div>';
 }
 
@@ -907,5 +1195,5 @@ function reg_send(form) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    raceChange('1');
+    raceChange('7');
 });
