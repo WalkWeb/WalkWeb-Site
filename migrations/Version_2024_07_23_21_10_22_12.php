@@ -10,6 +10,8 @@ use WalkWeb\NW\MySQL\ConnectionPool;
 class Version_2024_07_23_21_10_22_12
 {
     /**
+     * TODO Подумать над добавлением параметров: 1) small icon 2) playlable
+     *
      * @param ConnectionPool $connectionPool
      * @throws AppException
      */
