@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace Test;
 
+use App\Domain\Account\Character\Avatar\Avatar;
+use App\Domain\Account\Character\Avatar\AvatarInterface;
+use App\Domain\Account\Character\Genesis\Genesis;
+use App\Domain\Account\Floor\Floor;
 use App\Domain\Account\Notice\Action\SendNoticeAction;
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use App\Domain\Account\Notice\NoticeRepository;
+use App\Domain\Theme\Theme;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use WalkWeb\NW\App;
@@ -123,6 +128,21 @@ abstract class AbstractTest extends TestCase
     protected function getSendNoticeAction(): SendNoticeActionInterface
     {
         return new SendNoticeAction(new NoticeRepository(self::getContainer()));
+    }
+
+    /**
+     * @return AvatarInterface
+     * @throws AppException
+     */
+    protected function getAvatar(): AvatarInterface
+    {
+        return new Avatar(
+            115,
+            new Genesis(1, new Theme(1), 'icon', 'plural', 'single'),
+            new Floor(1),
+            'origin.png',
+            'small.png'
+        );
     }
 
     /**

@@ -67,11 +67,15 @@ class AccountRepository
             `characters_main`.`exp` as `character_exp`,
             `characters_main`.`energy_bonus` as `energy_bonus`,
             `characters_main`.`upload_bonus` as `upload_bonus`,
-            `characters_main`.`stats_point` as `character_stat_points`
+            `characters_main`.`stats_point` as `character_stat_points`,
+
+            `avatars`.`origin_url` as `avatar`
 
             FROM `accounts` 
 
-            JOIN `characters_main` on `accounts`.`id` = `characters_main`.`account_id`
+            JOIN `characters_main` ON `accounts`.`id` = `characters_main`.`account_id`
+            JOIN `characters` ON `accounts`.`character_id` = `characters`.`id`
+            JOIN `avatars` ON `characters`.`avatar_id` = `avatars`.`id`
 
             WHERE `name` = ?',
             [['type' => 's', 'value' => $name]],

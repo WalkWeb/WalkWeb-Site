@@ -88,7 +88,7 @@ class MainCharacterRepositoryTest extends AbstractTest
     {
         $container = self::getContainer();
         $sendNotice = $this->getSendNoticeAction();
-        $account = AccountFactory::createNew($request, 'hash_key');
+        $account = AccountFactory::createNew($request, $this->getAvatar(), 'hash_key');
         $accountRepository = new AccountRepository($container);
         $mainCharacterRepository = new MainCharacterRepository($container);
 

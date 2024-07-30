@@ -20,8 +20,6 @@ class AccountException extends Exception
 
     // id
     public const INVALID_ID                    = 'Incorrect parameter "id", it required and type string (uuid)';
-    // avatar
-    public const INVALID_AVATAR                = 'Incorrect parameter "avatar", it required and type string';
     // level
     public const INVALID_LEVEL                 = 'Incorrect parameter "level", it required and type int';
     // exp
@@ -36,6 +34,9 @@ class AccountException extends Exception
     public const INVALID_NAME                  = 'Incorrect parameter "name", it required and type string';
     public const INVALID_NAME_LENGTH           = 'Incorrect parameter "name", should be min-max length: ';
     public const INVALID_NAME_SYMBOL           = 'Incorrect "name", symbol, excepted letters, numbers, hyphen or underscore';
+    // avatar
+    public const INVALID_AVATAR                = 'Incorrect parameter "avatar", it required and type string';
+    public const INVALID_AVATAR_LENGTH         = 'Incorrect parameter "avatar", should be min-max length: ';
     // password
     public const INVALID_PASSWORD              = 'Incorrect parameter "password", it required and type string';
     public const INVALID_PASSWORD_LENGTH       = 'Incorrect parameter "password", should be min-max length: ';

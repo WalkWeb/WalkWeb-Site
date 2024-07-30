@@ -17,6 +17,7 @@ class Account implements AccountInterface
     private string $id;
     private string $login;
     private string $name;
+    private string $avatar;
     private string $password;
     private string $email;
     private bool $emailVerified;
@@ -40,6 +41,7 @@ class Account implements AccountInterface
         string $id,
         string $login,
         string $name,
+        string $avatar,
         string $password,
         string $email,
         bool $emailVerified,
@@ -63,6 +65,7 @@ class Account implements AccountInterface
         $this->id = $id;
         $this->login = $login;
         $this->name = $name;
+        $this->avatar = $avatar;
         $this->password = $password;
         $this->email = $email;
         $this->emailVerified = $emailVerified;
@@ -105,6 +108,14 @@ class Account implements AccountInterface
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar(): string
+    {
+        return $this->avatar;
     }
 
     /**

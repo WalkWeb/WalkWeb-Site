@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Account;
 
+use App\Domain\Account\Character\Avatar\AvatarInterface;
 use App\Domain\Account\DTO\CreateAccountRequest;
 use App\Domain\Account\Floor\Floor;
 use App\Domain\Account\Group\AccountGroup;
@@ -48,6 +49,7 @@ class AccountFactory
             self::uuid($data, 'id', AccountException::INVALID_ID),
             self::loginValidation($data),
             self::nameValidation($data),
+            self::avatarValidation($data),
             self::passwordValidate($data),
             self::emailValidate($data),
             (bool)self::int($data, 'email_verified', AccountException::INVALID_EMAIL_VERIFIED),
@@ -73,16 +75,18 @@ class AccountFactory
      * Create object Account on register page
      *
      * @param CreateAccountRequest $request
+     * @param AvatarInterface $avatar
      * @param string $hashKey
      * @return AccountInterface
      * @throws AppException
      */
-    public static function createNew(CreateAccountRequest $request, string $hashKey): AccountInterface
+    public static function createNew(CreateAccountRequest $request, AvatarInterface $avatar, string $hashKey): AccountInterface
     {
         return new Account(
             Uuid::uuid4()->toString(),
             $request->getLogin(),
             $request->getLogin(),
+            $avatar->getOriginUrl(),
             password_hash($request->getPassword(). $hashKey, PASSWORD_BCRYPT, ['cost' => 10]),
             $request->getEmail(),
             false,
@@ -165,6 +169,25 @@ class AccountFactory
         self::parent($name, AccountInterface::NAME_PARENT, AccountException::INVALID_NAME_SYMBOL);
 
         return $name;
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     * @throws AppException
+     */
+    private static function avatarValidation(array $data): string
+    {
+        $avatar = self::string($data, 'avatar', AccountException::INVALID_AVATAR);
+
+        self::stringMinMaxLength(
+            $avatar,
+            AccountInterface::AVATAR_MIN_LENGTH,
+            AccountInterface::AVATAR_MAX_LENGTH,
+            AccountException::INVALID_AVATAR_LENGTH . AccountInterface::AVATAR_MIN_LENGTH . '-' . AccountInterface::AVATAR_MAX_LENGTH
+        );
+
+        return $avatar;
     }
 
     /**

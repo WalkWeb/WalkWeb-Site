@@ -26,6 +26,7 @@ class AccountTest extends AbstractTest
         $id = '345994bd-6219-4d35-8c31-121222574778';
         $login = 'Login';
         $name = 'Name';
+        $avatar = 'avatar.png';
         $password = 'password_hash';
         $email = 'mail@mail.ru';
         $emailVerified = false;
@@ -48,6 +49,7 @@ class AccountTest extends AbstractTest
             $id,
             $login,
             $name,
+            $avatar,
             $password,
             $email,
             $emailVerified,
@@ -71,6 +73,7 @@ class AccountTest extends AbstractTest
         self::assertEquals($id, $account->getId());
         self::assertEquals($login, $account->getLogin());
         self::assertEquals($name, $account->getName());
+        self::assertEquals($avatar, $account->getAvatar());
         self::assertEquals($password, $account->getPassword());
         self::assertEquals($email, $account->getEmail());
         self::assertEquals($emailVerified, $account->isEmailVerified());

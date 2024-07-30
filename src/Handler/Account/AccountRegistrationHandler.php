@@ -8,12 +8,15 @@ use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountFactory;
 use App\Domain\Account\AccountInterface;
 use App\Domain\Account\AccountRepository;
+use App\Domain\Account\Character\Avatar\AvatarInterface;
 use App\Domain\Account\Character\Avatar\AvatarRepository;
 use App\Domain\Account\Character\CharacterException;
 use App\Domain\Account\Character\CharacterFactory;
 use App\Domain\Account\Character\CharacterInterface;
 use App\Domain\Account\Character\CharacterRepository;
+use App\Domain\Account\Character\Genesis\GenesisInterface;
 use App\Domain\Account\Character\Genesis\GenesisRepository;
+use App\Domain\Account\Character\Profession\ProfessionInterface;
 use App\Domain\Account\Character\Profession\ProfessionRepository;
 use App\Domain\Account\DTO\CreateAccountRequest;
 use App\Domain\Account\MainCharacter\MainCharacterFactory;
@@ -86,9 +89,13 @@ class AccountRegistrationHandler extends AbstractHandler
             }
 
             $requestDto = $this->createRequest($request);
-            $account = $this->createAccount($requestDto);
+            $genesis = $this->getGenesis($requestDto);
+            $profession = $this->getProfession($requestDto, $genesis);
+            $avatar = $this->getAvatar($requestDto, $genesis);
+
+            $account = $this->createAccount($requestDto, $avatar);
             $mainCharacter = $this->createMainCharacter($account);
-            $character = $this->createCharacter($requestDto, $account, $mainCharacter);
+            $character = $this->createCharacter($requestDto, $account, $mainCharacter, $genesis, $profession, $avatar);
             $this->accountRepository->setMainCharacterId($account, $mainCharacter);
             $this->accountRepository->setCharacterId($account, $character);
             $this->container->getCookies()->set(AccountInterface::AUTH_TOKEN, $account->getAuthToken());
@@ -131,12 +138,13 @@ class AccountRegistrationHandler extends AbstractHandler
 
     /**
      * @param CreateAccountRequest $request
+     * @param AvatarInterface $avatar
      * @return AccountInterface
      * @throws AppException
      */
-    private function createAccount(CreateAccountRequest $request): AccountInterface
+    private function createAccount(CreateAccountRequest $request, AvatarInterface $avatar): AccountInterface
     {
-        $account = AccountFactory::createNew($request, KEY);
+        $account = AccountFactory::createNew($request, $avatar, KEY);
         $this->accountRepository->add($account);
         return $account;
     }
@@ -157,14 +165,32 @@ class AccountRegistrationHandler extends AbstractHandler
      * @param CreateAccountRequest $request
      * @param AccountInterface $account
      * @param MainCharacterInterface $mainCharacter
+     * @param GenesisInterface $genesis
+     * @param ProfessionInterface $profession
+     * @param AvatarInterface $avatar
      * @return CharacterInterface
      * @throws AppException
      */
     private function createCharacter(
         CreateAccountRequest $request,
         AccountInterface $account,
-        MainCharacterInterface $mainCharacter
+        MainCharacterInterface $mainCharacter,
+        GenesisInterface $genesis,
+        ProfessionInterface $profession,
+        AvatarInterface $avatar
     ): CharacterInterface
+    {
+        $character = CharacterFactory::createNew($request, $account, $mainCharacter, $genesis, $profession, $avatar);
+        $this->characterRepository->add($character, $mainCharacter);
+        return $character;
+    }
+
+    /**
+     * @param CreateAccountRequest $request
+     * @return GenesisInterface
+     * @throws AppException
+     */
+    private function getGenesis(CreateAccountRequest $request): GenesisInterface
     {
         $genesis = $this->genesisRepository->get($request->getGenesis(), THEME);
 
@@ -172,21 +198,41 @@ class AccountRegistrationHandler extends AbstractHandler
             throw new AppException(CharacterException::UNKNOWN_GENESIS_ID);
         }
 
+        return $genesis;
+    }
+
+    /**
+     * @param CreateAccountRequest $request
+     * @param GenesisInterface $genesis
+     * @return ProfessionInterface
+     * @throws AppException
+     */
+    private function getProfession(CreateAccountRequest $request, GenesisInterface $genesis): ProfessionInterface
+    {
         $profession = $this->professionRepository->get($request->getProfession(), $genesis->getId());
 
         if (!$profession) {
             throw new AppException(CharacterException::UNKNOWN_PROFESSION_ID);
         }
 
+        return $profession;
+    }
+
+    /**
+     * @param CreateAccountRequest $request
+     * @param GenesisInterface $genesis
+     * @return AvatarInterface
+     * @throws AppException
+     */
+    private function getAvatar(CreateAccountRequest $request, GenesisInterface $genesis): AvatarInterface
+    {
         $avatar = $this->avatarRepository->getForRegister($request->getAvatar(), $genesis->getId(), $request->getFloor());
 
         if (!$avatar) {
             throw new AppException(CharacterException::UNKNOWN_AVATAR_ID);
         }
 
-        $character = CharacterFactory::createNew($request, $account, $mainCharacter, $genesis, $profession, $avatar);
-        $this->characterRepository->add($character, $mainCharacter);
-        return $character;
+        return $avatar;
     }
 
     /**

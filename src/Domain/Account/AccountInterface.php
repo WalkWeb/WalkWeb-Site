@@ -13,8 +13,6 @@ use DateTimeInterface;
 
 interface AccountInterface
 {
-    // TODO min-max avatar length
-
     public const AUTH_TOKEN                = 'auth';
 
     public const LOGIN_MIN_LENGTH          = 4;
@@ -24,6 +22,9 @@ interface AccountInterface
     public const NAME_MIN_LENGTH           = 4;
     public const NAME_MAX_LENGTH           = 20;
     public const NAME_PARENT               = '/^[a-zA-Z0-9а-яА-ЯёЁ\-_]*$/u';
+
+    public const AVATAR_MIN_LENGTH         = 5;
+    public const AVATAR_MAX_LENGTH         = 90;
 
     public const PASSWORD_MIN_LENGTH       = 5;
     public const PASSWORD_MAX_LENGTH       = 60;
@@ -61,6 +62,7 @@ interface AccountInterface
     public function getId(): string;
     public function getLogin(): string;
     public function getName(): string;
+    public function getAvatar(): string;
     public function getPassword(): string;
     public function getEmail(): string;
     public function isRegComplete(): bool;

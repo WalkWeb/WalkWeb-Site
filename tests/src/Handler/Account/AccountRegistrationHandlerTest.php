@@ -135,8 +135,8 @@ class AccountRegistrationHandlerTest extends AbstractTest
                 'password'      => '12345',
                 'floor_id'      => '1',
                 'genesis_id'    => '4',
-                'profession_id' => '3',
-                'avatar_id'     => '21',
+                'profession_id' => '4',
+                'avatar_id'     => '37',
             ],
         );
 
@@ -164,8 +164,8 @@ class AccountRegistrationHandlerTest extends AbstractTest
                 'password'      => '12345',
                 'floor_id'      => '1',
                 'genesis_id'    => '4',
-                'profession_id' => '3',
-                'avatar_id'     => '21',
+                'profession_id' => '4',
+                'avatar_id'     => '37',
             ],
         );
 
@@ -193,8 +193,8 @@ class AccountRegistrationHandlerTest extends AbstractTest
                 'password'      => '12345',
                 'floor_id'      => '1',
                 'genesis_id'    => '4',
-                'profession_id' => '3',
-                'avatar_id'     => '21',
+                'profession_id' => '4',
+                'avatar_id'     => '37',
             ],
         );
 
