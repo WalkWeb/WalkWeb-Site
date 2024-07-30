@@ -30,9 +30,9 @@ $rise = $account->getMainCharacter()->getLevel()->getStatPoints() > 0;
                     <p class="center"><span class="ch_test_h">Повысьте уровень аккаунта</span></p>
             
                     <p>
-                        За написание постов ваш аккаунт будет получать опыт, а при получении нового уровня вы сможете
-                        повысить его характеристики. Характеристики аккаунта прибавляются к существующим характеристикам
-                        ваших персонажей, тем самым усиливая их все
+                        За написание постов и комментариев ваш аккаунт будет получать опыт, а при получении нового уровня 
+                        вы сможете повысить его характеристики. Характеристики аккаунта прибавляются к существующим характеристикам
+                        ваших персонажей, тем самым усиливая их всех
                     </p>
                     
                     <p>
@@ -75,7 +75,7 @@ $rise = $account->getMainCharacter()->getLevel()->getStatPoints() > 0;
                         </tr>
                         <tr>
                             <td class="tb06"></td>
-                            <td colspan="3" rowspan="3" class="pr_ava" style="background:url()"></td>
+                            <td colspan="3" rowspan="3" class="pr_ava" style="background:url(<?= $account->getAvatar() ?>)"></td>
                             <td class="tb07"></td>
                         </tr>
                         <tr>

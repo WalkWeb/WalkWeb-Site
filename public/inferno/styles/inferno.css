@@ -1185,12 +1185,100 @@ a.pr_char_link {
 
 /* Profile style page end */
 
+/* Table border style start */
 
+.tb01 {
+    width: 10px;
+    height: 10px;
+    background: url('/inferno/images/tb01.png');
+}
 
+.tb02 {
+    width: 29px;
+    height: 10px;
+    background: url('/inferno/images/tb02.png');
+}
 
+.tb03 {
+    height: 10px;
+    background: url('/inferno/images/tb03.png');
+}
 
+.tb04 {
+    width: 29px;
+    height: 10px;
+    background: url('/inferno/images/tb04.png');
+}
 
+.tb05 {
+    width: 10px;
+    height: 10px;
+    background: url('/inferno/images/tb05.png');
+}
 
+.tb06 {
+    width: 10px;
+    height: 29px;
+    background: url('/inferno/images/tb06.png');
+}
 
+.tb07 {
+    width: 10px;
+    height: 29px;
+    background: url('/inferno/images/tb07.png');
+}
 
+.tb08 {
+    width: 10px;
+    height: 100%;
+    background: url('/inferno/images/tb08.png');
+}
 
+.tb09 {
+    width: 10px;
+    height: 100px;
+    background: url('/inferno/images/tb09.png');
+}
+
+.tb10 {
+    width: 10px;
+    height: 29px;
+    background: url('/inferno/images/tb10.png');
+}
+
+.tb11 {
+    width: 10px;
+    height: 29px;
+    background: url('/inferno/images/tb11.png');
+}
+
+.tb12 {
+    width: 10px;
+    height: 10px;
+    background: url('/inferno/images/tb12.png');
+}
+
+.tb13 {
+    width: 29px;
+    height: 10px;
+    background: url('/inferno/images/tb13.png');
+}
+
+.tb14 {
+    height: 10px;
+    background: url('/inferno/images/tb14.png');
+}
+
+.tb15 {
+    width: 29px;
+    height: 10px;
+    background: url('/inferno/images/tb15.png');
+}
+
+.tb16 {
+    width: 10px;
+    height: 10px;
+    background: url('/inferno/images/tb16.png');
+}
+
+/* Table border style end */
