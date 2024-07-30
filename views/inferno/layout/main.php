@@ -1,3 +1,8 @@
+<?php
+
+use App\Domain\Auth\AuthInterface;
+
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -15,6 +20,37 @@
         <div class="go_home_box">
             <a href="/" class="go_home" title="На главную"></a>
         </div>
+        <?php
+            if ($this->container->exist('user')) {
+                /** @var AuthInterface $user */
+                $user = $this->container->get('user');
+
+
+                echo '
+            <div class="nw_acc_cont">
+                <div class="nw_acc_ava" style="background-image: url(' . $user->getAvatar() . ');">
+                    <a href="/profile"></a>
+                </div>
+                <div class="nw_exp_box">
+                    <div id="auth_exp_width" class="nw_exp" style="width: ' . $user->getLevel()->getExpBarWeight() . '%;"></div>
+                </div>
+                <div class="nw_exp_text_box">
+                    <span id="auth_exp_at_lvl">' . $user->getLevel()->getExpAtLevel() . '</span> / <span id="auth_exp_to_lvl">' . $user->getLevel()->getExpToLevel() . '</span>
+                </div>
+                <div class="nw_acc_e">
+                    <div class="nw_acc_ea" id="energy_bar_div" style="width: ' . $user->getEnergy()->getEnergyWeight() . '%;"></div>
+                </div>
+                <div class="nw_acc_et">
+                    <span id="energy">' . $user->getEnergy()->getEnergy() . '</span> / <span id="energy_max">' . $user->getEnergy()->getMaxEnergy() . '</span>
+                </div>
+                <div class="nw_acc_t">
+                    <div class="nw_acc_tt" id="second_bar_div" style="width: ' . $user->getEnergy()->getRestoreWeight() . '%;"></div>
+                </div>
+            </div>';
+            } else {
+                echo '<div class="nw_guest_cont"><a href="/login" title="">Авторизация</a> / <a href="/registration/main" title="">Регистрация</a></div>';
+            }
+        ?>
     </div>
     <div id="menu_box">
         <span id="menu_r"></span><span id="menu_l"></span>
@@ -80,6 +116,52 @@
         <a rel="nofollow" href="#app" title="Наверх"></a>
     </div>
 </div>
-<div id="element_description"></div>
+<?php
+if ($this->container->exist('user')) {
+    /** @var AuthInterface $user */
+    $user = $this->container->getUser();
+
+    if ($count = count($user->getNotices())) {
+
+        echo '<div class="up_notice_box">
+                <div id="up_open_notice" onclick="openNotice()">
+                    <p><span>' . $count . '</span></p>
+                </div>
+                <div id="up_notice_content">';
+
+        foreach ($user->getNotices() as $notice) {
+            echo    '<div class="up_notice_row" id="notice_' . $notice->getId() . '">
+                        <div class="up_notice_row_l">
+                            <p>' . $notice->getMessage() . '</p>
+                        </div>
+                        <div class="up_notice_row_r">
+                            <span onclick="closeNotice(\'' . $notice->getId() . '\')">×</span>
+                        </div>
+                    </div>';
+        }
+
+        if ($count > 2) {
+            echo '<div class="up_notice_car">
+                    <p><span onclick="closeAllNotice()">закрыть все</span></p>
+                  </div>';
+        }
+
+        echo '</div></div>';
+    }
+
+    echo
+        '<script>
+            let interval = 1000;
+            let expected = Date.now() + interval;
+            let energy = ' . $user->getEnergy()->getEnergy() . ';
+            let energy_max = ' . $user->getEnergy()->getMaxEnergy() . ';
+            let second = ' . $user->getEnergy()->getResidue() . ';
+            let second_max = ' . ENERGY_RESTORE . ';
+            let energy_bar;
+            let second_bar;
+        </script>
+        <script src="/js/energy.js?v=1.0"></script>';
+}
+?>
 </body>
 </html>

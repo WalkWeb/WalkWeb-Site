@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+a {
+    color: #c38339;
+}
+
 body {
     color: #796252;
     font: normal 13px arial, helvetica, sans-serif;
@@ -841,3 +845,105 @@ input:focus {
 .center {
     text-align: center;
 }
+
+/* Head user info start */
+
+.nw_head {
+    width: 100%;
+    height: 220px;
+}
+
+.nw_guest_cont {
+    width: 220px;
+    float: right;
+    margin: -220px 100px 0 0;
+    font-size: 120%;
+    padding: 20px;
+}
+
+.nw_guest_cont a:hover {
+    color: #5176d5;
+    text-decoration: none;
+}
+
+.nw_acc_cont {
+    width: 150px;
+    float: right;
+    margin: -190px 150px 0 0;
+}
+
+.nw_acc_ava {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+}
+
+.nw_acc_ava a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.nw_acc_e {
+    width: 100%;
+    height: 12px;
+    background: #009;
+}
+
+.nw_acc_ea {
+    height: 12px;
+    background: #00f;
+}
+
+.nw_acc_et {
+    width: 100%;
+    height: 12px;
+    margin-top: -12px;
+    color: #fff;
+    font-size: 11px;
+    text-align: center;
+}
+
+.nw_acc_t {
+    width: 100%;
+    height: 3px;
+    background: #060;
+}
+
+.nw_acc_tt {
+    height: 3px;
+    background: #0a0;
+}
+
+.nw_acc_tc {
+    width: 100%;
+    height: 10px;
+    margin-top: -10px;
+    color: #afa;
+    text-align: center;
+    font-size: 9px;
+}
+
+.nw_exp_box {
+    width: 100%;
+    height: 12px;
+    background: #444;
+}
+
+.nw_exp {
+    height: 12px;
+    background: #888;
+}
+
+.nw_exp_text_box {
+    width: 100%;
+    height: 12px;
+    margin-top: -12px;
+    color: #fff;
+    text-align: center;
+    font-size: 11px;
+}
+
+/* Head user info end */
