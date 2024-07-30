@@ -21,8 +21,10 @@ class CharacterListFactory
         return new CharacterList(
             self::string($data, 'id', CharacterListException::INVALID_ID),
             self::string($data, 'avatar', CharacterListException::INVALID_AVATAR),
-            self::string($data, 'profession', CharacterListException::INVALID_PROFESSION),
+            self::string($data, 'profession_name_male', CharacterListException::INVALID_PROFESSION_MALE),
+            self::string($data, 'profession_name_female', CharacterListException::INVALID_PROFESSION_FEMALE),
             self::string($data, 'genesis', CharacterListException::INVALID_GENESIS),
+            self::int($data, 'floor_id', CharacterListException::INVALID_FLOOR_ID),
             self::int($data, 'level', CharacterListException::INVALID_LEVEL),
         );
     }

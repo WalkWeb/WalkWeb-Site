@@ -4,20 +4,26 @@ declare(strict_types=1);
 
 namespace App\Domain\Account\Character\Collection;
 
+use App\Domain\Account\Floor\FloorInterface;
+
 class CharacterList implements CharacterListInterface
 {
     private string $id;
     private string $avatar;
-    private string $profession;
+    private string $professionNameMale;
+    private string $professionNameFemale;
     private string $genesis;
+    private int $floorId;
     private int $level;
 
-    public function __construct(string $id, string $avatar, string $profession, string $genesis, int $level)
+    public function __construct(string $id, string $avatar, string $professionNameMale, string $professionNameFemale, string $genesis, int $floorId, int $level)
     {
         $this->id = $id;
         $this->avatar = $avatar;
-        $this->profession = $profession;
+        $this->professionNameMale = $professionNameMale;
+        $this->professionNameFemale = $professionNameFemale;
         $this->genesis = $genesis;
+        $this->floorId = $floorId;
         $this->level = $level;
     }
 
@@ -42,7 +48,12 @@ class CharacterList implements CharacterListInterface
      */
     public function getProfession(): string
     {
-        return $this->profession;
+        if ($this->floorId === FloorInterface::MALE) {
+            return $this->professionNameMale;
+        }
+
+
+        return $this->professionNameFemale;
     }
 
     /**

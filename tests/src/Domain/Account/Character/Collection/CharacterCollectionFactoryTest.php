@@ -26,7 +26,7 @@ class CharacterCollectionFactoryTest extends AbstractTest
         foreach ($collection as $account) {
             self::assertEquals($data[$i]['id'], $account->getId());
             self::assertEquals($data[$i]['avatar'], $account->getAvatar());
-            self::assertEquals($data[$i]['profession'], $account->getProfession());
+            self::assertEquals($data[$i]['profession_name_male'], $account->getProfession());
             self::assertEquals($data[$i]['genesis'], $account->getGenesis());
             self::assertEquals($data[$i]['level'], $account->getLevel());
             $i++;
@@ -54,18 +54,22 @@ class CharacterCollectionFactoryTest extends AbstractTest
             [
                 [
                     [
-                        'id'         => '185bec4f-8660-4f96-9635-2a261134f0d7',
-                        'avatar'     => 'avatar-1.png',
-                        'profession' => 'analytics',
-                        'genesis'    => 'human',
-                        'level'      => 1,
+                        'id'                     => '185bec4f-8660-4f96-9635-2a261134f0d7',
+                        'avatar'                 => 'avatar-1.png',
+                        'profession_name_male'   => 'analytics_male',
+                        'profession_name_female' => 'analytics_female',
+                        'genesis'                => 'human',
+                        'floor_id'               => 1,
+                        'level'                  => 1,
                     ],
                     [
-                        'id'         => '185bec4f-8660-4f96-9635-2a261134f123',
-                        'avatar'     => 'avatar-2.png',
-                        'profession' => 'programmer',
-                        'genesis'    => 'human',
-                        'level'      => 15,
+                        'id'                     => '185bec4f-8660-4f96-9635-2a261134f0d8',
+                        'avatar'                 => 'avatar-2.png',
+                        'profession_name_male'   => 'analytics_male',
+                        'profession_name_female' => 'analytics_female',
+                        'genesis'                => 'human',
+                        'floor_id'               => 1,
+                        'level'                  => 1,
                     ],
                 ],
             ],
@@ -79,18 +83,22 @@ class CharacterCollectionFactoryTest extends AbstractTest
             [
                 [
                     [
-                        'id'         => '185bec4f-8660-4f96-9635-2a261134f0d7',
-                        'avatar'     => 'avatar-1.png',
-                        'profession' => 'analytics',
-                        'genesis'    => 'human',
-                        'level'      => 1,
+                        'id'                     => '185bec4f-8660-4f96-9635-2a261134f0d7',
+                        'avatar'                 => 'avatar-1.png',
+                        'profession_name_male'   => 'analytics_male',
+                        'profession_name_female' => 'analytics_female',
+                        'genesis'                => 'human',
+                        'floor_id'               => 1,
+                        'level'                  => 1,
                     ],
                     [
-                        'id'         => '185bec4f-8660-4f96-9635-2a261134f0d7',
-                        'avatar'     => 'avatar-1.png',
-                        'profession' => 'analytics',
-                        'genesis'    => 'human',
-                        'level'      => 1,
+                        'id'                     => '185bec4f-8660-4f96-9635-2a261134f0d7',
+                        'avatar'                 => 'avatar-1.png',
+                        'profession_name_male'   => 'analytics_male',
+                        'profession_name_female' => 'analytics_female',
+                        'genesis'                => 'human',
+                        'floor_id'               => 1,
+                        'level'                  => 1,
                     ],
                 ],
                 CharacterListException::ALREADY_EXIST,
@@ -99,11 +107,13 @@ class CharacterCollectionFactoryTest extends AbstractTest
             [
                 [
                     [
-                        'id'         => '185bec4f-8660-4f96-9635-2a261134f0d7',
-                        'avatar'     => 'avatar-1.png',
-                        'profession' => 'analytics',
-                        'genesis'    => 'human',
-                        'level'      => 1,
+                        'id'                     => '185bec4f-8660-4f96-9635-2a261134f0d7',
+                        'avatar'                 => 'avatar-1.png',
+                        'profession_name_male'   => 'analytics_male',
+                        'profession_name_female' => 'analytics_female',
+                        'genesis'                => 'human',
+                        'floor_id'               => 1,
+                        'level'                  => 1,
                     ],
                     123,
                 ],
