@@ -15,6 +15,27 @@ body {
     background: #0d0c0a url('/inferno/images/nw_head.jpg') no-repeat top center;
 }
 
+h1 {
+    font-family: Times New Roman, sans-serif;
+    font-size: 22px;
+    color: #d6b885;
+    text-align: center;
+    font-weight: 100;
+    padding: 0 40px 30px 40px;
+    line-height: 23px;
+}
+
+h2 {
+    font-family: Times New Roman, sans-serif;
+    font-size: 21px;
+    color: #b9b982;
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    font-weight: 100;
+}
+
 #main_box {
     max-width: 1540px;
     min-width: 1000px;
@@ -182,6 +203,10 @@ body {
 
 .content_center {
     margin-right: 260px;
+}
+
+.content_profile_box {
+    padding: 30px 0;
 }
 
 .content_main_box p, .post_main_box p, .content_profile_box p, .content_center p {
@@ -846,104 +871,326 @@ input:focus {
     text-align: center;
 }
 
-/* Head user info start */
+.small {
+    font-size: 90%;
+}
 
-.nw_head {
+/* Profile style page start */
+
+.pr_info_box {
+    text-align: left;
     width: 100%;
-    height: 220px;
+    border: 0;
 }
 
-.nw_guest_cont {
-    width: 220px;
-    float: right;
-    margin: -220px 100px 0 0;
-    font-size: 120%;
-    padding: 20px;
+.pr_ava_box {
+    padding-left: 45px;
+    width: 20%;
+    vertical-align: top;
 }
 
-.nw_guest_cont a:hover {
-    color: #5176d5;
+.pr_ava_table {
+    text-align: left;
+    table-layout: fixed;
+    border: 0;
+}
+
+.pr_ava {
+    width: 170px;
+    height: 200px;
+}
+
+.pr_info {
+    width: 35%;
+    vertical-align: top;
+}
+
+.pr_stats {
+    width: 45%;
+    vertical-align: top;
+    padding-right: 40px;
+}
+
+.pr_char_sum {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.pr_char_box {
+    display: inline-block;
+    margin-right: 40px;
+    width: 150px;
+}
+
+a.pr_char_link {
     text-decoration: none;
 }
 
-.nw_acc_cont {
-    width: 150px;
-    float: right;
-    margin: -190px 150px 0 0;
-}
-
-.nw_acc_ava {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
+.pr_char_ava {
+    width: 106px;
+    height: 106px;
+    border-radius: 100%;
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
 }
 
-.nw_acc_ava a {
-    display: block;
-    width: 100%;
-    height: 100%;
+.pr_char_lvl {
+    background: #a49084;
+    padding: 1px 6px;
+    border-radius: 100%;
+    color: #58290c;
 }
 
-.nw_acc_e {
-    width: 100%;
-    height: 12px;
-    background: #009;
+.pr_char_race {
+    font-size: 90%;
+    color: #e05a26;
 }
 
-.nw_acc_ea {
-    height: 12px;
-    background: #00f;
+.pr_title {
+    font-size: 300%;
+    margin-top: 20px;
+    text-transform: uppercase;
 }
 
-.nw_acc_et {
-    width: 100%;
-    height: 12px;
-    margin-top: -12px;
-    color: #fff;
-    font-size: 11px;
+.pr_title:first-letter {
+    font-size: 130%;
+}
+
+.pr_h2 {
     text-align: center;
+    font-size: 200%;
 }
 
-.nw_acc_t {
-    width: 100%;
-    height: 3px;
-    background: #060;
-}
-
-.nw_acc_tt {
-    height: 3px;
-    background: #0a0;
-}
-
-.nw_acc_tc {
-    width: 100%;
-    height: 10px;
-    margin-top: -10px;
-    color: #afa;
+.pr_level {
     text-align: center;
-    font-size: 9px;
+    font-size: 160% !important;
+    margin-top: -20px !important;
 }
 
-.nw_exp_box {
+.pr_level_t {
+    text-transform: uppercase !important;
+    font-size: 70% !important;
+}
+
+.pr_stats_table {
     width: 100%;
-    height: 12px;
-    background: #444;
 }
 
-.nw_exp {
-    height: 12px;
-    background: #888;
+.pr_logout_form {
+    padding: 0 30px;
 }
 
-.nw_exp_text_box {
-    width: 100%;
-    height: 12px;
-    margin-top: -12px;
-    color: #fff;
+.pr_stats_td_l {
+    text-align: left;
+    font-size: 125%;
+    color: #a9825d;
+    padding: 3px;
+}
+
+.pr_stats_td_r {
+    text-align: right;
+    font-size: 140%;
+    color: #a9825d;
+    padding: 3px;
+}
+
+.pr_stats_td_i {
+    width: 40px;
+    padding: 0 0 0 10px;
+}
+
+.pr_stats_td_s {
     text-align: center;
-    font-size: 11px;
+    font-size: 130%;
+    color: #a9825d;
+    padding: 3px;
 }
 
-/* Head user info end */
+.pr_upload_box {
+    width: 200px;
+    height: 15px;
+    background: #555;
+    margin: 0 0 20px 30px;
+    border-radius: 4px;
+}
+
+.pr_upload {
+    height: 15px;
+    background: #262;
+    border-radius: 4px;
+}
+
+.pr_upload_limit {
+    height: 15px;
+    background: #822;
+    border-radius: 4px;
+}
+
+.pr_upload_text {
+    width: 100%;
+    height: 15px;
+    margin-top: -15px;
+    text-align: center;
+    color: #aaa;
+}
+
+.pr_upload_input {
+    display: none;
+}
+
+.pr_stats_i {
+    width: 34px;
+    height: 34px;
+}
+
+.pr_stat_str {
+    color: #e74b1b;
+}
+
+.pr_stat_dex {
+    color: #16a73f;
+}
+
+.pr_stat_int {
+    color: #a72dc1;
+}
+
+.pr_stat_end {
+    color: #d01c1c;
+}
+
+.pr_stat_char {
+    color: #8e66a3;
+}
+
+.pr_stat_energy {
+    color: #0da9a7;
+}
+
+.pr_stat_luck {
+    color: #d97a26;
+}
+
+.pr_stat_will {
+    color: #527dd5;
+}
+
+.pr_stat_perc {
+    color: #e8d394;
+}
+
+.pr_info_base {
+    width: 100%;
+    font-family: arial, sans-serif;
+    font-size: 125%;
+    color: #a9825d;
+    line-height: 125%;
+}
+
+.pr_info_base dl {
+    overflow: hidden;
+    padding: 0 30px;
+}
+
+.pr_info_base dt {
+    float: left;
+    max-width: 100%;
+    margin-right: 5px;
+}
+
+.pr_info_base dd {
+    float: right;
+    text-align: right;
+    max-width: 100%;
+}
+
+.add_stat_img:hover {
+    cursor: pointer;
+}
+
+.pbg01, .pbg02, .pbg03, .pbg04, .pbg05, .pbg06, .pbg07, .pbg08 {
+    width: 95%;
+    height: 64px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.pbg01 {
+    background: url('/inferno/images/pbg01.jpg') center no-repeat;
+}
+
+.pbg02 {
+    background: url('/inferno/images/pbg02.jpg') center no-repeat;
+}
+
+.pbg03 {
+    background: url('/inferno/images/pbg03.jpg') center no-repeat;
+}
+
+.pbg03 {
+    background: url('/inferno/images/pbg03.jpg') center no-repeat;
+}
+
+.pbg04 {
+    background: url('/inferno/images/pbg04.jpg') center no-repeat;
+}
+
+.pbg05 {
+    background: url('/inferno/images/pbg05.jpg') center no-repeat;
+}
+
+.pbg06 {
+    background: url('/inferno/images/pbg06.jpg') center no-repeat;
+}
+
+.pbg07 {
+    background: url('/inferno/images/pbg07.jpg') center no-repeat;
+}
+
+.pbg08 {
+    background: url('/inferno/images/pbg08.jpg') center no-repeat;
+}
+
+.profile_life1, .profile_life2, .profile_life3, .profile_life4, .profile_life_info_text {
+    width: 100%;
+    height: 64px;
+}
+
+.profile_life1 {
+    background: url('/inferno/images/bdlayers1.png');
+}
+
+.profile_life2 {
+    background: url('/inferno/images/bdlayers2.png') left no-repeat;
+}
+
+.profile_life3 {
+    background: url('/inferno/images/bdlayers_left2.png') left no-repeat;
+}
+
+.profile_life4 {
+    background: url('/inferno/images/bdlayers_right2.png') right no-repeat;
+}
+
+.profile_life_info_text {
+    background: url('/inferno/images/profile_info.png') left no-repeat;
+}
+
+.profile_life_characters {
+    width: 100%;
+    height: 64px;
+    background: url('/inferno/images/profile_character.png') left no-repeat;
+}
+
+/* Profile style page end */
+
+
+
+
+
+
+
+
+
+

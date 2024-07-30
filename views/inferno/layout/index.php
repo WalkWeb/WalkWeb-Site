@@ -94,12 +94,7 @@ use App\Domain\Auth\AuthInterface;
                 </div>
             </div>
             <div class="content_center">
-                <div class="row_mc1" style="margin-top: -20px;">
-                    <div class="content_main_box">
-                        <?= $content ?? '' ?>
-                    </div>
-                </div>
-                <div class="row_mc3"></div>
+                <?= $content ?? '' ?>
             </div>
             <div class="main_both"></div>
             <div class="demon_footer"></div>

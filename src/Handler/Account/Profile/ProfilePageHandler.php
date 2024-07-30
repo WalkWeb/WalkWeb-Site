@@ -25,6 +25,7 @@ class ProfilePageHandler extends AbstractHandler
             return $loginResponse;
         }
 
+        $this->layoutUrl = 'layout/index.php';
         $repository = new AccountRepository($this->container);
 
         return $this->render('account/profile', [
