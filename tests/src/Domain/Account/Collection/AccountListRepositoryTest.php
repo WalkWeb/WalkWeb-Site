@@ -44,7 +44,7 @@ class AccountListRepositoryTest extends AbstractTest
      */
     public function testAccountListRepositoryGetTotal(): void
     {
-        self::assertEquals(10, $this->getRepository()->getTotal());
+        self::assertEquals(11, $this->getRepository()->getTotal());
     }
 
     /**

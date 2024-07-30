@@ -20,6 +20,8 @@ class AccountListRepository
     /**
      * TODO Подумать над тем, что можно пропускать юзеров не завершивших регистрацию и заблокированных
      *
+     * TODO Добавить фильтрацию по theme
+     *
      * @param int $offset
      * @param int $limit
      * @return AccountCollection

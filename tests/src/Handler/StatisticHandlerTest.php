@@ -22,7 +22,7 @@ class StatisticHandlerTest extends AbstractTest
         $response = $this->app->handle($request);
 
         self::assertMatchesRegularExpression('/Статистика/', $response->getBody());
-        self::assertMatchesRegularExpression('/Пользователей: 10/', $response->getBody());
+        self::assertMatchesRegularExpression('/Пользователей: 11/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
     }
 }

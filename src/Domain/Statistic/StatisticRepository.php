@@ -17,6 +17,8 @@ class StatisticRepository
     }
 
     /**
+     * TODO Добавить фильтрацию по theme
+     *
      * @return int
      * @throws AppException
      */

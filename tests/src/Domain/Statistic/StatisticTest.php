@@ -19,6 +19,6 @@ class StatisticTest extends AbstractTest
         $container = self::getContainer();
         $statistic = new Statistic(new StatisticRepository($container));
 
-        self::assertEquals(10, $statistic->getTotalUser());
+        self::assertEquals(11, $statistic->getTotalUser());
     }
 }
