@@ -1183,6 +1183,58 @@ a.pr_char_link {
     background: url('/inferno/images/profile_character.png') left no-repeat;
 }
 
+.profile_chars_container {
+    padding: 0 50px;
+    margin-top: -18px;
+}
+
+.profile_char_container {
+    width: 121px;
+    height: 138px;
+    margin: 0 auto;
+}
+
+.profile_char_ava_cont {
+    padding: 38px 8px 8px 8px;
+}
+
+.profile_char_ava_border {
+    width: 121px;
+    height: 138px;
+    margin: -108px auto 0 auto;
+    background: url('/inferno/images/ava_border.png') no-repeat;
+    background-size: contain;
+}
+
+.profile_char_desc {
+    width: 150px;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.profile_char_desc p {
+    padding: 0;
+    text-align: center;
+}
+
+.profile_char_hp_bar {
+    width: 100%;
+    height: 10px;
+    background: #833;
+    border-radius: 3px;
+}
+
+.profile_char_hp_bar p {
+    text-align: center;
+    color: #c1c1c1;
+    font-size: 10px;
+    font-family: Verdana, sans-serif;
+}
+
+.profile_both, .main_both {
+    width: 100%; clear: both; height: 10px;
+}
+
 /* Profile style page end */
 
 /* Table border style start */

@@ -6,6 +6,7 @@ namespace App\Handler\Account\Profile;
 
 use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountRepository;
+use App\Domain\Account\Character\Collection\CharacterCollectionRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
@@ -27,9 +28,12 @@ class ProfilePageHandler extends AbstractHandler
 
         $this->layoutUrl = 'layout/index.php';
         $repository = new AccountRepository($this->container);
+        $characterRepository = new CharacterCollectionRepository($this->container);
 
         return $this->render('account/profile', [
-            'account' => $repository->get($this->getUser()->getName(), $this->getSendNoticeAction()),
+            'account'       => $repository->get($this->getUser()->getName(), $this->getSendNoticeAction()),
+            'characters'    => $characterRepository->get($this->getUser()->getMainCharacterId()),
+            'maxCharacters' => MAX_CHARACTERS,
         ]);
     }
 }

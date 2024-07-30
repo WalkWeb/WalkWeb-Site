@@ -1,14 +1,24 @@
 <?php
 
 use App\Domain\Account\AccountInterface;
+use App\Domain\Account\Character\Collection\CharacterCollection;
 use WalkWeb\NW\AppException;
 
 if (empty($account) || !($account instanceof AccountInterface)) {
-    throw new AppException('view.account.profile: miss account');
+    throw new AppException('view.account.profile: miss or invalid account');
+}
+
+if (empty($characters) || !($characters instanceof CharacterCollection)) {
+    throw new AppException('view.account.profile: miss or invalid characters');
+}
+
+if (empty($maxCharacters) || !is_int($maxCharacters)) {
+    throw new AppException('view.account.profile: miss or invalid maxCharacters');
 }
 
 $this->title = APP_NAME . ' — Ваш профиль';
 
+$charactersCount = count($characters);
 $rise = $account->getMainCharacter()->getLevel()->getStatPoints() > 0;
 
 ?>
@@ -220,11 +230,31 @@ $rise = $account->getMainCharacter()->getLevel()->getStatPoints() > 0;
         </div>
 
         <p class="pr_char_sum">
-            Персонажей: # / #<br />
+            Персонажей: <?= $charactersCount ?> / <?= $maxCharacters ?><br />
             <a href="/character/new" title="" class="osnova">Создать нового персонажа</a>
         </p>
 
-        <div class="profile_chars_container"></div>
+        <div class="profile_chars_container">
+            <?php
+            foreach ($characters as $character) {
+                echo '
+                    <a href="#" title="" class="pr_char_link">
+                    <div class="pr_char_box">
+                        <div class="profile_char_container">
+                            <div class="profile_char_ava_cont">
+                                <div class="pr_char_ava" style="background-image: url(' . $character->getAvatar() . ');"></div>
+                            </div>
+                        </div>
+                        <div class="profile_char_ava_border"></div>
+                        <div class="profile_char_desc">
+                            <p><span class="pr_char_lvl">' . $character->getLevel() . '</span> ' . $character->getProfession() . '<br />
+                            <span class="pr_char_race">' . $character->getGenesis() . '</span></p>
+                        </div>
+                    </div>
+                    </a>';
+            }
+            ?>
+        </div>
 
         <br /><br />
     </div>
