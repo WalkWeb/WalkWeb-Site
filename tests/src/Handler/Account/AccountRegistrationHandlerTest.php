@@ -50,6 +50,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
         self::assertEquals($body['login'], $account['login']);
         self::assertEquals($body['login'], $account['name']);
         self::assertEquals($body['email'], $account['email']);
+        self::assertEquals($body['user_agent'], $account['user_agent']);
         self::assertEquals((int)$body['floor_id'], $account['floor_id']);
         self::assertEquals($expectedIp, $account['ip']);
         self::assertEquals($expectedReferral, $account['ref']);
@@ -137,6 +138,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                 'genesis_id'    => '4',
                 'profession_id' => '4',
                 'avatar_id'     => '37',
+                'user_agent'    => 'user_agent',
             ],
         );
 
@@ -166,6 +168,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                 'genesis_id'    => '4',
                 'profession_id' => '4',
                 'avatar_id'     => '37',
+                'user_agent'    => 'user_agent',
             ],
         );
 
@@ -195,6 +198,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                 'genesis_id'    => '4',
                 'profession_id' => '4',
                 'avatar_id'     => '37',
+                'user_agent'    => 'user_agent',
             ],
         );
 
@@ -224,6 +228,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                 'genesis_id'    => '54',
                 'profession_id' => '3',
                 'avatar_id'     => '31',
+                'user_agent'    => 'user_agent',
             ],
         );
 
@@ -248,6 +253,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                 'genesis_id'    => '1',
                 'profession_id' => '6',
                 'avatar_id'     => '31',
+                'user_agent'    => 'user_agent',
             ],
         );
 
@@ -272,6 +278,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                 'genesis_id'    => '1',
                 'profession_id' => '1',
                 'avatar_id'     => '40',
+                'user_agent'    => 'user_agent',
             ],
         );
 
@@ -352,6 +359,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                     'genesis_id'    => '3',
                     'profession_id' => '3',
                     'avatar_id'     => '31',
+                    'user_agent'    => 'user_agent-1',
                 ],
                 'main',
                 'undefined',
@@ -366,6 +374,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                     'genesis_id'    => '3',
                     'profession_id' => '3',
                     'avatar_id'     => '32',
+                    'user_agent'    => 'user_agent-2',
                 ],
                 'ref100',
                 '0.0.0.0',
@@ -380,6 +389,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                     'genesis_id'    => '3',
                     'profession_id' => '3',
                     'avatar_id'     => '33',
+                    'user_agent'    => 'user_agent-3',
                 ],
                 'default',
                 '1.1.1.1',
@@ -394,6 +404,7 @@ class AccountRegistrationHandlerTest extends AbstractTest
                     'genesis_id'    => '3',
                     'profession_id' => '3',
                     'avatar_id'     => '34',
+                    'user_agent'    => 'user_agent-4',
                 ],
                 'aaa',
                 '2.2.2.2',

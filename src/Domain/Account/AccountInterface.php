@@ -48,7 +48,7 @@ interface AccountInterface
     public const REF_MAX_LENGTH            = 30;
 
     public const USER_AGENT_MIN_LENGTH     = 0;
-    public const USER_AGENT_MAX_LENGTH     = 100;
+    public const USER_AGENT_MAX_LENGTH     = 150;
 
     // TODO move to UploadInterface
     public const UPLOAD_MIN_VALUE          = 0;

@@ -124,9 +124,9 @@ class AccountRepository
             'INSERT INTO `accounts` 
                 (
                  `id`, `login`, `name`, `password`, `email`, `email_verified`, `reg_complete`, `auth_token`, 
-                 `verified_token`, `template`, `ip`, `ref`, `floor_id`, `status_id`, `group_id`, `energy_id`
+                 `verified_token`, `template`, `ip`, `ref`, `user_agent`, `floor_id`, `status_id`, `group_id`, `energy_id`
                 ) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [
                 ['type' => 's', 'value' => $account->getId()],
                 ['type' => 's', 'value' => $account->getLogin()],
@@ -140,6 +140,7 @@ class AccountRepository
                 ['type' => 's', 'value' => $account->getTemplate()],
                 ['type' => 's', 'value' => $account->getIp()],
                 ['type' => 's', 'value' => $account->getRef()],
+                ['type' => 's', 'value' => $account->getUserAgent()],
                 ['type' => 'i', 'value' => $account->getFloor()->getId()],
                 ['type' => 'i', 'value' => $account->getStatus()->getId()],
                 ['type' => 'i', 'value' => $account->getGroup()->getId()],

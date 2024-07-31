@@ -82,6 +82,8 @@ class AccountFactory
      */
     public static function createNew(CreateAccountRequest $request, AvatarInterface $avatar, string $hashKey): AccountInterface
     {
+        // TODO Если user_agent больше допустимой длины - то просто обрезать его, без ошибки
+
         return new Account(
             Uuid::uuid4()->toString(),
             $request->getLogin(),

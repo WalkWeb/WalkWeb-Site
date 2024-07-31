@@ -62,5 +62,8 @@ if (empty($floor)) {
     <label>
         <input type="hidden" name="csrf" value="<?= $csrfToken ?? '' ?>">
     </label>
+    <label>
+        <input type="hidden" name="user_agent" value="mock">
+    </label>
     <button type="submit">Зарегистрироваться</button>
 </form>

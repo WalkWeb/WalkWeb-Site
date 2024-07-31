@@ -36,7 +36,7 @@ class Version_2024_07_01_15_50_50_71
                 `chat_status_id` TINYINT UNSIGNED NOT NULL DEFAULT 10,        # id статуса аккаунта в чате
                 `upload`         INT UNSIGNED NOT NULL DEFAULT 0,             # суммарный вес файлов, загруженных пользователем
                 `notice`         TINYINT UNSIGNED NOT NULL DEFAULT 0,         # есть ли у пользователя активные уведомления
-                `user_agent`     VARCHAR(100) NOT NULL DEFAULT \'undefined\', # информация userAgent полученная от браузера
+                `user_agent`     VARCHAR(150) NOT NULL DEFAULT \'undefined\', # информация userAgent полученная от браузера
                 `can_like`       TINYINT NOT NULL DEFAULT 1,                  # Может ли пользователь лайкать чужие посты/комментарии
                 `created_at`     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,         # дата регистрации
                 `updated_at`     TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

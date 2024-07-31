@@ -134,7 +134,6 @@ class AccountRegistrationHandler extends AbstractHandler
 
         $body['ip'] = $this->getIp($request);
         $body['ref'] = $request->ref;
-        $body['user_agent'] = ''; // TODO Mock
 
         return AccountFactory::createRequest($body);
     }
