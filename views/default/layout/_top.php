@@ -11,7 +11,7 @@ $title = $this->title ?: APP_NAME . ' — Интересное';
     <meta name="Keywords" content="<?= htmlspecialchars($this->keywords) ?>">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link rel="stylesheet" type="text/css" href="/css/default.css">
+    <link rel="stylesheet" type="text/css" href="/lightweb/css/lw.css">
     <script src="/js/jquery.js"></script>
     <script src="/js/app.js?v=1.00"></script>
     <link rel="icon" type="image/x-icon" href="/icon64.png">
