@@ -10,8 +10,10 @@ use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 use WalkWeb\NW\Response;
 
-class NoticeRepository implements NoticeRepositoryInterface
+class NoticeRepository
 {
+    public const ACTUAL_LIMIT = 8;
+
     private Container $container;
 
     public function __construct(Container $container)

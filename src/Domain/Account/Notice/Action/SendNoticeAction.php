@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace App\Domain\Account\Notice\Action;
 
 use App\Domain\Account\Notice\Notice;
-use App\Domain\Account\Notice\NoticeException;
 use App\Domain\Account\Notice\NoticeInterface;
-use App\Domain\Account\Notice\NoticeRepositoryInterface;
+use App\Domain\Account\Notice\NoticeRepository;
 use DateTime;
 use Ramsey\Uuid\Uuid;
+use WalkWeb\NW\AppException;
 
 // TODO Добавить в контейнер
 
 class SendNoticeAction implements SendNoticeActionInterface
 {
-    private NoticeRepositoryInterface $noticeRepository;
+    private NoticeRepository $noticeRepository;
 
-    public function __construct(NoticeRepositoryInterface $noticeRepository)
+    public function __construct(NoticeRepository $noticeRepository)
     {
         $this->noticeRepository = $noticeRepository;
     }
@@ -30,7 +30,7 @@ class SendNoticeAction implements SendNoticeActionInterface
      * @param int $type
      * @param bool $print
      * @return NoticeInterface
-     * @throws NoticeException
+     * @throws AppException
      */
     public function send(string $accountId, string $message, int $type = NoticeInterface::TYPE_INFO, bool $print = true): NoticeInterface
     {

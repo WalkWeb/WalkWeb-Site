@@ -8,13 +8,14 @@ use App\Domain\Account\Notice\Notice;
 use App\Domain\Account\Notice\NoticeException;
 use DateTime;
 use Test\AbstractTest;
+use WalkWeb\NW\AppException;
 
 class NoticeTest extends AbstractTest
 {
     /**
      * Тест на успешное создание уведомления
      *
-     * @throws NoticeException
+     * @throws AppException
      */
     public function testNoticeCreateSuccess(): void
     {
@@ -40,7 +41,7 @@ class NoticeTest extends AbstractTest
     /**
      * Тест на ситуацию, когда передан неизвестный тип уведомления
      *
-     * @throws NoticeException
+     * @throws AppException
      */
     public function testNoticeCreateUnknownType(): void
     {
@@ -51,7 +52,7 @@ class NoticeTest extends AbstractTest
         $view = true;
         $createdAt = new DateTime('2019-08-12 14:00:00');
 
-        $this->expectException(NoticeException::class);
+        $this->expectException(AppException::class);
         $this->expectExceptionMessage(NoticeException::UNKNOWN_TYPE . ': ' . $type);
         new Notice($id, $type, $accountId, $message, $view, $createdAt);
     }

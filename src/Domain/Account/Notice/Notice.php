@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Account\Notice;
 
 use DateTimeInterface;
+use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\DateTrait;
 
 class Notice implements NoticeInterface
@@ -32,7 +33,7 @@ class Notice implements NoticeInterface
      * @param string $message
      * @param bool $view
      * @param DateTimeInterface $createdAt
-     * @throws NoticeException
+     * @throws AppException
      */
     public function __construct(
         string $id,
@@ -122,12 +123,12 @@ class Notice implements NoticeInterface
 
     /**
      * @param int $id
-     * @throws NoticeException
+     * @throws AppException
      */
     private function setType(int $id): void
     {
         if (!array_key_exists($id, self::$map)) {
-            throw new NoticeException(NoticeException::UNKNOWN_TYPE . ': ' . $id);
+            throw new AppException(NoticeException::UNKNOWN_TYPE . ': ' . $id);
         }
 
         $this->typeId = $id;

@@ -9,7 +9,6 @@ use App\Domain\Account\Notice\Notice;
 use App\Domain\Account\Notice\NoticeException;
 use App\Domain\Account\Notice\NoticeFactory;
 use App\Domain\Account\Notice\NoticeRepository;
-use App\Domain\Account\Notice\NoticeRepositoryInterface;
 use DateTime;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
@@ -176,10 +175,10 @@ class NoticeRepositoryTest extends AbstractTest
     }
 
     /**
-     * @return NoticeRepositoryInterface
+     * @return NoticeRepository
      * @throws AppException
      */
-    private function getRepository(): NoticeRepositoryInterface
+    private function getRepository(): NoticeRepository
     {
         return new NoticeRepository(self::getContainer());
     }

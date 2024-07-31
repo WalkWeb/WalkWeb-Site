@@ -7,7 +7,6 @@ namespace Test\src\Domain\Account\Notice\Action;
 use App\Domain\Account\Notice\Action\SendNoticeAction;
 use App\Domain\Account\Notice\NoticeException;
 use App\Domain\Account\Notice\NoticeRepository;
-use App\Domain\Account\Notice\NoticeRepositoryInterface;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 
@@ -42,10 +41,10 @@ class SendNoticeActionTest extends AbstractTest
     }
 
     /**
-     * @return NoticeRepositoryInterface
+     * @return NoticeRepository
      * @throws AppException
      */
-    private function getRepository(): NoticeRepositoryInterface
+    private function getRepository(): NoticeRepository
     {
         return new NoticeRepository(self::getContainer());
     }
