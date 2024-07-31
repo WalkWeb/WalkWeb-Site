@@ -17,6 +17,8 @@ class NoticeCollection implements Iterator, Countable
      */
     private array $elements = [];
 
+    private int $total = 0;
+
     /**
      * @param NoticeInterface $notice
      * @throws NoticeException
@@ -33,5 +35,15 @@ class NoticeCollection implements Iterator, Countable
     public function current(): NoticeInterface
     {
         return current($this->elements);
+    }
+
+    public function getTotal(): int
+    {
+        return $this->total;
+    }
+
+    public function setTotal(int $total): void
+    {
+        $this->total = $total;
     }
 }

@@ -24,6 +24,8 @@ class AuthFactory
     /**
      * Создает объект реализующий интерфейс AuthInterface на основе массива с данными
      *
+     * TODO Получать коллекцию уведомлений отдельно
+     *
      * @param array $data
      * @param SendNoticeActionInterface $sendNoticeAction
      * @return AuthInterface

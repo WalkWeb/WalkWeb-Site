@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Account\Notice;
 
+// TODO Delete
+
 use WalkWeb\NW\AppException;
 
 /**
@@ -15,6 +17,8 @@ use WalkWeb\NW\AppException;
  */
 interface NoticeRepositoryInterface
 {
+    public const ACTUAL_LIMIT = 8;
+
     /**
      * Получает данные из базы и создает объект уведомления пользователя
      *
@@ -33,10 +37,19 @@ interface NoticeRepositoryInterface
     public function add(NoticeInterface $notice): void;
 
     /**
+     * @param string $accountId
+     * @param int $offset
+     * @param int $limit
+     * @return NoticeCollection
+     */
+    public function getAll(string $accountId, int $offset, int $limit): NoticeCollection;
+
+    /**
      * Возвращает все актуальные уведомления для указанного пользователя
      *
      * @param string $accountId
+     * @param int $total
      * @return NoticeCollection
      */
-    public function getActual(string $accountId): NoticeCollection;
+    public function getActual(string $accountId, int $total = self::ACTUAL_LIMIT): NoticeCollection;
 }

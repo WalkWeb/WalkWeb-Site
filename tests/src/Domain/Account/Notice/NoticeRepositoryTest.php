@@ -125,14 +125,16 @@ class NoticeRepositoryTest extends AbstractTest
      * @dataProvider getActualDataProvider
      * @param string $accountId
      * @param array $noticesData
+     * @param int $total
      * @throws AppException
      * @throws NoticeException
      */
-    public function testNoticeRepositoryGetActual(string $accountId, array $noticesData): void
+    public function testNoticeRepositoryGetActual(string $accountId, array $noticesData, int $total): void
     {
-        $notices = $this->getRepository()->getActual($accountId);
+        $notices = $this->getRepository()->getActual($accountId, 5);
 
         self::assertSameSize($noticesData, $notices);
+        self::assertEquals($total, $notices->getTotal());
 
         $i = 0;
         foreach ($notices as $notice) {
@@ -152,14 +154,16 @@ class NoticeRepositoryTest extends AbstractTest
      * @param int $offset
      * @param int $limit
      * @param array $noticesData
+     * @param int $total
      * @throws AppException
      * @throws NoticeException
      */
-    public function testNoticeRepositoryGetAll(string $accountId, int $offset, int $limit, array $noticesData): void
+    public function testNoticeRepositoryGetAll(string $accountId, int $offset, int $limit, array $noticesData, int $total): void
     {
         $notices = $this->getRepository()->getAll($accountId, $offset, $limit);
 
         self::assertSameSize($noticesData, $notices);
+        self::assertEquals($total, $notices->getTotal());
 
         $i = 0;
         foreach ($notices as $notice) {
@@ -169,17 +173,6 @@ class NoticeRepositoryTest extends AbstractTest
             );
             $i++;
         }
-    }
-
-    /**
-     * @dataProvider totalDataProvider
-     * @param string $accountId
-     * @param int $expectedTotal
-     * @throws AppException
-     */
-    public function testNoticeRepositoryGetTotal(string $accountId, int $expectedTotal): void
-    {
-        self::assertEquals($expectedTotal, $this->getRepository()->getTotal($accountId));
     }
 
     /**
@@ -227,10 +220,63 @@ class NoticeRepositoryTest extends AbstractTest
                         'created_at' => '2021-12-25 13:00:00',
                     ],
                 ],
+                3,
             ],
             [
                 'a29393e0-34b4-4419-9c13-f4e8a1b54cf2',
                 [],
+                0,
+            ],
+            [
+                self::GAME_USER,
+                [
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477a01',
+                        'type'       => 1,
+                        'account_id' => self::GAME_USER,
+                        'message'    => 'notice message 1',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 07:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477a02',
+                        'type'       => 3,
+                        'account_id' => self::GAME_USER,
+                        'message'    => 'notice message 2',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 08:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477a03',
+                        'type'       => 2,
+                        'account_id' => self::GAME_USER,
+                        'message'    => 'notice message 3',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 09:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477a04',
+                        'type'       => 1,
+                        'account_id' => self::GAME_USER,
+                        'message'    => 'notice message 4',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 10:00:00',
+                    ],
+                    [
+
+                        'id'         => 'd92bce7f-112d-442c-8a75-bf440f477a05',
+                        'type'       => 1,
+                        'account_id' => self::GAME_USER,
+                        'message'    => 'notice message 5',
+                        'view'       => 0,
+                        'created_at' => '2021-12-25 11:00:00',
+                    ],
+                ],
+                9,
             ],
         ];
     }
@@ -292,6 +338,7 @@ class NoticeRepositoryTest extends AbstractTest
                         'created_at' => '2021-12-25 11:00:00',
                     ],
                 ],
+                5,
             ],
             // check limit
             [
@@ -318,6 +365,7 @@ class NoticeRepositoryTest extends AbstractTest
                         'created_at' => '2021-12-25 14:00:00',
                     ],
                 ],
+                5,
             ],
             // check offset
             [
@@ -352,6 +400,7 @@ class NoticeRepositoryTest extends AbstractTest
                         'created_at' => '2021-12-25 11:00:00',
                     ],
                 ],
+                5,
             ],
             // nothing
             [
@@ -359,22 +408,6 @@ class NoticeRepositoryTest extends AbstractTest
                 0,
                 10,
                 [],
-            ],
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function totalDataProvider(): array
-    {
-        return [
-            [
-                self::DEMO_USER,
-                5,
-            ],
-            [
-                self::DEMO_CHAT_ADMIN,
                 0,
             ],
         ];
