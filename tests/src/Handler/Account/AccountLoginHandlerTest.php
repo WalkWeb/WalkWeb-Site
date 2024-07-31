@@ -74,6 +74,23 @@ class AccountLoginHandlerTest extends AbstractTest
     }
 
     /**
+     * @throws AppException
+     */
+    public function testAccountLoginHandlerAlreadyAuth(): void
+    {
+        $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
+        $request = new Request(
+            ['REQUEST_URI' => '/login', 'REQUEST_METHOD' => 'POST'],
+            ['login' => 'DemoUser', 'password' => '12345', 'redirect_url' => ''],
+            [AccountInterface::AUTH_TOKEN => $token]
+        );
+        $response = $this->app->handle($request);
+
+        self::assertEquals(Response::FOUND, $response->getStatusCode());
+        self::assertEquals('/', $response->getHeaders()['Location']);
+    }
+
+    /**
      * @return array
      */
     public function failDataProvider(): array
