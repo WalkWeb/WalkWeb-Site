@@ -10,7 +10,7 @@ use App\Domain\Account\Group\AccountGroup;
 use App\Domain\Account\MainCharacter\Level\LevelFactory;
 use App\Domain\Account\MainCharacter\Level\LevelInterface;
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
-use App\Domain\Account\Notice\NoticeCollectionFactory;
+use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Account\Upload\AccountUpload;
 use Exception;
@@ -24,14 +24,13 @@ class AuthFactory
     /**
      * Создает объект реализующий интерфейс AuthInterface на основе массива с данными
      *
-     * TODO Получать коллекцию уведомлений отдельно
-     *
      * @param array $data
      * @param SendNoticeActionInterface $sendNoticeAction
+     * @param NoticeCollection $notices
      * @return AuthInterface
      * @throws AppException
      */
-    public static function create(array $data, SendNoticeActionInterface $sendNoticeAction): AuthInterface
+    public static function create(array $data, SendNoticeActionInterface $sendNoticeAction, NoticeCollection $notices): AuthInterface
     {
         try {
             $level = LevelFactory::create(self::array($data, 'level', AuthException::INVALID_LEVEL), $sendNoticeAction);
@@ -47,7 +46,7 @@ class AuthFactory
                 new AccountStatus(self::int($data, 'account_status_id', AuthException::INVALID_ACCOUNT_STATUS_ID)),
                 EnergyFactory::create(self::array($data, 'energy', AuthException::INVALID_ENERGY_DATA)),
                 (bool)self::int($data, 'can_like', AuthException::INVALID_CAN_LIKE),
-                NoticeCollectionFactory::create(self::array($data, 'notices', AuthException::INVALID_NOTICES_DATA)),
+                $notices,
                 $level,
                 self::string($data, 'template', AuthException::INVALID_TEMPLATE),
                 (bool)self::int($data, 'email_verified', AuthException::INVALID_EMAIL_VERIFIED),

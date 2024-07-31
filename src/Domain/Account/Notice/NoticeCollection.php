@@ -6,6 +6,7 @@ namespace App\Domain\Account\Notice;
 
 use Countable;
 use Iterator;
+use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\CollectionTrait;
 
 class NoticeCollection implements Iterator, Countable
@@ -21,12 +22,12 @@ class NoticeCollection implements Iterator, Countable
 
     /**
      * @param NoticeInterface $notice
-     * @throws NoticeException
+     * @throws AppException
      */
     public function add(NoticeInterface $notice): void
     {
         if (array_key_exists($notice->getId(), $this->elements)) {
-            throw new NoticeException(NoticeException::ALREADY_EXIST);
+            throw new AppException(NoticeException::ALREADY_EXIST);
         }
 
         $this->elements[$notice->getId()] = $notice;

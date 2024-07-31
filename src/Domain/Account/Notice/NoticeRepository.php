@@ -48,8 +48,6 @@ class NoticeRepository
      * @param int $limit
      * @return NoticeCollection
      * @throws AppException
-     * @throws AuthException
-     * @throws NoticeException
      */
     public function getActual(string $accountId, int $limit = self::ACTUAL_LIMIT): NoticeCollection
     {

@@ -5,16 +5,20 @@ declare(strict_types=1);
 namespace App\Domain\Auth;
 
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
+use App\Domain\Account\Notice\NoticeCollection;
+use App\Domain\Account\Notice\NoticeRepository;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 
 class AuthRepository
 {
     private Container $container;
+    private NoticeRepository $noticeRepository;
 
-    public function __construct(Container $container)
+    public function __construct(Container $container, NoticeRepository $noticeRepository = null)
     {
         $this->container = $container;
+        $this->noticeRepository = $noticeRepository ?? new NoticeRepository($container);
     }
 
     /**
@@ -89,30 +93,24 @@ class AuthRepository
 
         $data['level'] = $level;
 
-        $data['notices'] = $this->getNotice($data['notice'] === 1, $data['id']);
+        $notices = $this->getNotice($data['notice'] === 1, $data['id']);
 
-        return AuthFactory::create($data, $sendNoticeAction);
+        return AuthFactory::create($data, $sendNoticeAction, $notices);
     }
 
     /**
-     * TODO created_at DESC
-     *
      * @param bool $exist
      * @param string $accountId
-     * @return array
+     * @return NoticeCollection
      * @throws AppException
      */
-    public function getNotice(bool $exist, string $accountId): array
+    public function getNotice(bool $exist, string $accountId): NoticeCollection
     {
         if ($exist) {
-            return $this->container->getConnectionPool()->getConnection()->query(
-                'SELECT `id`, `type`, `account_id`, `message`, `view`, `created_at` 
-                FROM `notices` WHERE `account_id` = ? AND `view` = 0',
-                [['type' => 's', 'value' => $accountId]]
-            );
+            return $this->noticeRepository->getActual($accountId);
         }
 
-        return [];
+        return new NoticeCollection();
     }
 
     /**

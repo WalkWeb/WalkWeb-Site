@@ -17,7 +17,6 @@ class NoticeFactory
      * @param array $data
      * @return NoticeInterface
      * @throws AppException
-     * @throws NoticeException
      */
     public static function create(array $data): NoticeInterface
     {

@@ -9,13 +9,14 @@ use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Notice\NoticeException;
 use DateTime;
 use Test\AbstractTest;
+use WalkWeb\NW\AppException;
 
 class NoticeCollectionTest extends AbstractTest
 {
     /**
      * Тест на успешное создание NoticeCollection
      *
-     * @throws NoticeException
+     * @throws AppException
      */
     public function testNoticeCollectionCreateSuccess(): void
     {
@@ -64,7 +65,7 @@ class NoticeCollectionTest extends AbstractTest
     /**
      * Тест на ситуацию, когда в коллекцию добавляется уведомление, которое в ней уже существует
      *
-     * @throws NoticeException
+     * @throws AppException
      */
     public function testNoticeCollectionDoubleNotice(): void
     {
@@ -81,7 +82,7 @@ class NoticeCollectionTest extends AbstractTest
 
         $collection->add($notice);
 
-        $this->expectException(NoticeException::class);
+        $this->expectException(AppException::class);
         $this->expectExceptionMessage(NoticeException::ALREADY_EXIST);
         $collection->add($notice);
     }

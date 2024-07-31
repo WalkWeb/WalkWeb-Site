@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Account\Notice;
 
-use App\Domain\Auth\AuthException;
 use WalkWeb\NW\AppException;
 
 class NoticeCollectionFactory
@@ -12,8 +11,6 @@ class NoticeCollectionFactory
     /**
      * @param array $data
      * @return NoticeCollection
-     * @throws AuthException
-     * @throws NoticeException
      * @throws AppException
      */
     public static function create(array $data): NoticeCollection
@@ -22,7 +19,7 @@ class NoticeCollectionFactory
 
         foreach ($data as $noticeData) {
             if (!is_array($noticeData)) {
-                throw new AuthException(AuthException::INVALID_NOTICE_DATA);
+                throw new AppException(NoticeException::INVALID_NOTICE_DATA);
             }
 
             $collection->add(NoticeFactory::create($noticeData));
