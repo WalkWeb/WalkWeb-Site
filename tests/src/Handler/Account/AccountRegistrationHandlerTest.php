@@ -319,6 +319,26 @@ class AccountRegistrationHandlerTest extends AbstractTest
         self::assertEquals(Response::OK, $response->getStatusCode());
     }
 
+    /**
+     * @throws AppException
+     */
+    public function testAccountRegistrationHandlerAlreadyAuth(): void
+    {
+        $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
+        $request = new Request(
+            ['REQUEST_URI' => '/registration/main', 'REQUEST_METHOD' => 'POST'],
+            ['login' => 'MyUser', 'email' => 'myemail@email.com', 'password' => '12345', 'floor_id' => '1'],
+            [AccountInterface::AUTH_TOKEN => $token]
+        );
+        $response = $this->app->handle($request);
+
+        self::assertEquals(Response::FOUND, $response->getStatusCode());
+        self::assertEquals('/', $response->getHeaders()['Location']);
+    }
+
+    /**
+     * @return array
+     */
     public function successDataProvider(): array
     {
         return [

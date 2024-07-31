@@ -32,10 +32,7 @@ class AuthMiddleware extends AbstractMiddleware
                 $this->container->set('user', $user);
 
                 if ($request->getUri() !== '/banned' && $request->getUri() !== '/logout' && $user->getStatus()->getId() === AccountStatusInterface::BLOCKED) {
-                    // TODO Вынести в метод AbstractMiddleware
-                    $response = new Response('', Response::FOUND);
-                    $response->withHeader('Location', '/banned');
-                    return $response;
+                    return $this->banned();
                 }
 
             } else {

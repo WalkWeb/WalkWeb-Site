@@ -74,7 +74,10 @@ class AccountRegistrationHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
-        // TODO Проверка на уже существующую авторизацию
+        if ($this->container->exist('user')) {
+            return $this->redirect('/');
+        }
+
         // TODO Добавить откат транзакции, если что-то пошло не так
 
         try {
