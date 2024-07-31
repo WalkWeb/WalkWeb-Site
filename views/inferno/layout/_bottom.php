@@ -19,11 +19,11 @@ if ($this->container->exist('user')) {
     /** @var AuthInterface $user */
     $user = $this->container->getUser();
 
-    if ($count = count($user->getNotices())) {
+    if ($user->getNotices()->getTotal() > 0) {
 
         echo '<div class="up_notice_box">
                 <div id="up_open_notice" onclick="openNotice()">
-                    <p><span>' . $count . '</span></p>
+                    <p><span>' . $user->getNotices()->getTotal() . '</span></p>
                 </div>
                 <div id="up_notice_content">';
 
@@ -38,7 +38,7 @@ if ($this->container->exist('user')) {
                     </div>';
         }
 
-        if ($count > 2) {
+        if ($user->getNotices()->getTotal() > 2) {
             echo '<div class="up_notice_car">
                     <p><span onclick="closeAllNotice()">закрыть все</span></p>
                   </div>';

@@ -38,12 +38,11 @@ class NoticeFactoryTest extends AbstractTest
      * @dataProvider failDataProvider
      * @param array $data
      * @param string $error
-     * @throws NoticeException
      * @throws AppException
      */
     public function testNoticeFactoryCreateFail(array $data, string $error): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
         $this->getFactory()->create($data);
     }
