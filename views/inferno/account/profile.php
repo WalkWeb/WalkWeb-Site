@@ -85,7 +85,7 @@ $rise = $account->getMainCharacter()->getLevel()->getStatPoints() > 0;
                         </tr>
                         <tr>
                             <td class="tb06"></td>
-                            <td colspan="3" rowspan="3" class="pr_ava" style="background:url(<?= $account->getAvatar() ?>)"></td>
+                            <td colspan="3" rowspan="3" class="pr_ava" style="background-image: url(<?= $account->getAvatar() ?>)"></td>
                             <td class="tb07"></td>
                         </tr>
                         <tr>

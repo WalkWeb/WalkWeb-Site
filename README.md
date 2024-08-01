@@ -11,7 +11,7 @@
 | Banned         |      +       |      +       |      +       |       +      |
 | Notices        |      +       |      +       |      +       |       +      |
 | User           |      +-      |      +       |      +       |       +      |
-| User List      |      +       |      -       |      +       |              |
+| User List      |      +       |      +       |      +       |       +      |
 | Character      |      +       |      -       |      +       |              |
 | Errors         |      +       |      +       |      +       |       +      |
 | Statistic      |      +       |      -       |      +       |              |

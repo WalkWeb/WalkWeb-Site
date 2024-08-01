@@ -60,7 +60,7 @@ class AccountListRepositoryTest extends AbstractTest
                 [
                     [
                         'id'        => self::DEMO_USER,
-                        'avatar'    => '/img/default_avatar.jpg',
+                        'avatar'    => '/img/avatars/it/analyst/male/01s.jpg',
                         'name'      => 'DemoUser',
                         'level'     => 1,
                         'exp'       => 0,
@@ -70,7 +70,7 @@ class AccountListRepositoryTest extends AbstractTest
                     ],
                     [
                         'id'        => self::BLOCKED_USER,
-                        'avatar'    => '/img/default_avatar.jpg',
+                        'avatar'    => '/img/avatars/it/analyst/female/01s.jpg',
                         'name'      => 'BlockedUser',
                         'level'     => 2,
                         'exp'       => 54,
@@ -87,7 +87,7 @@ class AccountListRepositoryTest extends AbstractTest
                 [
                     [
                         'id'        => self::NO_END_REG_USER,
-                        'avatar'    => '/img/default_avatar.jpg',
+                        'avatar'    => '/img/avatars/it/designer/male/01s.jpg',
                         'name'      => 'NoEndRegisterUser',
                         'level'     => 3,
                         'exp'       => 150,
@@ -97,7 +97,7 @@ class AccountListRepositoryTest extends AbstractTest
                     ],
                     [
                         'id'        => self::DEMO_MODERATOR,
-                        'avatar'    => '/img/default_avatar.jpg',
+                        'avatar'    => '/img/avatars/it/designer/female/01s.jpg',
                         'name'      => 'NameModerator',
                         'level'     => 4,
                         'exp'       => 450,

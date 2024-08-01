@@ -38,11 +38,14 @@ class AccountListRepository
                 `accounts`.`status_id`,
                 `accounts`.`group_id`,
                 `characters_main`.`level`,
-                `characters_main`.`exp`
+                `characters_main`.`exp`,
+                `avatars`.`small_url` as `avatar`
 
                 FROM `accounts` 
 
                 JOIN `characters_main` on `accounts`.`id` = `characters_main`.`account_id`
+                JOIN `characters` on `accounts`.`character_id` = `characters`.`id`
+                JOIN `avatars` on `characters`.`avatar_id` = `avatars`.`id`
 
                 ORDER BY `created_at` LIMIT ? OFFSET ?',
             [
@@ -53,7 +56,6 @@ class AccountListRepository
 
         // TODO Mock
         foreach ($data as &$datum) {
-            $datum['avatar'] = '/img/default_avatar.jpg';
             $datum['carma'] = 0;
         }
 

@@ -82,7 +82,7 @@ use App\Domain\Auth\AuthInterface;
                 </div>
                 <div class="mr_content">
                     <div class="mr_el"><p>» <a href="#">FAQ</a></p></div>
-                    <div class="mr_el"><p>» <a href="#">Аккаунты</a></p></div>
+                    <div class="mr_el"><p>» <a href="/users/1">Пользователи</a></p></div>
                     <div class="mr_el"><p>» <a href="#">База Знаний</a></p></div>
                     <div class="mr_el"><p>» <a href="#">Статистика</a></p></div>
                 </div>
