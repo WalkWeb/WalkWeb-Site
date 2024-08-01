@@ -765,9 +765,7 @@ p.chat_form_read_only {
     text-decoration: underline;
 }
 
-/* Beta-test styles */
-
-.ch_test_box {
+.select_text_box {
     width: 90%;
     background: #14100c;
     border-radius: 20px;
@@ -775,11 +773,11 @@ p.chat_form_read_only {
     border: 1px solid #3d2c1c;
 }
 
-.ch_test_row {
+.select_text_row {
     padding: 20px;
 }
 
-.ch_test_h {
+.select_text_header {
     text-align: center;
     font-size: 160%;
 }

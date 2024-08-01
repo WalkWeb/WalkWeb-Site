@@ -32,16 +32,16 @@ class VerifiedEmailPageHandler extends AbstractHandler
 
         if ($this->container->getUser()->isEmailVerified()) {
             $this->title = 'Email успешно подтвержден';
-            $message = '<p>Вы успешно подтвердили email, ваш аккаунт активирован и все возможности доступны.</p>
-                        <p><a href="/">Перейти на главную</a></p>';
+            $message = 'Вы успешно подтвердили email, ваш аккаунт активирован и все возможности доступны.<br /><br />
+                        <a href="/">Перейти на главную</a>';
 
             return $this->render('account/email_verified', ['message' => $message]);
         }
 
         $this->title = 'Подтвердите ваш email';
-        $message = '<p>Вам необходимо подтвердить email чтобы активировать аккаунт. Инструкция по активации 
-                    отправлена на email указанный при регистрации.</p>
-                    <p>Если вам не пришло письмо – свяжитесь с нашей службой поддержки.</p>';
+        $message = 'Вам необходимо подтвердить email чтобы активировать аккаунт. Инструкция по активации 
+                    отправлена на email указанный при регистрации.<br /><br />
+                    Если вам не пришло письмо – свяжитесь с нашей службой поддержки.';
 
         return $this->render('account/email_verified', ['message' => $message]);
     }

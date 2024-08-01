@@ -17,12 +17,14 @@ class AccountRegistrationPageHandlerTest extends AbstractTest
     /**
      * Test on print registration page
      *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testAccountRegistrationPageHandlerSuccess(): void
+    public function testAccountRegistrationPageHandlerSuccess(string $template): void
     {
         $request = new Request(['REQUEST_URI' => '/registration/main']);
-        $response = $this->createApp()->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertMatchesRegularExpression('/Регистрация/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());

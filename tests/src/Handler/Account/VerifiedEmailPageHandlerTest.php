@@ -17,13 +17,15 @@ class VerifiedEmailPageHandlerTest extends AbstractTest
     /**
      * Тест на успешное отображение страницы о необходимости подтвердить email-адрес
      *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testNotVerifiedEmailHandlerSuccess(): void
+    public function testNotVerifiedEmailHandlerSuccess(string $template): void
     {
         $authToken = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a3';
         $request = new Request(['REQUEST_URI' => self::URI], [], [AccountInterface::AUTH_TOKEN => $authToken]);
-        $response = $this->createApp()->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Подтвердите ваш email/', $response->getBody());
@@ -49,13 +51,15 @@ class VerifiedEmailPageHandlerTest extends AbstractTest
     /**
      * Тест на ситуацию, когда пользователь с подтвержденной почтой пытается открыть страницу - ему сообщается что все ок
      *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testNotVerifiedEmailHandlerAlreadyVerified(): void
+    public function testNotVerifiedEmailHandlerAlreadyVerified(string $template): void
     {
         $authToken = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
         $request = new Request(['REQUEST_URI' => self::URI], [], [AccountInterface::AUTH_TOKEN => $authToken]);
-        $response = $this->createApp()->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Email успешно подтвержден/', $response->getBody());
