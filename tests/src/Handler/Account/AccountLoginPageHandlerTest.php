@@ -16,12 +16,14 @@ class AccountLoginPageHandlerTest extends AbstractTest
     /**
      * Test on print login page
      *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testAccountLoginPageHandlerSuccess(): void
+    public function testAccountLoginPageHandlerSuccess(string $template): void
     {
         $request = new Request(['REQUEST_URI' => '/login']);
-        $response = $this->createApp()->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Вход/', $response->getBody());

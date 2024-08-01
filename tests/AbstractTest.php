@@ -67,6 +67,21 @@ abstract class AbstractTest extends TestCase
     }
 
     /**
+     * @return array
+     */
+    public function templateDataProvider(): array
+    {
+        return [
+            [
+                'default'
+            ],
+            [
+                'inferno'
+            ],
+        ];
+    }
+
+    /**
      * @return Container
      * @throws AppException
      */

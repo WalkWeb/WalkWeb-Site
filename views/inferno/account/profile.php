@@ -37,7 +37,7 @@ $rise = $account->getMainCharacter()->getLevel()->getStatPoints() > 0;
             <div class="ch_test_box">
                 <div class="ch_test_row">
             
-                    <p class="center"><span class="ch_test_h">Повысьте уровень аккаунта</span></p>
+                    <p class="center"><span class="ch_test_h">Повышение уровня аккаунта</span></p>
             
                     <p>
                         За написание постов и комментариев ваш аккаунт будет получать опыт, а при получении нового уровня 

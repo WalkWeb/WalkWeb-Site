@@ -38,19 +38,4 @@ class ProfilePageHandlerTest extends AbstractTest
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Войти/', $response->getBody());
     }
-
-    /**
-     * @return array
-     */
-    public function templateDataProvider(): array
-    {
-        return [
-            [
-                'default'
-            ],
-            [
-                'inferno'
-            ],
-        ];
-    }
 }

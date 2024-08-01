@@ -73,19 +73,4 @@ EOT;
         self::assertEquals(Response::NOT_FOUND, $response->getStatusCode());
         self::assertEquals($expectedContent, $response->getBody());
     }
-
-    /**
-     * @return array
-     */
-    public function templateDataProvider(): array
-    {
-        return [
-            [
-                'default',
-            ],
-            [
-                'inferno',
-            ],
-        ];
-    }
 }
