@@ -8,6 +8,10 @@ a {
     color: #c38339;
 }
 
+a:hover {
+    color: #5176d5;
+}
+
 body {
     color: #796252;
     font: normal 13px arial, helvetica, sans-serif;

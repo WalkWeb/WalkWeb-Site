@@ -32,12 +32,14 @@ class MainHandlerTest extends AbstractTest
      * Тест на ситуацию, когда заблокированный пользователь пытается открыть главную страницу - его переадресует на
      * страницу с информацией о том, что его аккаунт заблокирован
      *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testMainPageBannedUser(): void
+    public function testMainPageBannedUser(string $template): void
     {
         $request = new Request(['REQUEST_URI' => '/'], [], [AccountInterface::AUTH_TOKEN => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a2']);
-        $response = $this->app->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::FOUND, $response->getStatusCode());
         self::assertEquals('/banned', $response->getHeaders()['Location']);
