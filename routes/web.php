@@ -20,7 +20,7 @@ $routes->get('account.list', '/users/{page}', 'App\\Handler\\Account\\AccountLis
 
 $routes->get('character.get', '/c/{id}', 'App\\Handler\\Character\\CharacterPageHandler', ['id' => '[a-zA-Z0-9-]+']);
 
-$routes->get('statistic', '/statistic', 'App\\Handler\\StatisticHandler');
+$routes->get('statistic', '/statistic', 'App\\Handler\\StatisticPageHandler');
 
 // TODO temporary methods
 $routes->get('account.add.exp', '/add/exp', 'App\\Handler\\Temporary\\AddExpHandler');

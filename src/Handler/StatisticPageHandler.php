@@ -10,7 +10,7 @@ use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
-class StatisticHandler extends AbstractHandler
+class StatisticPageHandler extends AbstractHandler
 {
     /**
      * Print statistic page

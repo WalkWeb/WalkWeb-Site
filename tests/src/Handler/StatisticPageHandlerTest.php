@@ -9,17 +9,19 @@ use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
-class StatisticHandlerTest extends AbstractTest
+class StatisticPageHandlerTest extends AbstractTest
 {
     /**
      * Test on get statistic page
      *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testMainPage(): void
+    public function testStatisticPageHandlerSuccess(string $template): void
     {
         $request = new Request(['REQUEST_URI' => '/statistic']);
-        $response = $this->app->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertMatchesRegularExpression('/Статистика/', $response->getBody());
         self::assertMatchesRegularExpression('/Пользователей: 11/', $response->getBody());

@@ -56,6 +56,21 @@ h3 {
     padding: 15px 30px 10px 30px;
 }
 
+ul {
+    list-style: none;
+    padding: 10px 40px 20px 60px;
+}
+
+li {
+    list-style-image: url(/inferno/images/ul_image.png);
+    font-family: arial, sans-serif;
+    font-size: 17px;
+    color: #a9825d;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    line-height: 125%;
+}
+
 #main_box {
     max-width: 1540px;
     min-width: 1000px;
