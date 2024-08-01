@@ -10,7 +10,7 @@
 | Profile        |      +-      |      +       |      +       |       +      |
 | Banned         |      +       |      +       |      +       |       +      |
 | Notices        |      +       |      +       |      +       |       +      |
-| User           |      +-      |      -       |      +       |              |
+| User           |      +-      |      +       |      +       |       +      |
 | User List      |      +       |      -       |      +       |              |
 | Character      |      +       |      -       |      +       |              |
 | Errors         |      +       |      +       |      +       |       +      |

@@ -12,24 +12,28 @@ use WalkWeb\NW\Response;
 class AccountPageHandlerTest extends AbstractTest
 {
     /**
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testAccountPageHandlerSuccess(): void
+    public function testAccountPageHandlerSuccess(string $template): void
     {
         $request = new Request(['REQUEST_URI' => '/u/DemoUser']);
-        $response = $this->app->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
-        self::assertMatchesRegularExpression('/Логин: DemoUser/', $response->getBody());
+        self::assertMatchesRegularExpression('/DemoUser/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
     }
 
     /**
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testAccountPageHandlerUserNotFound(): void
+    public function testAccountPageHandlerUserNotFound(string $template): void
     {
         $request = new Request(['REQUEST_URI' => '/u/MussUser']);
-        $response = $this->app->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertMatchesRegularExpression('/Пользователь не найден/', $response->getBody());
         self::assertEquals(Response::NOT_FOUND, $response->getStatusCode());

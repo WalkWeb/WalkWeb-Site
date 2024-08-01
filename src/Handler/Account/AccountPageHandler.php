@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Handler\Account;
 
 use App\Domain\Account\AccountRepository;
+use App\Domain\Account\Character\Collection\CharacterCollectionRepository;
 use Exception;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
@@ -20,11 +21,16 @@ class AccountPageHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
+        $this->layoutUrl = 'layout/index.php';
+
         try {
             $repository = new AccountRepository($this->container);
+            $characterRepository = new CharacterCollectionRepository($this->container);
+            $account = $repository->get($request->getAttribute('name'), $this->getSendNoticeAction());
 
             return $this->render('account/index', [
-                'account' => $repository->get($request->getAttribute('name'), $this->getSendNoticeAction()),
+                'account'    => $account,
+                'characters' => $characterRepository->get($account->getMainCharacter()->getId()),
             ]);
 
         } catch (Exception $e) {

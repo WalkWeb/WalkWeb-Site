@@ -7,7 +7,7 @@ if (empty($account) || !($account instanceof AccountInterface)) {
     throw new AppException('view.account.index: miss account');
 }
 
-$this->title = APP_ENV .  ' — Профиль пользователя ' . $account->getName();
+$this->title = APP_NAME .  ' — Профиль пользователя ' . $account->getName();
 
 $emailVerified = $account->isEmailVerified() ? 'да' : 'нет';
 $regComplete = $account->isRegComplete() ? 'да' : 'нет';
