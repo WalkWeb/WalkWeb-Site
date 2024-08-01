@@ -13,6 +13,10 @@ if (empty($notices) || !($notices instanceof NoticeCollection)) {
 $pagination = $pagination ?? '';
 $total = $total ?? 0;
 
+echo '<div class="cr_parent">
+        » <a href="/profile" title="" class="osnova">вернуться в профиль</a>
+      </div>';
+
 echo "<h3>Ваши уведомления ($total)</h3>";
 
 if (count($notices) > 0) {

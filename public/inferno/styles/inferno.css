@@ -40,6 +40,16 @@ h2 {
     font-weight: 100;
 }
 
+h3 {
+    font-family: verdana, sans-serif;
+    font-size: 125%;
+    line-height: 125%;
+    font-weight: 700;
+    text-align: left;
+    color: #ab9a63;
+    padding: 15px 30px 10px 30px;
+}
+
 #main_box {
     max-width: 1540px;
     min-width: 1000px;
@@ -1237,6 +1247,19 @@ a.pr_char_link {
     width: 100%; clear: both; height: 10px;
 }
 
+.cr_parent {
+    font-size: 140%;
+    padding: 20px 30px 10px 30px;
+}
+
+.cr_parent a {
+    text-decoration: none;
+}
+
+.cr_parent a:hover {
+    text-decoration: underline;
+}
+
 /* Profile style page end */
 
 /* Table border style start */
@@ -1474,3 +1497,125 @@ span.login_label {
     margin-left: 20px;
     font-size: 15px;
 }
+
+/* Notice page style start */
+
+.notice_box {
+    background: url(/inferno/images/row4.jpg) top;
+    margin: 10px 30px 0 30px;
+    border: 1px solid #413326;
+    border-radius: 5px;
+    display: flex;
+    -webkit-box-shadow: 0 3px 5px 0 rgb(0 0 0 / 75%);
+    -moz-box-shadow: 0 3px 5px 0 rgba(0,0,0,0.75);
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 75%);
+}
+
+.notice_box p {
+    padding: 5px;
+    margin: 0;
+}
+
+.notice_info, .notice_warning, .notice_success {
+    width: 15%;
+    min-width: 80px;
+    text-align: center;
+    border-radius: 5px 0 0 5px;
+}
+
+.notice_date_info, .notice_date_warning, .notice_date_success {
+    width: 25%;
+    min-width: 80px;
+    text-align: center;
+    border-radius: 0 5px 5px 0;
+}
+
+.notice_info {
+    border-right: 1px solid #503624;
+}
+
+.notice_warning {
+    background-color: #631b1b;
+    border-color: #b33131;
+    color: #fff;
+}
+
+.notice_success {
+    background-color: #2d5505;
+    border-color: #7dc736;
+    color: #fff;
+}
+
+.notice_date_info {
+    border-left: 1px solid #503624;
+}
+
+.notice_date_warning {
+    background-color: #631b1b;
+    border-color: #b33131;
+    color: #fff;
+}
+
+.notice_date_success {
+    background-color: #2d5505;
+    border-color: #7dc736;
+    color: #fff;
+}
+
+.notice_message_info, .notice_message_warning, .notice_message_success {
+    width: 60%;
+}
+
+.notice_message_warning {
+    background: #8b2626;
+    color: #fff;
+    border-color: #8b2626;
+}
+
+.notice_message_success {
+    background: #38630e;
+    color: #fff;
+    border-color: #649f2b;
+}
+
+/* Notice page style end */
+
+/* Pagination style start */
+
+.pagination {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 120%;
+}
+
+.pagination span {
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid #1a120d;
+    padding: 6px 12px;
+    background: url(/inferno/images/row.jpg) repeat-x scroll center top #1a120d;
+    color: #d2a456;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 0 #6c4930 inset, 0 2px 3px rgb(0 0 0 / 20%);
+    font: 100% arial, helvetica, sans-serif;
+}
+
+.pagination a {
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid #1a120d;
+    padding: 6px 12px;
+    cursor: pointer;
+    background: url(/inferno/images/row3.jpg) repeat-x scroll center top #1a120d;
+    color: #d2a456;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 0 #6c4930 inset, 0 2px 3px rgb(0 0 0 / 20%);
+    font: 100% arial, helvetica, sans-serif;
+}
+
+.pagination a:hover {
+    background: url(/inferno/images/row.jpg) repeat-x scroll center top #1a120d;
+    color: #a71d2a;
+}
+
+/* Pagination style end */

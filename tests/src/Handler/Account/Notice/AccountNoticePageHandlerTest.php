@@ -15,13 +15,15 @@ class AccountNoticePageHandlerTest extends AbstractTest
     /**
      * Test on success print notices page
      *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testAccountNoticePageHandlerSuccess(): void
+    public function testAccountNoticePageHandlerSuccess(string $template): void
     {
         $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
         $request = new Request(['REQUEST_URI' => '/notices/1'], [], [AccountInterface::AUTH_TOKEN => $token]);
-        $response = $this->app->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Ваши уведомления/', $response->getBody());
@@ -31,13 +33,15 @@ class AccountNoticePageHandlerTest extends AbstractTest
     /**
      * Test on print no notices page
      *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testAccountNoticePageHandlerEmpty(): void
+    public function testAccountNoticePageHandlerEmpty(string $template): void
     {
         $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a4';
         $request = new Request(['REQUEST_URI' => '/notices/1'], [], [AccountInterface::AUTH_TOKEN => $token]);
-        $response = $this->app->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Ваши уведомления/', $response->getBody());
@@ -62,15 +66,17 @@ class AccountNoticePageHandlerTest extends AbstractTest
     /**
      * Test on get no exist page
      *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testAccountNoticePageHandlerOverPage(): void
+    public function testAccountNoticePageHandlerOverPage(string $template): void
     {
         $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
         $request = new Request(['REQUEST_URI' => '/notices/10'], [], [AccountInterface::AUTH_TOKEN => $token]);
-        $response = $this->app->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::NOT_FOUND, $response->getStatusCode());
-        self::assertMatchesRegularExpression('/Page not found/', $response->getBody());
+        self::assertMatchesRegularExpression('/Страница не найдена/', $response->getBody());
     }
 }

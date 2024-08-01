@@ -44,7 +44,7 @@ class AccountNoticePageHandler extends AbstractHandler
 
         if ($page > 0 && $notices->getTotal() > 0 && $page > ceil($notices->getTotal() / self::PER_PAGE)) {
             // TODO Нужно доработать ошибку во фреймворке и заменить на renderErrorPage()
-            return $this->render('errors/custom_404', ['error' => 'Page not found'], Response::NOT_FOUND);
+            return $this->render('errors/custom_404', ['error' => 'Страница не найдена'], Response::NOT_FOUND);
         }
 
         return $this->render('account/notice', [

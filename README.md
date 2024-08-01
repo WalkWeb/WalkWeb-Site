@@ -9,10 +9,10 @@
 | Login          |      +       |      +       |      +       |       +      |
 | Profile        |      +-      |      +       |      +       |       +      |
 | Banned         |      +       |      +       |      +       |       +      |
-| Notices        |      +-      |      -       |      +       |              |
+| Notices        |      +       |      +       |      +       |       +      |
 | User           |      +-      |      -       |      +       |              |
 | User List      |      +       |      -       |      +       |              |
 | Character      |      +       |      -       |      +       |              |
-| Errors         |      +       |      -       |      +       |              |
+| Errors         |      +       |      +       |      +       |       +      |
 | Statistic      |      +       |      -       |      +       |              |
 |                |              |              |              |              |
