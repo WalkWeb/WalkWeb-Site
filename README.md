@@ -12,7 +12,7 @@
 | Notices        |      +       |      +       |      +       |       +      |
 | User           |      +-      |      +       |      +       |       +      |
 | User List      |      +       |      +       |      +       |       +      |
-| Character      |      +       |      -       |      +       |              |
+| Character      |      +       |      +       |      +       |       +      |
 | Errors         |      +       |      +       |      +       |       +      |
 | Statistic      |      +       |      -       |      +       |              |
 |                |              |              |              |              |

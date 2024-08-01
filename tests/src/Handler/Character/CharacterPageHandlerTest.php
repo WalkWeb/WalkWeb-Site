@@ -12,25 +12,29 @@ use WalkWeb\NW\Response;
 class CharacterPageHandlerTest extends AbstractTest
 {
     /**
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testCharacterPageHandlerSuccess(): void
+    public function testCharacterPageHandlerSuccess(string $template): void
     {
         $request = new Request(['REQUEST_URI' => '/c/277bbc70-cb4a-49a9-8de2-3fd5c1308c01']);
-        $response = $this->app->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
-        self::assertMatchesRegularExpression('/WalkWeb — Просмотр информации о персонаже/', $response->getBody());
-        self::assertMatchesRegularExpression('/ID: 277bbc70-cb4a-49a9-8de2-3fd5c1308c01/', $response->getBody());
+        self::assertMatchesRegularExpression('/Analyst/', $response->getBody());
+        self::assertMatchesRegularExpression('/Default/', $response->getBody());
     }
 
     /**
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testCharacterPageHandlerNotFound(): void
+    public function testCharacterPageHandlerNotFound(string $template): void
     {
         $request = new Request(['REQUEST_URI' => '/c/277bbc70-cb4a-49a9-8de2-3fd5c1308c33']);
-        $response = $this->app->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::NOT_FOUND, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Персонаж не найден/', $response->getBody());
