@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Test\src\Domain\Auth;
 
 use App\Domain\Account\AccountException;
-use App\Domain\Account\AccountInterface;
 use App\Domain\Account\Energy\EnergyFactory;
 use App\Domain\Account\Group\AccountGroup;
 use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Notice\NoticeException;
 use App\Domain\Account\Notice\NoticeFactory;
 use App\Domain\Account\Status\AccountStatus;
+use App\Domain\Account\Upload\UploadInterface;
 use App\Domain\Auth\AuthException;
 use App\Domain\Auth\AuthFactory;
 use Exception;
@@ -858,10 +858,10 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'template'               => 'default',
                     'email_verified'         => 0,
-                    'upload'                 => AccountInterface::UPLOAD_MIN_VALUE - 1,
+                    'upload'                 => UploadInterface::UPLOAD_MIN_VALUE - 1,
                     'upload_bonus'           => 3,
                 ],
-                AuthException::INVALID_UPLOAD_VALUE . AccountInterface::UPLOAD_MIN_VALUE . '-' . AccountInterface::UPLOAD_MAX_VALUE,
+                AuthException::INVALID_UPLOAD_VALUE . UploadInterface::UPLOAD_MIN_VALUE . '-' . UploadInterface::UPLOAD_MAX_VALUE,
             ],
             [
                 // upload over max value
@@ -891,10 +891,10 @@ class AuthFactoryTest extends AbstractTest
                     ],
                     'template'               => 'default',
                     'email_verified'         => 0,
-                    'upload'                 => AccountInterface::UPLOAD_MAX_VALUE + 1,
+                    'upload'                 => UploadInterface::UPLOAD_MAX_VALUE + 1,
                     'upload_bonus'           => 3,
                 ],
-                AuthException::INVALID_UPLOAD_VALUE . AccountInterface::UPLOAD_MIN_VALUE . '-' . AccountInterface::UPLOAD_MAX_VALUE,
+                AuthException::INVALID_UPLOAD_VALUE . UploadInterface::UPLOAD_MIN_VALUE . '-' . UploadInterface::UPLOAD_MAX_VALUE,
             ],
 
             [

@@ -11,6 +11,7 @@ use App\Domain\Account\Character\Avatar\AvatarInterface;
 use App\Domain\Account\DTO\CreateAccountRequest;
 use App\Domain\Account\Group\AccountGroupInterface;
 use App\Domain\Account\Status\AccountStatusInterface;
+use App\Domain\Account\Upload\UploadInterface;
 use Exception;
 use Ramsey\Uuid\Uuid;
 use Test\AbstractTest;
@@ -67,8 +68,8 @@ class AccountFactoryTest extends AbstractTest
             self::assertEquals($expectedMaxUpload, $account->getUpload()->getUploadMax());
             self::assertEquals($expectedMaxUpload - $data['upload'], $account->getUpload()->getUploadRemainder());
         } else {
-            self::assertEquals(AccountInterface::UPLOAD_MAX_BASE, $account->getUpload()->getUploadMax());
-            self::assertEquals(AccountInterface::UPLOAD_MAX_BASE - $data['upload'], $account->getUpload()->getUploadRemainder());
+            self::assertEquals(UploadInterface::UPLOAD_MAX_BASE, $account->getUpload()->getUploadMax());
+            self::assertEquals(UploadInterface::UPLOAD_MAX_BASE - $data['upload'], $account->getUpload()->getUploadRemainder());
         }
     }
 
@@ -117,8 +118,8 @@ class AccountFactoryTest extends AbstractTest
         self::assertEquals(AccountStatusInterface::ACTIVE, $account->getStatus()->getId());
         self::assertEquals(AccountGroupInterface::USER, $account->getGroup()->getId());
         self::assertEquals(0, $account->getUpload()->getUpload());
-        self::assertEquals(AccountInterface::UPLOAD_MAX_BASE, $account->getUpload()->getUploadMax());
-        self::assertEquals(AccountInterface::UPLOAD_MAX_BASE, $account->getUpload()->getUploadRemainder());
+        self::assertEquals(UploadInterface::UPLOAD_MAX_BASE, $account->getUpload()->getUploadMax());
+        self::assertEquals(UploadInterface::UPLOAD_MAX_BASE, $account->getUpload()->getUploadRemainder());
         self::assertEquals($request->getUserAgent(), $account->getUserAgent());
         self::assertTrue($account->isCanLike());
         // TODO Тест иногда падает из-за разницы во времени на 1 секунду, можно делать не точное сравнение, а разницу, и смотреть, что разница не более 1 секунды
@@ -228,7 +229,7 @@ class AccountFactoryTest extends AbstractTest
                         'character_stat_points' => 0,
                     ],
                 ],
-                AccountInterface::UPLOAD_MAX_BASE,
+                UploadInterface::UPLOAD_MAX_BASE,
             ],
             [
                 // upload bonus
@@ -265,7 +266,7 @@ class AccountFactoryTest extends AbstractTest
                         'character_stat_points' => 0,
                     ],
                 ],
-                AccountInterface::UPLOAD_MAX_BASE + (4 * AccountInterface::UPLOAD_PER_LEVEL) + (3 * AccountInterface::UPLOAD_PER_STAT),
+                UploadInterface::UPLOAD_MAX_BASE + (4 * UploadInterface::UPLOAD_PER_LEVEL) + (3 * UploadInterface::UPLOAD_PER_STAT),
             ],
         ];
     }
@@ -1912,13 +1913,13 @@ class AccountFactoryTest extends AbstractTest
                     'floor_id'          => 1,
                     'status_id'         => 1,
                     'group_id'          => 10,
-                    'upload'            => AccountInterface::UPLOAD_MIN_VALUE - 1,
+                    'upload'            => UploadInterface::UPLOAD_MIN_VALUE - 1,
                     'user_agent'        => 'undefined',
                     'can_like'          => 1,
                     'created_at'        => '2020-12-25 11:00:00',
                     'updated_at'        => '2020-12-25 11:00:00',
                 ],
-                AccountException::INVALID_UPLOAD_VALUE . AccountInterface::UPLOAD_MIN_VALUE . '-' . AccountInterface::UPLOAD_MAX_VALUE,
+                AccountException::INVALID_UPLOAD_VALUE . UploadInterface::UPLOAD_MIN_VALUE . '-' . UploadInterface::UPLOAD_MAX_VALUE,
             ],
             // upload over max value
             [
@@ -1939,13 +1940,13 @@ class AccountFactoryTest extends AbstractTest
                     'floor_id'          => 1,
                     'status_id'         => 1,
                     'group_id'          => 10,
-                    'upload'            => AccountInterface::UPLOAD_MAX_VALUE + 1,
+                    'upload'            => UploadInterface::UPLOAD_MAX_VALUE + 1,
                     'user_agent'        => 'undefined',
                     'can_like'          => 1,
                     'created_at'        => '2020-12-25 11:00:00',
                     'updated_at'        => '2020-12-25 11:00:00',
                 ],
-                AccountException::INVALID_UPLOAD_VALUE . AccountInterface::UPLOAD_MIN_VALUE . '-' . AccountInterface::UPLOAD_MAX_VALUE,
+                AccountException::INVALID_UPLOAD_VALUE . UploadInterface::UPLOAD_MIN_VALUE . '-' . UploadInterface::UPLOAD_MAX_VALUE,
             ],
 
             // miss user_agent

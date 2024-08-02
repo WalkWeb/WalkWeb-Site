@@ -15,6 +15,7 @@ use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Account\Status\AccountStatusInterface;
 use App\Domain\Account\Upload\AccountUpload;
+use App\Domain\Account\Upload\UploadInterface;
 use DateTime;
 use Ramsey\Uuid\Uuid;
 use WalkWeb\NW\AppException;
@@ -103,7 +104,7 @@ class AccountFactory
             new Floor($request->getFloor()),
             new AccountStatus(AccountStatusInterface::ACTIVE),
             new AccountGroup(AccountGroupInterface::USER),
-            new AccountUpload(0, AccountInterface::UPLOAD_MAX_BASE),
+            new AccountUpload(0, UploadInterface::UPLOAD_MAX_BASE),
             new DateTime(),
             new DateTime(),
             null,
@@ -358,15 +359,15 @@ class AccountFactory
 
         self::intMinMaxValue(
             $upload,
-            AccountInterface::UPLOAD_MIN_VALUE,
-            AccountInterface::UPLOAD_MAX_VALUE,
-            AccountException::INVALID_UPLOAD_VALUE . AccountInterface::UPLOAD_MIN_VALUE . '-' . AccountInterface::UPLOAD_MAX_VALUE
+            UploadInterface::UPLOAD_MIN_VALUE,
+            UploadInterface::UPLOAD_MAX_VALUE,
+            AccountException::INVALID_UPLOAD_VALUE . UploadInterface::UPLOAD_MIN_VALUE . '-' . UploadInterface::UPLOAD_MAX_VALUE
         );
 
-        $uploadMax = $mainCharacter === null ? AccountInterface::UPLOAD_MAX_BASE :
-            AccountInterface::UPLOAD_MAX_BASE +
-            ($mainCharacter->getLevel()->getLevel() - 1) * AccountInterface::UPLOAD_PER_LEVEL +
-            $mainCharacter->getUploadBonus() * AccountInterface::UPLOAD_PER_STAT;
+        $uploadMax = $mainCharacter === null ? UploadInterface::UPLOAD_MAX_BASE :
+            UploadInterface::UPLOAD_MAX_BASE +
+            ($mainCharacter->getLevel()->getLevel() - 1) * UploadInterface::UPLOAD_PER_LEVEL +
+            $mainCharacter->getUploadBonus() * UploadInterface::UPLOAD_PER_STAT;
 
         return new AccountUpload($upload, $uploadMax);
     }

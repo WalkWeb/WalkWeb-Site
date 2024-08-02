@@ -15,7 +15,6 @@ class CharacterFactoryTest extends AbstractTest
     /**
      * @dataProvider successDataProvider
      * @param array $data
-     * @throws AccountException
      * @throws AppException
      */
     public function testCharacterFactoryCreateSuccess(array $data): void
@@ -59,7 +58,6 @@ class CharacterFactoryTest extends AbstractTest
      * @dataProvider failDataProvider
      * @param array $data
      * @param string $error
-     * @throws AccountException
      */
     public function testCharacterFactoryCreateFail(array $data, string $error): void
     {

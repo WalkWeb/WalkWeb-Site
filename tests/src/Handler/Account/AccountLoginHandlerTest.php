@@ -98,7 +98,7 @@ class AccountLoginHandlerTest extends AbstractTest
         return [
             // Невалидный логин
             [
-                'xxx',
+                'xx',
                 '12345',
                 AccountException::INVALID_LOGIN_LENGTH,
             ],

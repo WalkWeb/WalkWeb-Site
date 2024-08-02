@@ -13,6 +13,7 @@ use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Account\Upload\AccountUpload;
+use App\Domain\Account\Upload\UploadInterface;
 use Exception;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\ValidationTrait;
@@ -70,15 +71,15 @@ class AuthFactory
 
         self::intMinMaxValue(
             $upload,
-            AccountInterface::UPLOAD_MIN_VALUE,
-            AccountInterface::UPLOAD_MAX_VALUE,
-            AuthException::INVALID_UPLOAD_VALUE . AccountInterface::UPLOAD_MIN_VALUE . '-' . AccountInterface::UPLOAD_MAX_VALUE
+            UploadInterface::UPLOAD_MIN_VALUE,
+            UploadInterface::UPLOAD_MAX_VALUE,
+            AuthException::INVALID_UPLOAD_VALUE . UploadInterface::UPLOAD_MIN_VALUE . '-' . UploadInterface::UPLOAD_MAX_VALUE
         );
 
         $uploadMax =
-            AccountInterface::UPLOAD_MAX_BASE +
-            ($level->getLevel() - 1) * AccountInterface::UPLOAD_PER_LEVEL +
-            $uploadBonus * AccountInterface::UPLOAD_PER_STAT;
+            UploadInterface::UPLOAD_MAX_BASE +
+            ($level->getLevel() - 1) * UploadInterface::UPLOAD_PER_LEVEL +
+            $uploadBonus * UploadInterface::UPLOAD_PER_STAT;
 
         return new AccountUpload($upload, $uploadMax);
     }
