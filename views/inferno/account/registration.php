@@ -73,7 +73,7 @@ $action = '/registration/' . ($ref ?? 'undefined');
     <div id="reg_fields"></div>
 
     <div class="regcenter">
-        <img src="/inferno/images/loading.gif" alt="" id="reg_img_loading" />
+        <img src="/img/loading.gif" alt="" id="reg_img_loading" />
         <button class="input_submit submit_big" id="submit_id" disabled>Зарегистрироваться</button>
     </div>
 

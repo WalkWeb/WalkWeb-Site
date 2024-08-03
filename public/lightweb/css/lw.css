@@ -392,8 +392,12 @@ a.profile_link:hover {
     text-decoration: underline;
 }
 
-span.red {
+.red {
     color: #a71d2a;
+}
+
+.green {
+    color: #1c7430;
 }
 
 .notice_box {

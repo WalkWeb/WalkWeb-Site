@@ -17,8 +17,6 @@ $pagination = $pagination ?? '';
 
 ?>
 
-<h1>Пользователи портала</h1>
-
 <div class="content_box">
     <div class="content_box_c">
         <table class="d_table">

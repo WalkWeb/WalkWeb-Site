@@ -44,31 +44,31 @@
     <div class="r_n_l" id="class_list">
         <div class="r_class">
             <label>
-                <input type="radio" name="profession_id" value="1" onclick="classChange(this.value)" checked>
+                <input type="radio" name="profession_id" value="7" onclick="classChange(this.value)" checked>
                 <span>Паладин</span>
             </label>
         </div>
         <div class="r_class">
             <label>
-                <input type="radio" name="profession_id" value="2" onclick="classChange(this.value)">
+                <input type="radio" name="profession_id" value="8" onclick="classChange(this.value)">
                 <span>Убийца</span>
             </label>
         </div>
         <div class="r_class">
             <label>
-                <input type="radio" name="profession_id" value="3" onclick="classChange(this.value)">
+                <input type="radio" name="profession_id" value="9" onclick="classChange(this.value)">
                 <span>Рейнджер</span>
             </label>
         </div>
         <div class="r_class">
             <label>
-                <input type="radio" name="profession_id" value="4" onclick="classChange(this.value)">
+                <input type="radio" name="profession_id" value="10" onclick="classChange(this.value)">
                 <span>Маг Стихий</span>
             </label>
         </div>
         <div class="r_class">
             <label>
-                <input type="radio" name="profession_id" value="5" onclick="classChange(this.value)">
+                <input type="radio" name="profession_id" value="11" onclick="classChange(this.value)">
                 <span>Жрец</span>
             </label>
         </div>
@@ -77,6 +77,6 @@
     <div class="r_n_c" id="stats_list"></div>
 </div>
 
-<?= '<div class="r_ava_c" id="avatars_list"></div><div style="width: 100%; clear: both;"></div>' ?>
+<div class="r_ava_c" id="avatars_list"></div><div style="width: 100%; clear: both;"></div>
 
 <script src="/inferno/js/reg.js?v=1.0"></script>
