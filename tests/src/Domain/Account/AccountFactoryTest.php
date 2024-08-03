@@ -12,6 +12,7 @@ use App\Domain\Account\DTO\CreateAccountRequest;
 use App\Domain\Account\Group\AccountGroupInterface;
 use App\Domain\Account\Status\AccountStatusInterface;
 use App\Domain\Account\Upload\UploadInterface;
+use DateTime;
 use Exception;
 use Ramsey\Uuid\Uuid;
 use Test\AbstractTest;
@@ -122,9 +123,8 @@ class AccountFactoryTest extends AbstractTest
         self::assertEquals(UploadInterface::UPLOAD_MAX_BASE, $account->getUpload()->getUploadRemainder());
         self::assertEquals($request->getUserAgent(), $account->getUserAgent());
         self::assertTrue($account->isCanLike());
-        // TODO Тест иногда падает из-за разницы во времени на 1 секунду, можно делать не точное сравнение, а разницу, и смотреть, что разница не более 1 секунды
-        //self::assertEquals((new DateTime())->format(self::DATE_FORMAT), $account->getCreatedAt()->format(self::DATE_FORMAT));
-        //self::assertEquals((new DateTime())->format(self::DATE_FORMAT), $account->getUpdatedAt()->format(self::DATE_FORMAT));
+        self::assertTrue((new DateTime())->diff($account->getCreatedAt())->s <= 1);
+        self::assertTrue((new DateTime())->diff($account->getUpdatedAt())->s <= 1);
     }
 
     /**
