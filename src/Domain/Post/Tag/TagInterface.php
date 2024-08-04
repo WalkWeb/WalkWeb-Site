@@ -8,6 +8,9 @@ use App\Domain\Pieces\Interfaces\ArrayableInterface;
 
 interface TagInterface extends ArrayableInterface
 {
+    // TODO parent_id - для уже существующих тегов написанных с ошибками отображать в подсказках корректный родительский тег
+    // TODO created_at
+
     /**
      * Возвращает id тега
      *
