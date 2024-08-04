@@ -21,6 +21,10 @@ use App\Domain\Post\Tag\TagCollection;
  */
 interface PostInterface extends ArrayableInterface
 {
+    // TODO approved - одобрен ли пост для отображения (чтобы можно было включить предмодерацию публикации постов)
+    // TODO moderated - проверен ли пост модератором
+    // TODO html_content
+
     public const TITLE_MIN_LENGTH   = 2;
     public const TITLE_MAX_LENGTH   = 80;
     public const CONTENT_MIN_LENGTH = 2;
