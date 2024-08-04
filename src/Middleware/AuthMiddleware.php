@@ -32,7 +32,7 @@ class AuthMiddleware extends AbstractMiddleware
                 $this->container->set('user', $user);
 
                 if ($request->getUri() !== '/banned' && $request->getUri() !== '/logout' && $user->getStatus()->getId() === AccountStatusInterface::BLOCKED) {
-                    return $this->banned();
+                    return $this->redirect('/banned');
                 }
 
             } else {
