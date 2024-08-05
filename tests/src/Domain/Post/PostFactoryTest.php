@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Post;
 
+use App\Domain\Post\Tag\TagFactory;
 use DateTime;
 use Exception;
 use App\Domain\Post\Author\AuthorFactory;
@@ -13,7 +14,6 @@ use App\Domain\Post\PostInterface;
 use App\Domain\Post\Rating\RatingFactory;
 use App\Domain\Post\Status\StatusInterface;
 use App\Domain\Post\Tag\TagCollection;
-use App\Domain\Post\Tag\TagFactory;
 use Test\AbstractTest;
 
 class PostFactoryTest extends AbstractTest
@@ -27,14 +27,14 @@ class PostFactoryTest extends AbstractTest
      */
     public function testPostFactoryCreateSuccess(array $data): void
     {
-        $post = $this->getPostFactory()->create($data);
+        $post = PostFactory::create($data);
 
         self::assertEquals($data['id'], $post->getId());
         self::assertEquals(htmlspecialchars($data['title']), $post->getTitle());
         self::assertEquals($data['slug'], $post->getSlug());
         self::assertEquals(htmlspecialchars($data['content']), $post->getContent());
-        self::assertEquals($this->getAuthorFactory()->create($data), $post->getAuthor());
-        self::assertEquals($this->getRatingFactory()->create($data), $post->getRating());
+        self::assertEquals(AuthorFactory::create($data), $post->getAuthor());
+        self::assertEquals(RatingFactory::create($data), $post->getRating());
         self::assertEquals($data['comments_count'], $post->getCommentsCount());
         self::assertEquals((bool)$data['published'], $post->isPublished());
         self::assertEquals(new DateTime($data['created_at']), $post->getCreatedAt());
@@ -85,7 +85,7 @@ class PostFactoryTest extends AbstractTest
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage($error);
-        $this->getPostFactory()->create($data);
+        PostFactory::create($data);
     }
 
     /**
@@ -955,38 +955,6 @@ class PostFactoryTest extends AbstractTest
     }
 
     /**
-     * @return PostFactory
-     */
-    private function getPostFactory(): PostFactory
-    {
-        return new PostFactory($this->getAuthorFactory(), $this->getTagFactory(), $this->getRatingFactory());
-    }
-
-    /**
-     * @return AuthorFactory
-     */
-    private function getAuthorFactory(): AuthorFactory
-    {
-        return new AuthorFactory();
-    }
-
-    /**
-     * @return TagFactory
-     */
-    private function getTagFactory(): TagFactory
-    {
-        return new TagFactory();
-    }
-
-    /**
-     * @return RatingFactory
-     */
-    private function getRatingFactory(): RatingFactory
-    {
-        return new RatingFactory();
-    }
-
-    /**
      * @param array $data
      * @return TagCollection
      * @throws Exception
@@ -996,7 +964,7 @@ class PostFactoryTest extends AbstractTest
         $collection = new TagCollection();
 
         foreach ($data['tags'] as $tagData) {
-            $collection->add($this->getTagFactory()->create($tagData));
+            $collection->add(TagFactory::create($tagData));
         }
 
         return $collection;

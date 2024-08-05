@@ -8,13 +8,14 @@ use App\Domain\Post\Tag\Tag;
 use App\Domain\Post\Tag\TagCollection;
 use App\Domain\Post\Tag\TagException;
 use Test\AbstractTest;
+use WalkWeb\NW\AppException;
 
 class TagCollectionTest extends AbstractTest
 {
     /**
      * Тест на успешное создание TagCollection
      *
-     * @throws TagException
+     * @throws AppException
      */
     public function testTagCollectionCreateSuccess(): void
     {
@@ -81,7 +82,7 @@ class TagCollectionTest extends AbstractTest
     /**
      * Тест на ситуацию, когда в коллекцию добавляется гет, который в ней уже существует
      *
-     * @throws TagException
+     * @throws AppException
      */
     public function testNoticeCollectionDoubleNotice(): void
     {
@@ -98,7 +99,7 @@ class TagCollectionTest extends AbstractTest
 
         $collection->add($tag);
 
-        $this->expectException(TagException::class);
+        $this->expectException(AppException::class);
         $this->expectExceptionMessage(TagException::ALREADY_EXIST);
         $collection->add($tag);
     }

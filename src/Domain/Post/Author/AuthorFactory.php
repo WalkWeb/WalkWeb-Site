@@ -18,10 +18,9 @@ class AuthorFactory
      *
      * @param array $data
      * @return AuthorInterface
-     * @throws AccountException
      * @throws AppException
      */
-    public function create(array $data): AuthorInterface
+    public static function create(array $data): AuthorInterface
     {
         return new Author(
             self::string($data, 'author_id', AuthorException::INVALID_ID),

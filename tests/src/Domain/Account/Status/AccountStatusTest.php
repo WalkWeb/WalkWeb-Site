@@ -7,6 +7,7 @@ namespace Test\src\Domain\Account\Status;
 use App\Domain\Account\AccountException;
 use App\Domain\Account\Status\AccountStatus;
 use Test\AbstractTest;
+use WalkWeb\NW\AppException;
 
 class AccountStatusTest extends AbstractTest
 {
@@ -16,7 +17,7 @@ class AccountStatusTest extends AbstractTest
      * @dataProvider successDataProvider
      * @param int $id
      * @param string $name
-     * @throws AccountException
+     * @throws AppException
      */
     public function testAccountStatusCreateSuccess(int $id, string $name): void
     {
@@ -35,7 +36,7 @@ class AccountStatusTest extends AbstractTest
      */
     public function testAccountStatusCreateFail(int $id, string $error): void
     {
-        $this->expectException(AccountException::class);
+        $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
         new AccountStatus($id);
     }

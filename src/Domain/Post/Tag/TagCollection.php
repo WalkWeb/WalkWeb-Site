@@ -7,6 +7,7 @@ namespace App\Domain\Post\Tag;
 use App\Domain\Pieces\Interfaces\ArrayableInterface;
 use Countable;
 use Iterator;
+use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\CollectionTrait;
 
 class TagCollection implements Iterator, Countable, ArrayableInterface
@@ -20,12 +21,12 @@ class TagCollection implements Iterator, Countable, ArrayableInterface
 
     /**
      * @param TagInterface $tag
-     * @throws TagException
+     * @throws AppException
      */
     public function add(TagInterface $tag): void
     {
         if (array_key_exists($tag->getId(), $this->elements)) {
-            throw new TagException(TagException::ALREADY_EXIST);
+            throw new AppException(TagException::ALREADY_EXIST);
         }
 
         $this->elements[$tag->getId()] = $tag;

@@ -4,37 +4,26 @@ declare(strict_types=1);
 
 namespace App\Domain\Post;
 
-use Exception;
 use App\Domain\Post\Author\AuthorFactory;
 use App\Domain\Post\Rating\RatingFactory;
 use App\Domain\Post\Status\Status;
 use App\Domain\Post\Tag\TagCollection;
 use App\Domain\Post\Tag\TagFactory;
+use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\ValidationTrait;
 
 class PostFactory
 {
     use ValidationTrait;
 
-    private AuthorFactory $authorFactory;
-    private TagFactory $tagFactory;
-    private RatingFactory $ratingFactory;
-
-    public function __construct(AuthorFactory $authorFactory, TagFactory $tagFactory, RatingFactory $ratingFactory)
-    {
-        $this->authorFactory = $authorFactory;
-        $this->tagFactory = $tagFactory;
-        $this->ratingFactory = $ratingFactory;
-    }
-
     /**
      * Создает объект поста на основе массива с данными
      *
      * @param array $data
      * @return PostInterface
-     * @throws Exception
+     * @throws AppException
      */
-    public function create(array $data): PostInterface
+    public static function create(array $data): PostInterface
     {
         $title = self::string($data, 'title', PostException::INVALID_TITLE);
         $content = self::string($data, 'content', PostException::INVALID_CONTENT);
@@ -58,20 +47,20 @@ class PostFactory
 
         foreach (self::array($data, 'tags', PostException::INVALID_TAGS) as $tagData) {
             if (!is_array($tagData)) {
-                throw new PostException(PostException::INVALID_TAGS_DATA);
+                throw new AppException(PostException::INVALID_TAGS_DATA);
             }
 
-            $tagCollection->add($this->tagFactory->create($tagData));
+            $tagCollection->add(TagFactory::create($tagData));
         }
 
         return new Post(
-            self::string($data, 'id', PostException::INVALID_ID),
+            self::uuid($data, 'id', PostException::INVALID_ID),
             $title,
             self::string($data, 'slug', PostException::INVALID_SLUG),
             $content,
             new Status($statusId),
-            $this->authorFactory->create($data),
-            $this->ratingFactory->create($data),
+            AuthorFactory::create($data),
+            RatingFactory::create($data),
             self::int($data, 'comments_count', PostException::INVALID_COMMENTS_COUNT),
             (bool)self::int($data, 'published', PostException::INVALID_PUBLISHED),
             $tagCollection,

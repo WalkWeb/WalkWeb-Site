@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Post\Status;
 
+use WalkWeb\NW\AppException;
+
 class Status implements StatusInterface
 {
     private static array $map = [
@@ -18,7 +20,7 @@ class Status implements StatusInterface
 
     /**
      * @param int $id
-     * @throws StatusException
+     * @throws AppException
      */
     public function __construct(int $id)
     {
@@ -44,12 +46,12 @@ class Status implements StatusInterface
 
     /**
      * @param int $id
-     * @throws StatusException
+     * @throws AppException
      */
     private function setName(int $id): void
     {
         if (!array_key_exists($id, self::$map)) {
-            throw new StatusException(StatusException::UNKNOWN_POST_STATUS_ID . ': ' . $id);
+            throw new AppException(StatusException::UNKNOWN_POST_STATUS_ID . ': ' . $id);
         }
 
         $this->name = self::$map[$id];

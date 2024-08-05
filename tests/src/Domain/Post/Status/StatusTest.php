@@ -7,6 +7,7 @@ namespace Test\src\Domain\Post\Status;
 use App\Domain\Post\Status\Status;
 use App\Domain\Post\Status\StatusException;
 use Test\AbstractTest;
+use WalkWeb\NW\AppException;
 
 class StatusTest extends AbstractTest
 {
@@ -16,7 +17,7 @@ class StatusTest extends AbstractTest
      * @dataProvider successDataProvider
      * @param int $id
      * @param string $expectedName
-     * @throws StatusException
+     * @throws AppException
      */
     public function testStatusCreateSuccess(int $id, string $expectedName): void
     {
@@ -35,7 +36,7 @@ class StatusTest extends AbstractTest
      */
     public function testStatusCreateFail(int $id, string $error): void
     {
-        $this->expectException(StatusException::class);
+        $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
         new Status($id);
     }

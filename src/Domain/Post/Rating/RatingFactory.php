@@ -18,7 +18,7 @@ class RatingFactory
      * @return RatingInterface
      * @throws AppException
      */
-    public function create(array $data): RatingInterface
+    public static function create(array $data): RatingInterface
     {
         return new Rating(
             self::int($data, 'likes', RatingException::INVALID_LIKES),

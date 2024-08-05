@@ -436,45 +436,66 @@ try {
     $db->query("
         UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c01' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b01';
     ");
-
     $db->query("
         UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c02' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b02';
     ");
-
     $db->query("
         UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c03' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b03';
     ");
-
     $db->query("
         UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c04' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b04';
     ");
-
     $db->query("
         UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c05' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b05';
     ");
-
     $db->query("
         UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c06' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b06';
     ");
-
     $db->query("
         UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c07' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b07';
     ");
-
     $db->query("
         UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c08' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b08';
     ");
-
     $db->query("
         UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c09' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b09';
     ");
-
     $db->query("
         UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c10' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b10';
     ");
-
     $db->query("
         UPDATE `accounts` SET `character_id` = '277bbc70-cb4a-49a9-8de2-3fd5c1308c11' WHERE `id` = '1e3a3b27-12da-4c73-a3a7-b83092705b11';
+    ");
+
+
+    $db->query("
+        INSERT INTO `posts` (`id`, `author_id`, `title`, `slug`, `content`, `html_content`, 
+        `status_id`, `likes`, `dislikes`, `comments_count`, `published`, `approved`, `moderated`, `created_at`, `updated_at`) VALUES
+        ('7684ad22-613b-4c65-9bad-b7dfdd394c01', '1e3a3b27-12da-4c73-a3a7-b83092705b01', 'title post 1', 'slug-post-1-1000', 'content #1', 'html content #1', 
+        1, 0, 0, 0, 1, 1, 1, '2024-06-10 15:00:00', '2024-06-10 15:00:00'),
+        ('7684ad22-613b-4c65-9bad-b7dfdd394c02', '1e3a3b27-12da-4c73-a3a7-b83092705b01', 'title post 2', 'slug-post-2-1000', 'content #2', 'html content #2', 
+        1, 50, 30, 23, 1, 1, 1, '2024-06-11 15:00:00', '2024-06-11 15:00:00')
+        ;
+    ");
+
+    $db->query("
+        INSERT INTO `post_tags` (`id`, `name`, `slug`, `icon`, `preview_post_id`, `approved`, `created_at`) VALUES
+        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f01', 'diablo', 'diablo', '/img/icon/diablo.png', null, 1, '2024-06-10 10:00:00'),
+        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f02', 'blizzard', 'blizzard', '/img/icon/blizzard.png', null, 1, '2024-06-10 11:00:00'),
+        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f03', 'rpg', 'rpg', '/img/icon/rpg.png', null, 1, '2024-06-10 12:00:00'),
+        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f04', 'news', 'news', '/img/icon/news.png', null, 1, '2024-06-10 13:00:00'),
+        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f05', 'path of exile', 'path-of-exile', '/img/icon/path-of-exile.png', null, 1, '2024-06-10 14:00:00')
+        ;
+    ");
+
+    $db->query("
+        INSERT INTO `lk_post_tag` (`id`, `post_id`, `tag_id`) VALUES
+        ('65f76470-b967-4b52-b856-e10c0d0dc001', '7684ad22-613b-4c65-9bad-b7dfdd394c01', '6ea9c5c4-bbfd-4bf1-bde5-d929107c8f01'),
+        ('f71c078a-d7fd-4290-9d1e-152901859002', '7684ad22-613b-4c65-9bad-b7dfdd394c01', '6ea9c5c4-bbfd-4bf1-bde5-d929107c8f02'),
+        ('f71c078a-d7fd-4290-9d1e-152901859003', '7684ad22-613b-4c65-9bad-b7dfdd394c01', '6ea9c5c4-bbfd-4bf1-bde5-d929107c8f03'),
+        ('f71c078a-d7fd-4290-9d1e-152901859004', '7684ad22-613b-4c65-9bad-b7dfdd394c02', '6ea9c5c4-bbfd-4bf1-bde5-d929107c8f04'),
+        ('f71c078a-d7fd-4290-9d1e-152901859005', '7684ad22-613b-4c65-9bad-b7dfdd394c02', '6ea9c5c4-bbfd-4bf1-bde5-d929107c8f05')
+        ;
     ");
 
     echo "Fixtures Load\n";

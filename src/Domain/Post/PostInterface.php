@@ -107,6 +107,8 @@ interface PostInterface extends ArrayableInterface
     /**
      * Опубликован ли пост
      *
+     * TODO Будет использоваться в будущем как формат черновика
+     *
      * @return bool
      */
     public function isPublished(): bool;

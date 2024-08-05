@@ -21,7 +21,7 @@ class TagFactoryTest extends AbstractTest
      */
     public function testTagFactoryCreateSuccess(array $data): void
     {
-        $tag = $this->getFactory()->create($data);
+        $tag = TagFactory::create($data);
 
         self::assertEquals($data['id'], $tag->getId());
         self::assertEquals($data['name'], $tag->getName());
@@ -55,7 +55,7 @@ class TagFactoryTest extends AbstractTest
     {
         $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
-        $this->getFactory()->create($data);
+        TagFactory::create($data);
     }
 
     /**
@@ -229,13 +229,5 @@ class TagFactoryTest extends AbstractTest
                 TagException::INVALID_APPROVED,
             ],
         ];
-    }
-
-    /**
-     * @return TagFactory
-     */
-    private function getFactory(): TagFactory
-    {
-        return new TagFactory();
     }
 }

@@ -18,7 +18,7 @@ class TagFactory
      * @return TagInterface
      * @throws AppException
      */
-    public function create(array $data): TagInterface
+    public static function create(array $data): TagInterface
     {
         return new Tag(
             self::string($data, 'id', TagException::INVALID_ID),
