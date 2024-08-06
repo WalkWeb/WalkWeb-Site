@@ -482,11 +482,11 @@ try {
 
     $db->query("
         INSERT INTO `post_tags` (`id`, `name`, `slug`, `icon`, `preview_post_id`, `approved`, `created_at`) VALUES
-        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f01', 'diablo', 'diablo', '/img/icon/diablo.png', null, 1, '2024-06-10 10:00:00'),
-        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f02', 'blizzard', 'blizzard', '/img/icon/blizzard.png', null, 1, '2024-06-10 11:00:00'),
-        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f03', 'rpg', 'rpg', '/img/icon/rpg.png', null, 1, '2024-06-10 12:00:00'),
-        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f04', 'news', 'news', '/img/icon/news.png', null, 1, '2024-06-10 13:00:00'),
-        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f05', 'path of exile', 'path-of-exile', '/img/icon/path-of-exile.png', null, 1, '2024-06-10 14:00:00')
+        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f01', 'diablo 2', 'diablo-2', '/img/icon/tag/diablo-2.png', null, 1, '2024-06-10 10:00:00'),
+        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f02', 'blizzard', 'blizzard', '/img/icon/tag/blizzard.png', null, 1, '2024-06-10 11:00:00'),
+        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f03', 'rpg', 'rpg', '/img/icon/tag/rpg.png', null, 1, '2024-06-10 12:00:00'),
+        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f04', 'news', 'news', '/img/icon/tag/news.png', null, 1, '2024-06-10 13:00:00'),
+        ('6ea9c5c4-bbfd-4bf1-bde5-d929107c8f05', 'path of exile', 'path-of-exile', '/img/icon/tag/path-of-exile.png', null, 1, '2024-06-10 14:00:00')
         ;
     ");
 
