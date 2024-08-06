@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Test\src\Domain\Post;
 
 use App\Domain\Post\PostRepository;
+use App\Domain\Post\Tag\TagRepository;
 use DateTime;
 use Exception;
 use Test\AbstractTest;
@@ -37,9 +38,11 @@ class PostRepositoryTest extends AbstractTest
         self::assertEquals($data['author_name'], $post->getAuthor()->getName());
         self::assertEquals($data['author_level'], $post->getAuthor()->getLevel());
         self::assertEquals($data['author_avatar'], $post->getAuthor()->getAvatar());
-        self::assertEquals($data['status_id'], $post->getAuthor()->getStatus()->getId());
+        self::assertEquals($data['author_status_id'], $post->getAuthor()->getStatus()->getId());
         self::assertEquals(new DateTime($data['created_at']), $post->getCreatedAt());
         self::assertEquals(new DateTime($data['updated_at']), $post->getUpdatedAt());
+
+        self::assertEquals($this->getTagRepository()->getByPostId($post->getId()), $post->getTags());
     }
 
     /**
@@ -62,6 +65,9 @@ class PostRepositoryTest extends AbstractTest
             [
                 'slug-post-2-1000',
             ],
+            [
+                'slug-post-3-1000',
+            ],
         ];
     }
 
@@ -69,9 +75,18 @@ class PostRepositoryTest extends AbstractTest
      * @return PostRepository
      * @throws AppException
      */
-    protected function getRepository(): PostRepository
+    private function getRepository(): PostRepository
     {
         return new PostRepository(self::getContainer());
+    }
+
+    /**
+     * @return TagRepository
+     * @throws AppException
+     */
+    private function getTagRepository(): TagRepository
+    {
+        return new TagRepository(self::getContainer());
     }
 
     /**

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Post;
 
-use App\Domain\Post\Tag\TagFactory;
 use DateTime;
 use Exception;
 use App\Domain\Post\Author\AuthorFactory;
@@ -24,11 +23,12 @@ class PostFactoryTest extends AbstractTest
      *
      * @dataProvider successDataProvider
      * @param array $data
+     * @param TagCollection $tags
      * @throws Exception
      */
-    public function testPostFactoryCreateSuccess(array $data): void
+    public function testPostFactoryCreateSuccess(array $data, TagCollection $tags): void
     {
-        $post = PostFactory::create($data);
+        $post = PostFactory::create($data, $tags);
 
         self::assertEquals($data['id'], $post->getId());
         self::assertEquals(htmlspecialchars($data['title']), $post->getTitle());
@@ -39,9 +39,7 @@ class PostFactoryTest extends AbstractTest
         self::assertEquals($data['comments_count'], $post->getCommentsCount());
         self::assertEquals((bool)$data['published'], $post->isPublished());
         self::assertEquals(new DateTime($data['created_at']), $post->getCreatedAt());
-
-        self::assertEquals($this->createTags($data), $post->getTags());
-        self::assertSameSize($data['tags'], $post->getTags());
+        self::assertEquals($tags, $post->getTags());
 
         if (!is_null($data['updated_at'])) {
             self::assertEquals(new DateTime($data['updated_at']), $post->getUpdatedAt());
@@ -62,7 +60,7 @@ class PostFactoryTest extends AbstractTest
                 "comments_count"   => $data['comments_count'],
                 "published"        => $data['published'],
                 "is_liked"         => $data['is_liked'],
-                "tags"             => $data['tags'],
+                "tags"             => $tags->toArray(),
                 "author_id"        => $data['author_id'],
                 "author_name"      => $data['author_name'],
                 "author_avatar"    => $data['author_avatar'],
@@ -86,7 +84,7 @@ class PostFactoryTest extends AbstractTest
     {
         $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
-        PostFactory::create($data);
+        PostFactory::create($data, new TagCollection());
     }
 
     /**
@@ -109,7 +107,6 @@ class PostFactoryTest extends AbstractTest
                     'comments_count'   => 3,
                     'published'        => 1,
                     'is_liked'         => true,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -118,6 +115,7 @@ class PostFactoryTest extends AbstractTest
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
                 ],
+                new TagCollection(),
             ],
             [
                 // Без тегов и updated_at != null
@@ -133,7 +131,6 @@ class PostFactoryTest extends AbstractTest
                     'comments_count'   => 3,
                     'published'        => 1,
                     'is_liked'         => false,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -142,6 +139,7 @@ class PostFactoryTest extends AbstractTest
                     'created_at'       => '2019-08-12 19:00:00',
                     'updated_at'       => '2019-08-15 20:20:00',
                 ],
+                new TagCollection(),
             ],
             [
                 // С тегами и updated_at = null
@@ -157,24 +155,6 @@ class PostFactoryTest extends AbstractTest
                     'comments_count'   => 3,
                     'published'        => 1,
                     'is_liked'         => true,
-                    'tags'             => [
-                        [
-                            'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
-                            'name'            => 'новости',
-                            'slug'            => 'novosti',
-                            'icon'            => 'icon-1.png',
-                            'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                            'approved'        => 1,
-                        ],
-                        [
-                            'id'              => '3bf4f5b2-d79c-45c6-b6c3-7f8dee8bf8a5',
-                            'name'            => 'статьи',
-                            'slug'            => 'stati',
-                            'icon'            => 'icon-2.png',
-                            'preview_post_id' => null,
-                            'approved'        => 0,
-                        ],
-                    ],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -183,6 +163,7 @@ class PostFactoryTest extends AbstractTest
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
                 ],
+                new TagCollection(),
             ],
             [
                 // Со спецсимволами в title и content
@@ -198,7 +179,6 @@ class PostFactoryTest extends AbstractTest
                     'comments_count'   => 3,
                     'published'        => 1,
                     'is_liked'         => true,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -207,6 +187,7 @@ class PostFactoryTest extends AbstractTest
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
                 ],
+                new TagCollection(),
             ],
         ];
     }
@@ -233,7 +214,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -258,7 +238,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -284,7 +263,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -309,7 +287,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -334,7 +311,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -359,7 +335,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -385,7 +360,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -410,7 +384,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -436,7 +409,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -461,7 +433,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -486,7 +457,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -511,7 +481,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -536,7 +505,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -561,7 +529,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -587,7 +554,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -612,7 +578,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -638,7 +603,6 @@ class PostFactoryTest extends AbstractTest
                     'comments_count'   => 3,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -663,7 +627,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => true, // не смотря на тип bool у объекта, из базы ожидается получить int
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -689,7 +652,6 @@ class PostFactoryTest extends AbstractTest
                     'comments_count'   => 3,
                     'published'        => 1,
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -714,7 +676,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => [],
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -739,7 +700,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '9999-99-99 99:99:99',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -765,7 +725,6 @@ class PostFactoryTest extends AbstractTest
                     'comments_count'   => 3,
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -790,7 +749,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => 'null',
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -815,7 +773,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => '9999-99-99 99:99:99',
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -824,82 +781,6 @@ class PostFactoryTest extends AbstractTest
                     'is_liked'         => true,
                 ],
                 PostException::INVALID_UPDATED_AT,
-            ],
-
-            // tags
-            [
-                // отсутствует tags
-                [
-                    'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
-                    'title'            => 'Title',
-                    'slug'             => 'title-slug',
-                    'content'          => 'Post content',
-                    'status_id'        => StatusInterface::DEFAULT,
-                    'likes'            => 12,
-                    'dislikes'         => -2,
-                    'user_reaction'    => 1,
-                    'comments_count'   => 3,
-                    'published'        => 1,
-                    'created_at'       => '2019-08-12 19:05:19',
-                    'updated_at'       => null,
-                    'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
-                    'author_name'      => 'Name',
-                    'author_avatar'    => 'avatar.png',
-                    'author_level'     => 25,
-                    'author_status_id' => 1,
-                    'is_liked'         => true,
-                ],
-                PostException::INVALID_TAGS,
-            ],
-            [
-                // tags некорректного типа
-                [
-                    'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
-                    'title'            => 'Title',
-                    'slug'             => 'title-slug',
-                    'content'          => 'Post content',
-                    'status_id'        => StatusInterface::DEFAULT,
-                    'likes'            => 12,
-                    'dislikes'         => -2,
-                    'user_reaction'    => 1,
-                    'comments_count'   => 3,
-                    'published'        => 1,
-                    'created_at'       => '2019-08-12 19:05:19',
-                    'updated_at'       => null,
-                    'tags'             => null,
-                    'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
-                    'author_name'      => 'Name',
-                    'author_avatar'    => 'avatar.png',
-                    'author_level'     => 25,
-                    'author_status_id' => 1,
-                    'is_liked'         => true,
-                ],
-                PostException::INVALID_TAGS,
-            ],
-            [
-                // tags содержит не массивы
-                [
-                    'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
-                    'title'            => 'Title',
-                    'slug'             => 'title-slug',
-                    'content'          => 'Post content',
-                    'status_id'        => StatusInterface::DEFAULT,
-                    'likes'            => 12,
-                    'dislikes'         => -2,
-                    'user_reaction'    => 1,
-                    'comments_count'   => 3,
-                    'published'        => 1,
-                    'created_at'       => '2019-08-12 19:05:19',
-                    'updated_at'       => null,
-                    'tags'             => ['tag'],
-                    'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
-                    'author_name'      => 'Name',
-                    'author_avatar'    => 'avatar.png',
-                    'author_level'     => 25,
-                    'author_status_id' => 1,
-                    'is_liked'         => true,
-                ],
-                PostException::INVALID_TAGS_DATA,
             ],
             [
                 // отсутствует is_liked
@@ -916,7 +797,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -940,7 +820,6 @@ class PostFactoryTest extends AbstractTest
                     'published'        => 1,
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
-                    'tags'             => [],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
                     'author_name'      => 'Name',
                     'author_avatar'    => 'avatar.png',
@@ -953,21 +832,5 @@ class PostFactoryTest extends AbstractTest
 
             // Проверка валидации параметров автора сделана в AuthorFactoryTest
         ];
-    }
-
-    /**
-     * @param array $data
-     * @return TagCollection
-     * @throws Exception
-     */
-    private function createTags(array $data): TagCollection
-    {
-        $collection = new TagCollection();
-
-        foreach ($data['tags'] as $tagData) {
-            $collection->add(TagFactory::create($tagData));
-        }
-
-        return $collection;
     }
 }

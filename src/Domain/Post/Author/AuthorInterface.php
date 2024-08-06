@@ -45,6 +45,8 @@ interface AuthorInterface
     /**
      * Возвращает статус автора поста
      *
+     * TODO Можно удалить
+     *
      * @return AccountStatusInterface
      */
     public function getStatus(): AccountStatusInterface;

@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Post;
 
+use App\Domain\Post\Tag\TagRepository;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 
 class PostRepository
 {
     private Container $container;
+    private TagRepository $tagRepository;
 
-    public function __construct(Container $container)
+    public function __construct(Container $container, ?TagRepository $tagRepository = null)
     {
         $this->container = $container;
+        $this->tagRepository = $tagRepository ?? new TagRepository($container);
     }
 
     /**
@@ -64,9 +67,8 @@ class PostRepository
 
         // TODO Mock
         $data['user_reaction'] = 0;
-        $data['tags'] = [];
         $data['is_liked'] = false;
 
-        return PostFactory::create($data);
+        return PostFactory::create($data, $this->tagRepository->getByPostId($data['id'] ?? ''));
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Post\Author;
 
-use App\Domain\Account\AccountException;
 use App\Domain\Account\Status\AccountStatus;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\ValidationTrait;
