@@ -25,8 +25,8 @@ class TagFactory
             self::string($data, 'name', TagException::INVALID_NAME),
             self::string($data, 'slug', TagException::INVALID_SLUG),
             self::string($data, 'icon', TagException::INVALID_ICON),
-            self::string($data, 'preview_post_id', TagException::INVALID_PREVIEW_POST_ID),
-            self::bool($data, 'approved', TagException::INVALID_APPROVED)
+            self::stringOrNull($data, 'preview_post_id', TagException::INVALID_PREVIEW_POST_ID),
+            (bool)self::int($data, 'approved', TagException::INVALID_APPROVED)
         );
     }
 }

@@ -14,18 +14,18 @@ class PostRepositoryTest extends AbstractTest
 {
     /**
      * @dataProvider getSuccessDataProvider
-     * @param string $id
+     * @param string $slug
      * @throws Exception
      */
-    public function testPostRepositoryGetSuccess(string $id): void
+    public function testPostRepositoryGetSuccess(string $slug): void
     {
-        $post = $this->getRepository()->get($id);
+        $post = $this->getRepository()->get($slug);
 
-        $data = $this->getData($id);
+        $data = $this->getData($slug);
 
-        self::assertEquals($id, $post->getId());
+        self::assertEquals($data['id'], $post->getId());
         self::assertEquals($data['title'], $post->getTitle());
-        self::assertEquals($data['slug'], $post->getSlug());
+        self::assertEquals($slug, $post->getSlug());
         self::assertEquals($data['content'], $post->getContent());
         self::assertEquals($data['status_id'], $post->getStatus()->getId());
         self::assertEquals($data['likes'], $post->getRating()->getLikes());
@@ -57,10 +57,10 @@ class PostRepositoryTest extends AbstractTest
     {
         return [
             [
-                '7684ad22-613b-4c65-9bad-b7dfdd394c01',
+                'slug-post-1-1000',
             ],
             [
-                '7684ad22-613b-4c65-9bad-b7dfdd394c02',
+                'slug-post-2-1000',
             ],
         ];
     }
@@ -75,11 +75,11 @@ class PostRepositoryTest extends AbstractTest
     }
 
     /**
-     * @param string $id
+     * @param string $slug
      * @return array
      * @throws AppException
      */
-    private function getData(string $id): array
+    private function getData(string $slug): array
     {
         return self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT 
@@ -111,8 +111,8 @@ class PostRepositoryTest extends AbstractTest
             JOIN `characters` on `accounts`.`character_id` = `characters`.`id`
             JOIN `avatars` on `characters`.`avatar_id` = `avatars`.`id`
 
-            WHERE `posts`.`id` = ?',
-            [['type' => 's', 'value' => $id]],
+            WHERE `posts`.`slug` = ?',
+            [['type' => 's', 'value' => $slug]],
             true
         );
     }

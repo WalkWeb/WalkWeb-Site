@@ -17,11 +17,11 @@ class PostRepository
     }
 
     /**
-     * @param string $id
+     * @param string $slug
      * @return PostInterface|null
      * @throws AppException
      */
-    public function get(string $id): ?PostInterface
+    public function get(string $slug): ?PostInterface
     {
         $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT 
@@ -53,8 +53,8 @@ class PostRepository
             JOIN `characters` on `accounts`.`character_id` = `characters`.`id`
             JOIN `avatars` on `characters`.`avatar_id` = `avatars`.`id`
 
-            WHERE `posts`.`id` = ?',
-            [['type' => 's', 'value' => $id]],
+            WHERE `posts`.`slug` = ?',
+            [['type' => 's', 'value' => $slug]],
             true
         );
 

@@ -10,7 +10,7 @@ class Tag implements TagInterface
     private string $name;
     private string $slug;
     private string $icon;
-    private string $previewPostId;
+    private ?string $previewPostId;
     private bool $approved;
 
     public function __construct(
@@ -18,7 +18,7 @@ class Tag implements TagInterface
         string $name,
         string $slug,
         string $icon,
-        string $previewPostId,
+        ?string $previewPostId,
         bool $approved
     )
     {
@@ -67,7 +67,7 @@ class Tag implements TagInterface
      */
     public function getPreviewPostId(): string
     {
-        return $this->previewPostId;
+        return $this->previewPostId ?? '';
     }
 
     /**

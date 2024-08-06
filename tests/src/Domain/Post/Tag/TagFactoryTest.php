@@ -6,7 +6,6 @@ namespace Test\src\Domain\Post\Tag;
 
 use App\Domain\Post\Tag\TagException;
 use App\Domain\Post\Tag\TagFactory;
-use SplObjectStorage;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 
@@ -27,8 +26,8 @@ class TagFactoryTest extends AbstractTest
         self::assertEquals($data['name'], $tag->getName());
         self::assertEquals($data['slug'], $tag->getSlug());
         self::assertEquals($data['icon'], $tag->getIcon());
-        self::assertEquals($data['preview_post_id'], $tag->getPreviewPostId());
-        self::assertEquals($data['approved'], $tag->isApproved());
+        self::assertEquals($data['preview_post_id'] ?? '', $tag->getPreviewPostId());
+        self::assertEquals((bool)$data['approved'], $tag->isApproved());
 
         self::assertEquals(
             [
@@ -71,7 +70,7 @@ class TagFactoryTest extends AbstractTest
                     'slug'            => 'novosti',
                     'icon'            => 'icon-1.png',
                     'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                    'approved'        => true,
+                    'approved'        => 1,
                 ],
             ],
             [
@@ -80,8 +79,8 @@ class TagFactoryTest extends AbstractTest
                     'name'            => 'статьи',
                     'slug'            => 'stati',
                     'icon'            => 'icon-2.png',
-                    'preview_post_id' => '',
-                    'approved'        => false,
+                    'preview_post_id' => null,
+                    'approved'        => 0,
                 ],
             ],
         ];
@@ -97,7 +96,7 @@ class TagFactoryTest extends AbstractTest
                     'slug'            => 'novosti',
                     'icon'            => 'icon-1.png',
                     'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                    'approved'        => true,
+                    'approved'        => 1,
                 ],
                 TagException::INVALID_ID,
             ],
@@ -109,7 +108,7 @@ class TagFactoryTest extends AbstractTest
                     'slug'            => 'novosti',
                     'icon'            => 'icon-1.png',
                     'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                    'approved'        => true,
+                    'approved'        => 1,
                 ],
                 TagException::INVALID_ID,
             ],
@@ -120,7 +119,7 @@ class TagFactoryTest extends AbstractTest
                     'slug'            => 'novosti',
                     'icon'            => 'icon-1.png',
                     'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                    'approved'        => true,
+                    'approved'        => 1,
                 ],
                 TagException::INVALID_NAME,
             ],
@@ -132,7 +131,7 @@ class TagFactoryTest extends AbstractTest
                     'slug'            => 'novosti',
                     'icon'            => 'icon-1.png',
                     'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                    'approved'        => true,
+                    'approved'        => 1,
                 ],
                 TagException::INVALID_NAME,
             ],
@@ -143,7 +142,7 @@ class TagFactoryTest extends AbstractTest
                     'name'            => 'новости',
                     'icon'            => 'icon-1.png',
                     'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                    'approved'        => true,
+                    'approved'        => 1,
                 ],
                 TagException::INVALID_SLUG,
             ],
@@ -155,7 +154,7 @@ class TagFactoryTest extends AbstractTest
                     'slug'            => 10.20,
                     'icon'            => 'icon-1.png',
                     'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                    'approved'        => true,
+                    'approved'        => 1,
                 ],
                 TagException::INVALID_SLUG,
             ],
@@ -166,7 +165,7 @@ class TagFactoryTest extends AbstractTest
                     'name'            => 'новости',
                     'slug'            => 'novosti',
                     'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                    'approved'        => true,
+                    'approved'        => 1,
                 ],
                 TagException::INVALID_ICON,
             ],
@@ -178,7 +177,7 @@ class TagFactoryTest extends AbstractTest
                     'slug'            => 'novosti',
                     'icon'            => null,
                     'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                    'approved'        => true,
+                    'approved'        => 1,
                 ],
                 TagException::INVALID_ICON,
             ],
@@ -189,7 +188,7 @@ class TagFactoryTest extends AbstractTest
                     'name'            => 'новости',
                     'slug'            => 'novosti',
                     'icon'            => 'icon-1.png',
-                    'approved'        => true,
+                    'approved'        => 1,
                 ],
                 TagException::INVALID_PREVIEW_POST_ID,
             ],
@@ -200,8 +199,8 @@ class TagFactoryTest extends AbstractTest
                     'name'            => 'новости',
                     'slug'            => 'novosti',
                     'icon'            => 'icon-1.png',
-                    'preview_post_id' => new SplObjectStorage(),
-                    'approved'        => true,
+                    'preview_post_id' => 13,
+                    'approved'        => 1,
                 ],
                 TagException::INVALID_PREVIEW_POST_ID,
             ],
@@ -224,7 +223,7 @@ class TagFactoryTest extends AbstractTest
                     'slug'            => 'novosti',
                     'icon'            => 'icon-1.png',
                     'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                    'approved'        => 1,
+                    'approved'        => true,
                 ],
                 TagException::INVALID_APPROVED,
             ],

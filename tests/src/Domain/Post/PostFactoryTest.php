@@ -15,6 +15,7 @@ use App\Domain\Post\Rating\RatingFactory;
 use App\Domain\Post\Status\StatusInterface;
 use App\Domain\Post\Tag\TagCollection;
 use Test\AbstractTest;
+use WalkWeb\NW\AppException;
 
 class PostFactoryTest extends AbstractTest
 {
@@ -83,7 +84,7 @@ class PostFactoryTest extends AbstractTest
      */
     public function testPostFactoryCreateFail(array $data, string $error): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
         PostFactory::create($data);
     }
@@ -163,15 +164,15 @@ class PostFactoryTest extends AbstractTest
                             'slug'            => 'novosti',
                             'icon'            => 'icon-1.png',
                             'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
-                            'approved'        => true,
+                            'approved'        => 1,
                         ],
                         [
                             'id'              => '3bf4f5b2-d79c-45c6-b6c3-7f8dee8bf8a5',
                             'name'            => 'статьи',
                             'slug'            => 'stati',
                             'icon'            => 'icon-2.png',
-                            'preview_post_id' => '',
-                            'approved'        => false,
+                            'preview_post_id' => null,
+                            'approved'        => 0,
                         ],
                     ],
                     'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
