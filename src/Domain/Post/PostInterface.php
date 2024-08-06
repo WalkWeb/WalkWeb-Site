@@ -8,7 +8,7 @@ use DateTimeInterface;
 use App\Domain\Pieces\Interfaces\ArrayableInterface;
 use App\Domain\Post\Author\AuthorInterface;
 use App\Domain\Post\Rating\RatingInterface;
-use App\Domain\Post\Status\StatusInterface;
+use App\Domain\Post\Status\PostStatusInterface;
 use App\Domain\Post\Tag\TagCollection;
 
 /**
@@ -23,12 +23,13 @@ interface PostInterface extends ArrayableInterface
 {
     // TODO approved - одобрен ли пост для отображения (чтобы можно было включить предмодерацию публикации постов)
     // TODO moderated - проверен ли пост модератором
-    // TODO html_content
 
-    public const TITLE_MIN_LENGTH   = 2;
-    public const TITLE_MAX_LENGTH   = 80;
-    public const CONTENT_MIN_LENGTH = 2;
-    public const CONTENT_MAX_LENGTH = 65534;
+    public const TITLE_MIN_LENGTH        = 2;
+    public const TITLE_MAX_LENGTH        = 80;
+    public const CONTENT_MIN_LENGTH      = 5;
+    public const CONTENT_MAX_LENGTH      = 30000;
+    public const HTML_CONTENT_MIN_LENGTH = 5;
+    public const HTML_CONTENT_MAX_LENGTH = 65534;
 
     /**
      * Возвращает ID поста
@@ -60,11 +61,18 @@ interface PostInterface extends ArrayableInterface
     public function getSlug(): string;
 
     /**
-     * Возвращает контент для отображения поста
+     * Возвращает исходный контент полученный из формы создания поста
      *
      * @return string
      */
     public function getContent(): string;
+
+    /**
+     * Возвращает контент для отображения поста
+     *
+     * @return string
+     */
+    public function getHtmlContent(): string;
 
     /**
      * Устанавливает новый контент поста
@@ -79,9 +87,9 @@ interface PostInterface extends ArrayableInterface
      *
      * По мере роста рейтинга поста он получает новые статусы, а его автор - опыт для аккаунта
      *
-     * @return StatusInterface
+     * @return PostStatusInterface
      */
-    public function getStatus(): StatusInterface;
+    public function getStatus(): PostStatusInterface;
 
     /**
      * Возвращает автора поста

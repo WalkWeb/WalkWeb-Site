@@ -6,7 +6,7 @@ namespace App\Domain\Post\Status;
 
 use WalkWeb\NW\AppException;
 
-class Status implements StatusInterface
+class PostStatus implements PostStatusInterface
 {
     private static array $map = [
         self::DEFAULT => 'Default',

@@ -33,6 +33,7 @@ class PostRepository
             `posts`.`title`,
             `posts`.`slug`,
             `posts`.`content`,
+            `posts`.`html_content`,
             `posts`.`status_id`,
             `posts`.`likes`,
             `posts`.`dislikes`,

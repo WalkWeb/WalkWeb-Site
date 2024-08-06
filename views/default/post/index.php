@@ -11,7 +11,7 @@ if (empty($post) || !($post instanceof PostInterface)) {
 
 <h1><?= htmlspecialchars($post->getTitle()) ?></h1>
 
-<p><?= $post->getContent() ?></p>
+<?= $post->getHtmlContent() ?>
 
 <hr>
 

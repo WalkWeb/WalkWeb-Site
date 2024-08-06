@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Post\Status;
 
-use App\Domain\Post\Status\Status;
+use App\Domain\Post\Status\PostStatus;
 use App\Domain\Post\Status\StatusException;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
@@ -21,7 +21,7 @@ class StatusTest extends AbstractTest
      */
     public function testStatusCreateSuccess(int $id, string $expectedName): void
     {
-        $status = new Status($id);
+        $status = new PostStatus($id);
 
         self::assertEquals($id, $status->getId());
         self::assertEquals($expectedName, $status->getName());
@@ -38,7 +38,7 @@ class StatusTest extends AbstractTest
     {
         $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
-        new Status($id);
+        new PostStatus($id);
     }
 
     /**

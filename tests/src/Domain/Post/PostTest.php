@@ -11,8 +11,8 @@ use App\Domain\Post\Post;
 use App\Domain\Post\PostException;
 use App\Domain\Post\PostInterface;
 use App\Domain\Post\Rating\Rating;
-use App\Domain\Post\Status\Status;
-use App\Domain\Post\Status\StatusInterface;
+use App\Domain\Post\Status\PostStatus;
+use App\Domain\Post\Status\PostStatusInterface;
 use App\Domain\Post\Tag\Tag;
 use App\Domain\Post\Tag\TagCollection;
 use DateTime;
@@ -32,7 +32,8 @@ class PostTest extends AbstractTest
         $title = 'Обработка ошибок и C++';
         $slug = 'obrabotka-oshibok-i-c-123123';
         $content = 'post content';
-        $status = new Status(StatusInterface::DEFAULT);
+        $htmlContent = 'html post content';
+        $status = new PostStatus(PostStatusInterface::DEFAULT);
         $author = new Author(
             '4f88c009-6605-4ed9-9ba3-09a92b63bbdb',
             'Name',
@@ -53,6 +54,7 @@ class PostTest extends AbstractTest
             $title,
             $slug,
             $content,
+            $htmlContent,
             $status,
             $author,
             $rating,
@@ -68,6 +70,7 @@ class PostTest extends AbstractTest
         self::assertEquals($title, $post->getTitle());
         self::assertEquals($slug, $post->getSlug());
         self::assertEquals($content, $post->getContent());
+        self::assertEquals($htmlContent, $post->getHtmlContent());
         self::assertEquals($status, $post->getStatus());
         self::assertEquals($author, $post->getAuthor());
         self::assertEquals($rating, $post->getRating());
@@ -84,7 +87,7 @@ class PostTest extends AbstractTest
                 "title"            => $title,
                 "slug"             => $slug,
                 "content"          => $content,
-                "status_id"        => StatusInterface::DEFAULT,
+                "status_id"        => PostStatusInterface::DEFAULT,
                 "likes"            => $likes,
                 "dislikes"         => $dislikes,
                 "user_reaction"    => $userReaction,
@@ -162,7 +165,7 @@ class PostTest extends AbstractTest
     public function testPostSetContentFail(string $newContent): void
     {
         $this->expectException(PostException::class);
-        $this->expectExceptionMessage(PostException::INVALID_CONTENT_VALUE . PostInterface::CONTENT_MIN_LENGTH . '-' . PostInterface::CONTENT_MAX_LENGTH);
+        $this->expectExceptionMessage(PostException::INVALID_CONTENT_LENGTH . PostInterface::CONTENT_MIN_LENGTH . '-' . PostInterface::CONTENT_MAX_LENGTH);
         $this->createPost()->setContent($newContent);
     }
 
@@ -237,7 +240,8 @@ class PostTest extends AbstractTest
             'Title',
             'slug',
             'Content',
-            new Status(Status::DEFAULT),
+            'Html Content',
+            new PostStatus(PostStatus::DEFAULT),
             new Author(
                 '4f88c009-6605-4ed9-9ba3-09a92b63bbdb',
                 'Name',

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Post\Status;
 
-interface StatusInterface
+interface PostStatusInterface
 {
     public const DEFAULT = 1;
     public const SILVER  = 2;

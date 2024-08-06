@@ -7,7 +7,7 @@ namespace App\Domain\Post;
 use DateTimeInterface;
 use App\Domain\Post\Author\AuthorInterface;
 use App\Domain\Post\Rating\RatingInterface;
-use App\Domain\Post\Status\StatusInterface;
+use App\Domain\Post\Status\PostStatusInterface;
 use App\Domain\Post\Tag\TagCollection;
 
 class Post implements PostInterface
@@ -16,7 +16,8 @@ class Post implements PostInterface
     private string $title;
     private string $slug;
     private string $content;
-    private StatusInterface $status;
+    private string $htmlContent;
+    private PostStatusInterface $status;
     private AuthorInterface $author;
     private RatingInterface $rating;
     private int $commentsCount;
@@ -31,7 +32,8 @@ class Post implements PostInterface
         string $title,
         string $slug,
         string $content,
-        StatusInterface $status,
+        string $htmlContent,
+        PostStatusInterface $status,
         AuthorInterface $author,
         RatingInterface $rating,
         int $commentsCount,
@@ -46,6 +48,7 @@ class Post implements PostInterface
         $this->title = $title;
         $this->slug = $slug;
         $this->content = $content;
+        $this->htmlContent = $htmlContent;
         $this->status = $status;
         $this->author = $author;
         $this->rating = $rating;
@@ -107,6 +110,14 @@ class Post implements PostInterface
     }
 
     /**
+     * @return string
+     */
+    public function getHtmlContent(): string
+    {
+        return $this->htmlContent;
+    }
+
+    /**
      * @param string $content
      * @throws PostException
      */
@@ -116,7 +127,7 @@ class Post implements PostInterface
 
         if ($length < self::CONTENT_MIN_LENGTH || $length > self::CONTENT_MAX_LENGTH) {
             throw new PostException(
-                PostException::INVALID_CONTENT_VALUE . self::CONTENT_MIN_LENGTH . '-' . self::CONTENT_MAX_LENGTH
+                PostException::INVALID_CONTENT_LENGTH . self::CONTENT_MIN_LENGTH . '-' . self::CONTENT_MAX_LENGTH
             );
         }
 
@@ -124,9 +135,9 @@ class Post implements PostInterface
     }
 
     /**
-     * @return StatusInterface
+     * @return PostStatusInterface
      */
-    public function getStatus(): StatusInterface
+    public function getStatus(): PostStatusInterface
     {
         return $this->status;
     }
