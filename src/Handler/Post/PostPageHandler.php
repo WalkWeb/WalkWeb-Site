@@ -24,8 +24,8 @@ class PostPageHandler extends AbstractHandler
     public function __invoke(Request $request): Response
     {
         $repository = new PostRepository($this->container);
-
-        $post = $repository->get($request->slug);
+        $user = $this->container->exist('user') ? $this->getUser() : null;
+        $post = $repository->get($request->getAttribute('slug'), $user);
 
         if (!$post) {
             return $this->render(
@@ -36,23 +36,8 @@ class PostPageHandler extends AbstractHandler
         }
 
         $this->title = htmlspecialchars($post->getTitle()) . ' | ' . APP_NAME;
-        $owner = false;
 
-        if ($authorize = $this->container->exist('user')) {
-            $user = $this->getUser();
-
-            if ($post->getAuthor()->getId() === $user->getId()) {
-                $owner = true;
-            }
-        }
-
-        // TODO Проверка на то, лайкал ли пост авторизованный юзер
-
-        return $this->render('post/index', [
-            'post'      => $post,
-            'authorize' => $authorize,
-            'owner'     => $owner,
-        ]);
+        return $this->render('post/index', ['post' => $post]);
     }
 
     /**

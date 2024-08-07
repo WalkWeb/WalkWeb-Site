@@ -7,17 +7,7 @@ if (empty($post) || !($post instanceof PostInterface)) {
     throw new AppException('post/index view: miss $post');
 }
 
-if (!isset($authorize) || !is_bool($authorize)) {
-    throw new AppException('post/index view: miss $authorize');
-}
-
-if (!isset($owner) || !is_bool($owner)) {
-    throw new AppException('post/index view: miss $owner');
-}
-
-$ratingBox = '<div class="post_rating_box"><div id="post_rating_value">' . $post->getRating()->getRating() . '</div></div>';
-
-if ($authorize && !$owner) {
+if ($post->isLiked()) {
     $likePost = "likePost('{$post->getSlug()}', {$post->getRating()->getRating()})";
     $dislikePost = "dislikePost('{$post->getSlug()}', {$post->getRating()->getRating()})";
     $ratingBox = '<div id="post_rating_box_' . $post->getSlug() . '" class="post_rating_box">
@@ -25,6 +15,8 @@ if ($authorize && !$owner) {
                       <div id="post_rating_value"><span class="' . $post->getRating()->getColorClass() . '">' . $post->getRating()->getRating() . '</span></div>
                       <div id="post_rating_down" onclick="' . $dislikePost . '">&#9660;</div>
                   </div>';
+} else {
+    $ratingBox = '<div class="post_rating_box"><div id="post_rating_value">' . $post->getRating()->getRating() . '</div></div>';
 }
 
 ?>

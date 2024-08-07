@@ -10,7 +10,7 @@ class PostException extends Exception
 {
     public const INVALID_ID                  = 'Incorrect "id" parameter, it required and type string';
     public const INVALID_TITLE               = 'Incorrect "title" parameter, it required and type string';
-    public const INVALID_TITLE_VALUE         = 'Incorrect "title", should be min-max length: ';
+    public const INVALID_TITLE_LENGTH        = 'Incorrect "title", should be min-max length: ';
     public const INVALID_SLUG                = 'Incorrect "slug" parameter, it required and type string';
     public const INVALID_SLUG_LENGTH         = 'Incorrect "slug", should be min-max length: ';
     public const INVALID_CONTENT             = 'Incorrect "content" parameter, it required and type string';

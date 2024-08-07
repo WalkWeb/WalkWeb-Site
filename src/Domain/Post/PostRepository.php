@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Post;
 
+use App\Domain\Auth\AuthInterface;
 use App\Domain\Post\Tag\TagRepository;
 use Ramsey\Uuid\Uuid;
 use WalkWeb\NW\AppException;
@@ -22,10 +23,11 @@ class PostRepository
 
     /**
      * @param string $slug
+     * @param AuthInterface|null $user
      * @return PostInterface|null
      * @throws AppException
      */
-    public function get(string $slug): ?PostInterface
+    public function get(string $slug, ?AuthInterface $user = null): ?PostInterface
     {
         $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT 
@@ -67,9 +69,16 @@ class PostRepository
             return null;
         }
 
-        // TODO Mock
-        $data['user_reaction'] = 0;
-        $data['is_liked'] = false;
+        if ($user === null) {
+            $data['user_reaction'] = 0;
+            $data['is_liked'] = true;
+        } elseif ($user->getId() === $data['author_id']) {
+            $data['user_reaction'] = 0;
+            $data['is_liked'] = false;
+        } else {
+            $data['user_reaction'] = $this->getUserReaction($slug, $user);
+            $data['is_liked'] = $data['user_reaction'] === 0;
+        }
 
         return PostFactory::create($data, $this->tagRepository->getByPostId($data['id'] ?? ''));
     }
@@ -170,5 +179,23 @@ class PostRepository
                 ],
             );
         }
+    }
+
+    /**
+     * @param string $slug
+     * @param AuthInterface $user
+     * @return int
+     * @throws AppException
+     */
+    private function getUserReaction(string $slug, AuthInterface $user): int
+    {
+        return $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `value` FROM `lk_account_like_post` WHERE `account_id` = ? AND `post_slug` = ?',
+            [
+                ['type' => 's', 'value' => $user->getId()],
+                ['type' => 's', 'value' => $slug],
+            ],
+            true
+        )['value'] ?? 0;
     }
 }

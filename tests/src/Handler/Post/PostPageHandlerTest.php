@@ -25,11 +25,11 @@ class PostPageHandlerTest extends AbstractTest
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/title post 1/', $response->getBody());
 
-        // no view like icon
-        self::assertDoesNotMatchRegularExpression('/9650/', $response->getBody());
+        // view like icon
+        self::assertMatchesRegularExpression('/9650/', $response->getBody());
 
-        // no view dislike icon
-        self::assertDoesNotMatchRegularExpression('/9660/', $response->getBody());
+        // view dislike icon
+        self::assertMatchesRegularExpression('/9660/', $response->getBody());
     }
 
     /**

@@ -327,7 +327,7 @@ class PostFactoryTest extends AbstractTest
                     'author_status_id' => 1,
                     'is_liked'         => true,
                 ],
-                PostException::INVALID_TITLE_VALUE . PostInterface::TITLE_MIN_LENGTH . '-' . PostInterface::TITLE_MAX_LENGTH,
+                PostException::INVALID_TITLE_LENGTH . PostInterface::TITLE_MIN_LENGTH . '-' . PostInterface::TITLE_MAX_LENGTH,
             ],
             [
                 // title длиннее максимальной длины
@@ -352,7 +352,7 @@ class PostFactoryTest extends AbstractTest
                     'author_status_id' => 1,
                     'is_liked'         => true,
                 ],
-                PostException::INVALID_TITLE_VALUE . PostInterface::TITLE_MIN_LENGTH . '-' . PostInterface::TITLE_MAX_LENGTH,
+                PostException::INVALID_TITLE_LENGTH . PostInterface::TITLE_MIN_LENGTH . '-' . PostInterface::TITLE_MAX_LENGTH,
             ],
 
             // slug
@@ -404,6 +404,56 @@ class PostFactoryTest extends AbstractTest
                     'is_liked'         => true,
                 ],
                 PostException::INVALID_SLUG,
+            ],
+            [
+                // slug over min length
+                [
+                    'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
+                    'title'            => 'Title',
+                    'slug'             => self::generateString(PostInterface::SLUG_MIN_LENGTH - 1),
+                    'content'          => '[p]Post content[/p]',
+                    'html_content'     => '<p>Post content</p>',
+                    'status_id'        => PostStatusInterface::DEFAULT,
+                    'likes'            => 12,
+                    'dislikes'         => -2,
+                    'user_reaction'    => 1,
+                    'comments_count'   => 3,
+                    'published'        => 1,
+                    'created_at'       => '2019-08-12 19:05:19',
+                    'updated_at'       => null,
+                    'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
+                    'author_name'      => 'Name',
+                    'author_avatar'    => 'avatar.png',
+                    'author_level'     => 25,
+                    'author_status_id' => 1,
+                    'is_liked'         => true,
+                ],
+                PostException::INVALID_SLUG_LENGTH . PostInterface::SLUG_MIN_LENGTH . '-' . PostInterface::SLUG_MAX_LENGTH,
+            ],
+            [
+                // slug over max length
+                [
+                    'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
+                    'title'            => 'Title',
+                    'slug'             => self::generateString(PostInterface::SLUG_MAX_LENGTH + 1),
+                    'content'          => '[p]Post content[/p]',
+                    'html_content'     => '<p>Post content</p>',
+                    'status_id'        => PostStatusInterface::DEFAULT,
+                    'likes'            => 12,
+                    'dislikes'         => -2,
+                    'user_reaction'    => 1,
+                    'comments_count'   => 3,
+                    'published'        => 1,
+                    'created_at'       => '2019-08-12 19:05:19',
+                    'updated_at'       => null,
+                    'author_id'        => '67ea6431-4523-42ee-bfa0-e302d6447acb',
+                    'author_name'      => 'Name',
+                    'author_avatar'    => 'avatar.png',
+                    'author_level'     => 25,
+                    'author_status_id' => 1,
+                    'is_liked'         => true,
+                ],
+                PostException::INVALID_SLUG_LENGTH . PostInterface::SLUG_MIN_LENGTH . '-' . PostInterface::SLUG_MAX_LENGTH,
             ],
 
             // content

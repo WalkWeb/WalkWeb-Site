@@ -18,8 +18,6 @@ class PostFactory
     /**
      * Создает объект поста на основе массива с данными
      *
-     * TODO Add mix-max length slug validate
-     *
      * @param array $data
      * @param TagCollection $tags
      * @return PostInterface
@@ -30,7 +28,7 @@ class PostFactory
         return new Post(
             self::uuid($data, 'id', PostException::INVALID_ID),
             self::validateTitle($data),
-            self::string($data, 'slug', PostException::INVALID_SLUG),
+            self::validateSlug($data),
             self::validateContent($data),
             self::validateHtmlContent($data),
             new PostStatus(self::int($data, 'status_id', PostException::INVALID_STATUS_ID)),
@@ -58,10 +56,29 @@ class PostFactory
             $title,
             PostInterface::TITLE_MIN_LENGTH,
             PostInterface::TITLE_MAX_LENGTH,
-            PostException::INVALID_TITLE_VALUE . PostInterface::TITLE_MIN_LENGTH . '-' . PostInterface::TITLE_MAX_LENGTH
+            PostException::INVALID_TITLE_LENGTH . PostInterface::TITLE_MIN_LENGTH . '-' . PostInterface::TITLE_MAX_LENGTH
         );
 
         return $title;
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     * @throws AppException
+     */
+    private static function validateSlug(array $data): string
+    {
+        $slug = self::string($data, 'slug', PostException::INVALID_SLUG);
+
+        self::stringMinMaxLength(
+            $slug,
+            PostInterface::SLUG_MIN_LENGTH,
+            PostInterface::SLUG_MAX_LENGTH,
+            PostException::INVALID_SLUG_LENGTH . PostInterface::SLUG_MIN_LENGTH . '-' . PostInterface::SLUG_MAX_LENGTH
+        );
+
+        return $slug;
     }
 
     /**

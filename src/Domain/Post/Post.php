@@ -86,7 +86,7 @@ class Post implements PostInterface
 
         if ($length < self::TITLE_MIN_LENGTH || $length > self::TITLE_MAX_LENGTH) {
             throw new PostException(
-                PostException::INVALID_TITLE_VALUE . self::TITLE_MIN_LENGTH . '-' . self::TITLE_MAX_LENGTH
+                PostException::INVALID_TITLE_LENGTH . self::TITLE_MIN_LENGTH . '-' . self::TITLE_MAX_LENGTH
             );
         }
 

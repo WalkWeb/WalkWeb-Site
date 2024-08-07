@@ -134,7 +134,7 @@ class PostTest extends AbstractTest
     public function testPostSetTitleFail(string $newTitle): void
     {
         $this->expectException(PostException::class);
-        $this->expectExceptionMessage(PostException::INVALID_TITLE_VALUE . PostInterface::TITLE_MIN_LENGTH . '-' . PostInterface::TITLE_MAX_LENGTH);
+        $this->expectExceptionMessage(PostException::INVALID_TITLE_LENGTH . PostInterface::TITLE_MIN_LENGTH . '-' . PostInterface::TITLE_MAX_LENGTH);
         $this->createPost()->setTitle($newTitle);
     }
 
