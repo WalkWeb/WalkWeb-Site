@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace App\Handler\Post;
 
+use App\Domain\Post\PostInterface;
 use App\Domain\Post\PostRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
+use WalkWeb\NW\Traits\DateTrait;
 
 class PostPageHandler extends AbstractHandler
 {
+    use DateTrait;
+
     /**
      * @param Request $request
      * @return Response
@@ -49,5 +53,14 @@ class PostPageHandler extends AbstractHandler
             'authorize' => $authorize,
             'owner'     => $owner,
         ]);
+    }
+
+    /**
+     * @param PostInterface $post
+     * @return string
+     */
+    protected function getCreatedAtEasyData(PostInterface $post): string
+    {
+        return self::getElapsedTime($post->getCreatedAt());
     }
 }

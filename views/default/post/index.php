@@ -56,5 +56,5 @@ foreach ($post->getTags() as $tag) {
 <p>
     Автор: <a href="/u/<?= $post->getAuthor()->getName() ?>" title="" class="osnova"><?= $post->getAuthor()->getName() ?></a>
     <span class="post_author_lvl"><?= $post->getAuthor()->getLevel() ?></span><br />
-    Опубликован: #
+    Опубликован: <abbr title="<?= $post->getCreatedAt()->format('Y-m-d H:i:s') ?>"><?= $this->getCreatedAtEasyData($post) ?></abbr>
 </p>
