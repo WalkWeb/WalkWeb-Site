@@ -18,6 +18,8 @@ class PostFactory
     /**
      * Создает объект поста на основе массива с данными
      *
+     * TODO Add mix-max length slug validate
+     *
      * @param array $data
      * @param TagCollection $tags
      * @return PostInterface

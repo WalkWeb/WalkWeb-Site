@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Handler\Post;
 
 use App\Domain\Post\PostException;
+use App\Domain\Post\PostInterface;
 use App\Domain\Post\PostRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
@@ -31,6 +32,17 @@ class LikePostHandler extends AbstractHandler
         }
 
         $slug = $request->slug;
+        $slugLength = mb_strlen($slug);
+
+        if ($slugLength < PostInterface::SLUG_MIN_LENGTH || $slugLength > PostInterface::SLUG_MAX_LENGTH) {
+            return $this->json(
+                [
+                    'success' => false,
+                    'error' => PostException::INVALID_SLUG_LENGTH . PostInterface::SLUG_MIN_LENGTH . '-' . PostInterface::SLUG_MAX_LENGTH
+                ]
+            );
+        }
+
         $repository = new PostRepository($this->container);
 
         if ($repository->isOwner($slug, $user->getId())) {

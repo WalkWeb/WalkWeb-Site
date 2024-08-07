@@ -6,6 +6,7 @@ namespace Test\src\Handler\Post;
 
 use App\Domain\Account\AccountInterface;
 use App\Domain\Post\PostException;
+use App\Domain\Post\PostInterface;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
@@ -30,7 +31,7 @@ class LikePostHandlerTest extends AbstractTest
 
         // Отправляем запрос на лайк
         $request = new Request(
-            ['REQUEST_URI' => '/post/like/slug-post-1-1000', 'REQUEST_METHOD' => 'POST'],
+            ['REQUEST_URI' => '/post/like/' . $slug, 'REQUEST_METHOD' => 'POST'],
             [],
             [AccountInterface::AUTH_TOKEN => $authToken]
         );
@@ -67,7 +68,7 @@ class LikePostHandlerTest extends AbstractTest
         self::assertEquals(0, $data['dislikes']);
 
         // Отправляем запрос на лайк
-        $request = new Request(['REQUEST_URI' => '/post/like/slug-post-1-1000', 'REQUEST_METHOD' => 'POST']);
+        $request = new Request(['REQUEST_URI' => '/post/like/' . $slug, 'REQUEST_METHOD' => 'POST']);
         $response = $this->app->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
@@ -100,7 +101,7 @@ class LikePostHandlerTest extends AbstractTest
 
         // Отправляем запрос на лайк
         $request = new Request(
-            ['REQUEST_URI' => '/post/like/slug-post-1-1000', 'REQUEST_METHOD' => 'POST'],
+            ['REQUEST_URI' => '/post/like/' . $slug, 'REQUEST_METHOD' => 'POST'],
             [],
             [AccountInterface::AUTH_TOKEN => $authToken]
         );
@@ -135,7 +136,7 @@ class LikePostHandlerTest extends AbstractTest
 
         // Отправляем запрос на лайк
         $request = new Request(
-            ['REQUEST_URI' => '/post/like/slug-post-1-1000', 'REQUEST_METHOD' => 'POST'],
+            ['REQUEST_URI' => '/post/like/' . $slug, 'REQUEST_METHOD' => 'POST'],
             [],
             [AccountInterface::AUTH_TOKEN => $authToken]
         );
@@ -168,7 +169,7 @@ class LikePostHandlerTest extends AbstractTest
 
         // Отправляем запрос на лайк
         $request = new Request(
-            ['REQUEST_URI' => '/post/like/slug-post-1-1000', 'REQUEST_METHOD' => 'POST'],
+            ['REQUEST_URI' => '/post/like/' . $slug, 'REQUEST_METHOD' => 'POST'],
             [],
             [AccountInterface::AUTH_TOKEN => $authToken]
         );
@@ -185,6 +186,52 @@ class LikePostHandlerTest extends AbstractTest
 
         // Проверяем, что запись в таблице lk_account_like_post не появилась
         self::assertEquals([], $this->getLikeData($slug, $accountId));
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testLikePostHandlerSlugOverMinLength(): void
+    {
+        $authToken = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a3';
+        $slug = self::generateString(PostInterface::SLUG_MIN_LENGTH - 1);
+
+        // Отправляем запрос на лайк
+        $request = new Request(
+            ['REQUEST_URI' => '/post/like/' . $slug, 'REQUEST_METHOD' => 'POST'],
+            [],
+            [AccountInterface::AUTH_TOKEN => $authToken]
+        );
+        $response = $this->app->handle($request);
+
+        self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertJsonError(
+            PostException::INVALID_SLUG_LENGTH . PostInterface::SLUG_MIN_LENGTH . '-' . PostInterface::SLUG_MAX_LENGTH,
+            $response
+        );
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testLikePostHandlerSlugOverMaxLength(): void
+    {
+        $authToken = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a3';
+        $slug = self::generateString(PostInterface::SLUG_MAX_LENGTH + 1);
+
+        // Отправляем запрос на лайк
+        $request = new Request(
+            ['REQUEST_URI' => '/post/like/' . $slug, 'REQUEST_METHOD' => 'POST'],
+            [],
+            [AccountInterface::AUTH_TOKEN => $authToken]
+        );
+        $response = $this->app->handle($request);
+
+        self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertJsonError(
+            PostException::INVALID_SLUG_LENGTH . PostInterface::SLUG_MIN_LENGTH . '-' . PostInterface::SLUG_MAX_LENGTH,
+            $response
+        );
     }
 
     /**

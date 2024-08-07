@@ -26,6 +26,8 @@ interface PostInterface extends ArrayableInterface
 
     public const TITLE_MIN_LENGTH        = 2;
     public const TITLE_MAX_LENGTH        = 80;
+    public const SLUG_MIN_LENGTH         = 5;
+    public const SLUG_MAX_LENGTH         = 150;
     public const CONTENT_MIN_LENGTH      = 5;
     public const CONTENT_MAX_LENGTH      = 30000;
     public const HTML_CONTENT_MIN_LENGTH = 5;
