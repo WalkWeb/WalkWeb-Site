@@ -24,7 +24,7 @@ class RatingFactoryTest extends AbstractTest
     {
         $rating = $this->getFactory()->create($data);
 
-        self::assertEquals($data['likes'] + $data['dislikes'], $rating->getRating());
+        self::assertEquals($data['likes'] - $data['dislikes'], $rating->getRating());
         self::assertEquals($data['likes'], $rating->getLikes());
         self::assertEquals($data['dislikes'], $rating->getDislikes());
         self::assertEquals($data['user_reaction'], $rating->getUserReaction());
@@ -63,7 +63,7 @@ class RatingFactoryTest extends AbstractTest
             [
                 [
                     'likes'         => 15,
-                    'dislikes'      => -5,
+                    'dislikes'      => 5,
                     'user_reaction' => 1,
                 ],
                 RatingInterface::POSITIVE_CLASS_COLOR,
@@ -71,7 +71,7 @@ class RatingFactoryTest extends AbstractTest
             [
                 [
                     'likes'         => 20,
-                    'dislikes'      => -100,
+                    'dislikes'      => 100,
                     'user_reaction' => -1,
                 ],
                 RatingInterface::NEGATIVE_CLASS_COLOR,

@@ -13,7 +13,7 @@ class Rating implements RatingInterface
 
     public function __construct(int $likes, int $dislikes, int $userReaction)
     {
-        $this->rating = $likes + $dislikes;
+        $this->rating = $likes - $dislikes;
         $this->likes = $likes;
         $this->dislikes = $dislikes;
         $this->userReaction = $userReaction;

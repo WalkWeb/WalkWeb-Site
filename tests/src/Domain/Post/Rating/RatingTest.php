@@ -28,7 +28,7 @@ class RatingTest extends AbstractTest
     {
         $rating = new Rating($likes, $dislikes, $userReaction);
 
-        self::assertEquals($likes + $dislikes, $rating->getRating());
+        self::assertEquals($likes - $dislikes, $rating->getRating());
         self::assertEquals($likes, $rating->getLikes());
         self::assertEquals($dislikes, $rating->getDislikes());
         self::assertEquals($expectedColorClass, $rating->getColorClass());
@@ -50,13 +50,13 @@ class RatingTest extends AbstractTest
             ],
             [
                 15,
-                -5,
+                5,
                 1,
                 RatingInterface::POSITIVE_CLASS_COLOR
             ],
             [
                 20,
-                -100,
+                100,
                 -1,
                 RatingInterface::NEGATIVE_CLASS_COLOR
             ],

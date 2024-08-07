@@ -706,4 +706,50 @@ td.avatar {
     border: 1px solid #333;
 }
 
+.post_rating_box {
+    position: relative;
+    float: right;
+    padding: 0 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+#post_rating_value {
+    height: 40px;
+    text-align: center;
+    font-size: 150%;
+    line-height: 40px;
+}
+
+#post_rating_up {
+    height: 24px;
+    text-align: center;
+    font-size: 120%;
+    line-height: 24px;
+}
+
+#post_rating_up:hover {
+    color: #282;
+    cursor: pointer;
+}
+
+#post_rating_down {
+    height: 24px;
+    text-align: center;
+    font-size: 120%;
+    line-height: 24px;
+}
+
+#post_rating_down:hover {
+    color: #822;
+    cursor: pointer;
+}
+
+#post_rating_value {
+    height: 40px;
+    text-align: center;
+    font-size: 130%;
+    line-height: 40px;
+}
+
 /* Post style end */

@@ -31,7 +31,7 @@ class PostRepositoryTest extends AbstractTest
         self::assertEquals($data['status_id'], $post->getStatus()->getId());
         self::assertEquals($data['likes'], $post->getRating()->getLikes());
         self::assertEquals($data['dislikes'], $post->getRating()->getDislikes());
-        self::assertEquals($data['likes'] + $data['dislikes'], $post->getRating()->getRating());
+        self::assertEquals($data['likes'] - $data['dislikes'], $post->getRating()->getRating());
         self::assertEquals($data['comments_count'], $post->getCommentsCount());
         self::assertEquals($data['published'], $post->isPublished());
         self::assertEquals($data['author_id'], $post->getAuthor()->getId());

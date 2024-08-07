@@ -2589,7 +2589,6 @@ table.d_table {
 /* Post style start */
 
 .content_post_main {
-    /*padding: 30px 20px 0 20px;*/
     min-height: 130px;
 }
 
@@ -2598,12 +2597,10 @@ table.d_table {
     word-wrap: break-word;
 }
 
-
-
 .post_rating_box {
     position: relative;
     float: right;
-    margin: 0 0 0 30px;
+    margin: 10px 30px 0 30px;
     background: #251e18;
     padding: 0 10px;
     border: 1px solid #382c22;

@@ -7,10 +7,31 @@ if (empty($post) || !($post instanceof PostInterface)) {
     throw new AppException('post/index view: miss $post');
 }
 
+if (!isset($authorize) || !is_bool($authorize)) {
+    throw new AppException('post/index view: miss $authorize');
+}
+
+if (!isset($owner) || !is_bool($owner)) {
+    throw new AppException('post/index view: miss $owner');
+}
+
+$ratingBox = '<div class="post_rating_box"><div id="post_rating_value">' . $post->getRating()->getRating() . '</div></div>';
+
+if ($authorize && !$owner) {
+    $likePost = "likePost({$post->getSlug()}}, {$post->getRating()->getRating()})";
+    $dislikePost = "dislikePost({$post->getSlug()}, {$post->getRating()->getRating()})";
+    $ratingBox = '<div id="post_rating_box_' . $post->getSlug() . '" class="post_rating_box">
+                      <div id="post_rating_up" onclick="' . $likePost . '">&#9650;</div>
+                      <div id="post_rating_value">' . $post->getRating()->getRating() . '</div>
+                      <div id="post_rating_down" onclick="' . $dislikePost . '">&#9660;</div>
+                  </div>';
+}
+
 ?>
 
 <div class="content_post_main">
     <div class="content_post_nowrap">
+        <?= $ratingBox ?>
         <h1><?= htmlspecialchars($post->getTitle()) ?></h1>
         <?= $post->getHtmlContent() ?>
     </div>
@@ -24,7 +45,7 @@ if (empty($post) || !($post instanceof PostInterface)) {
             <img src="<?= $post->getAuthor()->getAvatar() ?>" alt="" />
         </div>
         <div class="post_footer_author_box">
-            Автор: <a href="/u/<?= $post->getAuthor()->getName() ?>"><?= $post->getAuthor()->getName() ?></a>
+            <a href="/u/<?= $post->getAuthor()->getName() ?>"><?= $post->getAuthor()->getName() ?></a>
             <span class="post_author_lvl"><?= $post->getAuthor()->getLevel() ?></span><br />
             Опубликован: #
         </div>

@@ -32,9 +32,22 @@ class PostPageHandler extends AbstractHandler
         }
 
         $this->title = htmlspecialchars($post->getTitle()) . ' | ' . APP_NAME;
+        $owner = false;
+
+        if ($authorize = $this->container->exist('user')) {
+            $user = $this->getUser();
+
+            if ($post->getAuthor()->getId() === $user->getId()) {
+                $owner = true;
+            }
+        }
+
+        // TODO Проверка на то, лайкал ли пост авторизованный юзер
 
         return $this->render('post/index', [
-            'post' => $post,
+            'post'      => $post,
+            'authorize' => $authorize,
+            'owner'     => $owner,
         ]);
     }
 }
