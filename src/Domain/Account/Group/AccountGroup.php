@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Account\Group;
 
 use App\Domain\Account\AccountException;
+use WalkWeb\NW\AppException;
 
 class AccountGroup implements AccountGroupInterface
 {
@@ -21,7 +22,7 @@ class AccountGroup implements AccountGroupInterface
 
     /**
      * @param int $id
-     * @throws AccountException
+     * @throws AppException
      */
     public function __construct(int $id)
     {
@@ -47,12 +48,12 @@ class AccountGroup implements AccountGroupInterface
 
     /**
      * @param int $id
-     * @throws AccountException
+     * @throws AppException
      */
     private function setName(int $id): void
     {
         if (!array_key_exists($id, self::$map)) {
-            throw new AccountException(AccountException::UNKNOWN_GROUP_ID . ': ' . $id);
+            throw new AppException(AccountException::UNKNOWN_GROUP_ID . ': ' . $id);
         }
 
         $this->name = self::$map[$id];

@@ -21,6 +21,7 @@ class PostException extends Exception
     public const INVALID_COMMENTS_COUNT      = 'Incorrect "comments_count" parameter, it required and type int';
     public const INVALID_PUBLISHED           = 'Incorrect "published" parameter, it required and type int';
     public const INVALID_TAGS                = 'Incorrect "tags" parameter, it required and type array';
+    public const INVALID_TAG                 = 'Incorrect "tag" parameter, it required and type string';
     public const INVALID_IS_LIKED_DATA       = 'Incorrect "is_liked" data, expected arrays';
     public const INVALID_CREATED_AT          = 'Incorrect "created_at" parameter, it required and type string date';
     public const INVALID_UPDATED_AT          = 'Incorrect "updated_at" parameter, expected string date or empty';

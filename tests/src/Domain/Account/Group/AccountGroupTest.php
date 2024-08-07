@@ -7,6 +7,7 @@ namespace Test\src\Domain\Account\Group;
 use App\Domain\Account\AccountException;
 use App\Domain\Account\Group\AccountGroup;
 use Test\AbstractTest;
+use WalkWeb\NW\AppException;
 
 class AccountGroupTest extends AbstractTest
 {
@@ -16,7 +17,7 @@ class AccountGroupTest extends AbstractTest
      * @dataProvider successDataProvider
      * @param int $id
      * @param string $name
-     * @throws AccountException
+     * @throws AppException
      */
     public function testAccountGroupCreateSuccess(int $id, string $name): void
     {
@@ -35,7 +36,7 @@ class AccountGroupTest extends AbstractTest
      */
     public function testAccountGroupCreateFail(int $id, string $error): void
     {
-        $this->expectException(AccountException::class);
+        $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
         new AccountGroup($id);
     }

@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Auth;
 
-use App\Domain\Account\AccountException;
 use App\Domain\Account\Energy\EnergyFactory;
 use App\Domain\Account\Group\AccountGroup;
 use App\Domain\Account\Notice\NoticeCollection;
-use App\Domain\Account\Notice\NoticeException;
 use App\Domain\Account\Notice\NoticeFactory;
 use App\Domain\Account\Status\AccountStatus;
 use App\Domain\Account\Upload\UploadInterface;
 use App\Domain\Auth\AuthException;
 use App\Domain\Auth\AuthFactory;
-use Exception;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 
@@ -27,8 +24,6 @@ class AuthFactoryTest extends AbstractTest
      * @param array $data
      * @param int $expectedMaxUpload
      * @param NoticeCollection $notices
-     * @throws AccountException
-     * @throws NoticeException
      * @throws AppException
      */
     public function testAuthFactoryCreateSuccess(array $data, int $expectedMaxUpload, NoticeCollection $notices): void
@@ -79,11 +74,11 @@ class AuthFactoryTest extends AbstractTest
      * @dataProvider failDataProvider
      * @param array $data
      * @param string $error
-     * @throws Exception
+     * @throws AppException
      */
     public function testAuthFactoryCreateFail(array $data, string $error): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
         AuthFactory::create($data, $this->getSendNoticeAction(), new NoticeCollection());
     }
