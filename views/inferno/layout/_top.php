@@ -46,7 +46,7 @@ use App\Domain\Auth\AuthInterface;
                 </div>
             </div>';
         } else {
-            echo '<div class="nw_guest_cont"><a href="/login" title="">Авторизация</a> / <a href="/registration/main" title="">Регистрация</a></div>';
+            echo '<div class="nw_guest_cont"><a href="/login" title="">Вход</a> / <a href="/registration/main" title="">Регистрация</a></div>';
         }
         ?>
     </div>

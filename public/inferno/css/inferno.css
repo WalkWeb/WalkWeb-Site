@@ -2746,7 +2746,8 @@ img.i_img {
 }
 
 .notification_box {
-    width: 400px;
+    width: 90%;
+    max-width: 500px;
     min-height: 100px;
     background: #1e1915 url('/inferno/images/row5.jpg') repeat-x top left;
     border: 1px solid #d8be91;

@@ -26,7 +26,7 @@ class PostException extends Exception
     public const INVALID_UPDATED_AT          = 'Incorrect "updated_at" parameter, expected string date or empty';
 
     // like errors
-    public const ERROR_NO_AUTH      = 'Вы не авторизованны';
+    public const ERROR_NO_AUTH      = 'Изменять рейтинг постов могут только зарегистрированные и авторизованные пользователи.<br /><br /><a href="/registration/main">Зарегистрироваться</a> / <a href="/login">Войти</a>';
     public const ERROR_OWNER        = 'Нельзя изменять рейтинг своего поста';
     public const ERROR_DONT_LIKE    = 'Пока вам недоступен функционал изменения рейтинга постов';
     public const ERROR_ALREADY_LIKE = 'Вы уже изменяли рейтинг этого поста';
