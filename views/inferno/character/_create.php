@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" type="text/css" href="/inferno/styles/registration.css?ver=1.0">
+<link rel="stylesheet" type="text/css" href="/inferno/css/registration.css?ver=1.0">
 
 <div class="r_races_cont">
     <div class="rcbox r_16" align="center">

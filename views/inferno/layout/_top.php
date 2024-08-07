@@ -9,7 +9,7 @@ use App\Domain\Auth\AuthInterface;
     <meta name="Keywords" content="<?= $this->keywords ?>">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" type="text/css" href="/inferno/styles/inferno.css?ver=1.00">
+    <link rel="stylesheet" type="text/css" href="/inferno/css/inferno.css?ver=1.00">
     <link rel="icon" type="image/x-icon" href="/dw-icon-64.png">
     <script src="/js/jquery.js"></script>
     <script src="/js/app.js?v=1.00"></script>

@@ -635,7 +635,7 @@ td.avatar {
     background-size: cover;
 }
 
-/* pop-up message */
+/* Pop-up message style start */
 
 .notification_bg {
     position: fixed;
@@ -649,24 +649,25 @@ td.avatar {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
 }
 
 .notification_box {
     width: 400px;
     min-height: 100px;
-    background: #1e1915;
-    border: 1px solid #D8BE91;
+    background: #444;
+    border: 1px solid #333;
 }
 
 .notification_box p {
     font-size: 140%;
     padding: 10px;
+    color: #aaa;
+    text-align: center;
 }
 
 .notification_box h3 {
     background: #251d16;
-    color: #D8BE91;
+    color: #d8be91;
     padding: 8px 10px 9px;
     font-size: 16px;
     font-weight: 300;
@@ -684,6 +685,8 @@ td.avatar {
     cursor: pointer;
     color: #a22;
 }
+
+/* Pop-up message style end */
 
 /* Post style start */
 

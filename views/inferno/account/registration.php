@@ -5,11 +5,9 @@ $action = '/registration/' . ($ref ?? 'undefined');
 
 ?>
 
-<link rel="stylesheet" type="text/css" href="/inferno/styles/registration.css?ver=1.0">
-
-<div class="ch_test_box">
-    <div class="ch_test_row">
-        <p class="center"><span class="ch_test_h">Ранняя стадия разработки</span></p>
+<div class="select_text_box">
+    <div class="select_text_row">
+        <p class="center"><span class="select_text_header">Ранняя стадия разработки</span></p>
 
         <p>
             Проект находится в ранней стадии разработки. Большая часть функционала еще не реализованна. Также,

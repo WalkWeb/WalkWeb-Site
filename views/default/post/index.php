@@ -18,8 +18,8 @@ if (!isset($owner) || !is_bool($owner)) {
 $ratingBox = '<div class="post_rating_box"><div id="post_rating_value">' . $post->getRating()->getRating() . '</div></div>';
 
 if ($authorize && !$owner) {
-    $likePost = "likePost({$post->getSlug()}}, {$post->getRating()->getRating()})";
-    $dislikePost = "dislikePost({$post->getSlug()}, {$post->getRating()->getRating()})";
+    $likePost = "likePost('{$post->getSlug()}', {$post->getRating()->getRating()})";
+    $dislikePost = "dislikePost('{$post->getSlug()}', {$post->getRating()->getRating()})";
     $ratingBox = '<div id="post_rating_box_' . $post->getSlug() . '" class="post_rating_box">
                       <div id="post_rating_up" onclick="' . $likePost . '">&#9650;</div>
                      <div id="post_rating_value"><span class="' . $post->getRating()->getColorClass() . '">' . $post->getRating()->getRating() . '</span></div>
