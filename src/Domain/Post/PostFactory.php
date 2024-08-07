@@ -4,16 +4,24 @@ declare(strict_types=1);
 
 namespace App\Domain\Post;
 
+use App\Domain\Post\Author\Author;
 use App\Domain\Post\Author\AuthorFactory;
+use App\Domain\Post\DTO\CreatePostRequest;
+use App\Domain\Post\Rating\Rating;
 use App\Domain\Post\Rating\RatingFactory;
 use App\Domain\Post\Status\PostStatus;
 use App\Domain\Post\Tag\TagCollection;
+use DateTime;
+use Exception;
+use Ramsey\Uuid\Uuid;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Traits\StringTrait;
 use WalkWeb\NW\Traits\ValidationTrait;
 
 class PostFactory
 {
     use ValidationTrait;
+    use StringTrait;
 
     /**
      * Создает объект поста на основе массива с данными
@@ -40,6 +48,41 @@ class PostFactory
             self::bool($data, 'is_liked', PostException::INVALID_IS_LIKED_DATA),
             self::date($data, 'created_at', PostException::INVALID_CREATED_AT),
             self::dateOrNull($data, 'updated_at', PostException::INVALID_UPDATED_AT),
+        );
+    }
+
+    /**
+     * @param CreatePostRequest $request
+     * @return PostInterface
+     * @throws Exception
+     */
+    public static function createNew(CreatePostRequest $request): PostInterface
+    {
+        $slug = strtolower(self::transliterate($request->getTitle())) . '-' . random_int(10000, 99999);
+
+        // TODO
+        $tags = new TagCollection();
+
+        return new Post(
+            Uuid::uuid4()->toString(),
+            $request->getTitle(),
+            $slug,
+            $request->getContent(),
+            self::convertToHtml($request->getContent()),
+            new PostStatus(PostStatus::DEFAULT),
+            new Author(
+                $request->getAuthor()->getId(),
+                $request->getAuthor()->getName(),
+                $request->getAuthor()->getAvatar(),
+                $request->getAuthor()->getLevel()->getLevel(),
+                $request->getAuthor()->getStatus()
+            ),
+            new Rating(0, 0, 0),
+            0,
+            PostInterface::DEFAULT_PUBLISHED,
+            $tags,
+            false,
+            new DateTime(),
         );
     }
 
@@ -117,5 +160,22 @@ class PostFactory
         );
 
         return $content;
+    }
+
+    /**
+     * @param string $content
+     * @return string
+     */
+    private static function convertToHtml(string $content): string
+    {
+        $text = htmlspecialchars($content);
+
+        $text = preg_replace( '[\[img\]([^"\s]+?)\[/img\]]m', PostInterface::IMAGE_TEMPLATE, $text);
+
+        return str_replace(
+            ['[p]', '[/p]', '[video]', '[/video]', '[line]', '[h2]', '[/h2]', '[br]'],
+            ['<p>', '</p>', PostInterface::VIDEO_PREFIX, PostInterface::VIDEO_SUFFIX, PostInterface::LINE, '<h2>', '</h2>', '<br />'],
+            $text
+        );
     }
 }

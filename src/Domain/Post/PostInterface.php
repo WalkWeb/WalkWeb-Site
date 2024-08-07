@@ -21,6 +21,8 @@ use App\Domain\Post\Tag\TagCollection;
  */
 interface PostInterface extends ArrayableInterface
 {
+    public const DEFAULT_PUBLISHED = true;
+
     // TODO approved - одобрен ли пост для отображения (чтобы можно было включить предмодерацию публикации постов)
     // TODO moderated - проверен ли пост модератором
 
@@ -32,6 +34,12 @@ interface PostInterface extends ArrayableInterface
     public const CONTENT_MAX_LENGTH      = 30000;
     public const HTML_CONTENT_MIN_LENGTH = 5;
     public const HTML_CONTENT_MAX_LENGTH = 65534;
+
+    // Шаблоны замены bb-кодов на html
+    public const IMAGE_TEMPLATE = '<div class="i_box"><a href="/$1" rel="gallery" class="pirobox_gall" target="_blank" title=""><img src="/$1" alt="" class="i_img" /></a></div>';
+    public const VIDEO_PREFIX   = '<div class="videocontent"><div class="youvideo"><iframe width="560" height="315" src="https://www.youtube.com/embed/';
+    public const VIDEO_SUFFIX   = '" frameborder="0" allowfullscreen></iframe></div></div>';
+    public const LINE           = '<div align="center"><div class="linehere1"><div class="linehere2"></div><div class="linehere3"></div><div class="linehere4">&nbsp;</div></div></div>';
 
     /**
      * Возвращает ID поста

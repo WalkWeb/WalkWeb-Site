@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Post;
 
+use App\Domain\Post\DTO\CreatePostRequest;
+use App\Domain\Post\Status\PostStatus;
 use DateTime;
 use Exception;
 use App\Domain\Post\Author\AuthorFactory;
@@ -13,6 +15,7 @@ use App\Domain\Post\PostInterface;
 use App\Domain\Post\Rating\RatingFactory;
 use App\Domain\Post\Status\PostStatusInterface;
 use App\Domain\Post\Tag\TagCollection;
+use Ramsey\Uuid\Uuid;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 
@@ -85,6 +88,36 @@ class PostFactoryTest extends AbstractTest
         $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
         PostFactory::create($data, new TagCollection());
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testPostFactoryCreateNewSuccess(): void
+    {
+        $request = $this->createRequest();
+        $post = PostFactory::createNew($request);
+
+        self::assertTrue(Uuid::isValid($post->getId()));
+        self::assertTrue(mb_strlen($post->getSlug()) > 10);
+        self::assertEquals($request->getTitle(), $post->getTitle());
+        self::assertEquals($this->convertToHtml($request->getContent()), $post->getHtmlContent());
+        self::assertEquals(PostStatus::DEFAULT, $post->getStatus()->getId());
+        self::assertEquals($request->getAuthor()->getId(), $post->getAuthor()->getId());
+        self::assertEquals($request->getAuthor()->getName(), $post->getAuthor()->getName());
+        self::assertEquals($request->getAuthor()->getAvatar(), $post->getAuthor()->getAvatar());
+        self::assertEquals($request->getAuthor()->getLevel()->getLevel(), $post->getAuthor()->getLevel());
+        self::assertEquals($request->getAuthor()->getName(), $post->getAuthor()->getName());
+        self::assertEquals(0, $post->getRating()->getRating());
+        self::assertEquals(0, $post->getRating()->getLikes());
+        self::assertEquals(0, $post->getRating()->getDislikes());
+        self::assertEquals(0, $post->getCommentsCount());
+        self::assertEquals(PostInterface::DEFAULT_PUBLISHED, $post->isPublished());
+        self::assertFalse($post->isLiked());
+        self::assertTrue((new DateTime())->diff($post->getCreatedAt())->s <= 1);
+
+        // TODO
+        self::assertEquals(new TagCollection(), $post->getTags());
     }
 
     /**
@@ -1013,5 +1046,36 @@ class PostFactoryTest extends AbstractTest
 
             // Проверка валидации параметров автора сделана в AuthorFactoryTest
         ];
+    }
+
+    /**
+     * @return CreatePostRequest
+     * @throws AppException
+     */
+    private function createRequest(): CreatePostRequest
+    {
+        return new CreatePostRequest(
+            'title',
+            '[p]content[p][line][h2]Video:[/h2][video]5j4g_K55Lcw[/video][br][img]images/upload/image.png[img]',
+            ['tag-1', 'tag-2', 'tag-3'],
+            $this->createUser(),
+        );
+    }
+
+    /**
+     * @param string $content
+     * @return string
+     */
+    private function convertToHtml(string $content): string
+    {
+        $text = htmlspecialchars($content);
+
+        $text = preg_replace( '[\[img\]([^"\s]+?)\[/img\]]m', PostInterface::IMAGE_TEMPLATE, $text);
+
+        return str_replace(
+            ['[p]', '[/p]', '[video]', '[/video]', '[line]', '[h2]', '[/h2]', '[br]'],
+            ['<p>', '</p>', PostInterface::VIDEO_PREFIX, PostInterface::VIDEO_SUFFIX, PostInterface::LINE, '<h2>', '</h2>', '<br />'],
+            $text
+        );
     }
 }

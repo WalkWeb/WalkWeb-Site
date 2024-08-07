@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Post\DTO;
 
-use App\Domain\Account\Notice\NoticeCollection;
-use App\Domain\Auth\AuthFactory;
-use App\Domain\Auth\AuthInterface;
 use App\Domain\Post\DTO\CreatePostRequestFactory;
 use App\Domain\Post\PostException;
 use App\Domain\Post\PostInterface;
@@ -165,46 +162,5 @@ class CreatePostRequestFactoryTest extends AbstractTest
                 PostException::INVALID_TAG,
             ],
         ];
-    }
-
-    /**
-     * @return AuthInterface
-     * @throws AppException
-     */
-    private function createUser(): AuthInterface
-    {
-        return AuthFactory::create(
-            [
-                'id'                => '68435c80-eb31-4756-a260-a00900e5db9f',
-                'name'              => 'AccountName',
-                'avatar'            => 'account_avatar.png',
-                'verified_token'    => 'VBajfT8P6PFtrkHhCqb7ZNwIFG45b3',
-                'main_character_id' => 'b1d4eccd-8b91-41c2-87b0-4538b76500af',
-                'account_group_id'  => 10,
-                'account_status_id' => 1,
-                'energy'            => [
-                    'energy_id'         => 'f0c4391a-f16a-4a22-80fb-ac0a02168b1f',
-                    'account_id'        => '68435c80-eb31-4756-a260-a00900e5db9f',
-                    'energy'            => 30,
-                    'energy_bonus'      => 15,
-                    'energy_updated_at' => 1566745426.0000,
-                    'energy_residue'    => 10,
-                ],
-                'can_like'          => 1,
-                'level'             => [
-                    'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',
-                    'character_id'          => '4a45c2f9-c46e-4dbb-bfaf-08494110d7e0',
-                    'character_level'       => 1,
-                    'character_exp'         => 0,
-                    'character_stat_points' => 0,
-                ],
-                'template'          => 'default',
-                'email_verified'    => 0,
-                'upload'            => 1000,
-                'upload_bonus'      => 3,
-            ],
-            $this->getSendNoticeAction(),
-            new NoticeCollection(),
-        );
     }
 }
