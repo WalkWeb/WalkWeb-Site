@@ -22,7 +22,7 @@ if ($authorize && !$owner) {
     $dislikePost = "dislikePost({$post->getSlug()}, {$post->getRating()->getRating()})";
     $ratingBox = '<div id="post_rating_box_' . $post->getSlug() . '" class="post_rating_box">
                       <div id="post_rating_up" onclick="' . $likePost . '">&#9650;</div>
-                      <div id="post_rating_value">' . $post->getRating()->getRating() . '</div>
+                     <div id="post_rating_value"><span class="' . $post->getRating()->getColorClass() . '">' . $post->getRating()->getRating() . '</span></div>
                       <div id="post_rating_down" onclick="' . $dislikePost . '">&#9660;</div>
                   </div>';
 }

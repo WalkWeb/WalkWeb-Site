@@ -2731,4 +2731,14 @@ img.i_img {
     text-decoration: underline;
 }
 
+.defaultRatingColor {}
+
+.positiveRatingColor {
+    color: #249922;
+}
+
+.negativeRatingColor {
+    color: #cd0b0b;
+}
+
 /* Post style end */

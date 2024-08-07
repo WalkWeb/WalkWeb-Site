@@ -152,15 +152,13 @@ function dislikePost(slug, rating) {
 function updatePostRating(slug, rating) {
     let rating_box = document.getElementById('post_rating_box_' + slug);
 
-    console.log(rating_box)
-
     if (rating > 0) {
-        rating_box.innerHTML = '<div id="post_rating_value"><span class="green">' + rating + '</span></div>';
+        rating_box.innerHTML = '<div id="post_rating_value"><span class="positiveRatingColor">' + rating + '</span></div>';
     }
     if (rating < 0) {
-        rating_box.innerHTML = '<div id="post_rating_value"><span class="red">' + rating + '</span></div>';
+        rating_box.innerHTML = '<div id="post_rating_value"><span class="negativeRatingColor">' + rating + '</span></div>';
     }
     if (rating === 0) {
-        rating_box.innerHTML = '<div id="post_rating_value"><span>' + rating + '</span></div>';
+        rating_box.innerHTML = '<div id="post_rating_value"><span class="defaultRatingColor">' + rating + '</span></div>';
     }
 }

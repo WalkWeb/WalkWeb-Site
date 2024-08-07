@@ -729,7 +729,7 @@ td.avatar {
 }
 
 #post_rating_up:hover {
-    color: #282;
+    color: #247722;
     cursor: pointer;
 }
 
@@ -741,7 +741,7 @@ td.avatar {
 }
 
 #post_rating_down:hover {
-    color: #822;
+    color: #cd0b0b;
     cursor: pointer;
 }
 
@@ -750,6 +750,16 @@ td.avatar {
     text-align: center;
     font-size: 130%;
     line-height: 40px;
+}
+
+.defaultRatingColor {}
+
+.positiveRatingColor {
+    color: #247722;
+}
+
+.negativeRatingColor {
+    color: #cd0b0b;
 }
 
 /* Post style end */
