@@ -138,6 +138,8 @@ interface PostInterface extends ArrayableInterface
     /**
      * Лайкал/дизлайкал ли авторизованный пользователь данный пост. Если пользователь не авторизован - вернет false
      *
+     * TODO rename isCanLike
+     *
      * @return bool
      */
     public function isLiked(): bool;

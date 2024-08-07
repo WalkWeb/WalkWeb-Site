@@ -94,3 +94,73 @@ function closeNotification() {
     let notification = document.getElementById('notification_bg');
     notification.remove();
 }
+
+/**
+ * Обрабатывает запрос на лайк посту
+ *
+ * @param slug
+ * @param rating
+ */
+function likePost(slug, rating) {
+    $.ajax({
+        url: '/post/like/' + slug,
+        type: 'POST',
+        success: function(data) {
+            if (data.success === true) {
+                rating++;
+                updatePostRating(slug, rating);
+            } else {
+                createNotification(data.error);
+            }
+        },
+        error: function() {
+            alert('Ошибка! Пожалуйста, обновите страницу!');
+        }
+    });
+}
+
+/**
+ * Обрабатывает запрос на дизлайк посту
+ *
+ * @param slug
+ * @param rating
+ */
+function dislikePost(slug, rating) {
+    $.ajax({
+        url: '/post/dislike/' + slug,
+        type: 'POST',
+        success: function(data) {
+            if (data.success === true) {
+                rating--;
+                updatePostRating(slug, rating);
+            } else {
+                createNotification(data.error);
+            }
+        },
+        error: function() {
+            alert('Ошибка! Пожалуйста, обновите страницу!');
+        }
+    });
+}
+
+/**
+ * Обновляет отображение рейтинга поста
+ *
+ * @param slug
+ * @param rating
+ */
+function updatePostRating(slug, rating) {
+    let rating_box = document.getElementById('post_rating_box_' + slug);
+
+    console.log(rating_box)
+
+    if (rating > 0) {
+        rating_box.innerHTML = '<div id="post_rating_value"><span class="green">' + rating + '</span></div>';
+    }
+    if (rating < 0) {
+        rating_box.innerHTML = '<div id="post_rating_value"><span class="red">' + rating + '</span></div>';
+    }
+    if (rating === 0) {
+        rating_box.innerHTML = '<div id="post_rating_value"><span>' + rating + '</span></div>';
+    }
+}

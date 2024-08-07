@@ -305,7 +305,7 @@ try {
              0,
              0,
              'undefined',
-             1,
+             0,
              '2020-12-25 20:00:00',
              '2020-12-25 20:00:00'
          ),
@@ -497,6 +497,12 @@ try {
         ('f71c078a-d7fd-4290-9d1e-152901859003', '7684ad22-613b-4c65-9bad-b7dfdd394c01', '6ea9c5c4-bbfd-4bf1-bde5-d929107c8f03'),
         ('f71c078a-d7fd-4290-9d1e-152901859004', '7684ad22-613b-4c65-9bad-b7dfdd394c02', '6ea9c5c4-bbfd-4bf1-bde5-d929107c8f04'),
         ('f71c078a-d7fd-4290-9d1e-152901859005', '7684ad22-613b-4c65-9bad-b7dfdd394c02', '6ea9c5c4-bbfd-4bf1-bde5-d929107c8f05')
+        ;
+    ");
+
+    $db->query("
+        INSERT INTO `lk_account_like_post` (`id`, `account_id`, `post_slug`, `value`) VALUES
+        ('b98dd4ea-1488-4dc1-8049-ad27e079cbad', '1e3a3b27-12da-4c73-a3a7-b83092705b04', 'slug-post-1-1000', 1)
         ;
     ");
 

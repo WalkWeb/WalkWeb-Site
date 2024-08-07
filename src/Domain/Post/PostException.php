@@ -23,4 +23,10 @@ class PostException extends Exception
     public const INVALID_IS_LIKED_DATA       = 'Incorrect "is_liked" data, expected arrays';
     public const INVALID_CREATED_AT          = 'Incorrect "created_at" parameter, it required and type string date';
     public const INVALID_UPDATED_AT          = 'Incorrect "updated_at" parameter, expected string date or empty';
+
+    // like errors
+    public const ERROR_NO_AUTH      = 'Вы не авторизованны';
+    public const ERROR_OWNER        = 'Нельзя изменять рейтинг своего поста';
+    public const ERROR_DONT_LIKE    = 'Пока вам недоступен функционал изменения рейтинга постов';
+    public const ERROR_ALREADY_LIKE = 'Вы уже изменяли рейтинг этого поста';
 }
