@@ -21,7 +21,8 @@ $routes->get('account.list', '/users/{page}', 'App\\Handler\\Account\\AccountLis
 $routes->get('character.get', '/c/{id}', 'App\\Handler\\Character\\CharacterPageHandler', ['id' => '[a-zA-Z0-9-]+']);
 
 $routes->get('post.get', '/p/{slug}', 'App\\Handler\\Post\\PostPageHandler', ['slug' => '[a-zA-Z0-9-]+']);
-$routes->post('post.get', '/post/like/{slug}', 'App\\Handler\\Post\\LikePostHandler', ['slug' => '[a-zA-Z0-9-]+']);
+$routes->post('post.like', '/post/like/{slug}', 'App\\Handler\\Post\\LikePostHandler', ['slug' => '[a-zA-Z0-9-]+']);
+$routes->post('post.dislike', '/post/dislike/{slug}', 'App\\Handler\\Post\\DislikePostHandler', ['slug' => '[a-zA-Z0-9-]+']);
 
 $routes->get('statistic', '/statistic', 'App\\Handler\\StatisticPageHandler');
 

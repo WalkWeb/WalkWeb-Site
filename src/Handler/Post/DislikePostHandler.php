@@ -11,7 +11,7 @@ use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
-class LikePostHandler extends AbstractHandler
+class DislikePostHandler extends AbstractHandler
 {
     use LikePostTrait;
 
@@ -28,10 +28,7 @@ class LikePostHandler extends AbstractHandler
             return $response;
         }
 
-        $repository->like($request->slug, $this->getUser()->getId(), 1);
-
-        // TODO Проверка необходимости изменения статуса поста
-        // TODO Добавление опыта автору посту, в случае изменения статуса поста
+        $repository->dislike($request->slug, $this->getUser()->getId(), 1);
 
         return $this->json(['success' => true]);
     }

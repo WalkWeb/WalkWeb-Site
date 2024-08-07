@@ -118,6 +118,29 @@ class PostRepository
      */
     public function like(string $slug, string $accountId, int $value): void
     {
+        $this->changeRating($slug, $accountId, $value);
+    }
+
+    /**
+     * @param string $slug
+     * @param string $accountId
+     * @param int $value
+     * @throws AppException
+     */
+    public function dislike(string $slug, string $accountId, int $value): void
+    {
+        $this->changeRating($slug, $accountId, $value, false);
+    }
+
+    /**
+     * @param string $slug
+     * @param string $accountId
+     * @param int $value
+     * @param bool $like
+     * @throws AppException
+     */
+    protected function changeRating(string $slug, string $accountId, int $value, bool $like = true): void
+    {
         $connection = $this->container->getConnectionPool()->getConnection();
 
         $connection->query(
@@ -126,16 +149,26 @@ class PostRepository
                 ['type' => 's', 'value' => Uuid::uuid4()],
                 ['type' => 's', 'value' => $accountId],
                 ['type' => 's', 'value' => $slug],
-                ['type' => 'i', 'value' => $value],
+                ['type' => 'i', 'value' => $like ? $value : -$value],
             ],
         );
 
-        $connection->query(
-            'UPDATE `posts` SET `likes` = `likes` + ? WHERE `slug` = ?',
-            [
-                ['type' => 'i', 'value' => $value],
-                ['type' => 's', 'value' => $slug],
-            ],
-        );
+        if ($like) {
+            $connection->query(
+                'UPDATE `posts` SET `likes` = `likes` + ? WHERE `slug` = ?',
+                [
+                    ['type' => 'i', 'value' => $value],
+                    ['type' => 's', 'value' => $slug],
+                ],
+            );
+        } else {
+            $connection->query(
+                'UPDATE `posts` SET `dislikes` = `dislikes` + ? WHERE `slug` = ?',
+                [
+                    ['type' => 'i', 'value' => $value],
+                    ['type' => 's', 'value' => $slug],
+                ],
+            );
+        }
     }
 }
