@@ -6,6 +6,8 @@ namespace Test\src\Domain\Post\Tag;
 
 use App\Domain\Post\Tag\TagException;
 use App\Domain\Post\Tag\TagFactory;
+use Exception;
+use Ramsey\Uuid\Uuid;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 
@@ -55,6 +57,23 @@ class TagFactoryTest extends AbstractTest
         $this->expectException(AppException::class);
         $this->expectExceptionMessage($error);
         TagFactory::create($data);
+    }
+
+    /**
+     * @dataProvider newDataProvider
+     * @param string $tagName
+     * @throws Exception
+     */
+    public function testTagFactoryCreateNewSuccess(string $tagName): void
+    {
+        $tag = TagFactory::createNew($tagName);
+
+        self::assertTrue(Uuid::isValid($tag->getId()));
+        self::assertEquals($tagName, $tag->getName());
+        self::assertTrue(mb_strlen($tag->getSlug()) > 5);
+        self::assertEquals('', $tag->getIcon());
+        self::assertEquals('', $tag->getPreviewPostId());
+        self::assertFalse($tag->isApproved());
     }
 
     /**
@@ -227,6 +246,27 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_APPROVED,
             ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function newDataProvider(): array
+    {
+        return [
+            [
+                'Программирование',
+            ],
+//            [
+//                'Programming',
+//            ],
+//            [
+//                'IT',
+//            ],
+//            [
+//                'AI',
+//            ],
         ];
     }
 }

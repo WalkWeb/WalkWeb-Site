@@ -11,6 +11,8 @@ interface TagInterface extends ArrayableInterface
     // TODO parent_id - для уже существующих тегов написанных с ошибками отображать в подсказках корректный родительский тег
     // TODO created_at
 
+    // TODO min-max length name value
+
     /**
      * Возвращает id тега
      *
