@@ -43,8 +43,8 @@ class TagFactory
     {
         return new Tag(
             Uuid::uuid4()->toString(),
-            $tag,
-            strtolower(self::transliterate($tag)) . '-' . random_int(100, 999),
+            mb_strtolower($tag),
+            mb_strtolower(self::transliterate($tag)) . '-' . random_int(100, 999),
             '',
             null,
             false

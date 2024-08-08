@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Post\Tag;
 
+use App\Domain\Post\Tag\TagFactory;
+use App\Domain\Post\Tag\TagInterface;
 use App\Domain\Post\Tag\TagRepository;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
@@ -18,7 +20,7 @@ class TagRepositoryTest extends AbstractTest
     public function testTagRepositoryGetByPostId(string $postId): void
     {
         $tags = $this->getRepository()->getByPostId($postId);
-        $data = $this->getData($postId);
+        $data = $this->getDataByPostId($postId);
 
         self::assertSameSize($tags, $data);
 
@@ -28,10 +30,47 @@ class TagRepositoryTest extends AbstractTest
             self::assertEquals($data[$i]['name'], $tag->getName());
             self::assertEquals($data[$i]['slug'], $tag->getSlug());
             self::assertEquals($data[$i]['icon'], $tag->getIcon());
-            self::assertEquals($data[$i]['preview_post_id'] ?? '', $tag->getPreviewPostId());
+            self::assertEquals($data[$i]['preview_post_id'], $tag->getPreviewPostId());
             self::assertEquals($data[$i]['approved'], $tag->isApproved());
             $i++;
         }
+    }
+
+    /**
+     * @dataProvider getByNameDataProvider
+     * @param string $name
+     * @throws AppException
+     */
+    public function testTagRepositoryGetByName(string $name): void
+    {
+        $tag = $this->getRepository()->getByName($name);
+        $data = $this->getDataByName($name);
+
+        self::assertEquals($data['id'], $tag->getId());
+        self::assertEquals($data['name'], $tag->getName());
+        self::assertEquals($data['slug'], $tag->getSlug());
+        self::assertEquals($data['icon'], $tag->getIcon());
+        self::assertEquals($data['preview_post_id'], $tag->getPreviewPostId());
+        self::assertEquals($data['approved'], $tag->isApproved());
+    }
+
+    /**
+     * @dataProvider saveDataProvider
+     * @param TagInterface $tag
+     * @throws AppException
+     */
+    public function testTagRepositorySave(TagInterface $tag): void
+    {
+        $this->getRepository()->save($tag);
+
+        $tagDb = TagFactory::create($this->getDataByName($tag->getName()));
+
+        self::assertEquals($tagDb->getId(), $tag->getId());
+        self::assertEquals($tagDb->getName(), mb_strtolower($tag->getName()));
+        self::assertEquals($tagDb->getSlug(), mb_strtolower($tag->getSlug()));
+        self::assertEquals($tagDb->getIcon(), $tag->getIcon());
+        self::assertEquals($tagDb->getPreviewPostId(), $tag->getPreviewPostId());
+        self::assertEquals($tagDb->isApproved(), $tag->isApproved());
     }
 
     /**
@@ -53,6 +92,60 @@ class TagRepositoryTest extends AbstractTest
     }
 
     /**
+     * @return array
+     */
+    public function getByNameDataProvider(): array
+    {
+        return [
+            [
+                'diablo 2',
+            ],
+            [
+                'Blizzard',
+            ],
+            [
+                'rpg',
+            ],
+            [
+                'news',
+            ],
+            [
+                'Path of exile',
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     * @throws AppException
+     */
+    public function saveDataProvider(): array
+    {
+        return [
+            [
+                TagFactory::create([
+                    'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
+                    'name'            => 'Новости',
+                    'slug'            => 'Novosti-100',
+                    'icon'            => 'icon-1.png',
+                    'preview_post_id' => null,
+                    'approved'        => 1,
+                ]),
+            ],
+            [
+                TagFactory::create([
+                    'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f11',
+                    'name'            => 'Work',
+                    'slug'            => 'Work-300',
+                    'icon'            => 'work-1.png',
+                    'preview_post_id' => '7684ad22-613b-4c65-9bad-b7dfdd394c01',
+                    'approved'        => 0,
+                ]),
+            ],
+        ];
+    }
+
+    /**
      * @return TagRepository
      * @throws AppException
      */
@@ -66,7 +159,7 @@ class TagRepositoryTest extends AbstractTest
      * @return array
      * @throws AppException
      */
-    private function getData(string $postId): array
+    private function getDataByPostId(string $postId): array
     {
         return self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT 
@@ -85,6 +178,20 @@ class TagRepositoryTest extends AbstractTest
 
                 WHERE `lk_post_tag`.`post_id` = ?',
             [['type' => 's', 'value' => $postId]],
+        );
+    }
+
+    /**
+     * @param string $name
+     * @return array
+     * @throws AppException
+     */
+    private function getDataByName(string $name): array
+    {
+        return self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT `id`, `name`, `slug`, `icon`, `preview_post_id`, `approved` FROM `post_tags` WHERE `name` = ?',
+            [['type' => 's', 'value' => $name]],
+            true
         );
     }
 }

@@ -45,11 +45,9 @@ interface TagInterface extends ArrayableInterface
      * Возвращает id поста, который отмечен как информация этого тега - любое информационное содержимое, которое будет
      * отображаться в самом начале
      *
-     * Если такого поста нет - будет возвращена пустая строка
-     *
-     * @return string
+     * @return string|null
      */
-    public function getPreviewPostId(): string;
+    public function getPreviewPostId(): ?string;
 
     /**
      * Является ли тег одобренным. Одобренные теги подставляются как подсказки (когда пользователь указывает тег).

@@ -69,7 +69,7 @@ class TagFactoryTest extends AbstractTest
         $tag = TagFactory::createNew($tagName);
 
         self::assertTrue(Uuid::isValid($tag->getId()));
-        self::assertEquals($tagName, $tag->getName());
+        self::assertEquals(mb_strtolower($tagName), $tag->getName());
         self::assertTrue(mb_strlen($tag->getSlug()) > 5);
         self::assertEquals('', $tag->getIcon());
         self::assertEquals('', $tag->getPreviewPostId());
@@ -258,15 +258,15 @@ class TagFactoryTest extends AbstractTest
             [
                 'Программирование',
             ],
-//            [
-//                'Programming',
-//            ],
-//            [
-//                'IT',
-//            ],
-//            [
-//                'AI',
-//            ],
+            [
+                'Programming',
+            ],
+            [
+                'IT',
+            ],
+            [
+                'AI',
+            ],
         ];
     }
 }

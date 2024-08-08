@@ -17,6 +17,22 @@ class TagRepository
     }
 
     /**
+     * @param string $name
+     * @return TagInterface|null
+     * @throws AppException
+     */
+    public function getByName(string $name): ?TagInterface
+    {
+        return TagFactory::create(
+            $this->container->getConnectionPool()->getConnection()->query(
+                'SELECT `id`, `name`, `slug`, `icon`, `preview_post_id`, `approved` FROM `post_tags` WHERE `name` = ?',
+                [['type' => 's', 'value' => mb_strtolower($name)]],
+                true
+            )
+        );
+    }
+
+    /**
      * @param string $postId
      * @return TagCollection
      * @throws AppException
@@ -42,6 +58,25 @@ class TagRepository
                 WHERE `lk_post_tag`.`post_id` = ?',
                 [['type' => 's', 'value' => $postId]],
             )
+        );
+    }
+
+    /**
+     * @param TagInterface $tag
+     * @throws AppException
+     */
+    public function save(TagInterface $tag): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'INSERT INTO `post_tags` (`id`, `name`, `slug`, `icon`, `preview_post_id`, `approved`) VALUES (?, ?, ?, ?, ?, ?)',
+            [
+                ['type' => 's', 'value' => $tag->getId()],
+                ['type' => 's', 'value' => mb_strtolower($tag->getName())],
+                ['type' => 's', 'value' => mb_strtolower($tag->getSlug())],
+                ['type' => 's', 'value' => $tag->getIcon()],
+                ['type' => 's', 'value' => $tag->getPreviewPostId()],
+                ['type' => 'i', 'value' => (int)$tag->isApproved()],
+            ],
         );
     }
 }

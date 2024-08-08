@@ -65,9 +65,9 @@ class Tag implements TagInterface
     /**
      * @return string
      */
-    public function getPreviewPostId(): string
+    public function getPreviewPostId(): ?string
     {
-        return $this->previewPostId ?? '';
+        return $this->previewPostId;
     }
 
     /**
