@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Post\Tag;
 
+use App\Domain\Post\DTO\CreatePostRequestFactory;
 use App\Domain\Post\Tag\TagFactory;
 use App\Domain\Post\Tag\TagInterface;
 use App\Domain\Post\Tag\TagRepository;
@@ -41,7 +42,7 @@ class TagRepositoryTest extends AbstractTest
      * @param string $name
      * @throws AppException
      */
-    public function testTagRepositoryGetByName(string $name): void
+    public function testTagRepositoryGetByNameSuccess(string $name): void
     {
         $tag = $this->getRepository()->getByName($name);
         $data = $this->getDataByName($name);
@@ -55,11 +56,19 @@ class TagRepositoryTest extends AbstractTest
     }
 
     /**
+     * @throws AppException
+     */
+    public function testTagRepositoryGetByNameNotFound(): void
+    {
+        self::assertNull($this->getRepository()->getByName('abc'));
+    }
+
+    /**
      * @dataProvider saveDataProvider
      * @param TagInterface $tag
      * @throws AppException
      */
-    public function testTagRepositorySave(TagInterface $tag): void
+    public function testTagRepositorySaveOnce(TagInterface $tag): void
     {
         $this->getRepository()->save($tag);
 
@@ -71,6 +80,41 @@ class TagRepositoryTest extends AbstractTest
         self::assertEquals($tagDb->getIcon(), $tag->getIcon());
         self::assertEquals($tagDb->getPreviewPostId(), $tag->getPreviewPostId());
         self::assertEquals($tagDb->isApproved(), $tag->isApproved());
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testTagRepositorySaveCollection(): void
+    {
+        // Вначале проверяем общее количество тегов
+        $tags = $this->getDataAllTags();
+
+        self::assertCount(5, $tags);
+
+        // Запрос на создание поста, в котором один тег новый, другой уже существующий
+        $request = CreatePostRequestFactory::create([
+            'title'   => 'title',
+            'content' => 'content',
+            'tags'    => ['News', 'Новости'],
+        ], $this->createUser());
+
+        $tagCollection = $this->getRepository()->saveCollection($request);
+
+        self::assertCount(2, $tagCollection);
+
+        // Проверяем добавленный новый тег
+        $tag = $this->getDataByName('Новости');
+
+        self::assertEquals('новости', $tag['name']);
+        self::assertEquals('', $tag['icon']);
+        self::assertEquals(null, $tag['preview_post_id']);
+        self::assertEquals(0, $tag['approved']);
+
+        // Вначале проверяем, что общее количество тегов увеличилось на 1
+        $tags = $this->getDataAllTags();
+
+        self::assertCount(6, $tags);
     }
 
     /**
@@ -192,6 +236,17 @@ class TagRepositoryTest extends AbstractTest
             'SELECT `id`, `name`, `slug`, `icon`, `preview_post_id`, `approved` FROM `post_tags` WHERE `name` = ?',
             [['type' => 's', 'value' => $name]],
             true
+        );
+    }
+
+    /**
+     * @return array
+     * @throws AppException
+     */
+    private function getDataAllTags(): array
+    {
+        return self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `post_tags`',
         );
     }
 }

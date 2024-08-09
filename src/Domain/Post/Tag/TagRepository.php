@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Post\Tag;
 
+use App\Domain\Post\DTO\CreatePostRequest;
+use Exception;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 
@@ -23,13 +25,17 @@ class TagRepository
      */
     public function getByName(string $name): ?TagInterface
     {
-        return TagFactory::create(
-            $this->container->getConnectionPool()->getConnection()->query(
-                'SELECT `id`, `name`, `slug`, `icon`, `preview_post_id`, `approved` FROM `post_tags` WHERE `name` = ?',
-                [['type' => 's', 'value' => mb_strtolower($name)]],
-                true
-            )
+        $data =             $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `id`, `name`, `slug`, `icon`, `preview_post_id`, `approved` FROM `post_tags` WHERE `name` = ?',
+            [['type' => 's', 'value' => mb_strtolower($name)]],
+            true
         );
+
+        if (!$data) {
+            return null;
+        }
+
+        return TagFactory::create($data);
     }
 
     /**
@@ -78,5 +84,28 @@ class TagRepository
                 ['type' => 'i', 'value' => (int)$tag->isApproved()],
             ],
         );
+    }
+
+    /**
+     * @param CreatePostRequest $request
+     * @return TagCollection
+     * @throws AppException
+     * @throws Exception
+     */
+    public function saveCollection(CreatePostRequest $request): TagCollection
+    {
+        $tags = new TagCollection();
+
+        foreach ($request->getTags() as $tagName) {
+            if ($tag = $this->getByName($tagName)) {
+                $tags->add($tag);
+            } else {
+                $tag = TagFactory::createNew($tagName);
+                $this->save($tag);
+                $tags->add($tag);
+            }
+        }
+
+        return $tags;
     }
 }
