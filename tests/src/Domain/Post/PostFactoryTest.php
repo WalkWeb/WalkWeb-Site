@@ -96,7 +96,8 @@ class PostFactoryTest extends AbstractTest
     public function testPostFactoryCreateNewSuccess(): void
     {
         $request = $this->createRequest();
-        $post = PostFactory::createNew($request);
+        $tags = new TagCollection();
+        $post = PostFactory::createNew($request, $tags);
 
         self::assertTrue(Uuid::isValid($post->getId()));
         self::assertTrue(mb_strlen($post->getSlug()) > 10);
@@ -115,9 +116,7 @@ class PostFactoryTest extends AbstractTest
         self::assertEquals(PostInterface::DEFAULT_PUBLISHED, $post->isPublished());
         self::assertFalse($post->isLiked());
         self::assertTrue((new DateTime())->diff($post->getCreatedAt())->s <= 1);
-
-        // TODO
-        self::assertEquals(new TagCollection(), $post->getTags());
+        self::assertEquals($tags, $post->getTags());
     }
 
     /**
@@ -136,7 +135,7 @@ class PostFactoryTest extends AbstractTest
                     'html_content'     => '<p>Post content</p>',
                     'status_id'        => PostStatusInterface::DEFAULT,
                     'likes'            => 12,
-                    'dislikes'         => -2,
+                    'dislikes'         => 2,
                     'user_reaction'    => 1,
                     'comments_count'   => 3,
                     'published'        => 1,
@@ -161,7 +160,7 @@ class PostFactoryTest extends AbstractTest
                     'html_content'     => '<p>Post content</p>',
                     'status_id'        => PostStatusInterface::SILVER,
                     'likes'            => 10,
-                    'dislikes'         => -5,
+                    'dislikes'         => 5,
                     'user_reaction'    => 0,
                     'comments_count'   => 3,
                     'published'        => 1,
@@ -186,7 +185,7 @@ class PostFactoryTest extends AbstractTest
                     'html_content'     => '<p>Post content</p>',
                     'status_id'        => PostStatusInterface::GOLD,
                     'likes'            => 1,
-                    'dislikes'         => -6,
+                    'dislikes'         => 6,
                     'user_reaction'    => -1,
                     'comments_count'   => 3,
                     'published'        => 1,

@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Post;
 
+use App\Domain\Post\PostFactory;
+use App\Domain\Post\PostInterface;
 use App\Domain\Post\PostRepository;
+use App\Domain\Post\Status\PostStatusInterface;
+use App\Domain\Post\Tag\TagCollection;
 use App\Domain\Post\Tag\TagRepository;
 use DateTime;
 use Exception;
@@ -54,6 +58,34 @@ class PostRepositoryTest extends AbstractTest
     }
 
     /**
+     * @dataProvider addDataProvider
+     * @param PostInterface $post
+     * @throws AppException
+     */
+    public function testPostRepositoryAdd(PostInterface $post): void
+    {
+        $this->getRepository()->add($post);
+
+        $data = $this->getData($post->getSlug());
+
+        self::assertEquals($post->getId(), $data['id']);
+        self::assertEquals($post->getAuthor()->getId(), $data['author_id']);
+        self::assertEquals($post->getTitle(), $data['title']);
+        self::assertEquals($post->getSlug(), $data['slug']);
+        self::assertEquals($post->getContent(), $data['content']);
+        self::assertEquals($post->getHtmlContent(), $data['html_content']);
+        self::assertEquals($post->getStatus()->getId(), $data['status_id']);
+        self::assertEquals($post->getRating()->getLikes(), $data['likes']);
+        self::assertEquals($post->getRating()->getDislikes(), $data['dislikes']);
+        self::assertEquals($post->getCommentsCount(), $data['comments_count']);
+        self::assertEquals($post->isPublished(), $data['published']);
+
+        // TODO
+        self::assertEquals(1, $data['approved']);
+        self::assertEquals(0, $data['moderated']);
+    }
+
+    /**
      * @return array
      */
     public function getSuccessDataProvider(): array
@@ -67,6 +99,62 @@ class PostRepositoryTest extends AbstractTest
             ],
             [
                 'slug-post-3-1000',
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     * @throws AppException
+     */
+    public function addDataProvider(): array
+    {
+        return [
+            [
+                PostFactory::create([
+                    'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
+                    'title'            => 'Title',
+                    'slug'             => 'title-slug',
+                    'content'          => '[p]Post content[/p]',
+                    'html_content'     => '<p>Post content</p>',
+                    'status_id'        => PostStatusInterface::DEFAULT,
+                    'likes'            => 12,
+                    'dislikes'         => 2,
+                    'user_reaction'    => 1,
+                    'comments_count'   => 3,
+                    'published'        => 1,
+                    'is_liked'         => true,
+                    'author_id'        => self::DEMO_MODERATOR,
+                    'author_name'      => 'Name',
+                    'author_avatar'    => 'avatar.png',
+                    'author_level'     => 25,
+                    'author_status_id' => 1,
+                    'created_at'       => '2019-08-12 19:05:19',
+                    'updated_at'       => null,
+                ], new TagCollection()),
+            ],
+            [
+                PostFactory::create([
+                    'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
+                    'title'            => 'Title',
+                    'slug'             => 'title-slug',
+                    'content'          => '[p]Post content[/p]',
+                    'html_content'     => '<p>Post content</p>',
+                    'status_id'        => PostStatusInterface::SILVER,
+                    'likes'            => 10,
+                    'dislikes'         => 5,
+                    'user_reaction'    => 0,
+                    'comments_count'   => 3,
+                    'published'        => 1,
+                    'is_liked'         => false,
+                    'author_id'        => self::DEMO_CHAT_ADMIN,
+                    'author_name'      => 'Name',
+                    'author_avatar'    => 'avatar.png',
+                    'author_level'     => 25,
+                    'author_status_id' => 1,
+                    'created_at'       => '2019-08-12 19:00:00',
+                    'updated_at'       => '2019-08-15 20:20:00',
+                ], new TagCollection()),
             ],
         ];
     }
@@ -103,11 +191,14 @@ class PostRepositoryTest extends AbstractTest
             `posts`.`title`,
             `posts`.`slug`,
             `posts`.`content`,
+            `posts`.`html_content`,
             `posts`.`status_id`,
             `posts`.`likes`,
             `posts`.`dislikes`,
             `posts`.`comments_count`,
             `posts`.`published`,
+            `posts`.`approved`,
+            `posts`.`moderated`,
             `posts`.`created_at`,
             `posts`.`updated_at`,
             

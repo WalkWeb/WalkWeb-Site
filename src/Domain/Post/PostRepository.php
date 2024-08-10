@@ -142,6 +142,33 @@ class PostRepository
     }
 
     /**
+     * @param PostInterface $post
+     * @throws AppException
+     */
+    public function add(PostInterface $post): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'INSERT INTO `posts` (`id`, `author_id`, `title`, `slug`, `content`, `html_content`, `status_id`, `comments_count`,
+                 `likes`, `dislikes`, `published`, `approved`, `moderated`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [
+                ['type' => 's', 'value' => $post->getId()],
+                ['type' => 's', 'value' => $post->getAuthor()->getId()],
+                ['type' => 's', 'value' => $post->getTitle()],
+                ['type' => 's', 'value' => $post->getSlug()],
+                ['type' => 's', 'value' => $post->getContent()],
+                ['type' => 's', 'value' => $post->getHtmlContent()],
+                ['type' => 's', 'value' => $post->getStatus()->getId()],
+                ['type' => 's', 'value' => $post->getCommentsCount()],
+                ['type' => 's', 'value' => $post->getRating()->getLikes()],
+                ['type' => 's', 'value' => $post->getRating()->getDislikes()],
+                ['type' => 'i', 'value' => (int)$post->isPublished()],
+                ['type' => 'i', 'value' => 1], // TODO
+                ['type' => 'i', 'value' => 0], // TODO
+            ]
+        );
+    }
+
+    /**
      * @param string $slug
      * @param string $accountId
      * @param int $value

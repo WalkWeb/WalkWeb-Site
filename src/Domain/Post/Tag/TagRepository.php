@@ -71,7 +71,7 @@ class TagRepository
      * @param TagInterface $tag
      * @throws AppException
      */
-    public function save(TagInterface $tag): void
+    public function add(TagInterface $tag): void
     {
         $this->container->getConnectionPool()->getConnection()->query(
             'INSERT INTO `post_tags` (`id`, `name`, `slug`, `icon`, `preview_post_id`, `approved`) VALUES (?, ?, ?, ?, ?, ?)',
@@ -101,7 +101,7 @@ class TagRepository
                 $tags->add($tag);
             } else {
                 $tag = TagFactory::createNew($tagName);
-                $this->save($tag);
+                $this->add($tag);
                 $tags->add($tag);
             }
         }

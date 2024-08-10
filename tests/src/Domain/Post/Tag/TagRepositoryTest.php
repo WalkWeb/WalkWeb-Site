@@ -68,9 +68,9 @@ class TagRepositoryTest extends AbstractTest
      * @param TagInterface $tag
      * @throws AppException
      */
-    public function testTagRepositorySaveOnce(TagInterface $tag): void
+    public function testTagRepositoryAdd(TagInterface $tag): void
     {
-        $this->getRepository()->save($tag);
+        $this->getRepository()->add($tag);
 
         $tagDb = TagFactory::create($this->getDataByName($tag->getName()));
 

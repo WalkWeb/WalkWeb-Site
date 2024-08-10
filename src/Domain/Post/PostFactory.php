@@ -53,15 +53,13 @@ class PostFactory
 
     /**
      * @param CreatePostRequest $request
+     * @param TagCollection $tags
      * @return PostInterface
      * @throws Exception
      */
-    public static function createNew(CreatePostRequest $request): PostInterface
+    public static function createNew(CreatePostRequest $request, TagCollection $tags): PostInterface
     {
         $slug = strtolower(self::transliterate($request->getTitle())) . '-' . random_int(10000, 99999);
-
-        // TODO
-        $tags = new TagCollection();
 
         return new Post(
             Uuid::uuid4()->toString(),

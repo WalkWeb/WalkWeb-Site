@@ -22,6 +22,7 @@ use App\Domain\Post\Tag\TagCollection;
 interface PostInterface extends ArrayableInterface
 {
     public const DEFAULT_PUBLISHED = true;
+    public const DEFAULT_APPROVED  = true;
 
     // TODO approved - одобрен ли пост для отображения (чтобы можно было включить предмодерацию публикации постов)
     // TODO moderated - проверен ли пост модератором
