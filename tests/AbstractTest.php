@@ -179,6 +179,20 @@ abstract class AbstractTest extends TestCase
     }
 
     /**
+     * @param string $json
+     * @return array
+     * @throws AppException
+     */
+    protected static function jsonDecode(string $json): array
+    {
+        try {
+            return (array)json_decode($json, false, 512, JSON_THROW_ON_ERROR);
+        } catch (Exception $e) {
+            throw new AppException($e->getMessage());
+        }
+    }
+
+    /**
      * @param string $error
      * @param Response $response
      * @throws AppException

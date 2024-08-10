@@ -58,11 +58,11 @@ function createPost() {
             if (validateFullContent(content)) {
                 $.ajax({
                     url: '/post/create',
-                    data: {title: title, text: content},
+                    data: {title: title, content: content},
                     type: 'POST',
                     success: function(data) {
-                        if (data.success === 1) {
-                            window.location.replace(window.location.protocol + '//' + document.domain + '/p/' + data.id);
+                        if (data.success === true) {
+                            window.location.replace(window.location.protocol + '//' + document.domain + '/p/' + data.slug);
                         } else {
                             createNotification(data.error);
                         }

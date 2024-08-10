@@ -76,6 +76,7 @@ use App\Domain\Auth\AuthInterface;
         <div class="row_mc0">
             <div class="news_top_line"></div>
             <div class="mr_box">
+                <div class="mr_p_c"><a href="/post/create" title="">Создать пост</a></div>
                 <div>
                     <div class="mr_tl"></div>
                     <div class="mr_tr"></div>
