@@ -2799,9 +2799,6 @@ img.i_img {
     background: none;
     box-shadow: none;
     border: 1px dashed #444;
-}
-
-#post_create_title {
     font-family: Times New Roman, sans-serif;
     font-size: 180%;
     color: #d6b885;
@@ -2820,9 +2817,6 @@ img.i_img {
     border: none;
     background: none;
     box-shadow: none;
-}
-
-.post_create_h2 {
     font-family: Times New Roman, sans-serif;
     font-size: 180%;
     line-height: 120%;

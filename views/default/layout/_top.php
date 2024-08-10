@@ -33,7 +33,7 @@ $title = $this->title ?: APP_NAME . ' — Интересное';
         </div>
         <div class="head_menu float_right">
             <ul>
-                <li><a href="#">Добавить пост</a></li>
+                <li><a href="/post/create">Добавить пост</a></li>
                 <?php
                 if (!$this->container->exist('user')) {
                     echo '<li><a href="/login">Вход</a></li>

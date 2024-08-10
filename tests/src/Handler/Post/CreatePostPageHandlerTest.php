@@ -13,29 +13,29 @@ use WalkWeb\NW\Response;
 class CreatePostPageHandlerTest extends AbstractTest
 {
     /**
-     * TODO add default view
-     *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testCreatePostPageHandlerSuccess(): void
+    public function testCreatePostPageHandlerSuccess(string $template): void
     {
         $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
         $request = new Request(['REQUEST_URI' => '/post/create'], [], [AccountInterface::AUTH_TOKEN => $token]);
-        $response = $this->createApp('inferno')->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Создание нового поста/', $response->getBody());
     }
 
     /**
-     * TODO add default view
-     *
+     * @dataProvider templateDataProvider
+     * @param string $template
      * @throws AppException
      */
-    public function testCreatePostPageHandlerNoAuth(): void
+    public function testCreatePostPageHandlerNoAuth(string $template): void
     {
         $request = new Request(['REQUEST_URI' => '/post/create']);
-        $response = $this->createApp('inferno')->handle($request);
+        $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Вход/', $response->getBody());
