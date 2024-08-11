@@ -1015,7 +1015,7 @@ class PostFactoryTest extends AbstractTest
                     'author_level'     => 25,
                     'author_status_id' => 1,
                 ],
-                PostException::INVALID_IS_LIKED_DATA,
+                PostException::INVALID_IS_LIKED,
             ],
             [
                 // is_liked некорректного типа
@@ -1040,7 +1040,7 @@ class PostFactoryTest extends AbstractTest
                     'author_status_id' => 1,
                     'is_liked'         => 123,
                 ],
-                PostException::INVALID_IS_LIKED_DATA,
+                PostException::INVALID_IS_LIKED,
             ],
 
             // Проверка валидации параметров автора сделана в AuthorFactoryTest

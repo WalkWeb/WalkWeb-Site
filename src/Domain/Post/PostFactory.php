@@ -45,7 +45,7 @@ class PostFactory
             self::int($data, 'comments_count', PostException::INVALID_COMMENTS_COUNT),
             (bool)self::int($data, 'published', PostException::INVALID_PUBLISHED),
             $tags,
-            self::bool($data, 'is_liked', PostException::INVALID_IS_LIKED_DATA),
+            self::bool($data, 'is_liked', PostException::INVALID_IS_LIKED),
             self::date($data, 'created_at', PostException::INVALID_CREATED_AT),
             self::dateOrNull($data, 'updated_at', PostException::INVALID_UPDATED_AT),
         );
