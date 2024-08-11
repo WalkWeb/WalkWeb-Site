@@ -40,4 +40,6 @@ class PostException extends Exception
     public const ERROR_ALREADY_LIKE = 'Вы уже изменяли рейтинг этого поста';
 
     public const NO_CREATE_ENERGY   = 'No energy to create post. Need %d, have %d';
+    public const ALREADY_EXIST      = 'PostCollection: post to be added already exists';
+    public const EXPECTED_ARRAY     = 'PostCollectionFactory: expected array data';
 }
