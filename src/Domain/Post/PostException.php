@@ -31,4 +31,6 @@ class PostException extends Exception
     public const ERROR_OWNER        = 'Нельзя изменять рейтинг своего поста';
     public const ERROR_DONT_LIKE    = 'Пока вам недоступен функционал изменения рейтинга постов';
     public const ERROR_ALREADY_LIKE = 'Вы уже изменяли рейтинг этого поста';
+
+    public const NO_CREATE_ENERGY   = 'No energy to create post. Need %d, have %d';
 }

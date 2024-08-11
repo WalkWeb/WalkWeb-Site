@@ -21,6 +21,8 @@ use App\Domain\Post\Tag\TagCollection;
  */
 interface PostInterface extends ArrayableInterface
 {
+    public const CREATE_ENERGY_COST = 30;
+
     public const DEFAULT_PUBLISHED = true;
     public const DEFAULT_APPROVED  = true;
 

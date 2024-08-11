@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Test\src\Handler\Post;
 
 use App\Domain\Account\AccountInterface;
+use App\Domain\Post\PostException;
 use App\Handler\Post\CreatePostHandler;
+use Exception;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
@@ -18,7 +20,7 @@ class CreatePostHandlerTest extends AbstractTest
      */
     public function testCreatePostHandlerSuccess(): void
     {
-        $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
+        $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a4';
         $request = new Request([
             'REQUEST_URI' => '/post/create', 'REQUEST_METHOD' => 'POST'],
             [
@@ -70,6 +72,32 @@ class CreatePostHandlerTest extends AbstractTest
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertJsonError(CreatePostHandler::NO_AUTH, $response);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testCreatePostHandlerNoEnergy(): void
+    {
+        $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a8';
+        $request = new Request([
+            'REQUEST_URI' => '/post/create', 'REQUEST_METHOD' => 'POST'],
+            [
+                'title'   => 'Title',
+                'content' => '[p]text text text[/p]',
+            ],
+            [AccountInterface::AUTH_TOKEN => $token]
+        );
+
+        $this->app->handle($request);
+        $this->app->handle($request);
+        $this->app->handle($request);
+        $this->app->handle($request);
+        $this->app->handle($request);
+        $response = $this->app->handle($request);
+
+        self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertJsonError(sprintf(PostException::NO_CREATE_ENERGY, 30, 0), $response);
     }
 
     /**
