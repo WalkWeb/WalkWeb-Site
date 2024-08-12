@@ -28,7 +28,6 @@ class AccountRepository
      * @param string $name
      * @param SendNoticeActionInterface $sendNoticeAction
      * @return AccountInterface
-     * @throws AccountException
      * @throws AppException
      */
     public function get(string $name, SendNoticeActionInterface $sendNoticeAction): AccountInterface
@@ -57,6 +56,8 @@ class AccountRepository
             `accounts`.`notice`, 
             `accounts`.`user_agent`, 
             `accounts`.`can_like`,
+            `accounts`.`post_count`,
+            `accounts`.`comment_count`,
             `accounts`.`created_at`, 
             `accounts`.`updated_at`,
 

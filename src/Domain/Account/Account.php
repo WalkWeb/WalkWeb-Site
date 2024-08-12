@@ -29,6 +29,8 @@ class Account implements AccountInterface
     private string $ref;
     private string $userAgent;
     private bool $canLike;
+    private int $postCount;
+    private int $commentCount;
     private ?MainCharacterInterface $mainCharacter;
     private FloorInterface $floor;
     private AccountStatus $status;
@@ -53,6 +55,8 @@ class Account implements AccountInterface
         string $ref,
         string $userAgent,
         bool $canLike,
+        int $postCount,
+        int $commentCount,
         FloorInterface $floor,
         AccountStatus $status,
         AccountGroupInterface $group,
@@ -77,6 +81,8 @@ class Account implements AccountInterface
         $this->ref = $ref;
         $this->userAgent = $userAgent;
         $this->canLike = $canLike;
+        $this->postCount = $postCount;
+        $this->commentCount = $commentCount;
         $this->floor = $floor;
         $this->status = $status;
         $this->group = $group;
@@ -221,6 +227,22 @@ class Account implements AccountInterface
     public function isCanLike(): bool
     {
         return $this->canLike;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostCount(): int
+    {
+        return $this->postCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCommentCount(): int
+    {
+        return $this->commentCount;
     }
 
     /**

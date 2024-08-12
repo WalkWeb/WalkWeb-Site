@@ -67,6 +67,8 @@ interface AccountInterface
     public function getRef(): string;
     public function getUserAgent(): string;
     public function isCanLike(): bool;
+    public function getPostCount(): int;
+    public function getCommentCount(): int;
     public function getMainCharacter(): MainCharacterInterface;
     public function getFloor(): FloorInterface;
     public function getStatus(): AccountStatus;

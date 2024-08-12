@@ -33,7 +33,6 @@ class AccountFactory
      * @param array $data
      * @param SendNoticeActionInterface $sendNoticeAction
      * @return AccountInterface
-     * @throws AccountException
      * @throws AppException
      */
     public static function create(array $data, SendNoticeActionInterface $sendNoticeAction): AccountInterface
@@ -62,6 +61,8 @@ class AccountFactory
             self::refValidate($data),
             self::userAgentValidate($data),
             (bool)self::int($data, 'can_like', AccountException::INVALID_CAN_LIKE),
+            self::int($data, 'post_count', AccountException::INVALID_POST_COUNT),
+            self::int($data, 'comment_count', AccountException::INVALID_COMMENT_COUNT),
             new Floor(self::int($data, 'floor_id', AccountException::INVALID_FLOOR_ID)),
             new AccountStatus(self::int($data, 'status_id', AccountException::INVALID_STATUS_ID)),
             new AccountGroup(self::int($data, 'group_id', AccountException::INVALID_GROUP_ID)),
@@ -101,6 +102,8 @@ class AccountFactory
             $request->getReferral(),
             $request->getUserAgent(),
             true,
+            0,
+            0,
             new Floor($request->getFloor()),
             new AccountStatus(AccountStatusInterface::ACTIVE),
             new AccountGroup(AccountGroupInterface::USER),

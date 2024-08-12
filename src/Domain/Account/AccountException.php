@@ -68,6 +68,10 @@ class AccountException extends Exception
     public const INVALID_USER_AGENT_LENGTH     = 'Incorrect parameter "user_agent", should be min-max length: ';
     // can_like
     public const INVALID_CAN_LIKE              = 'Incorrect parameter "can_like", excepted int (0 or 1)';
+    // post_count
+    public const INVALID_POST_COUNT            = 'Incorrect parameter "post_count", it required and type int';
+    // comment_count
+    public const INVALID_COMMENT_COUNT         = 'Incorrect parameter "comment_count", it required and type int';
     // floor_id
     public const INVALID_FLOOR_ID              = 'Incorrect parameter "floor_id", excepted int';
     public const UNKNOWN_FLOOR_ID              = 'Unknown account floor id';

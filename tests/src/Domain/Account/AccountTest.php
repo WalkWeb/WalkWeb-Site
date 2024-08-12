@@ -19,7 +19,7 @@ class AccountTest extends AbstractTest
     /**
      * Test on success created Account object
      *
-     * @throws AccountException
+     * @throws AppException
      */
     public function testAccountCreateSuccess(): void
     {
@@ -38,6 +38,8 @@ class AccountTest extends AbstractTest
         $ref = 'ref_link';
         $userAgent = 'undefined';
         $canLike = true;
+        $postCount = 123;
+        $commentCount = 345;
         $floor = new Floor(1);
         $status = new AccountStatus(1);
         $group = new AccountGroup(10);
@@ -61,6 +63,8 @@ class AccountTest extends AbstractTest
             $ref,
             $userAgent,
             $canLike,
+            $postCount,
+            $commentCount,
             $floor,
             $status,
             $group,
@@ -85,6 +89,8 @@ class AccountTest extends AbstractTest
         self::assertEquals($ref, $account->getRef());
         self::assertEquals($userAgent, $account->getUserAgent());
         self::assertEquals($canLike, $account->isCanLike());
+        self::assertEquals($postCount, $account->getPostCount());
+        self::assertEquals($commentCount, $account->getCommentCount());
         self::assertEquals($floor, $account->getFloor());
         self::assertEquals($status, $account->getStatus());
         self::assertEquals($group, $account->getGroup());
