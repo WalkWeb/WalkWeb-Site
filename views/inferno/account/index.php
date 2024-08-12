@@ -86,11 +86,11 @@ $this->title = APP_NAME . ' — Ваш профиль';
                         </dl>
                         <dl>
                             <dt>Количество постов:</dt>
-                            <dd>#</dd>
+                            <dd><?= $account->getPostCount() ?></dd>
                         </dl>
                         <dl>
                             <dt>Количество комментариев:</dt>
-                            <dd>#</dd>
+                            <dd><?= $account->getCommentCount() ?></dd>
                         </dl>
                         <dl>
                             <dt>Группа:</dt>
