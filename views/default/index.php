@@ -1,67 +1,42 @@
 <?php
 
+use App\Domain\Post\Collection\PostCollection;
+use WalkWeb\NW\AppException;
+
 $this->title = APP_NAME . ' — Интересное';
 
-?>
-<div class="post_box">
-    <a href="#" class="post_link">
-        Заголовок поста #1
-    </a>
-    <p>
-        <span class="post_details">Walk</span>
-        <span class="post_details">php, web, html</span>
+if (empty($posts) || !($posts instanceof PostCollection)) {
+    throw new AppException('view.index: miss or invalid $posts');
+}
 
-    </p>
-    <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-        labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-        et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-        ipsum dolor sit amet, consetetur sadipscing elitr.
-    </p>
+foreach ($posts as $post) {
 
-</div>
+    if ($post->isLiked()) {
+        $likePost = "likePost('{$post->getSlug()}', {$post->getRating()->getRating()})";
+        $dislikePost = "dislikePost('{$post->getSlug()}', {$post->getRating()->getRating()})";
+        $ratingBox = '<div id="post_rating_box_' . $post->getSlug() . '" class="post_rating_box">
+                      <div id="post_rating_up" onclick="' . $likePost . '">&#9650;</div>
+                      <div id="post_rating_value"><span class="' . $post->getRating()->getColorClass() . '">' . $post->getRating()->getRating() . '</span></div>
+                      <div id="post_rating_down" onclick="' . $dislikePost . '">&#9660;</div>
+                  </div>';
+    } else {
+        $ratingBox = '<div class="post_rating_box">
+                          <div id="post_rating_value">
+                              <span class="' . $post->getRating()->getColorClass() . '">' . $post->getRating()->getRating() . '</span>
+                          </div>
+                      </div>';
+    }
 
-<div class="post_box">
-    <a href="#" class="post_link">Очень длинный заголовок поста и еще немного текста #2</a>
-    <p>
-        <span class="post_details">Admin</span>
-        <span class="post_details">jQuery, js, Grunt</span>
-        <span class="post_details">3 Comments</span>
-    </p>
-    <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-        labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-        et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-        ipsum dolor sit amet, consetetur sadipscing elitr.
-    </p>
-</div>
-
-<div class="post_box">
-    <a href="#" class="post_link">Заголовок поста #3</a>
-    <p>
-        <span class="post_details">Admin</span>
-        <span class="post_details">jQuery, js, Grunt</span>
-        <span class="post_details">3 Comments</span>
-    </p>
-    <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-        labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-        et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-        ipsum dolor sit amet, consetetur sadipscing elitr.
-    </p>
-</div>
-
-<div class="post_box">
-    <a href="#" class="post_link">Заголовок поста #4</a>
-    <p>
-        <span class="post_details">Admin</span>
-        <span class="post_details">jQuery, js, Grunt</span>
-        <span class="post_details">3 Comments</span>
-    </p>
-    <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-        labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-        et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-        ipsum dolor sit amet, consetetur sadipscing elitr.
-    </p>
-</div>
+    echo '
+    <div class="post_box">
+        ' . $ratingBox . '
+        <a href="/p/' . $post->getSlug() . '" class="post_link">
+            ' . $post->getTitle() . '
+        </a>
+        <p>
+            <span class="post_details"><a href="/u/' . $post->getAuthorName() . '" title="" class="osnova">' . $post->getAuthorName() . '</a></span>
+            <span class="post_details">php, web, html</span>
+        </p>
+        ' . $post->getHtmlContent() . '
+    </div>';
+}

@@ -44,7 +44,7 @@ class PostListFactory
             self::validateHtmlContent($data),
             self::string($data, 'author_name', PostException::INVALID_AUTHOR_NAME),
             RatingFactory::create($data),
-            self::int($data, 'comment_count', PostException::INVALID_COMMENTS_COUNT),
+            self::int($data, 'comments_count', PostException::INVALID_COMMENTS_COUNT),
             $tags,
             self::bool($data, 'is_liked', PostException::INVALID_IS_LIKED),
             self::date($data, 'created_at', PostException::INVALID_CREATED_AT),

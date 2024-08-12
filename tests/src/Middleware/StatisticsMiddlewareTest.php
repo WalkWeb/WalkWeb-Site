@@ -26,7 +26,7 @@ class StatisticsMiddlewareTest extends AbstractTest
             self::assertEquals('Statistic', $header);
             self::assertMatchesRegularExpression('/Runtime: /', $value);
             self::assertMatchesRegularExpression('/memory cost: /', $value);
-            self::assertMatchesRegularExpression('/queries: 0/', $value);
+            self::assertMatchesRegularExpression('/queries: 1/', $value);
         }
     }
 }

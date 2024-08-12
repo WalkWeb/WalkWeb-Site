@@ -16,7 +16,11 @@ if ($post->isLiked()) {
                       <div id="post_rating_down" onclick="' . $dislikePost . '">&#9660;</div>
                   </div>';
 } else {
-    $ratingBox = '<div class="post_rating_box"><div id="post_rating_value">' . $post->getRating()->getRating() . '</div></div>';
+    $ratingBox = '<div class="post_rating_box">
+                      <div id="post_rating_value">
+                          <span class="' . $post->getRating()->getColorClass() . '">' . $post->getRating()->getRating() . '</span>
+                      </div>
+                  </div>';
 }
 
 ?>

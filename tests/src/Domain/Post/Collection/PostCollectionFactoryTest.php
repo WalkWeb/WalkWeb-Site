@@ -32,7 +32,7 @@ class PostCollectionFactoryTest extends AbstractTest
             self::assertEquals($data[$i]['slug'], $post->getSlug());
             self::assertEquals($data[$i]['html_content'], $post->getHtmlContent());
             self::assertEquals(new Rating($data[$i]['likes'], $data[$i]['dislikes'], $data[$i]['user_reaction']), $post->getRating());
-            self::assertEquals($data[$i]['comment_count'], $post->getCommentCount());
+            self::assertEquals($data[$i]['comments_count'], $post->getCommentCount());
             self::assertEquals($data[$i]['tags'], $post->getTags());
             self::assertEquals($data[$i]['is_liked'], $post->isLiked());
             self::assertEquals($data[$i]['author_name'], $post->getAuthorName());
@@ -62,15 +62,15 @@ class PostCollectionFactoryTest extends AbstractTest
             [
                 [
                     [
-                        'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
-                        'title'            => 'Title',
-                        'slug'             => 'title-slug',
-                        'html_content'     => '<p>Post content</p>',
-                        'likes'            => 12,
-                        'dislikes'         => 2,
-                        'user_reaction'    => 1,
-                        'comment_count'    => 3,
-                        'tags'             => [
+                        'id'             => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
+                        'title'          => 'Title',
+                        'slug'           => 'title-slug',
+                        'html_content'   => '<p>Post content</p>',
+                        'likes'          => 12,
+                        'dislikes'       => 2,
+                        'user_reaction'  => 1,
+                        'comments_count' => 3,
+                        'tags'           => [
                             [
                                 'slug' => 'news-100',
                                 'name' => 'news',
@@ -80,20 +80,20 @@ class PostCollectionFactoryTest extends AbstractTest
                                 'name' => 'it',
                             ],
                         ],
-                        'is_liked'         => true,
-                        'author_name'      => 'Name',
-                        'created_at'       => '2019-08-12 19:05:19',
+                        'is_liked'       => true,
+                        'author_name'    => 'Name',
+                        'created_at'     => '2019-08-12 19:05:19',
                     ],
                     [
-                        'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c6812',
-                        'title'            => 'Title 2',
-                        'slug'             => 'title-slug-2',
-                        'html_content'     => '<p>Post content</p>',
-                        'likes'            => 12,
-                        'dislikes'         => 2,
-                        'user_reaction'    => 1,
-                        'comment_count'    => 3,
-                        'tags'             => [
+                        'id'             => 'b5d82b2c-6be2-42a0-85c6-821a170c6812',
+                        'title'          => 'Title 2',
+                        'slug'           => 'title-slug-2',
+                        'html_content'   => '<p>Post content</p>',
+                        'likes'          => 12,
+                        'dislikes'       => 2,
+                        'user_reaction'  => 1,
+                        'comments_count' => 3,
+                        'tags'           => [
                             [
                                 'slug' => 'news-100',
                                 'name' => 'news',
@@ -103,9 +103,9 @@ class PostCollectionFactoryTest extends AbstractTest
                                 'name' => 'it',
                             ],
                         ],
-                        'is_liked'         => true,
-                        'author_name'      => 'Name',
-                        'created_at'       => '2019-08-12 19:05:19',
+                        'is_liked'       => true,
+                        'author_name'    => 'Name',
+                        'created_at'     => '2019-08-12 19:05:19',
                     ],
                 ],
             ],
@@ -122,15 +122,15 @@ class PostCollectionFactoryTest extends AbstractTest
             [
                 [
                     [
-                        'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
-                        'title'            => 'Title',
-                        'slug'             => 'title-slug',
-                        'html_content'     => '<p>Post content</p>',
-                        'likes'            => 12,
-                        'dislikes'         => 2,
-                        'user_reaction'    => 1,
-                        'comment_count'    => 3,
-                        'tags'             => [
+                        'id'             => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
+                        'title'          => 'Title',
+                        'slug'           => 'title-slug',
+                        'html_content'   => '<p>Post content</p>',
+                        'likes'          => 12,
+                        'dislikes'       => 2,
+                        'user_reaction'  => 1,
+                        'comments_count' => 3,
+                        'tags'           => [
                             [
                                 'slug' => 'news-100',
                                 'name' => 'news',
@@ -140,20 +140,20 @@ class PostCollectionFactoryTest extends AbstractTest
                                 'name' => 'it',
                             ],
                         ],
-                        'is_liked'         => true,
-                        'author_name'      => 'Name',
-                        'created_at'       => '2019-08-12 19:05:19',
+                        'is_liked'       => true,
+                        'author_name'    => 'Name',
+                        'created_at'     => '2019-08-12 19:05:19',
                     ],
                     [
-                        'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
-                        'title'            => 'Title 2',
-                        'slug'             => 'title-slug-2',
-                        'html_content'     => '<p>Post content</p>',
-                        'likes'            => 12,
-                        'dislikes'         => 2,
-                        'user_reaction'    => 1,
-                        'comment_count'    => 3,
-                        'tags'             => [
+                        'id'             => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
+                        'title'          => 'Title 2',
+                        'slug'           => 'title-slug-2',
+                        'html_content'   => '<p>Post content</p>',
+                        'likes'          => 12,
+                        'dislikes'       => 2,
+                        'user_reaction'  => 1,
+                        'comments_count' => 3,
+                        'tags'           => [
                             [
                                 'slug' => 'news-100',
                                 'name' => 'news',
@@ -163,9 +163,9 @@ class PostCollectionFactoryTest extends AbstractTest
                                 'name' => 'it',
                             ],
                         ],
-                        'is_liked'         => true,
-                        'author_name'      => 'Name',
-                        'created_at'       => '2019-08-12 19:05:19',
+                        'is_liked'       => true,
+                        'author_name'    => 'Name',
+                        'created_at'     => '2019-08-12 19:05:19',
                     ],
                 ],
                 PostException::ALREADY_EXIST,
@@ -175,15 +175,15 @@ class PostCollectionFactoryTest extends AbstractTest
                 [
                     'post data',
                     [
-                        'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
-                        'title'            => 'Title 2',
-                        'slug'             => 'title-slug-2',
-                        'html_content'     => '<p>Post content</p>',
-                        'likes'            => 12,
-                        'dislikes'         => 2,
-                        'user_reaction'    => 1,
-                        'comment_count'    => 3,
-                        'tags'             => [
+                        'id'             => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
+                        'title'          => 'Title 2',
+                        'slug'           => 'title-slug-2',
+                        'html_content'   => '<p>Post content</p>',
+                        'likes'          => 12,
+                        'dislikes'       => 2,
+                        'user_reaction'  => 1,
+                        'comments_count' => 3,
+                        'tags'           => [
                             [
                                 'slug' => 'news-100',
                                 'name' => 'news',
@@ -193,9 +193,9 @@ class PostCollectionFactoryTest extends AbstractTest
                                 'name' => 'it',
                             ],
                         ],
-                        'is_liked'         => true,
-                        'author_name'      => 'Name',
-                        'created_at'       => '2019-08-12 19:05:19',
+                        'is_liked'       => true,
+                        'author_name'    => 'Name',
+                        'created_at'     => '2019-08-12 19:05:19',
                     ],
                 ],
                 PostException::EXPECTED_ARRAY,

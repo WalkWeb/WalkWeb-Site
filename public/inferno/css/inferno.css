@@ -2597,6 +2597,16 @@ table.d_table {
     border-radius: 4px;
 }
 
+.post_rating_box_list {
+    position: relative;
+    float: right;
+    margin: 15px 0 10px 10px;
+    background: #251e18;
+    padding: 0 10px;
+    border: 1px solid #382c22;
+    border-radius: 4px;
+}
+
 #post_rating_up {
     height: 24px;
     text-align: center;
@@ -3074,3 +3084,86 @@ img.i_img {
 }
 
 /* Create post button end */
+
+/* Post list style start */
+
+.news_preview {
+    background:
+            url('/inferno/images/authorvleft.png') top left no-repeat,
+            url('/inferno/images/authorvright.png') top right no-repeat,
+            url('/inferno/images/bglinebottom.gif') top repeat-x,
+            url('/inferno/images/bgbottomleft.png') bottom left no-repeat,
+            url('/inferno/images/bgbottomright.gif') bottom right no-repeat,
+            url('/inferno/images/bgleft6.png') left repeat-y,
+            url('/inferno/images/bgright6.png') right repeat-y,
+            url('/inferno/images/bglinebottom.gif') bottom repeat-x,
+            url('/inferno/images/bgcenter2.jpg');
+}
+
+.news_bottom_line {
+    height: 40px;
+}
+
+.news_preview_box {
+    padding: 0 30px 40px 30px;
+}
+
+.news_preview_box h2 {
+    padding: 20px 0 0 0;
+    margin-bottom: 20px;
+}
+
+.news_preview_box p {
+    font-family: arial, sans-serif;
+    font-size: 125%;
+    color: #a9825d;
+    line-height: 125%;
+    padding: 0 0 10px 0;
+    margin: 0;
+}
+
+.news_preview_content {
+    position: relative;
+    overflow: hidden;
+    max-height: 900px;
+}
+
+.news_preview_c_b {
+    position: relative;
+    display: none;
+    height: 76px;
+    margin-top: -76px;
+    background: url('/inferno/images/bgcenter2.png') bottom repeat-x;
+
+    text-align: center;
+    color: #a9624d;
+    font-size: 160%;
+    line-height: 76px;
+}
+
+.news_preview_c_b:hover {
+    cursor: pointer;
+    color: #c9925d;
+}
+
+.news_a_line {
+    border-top: 1px solid #19130f;
+    border-bottom: 1px solid #3b2f25;
+    margin: 0 0 10px 0;
+}
+
+.news_n_date {
+    color: #836445;
+}
+
+a.news_link {
+    color: #d6b885;
+    text-decoration: none;
+}
+
+a.news_link:hover {
+    color: #5176d5;
+    text-decoration: underline;
+}
+
+/* Post list style end */

@@ -24,7 +24,7 @@ class AuthMiddlewareTest extends AbstractTest
 
         $response = $app->handle($request);
 
-        self::assertMatchesRegularExpression('/Заголовок поста #1/', $response->getBody());
+        self::assertMatchesRegularExpression('/title post 1/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
 
         self::assertTrue($app->getContainer()->exist('user'));
@@ -52,7 +52,7 @@ class AuthMiddlewareTest extends AbstractTest
 
         $response = $app->handle($request);
 
-        self::assertMatchesRegularExpression('/Заголовок поста #1/', $response->getBody());
+        self::assertMatchesRegularExpression('/title post 1/', $response->getBody());
         self::assertEquals(Response::OK, $response->getStatusCode());
 
         self::assertFalse($app->getContainer()->exist('user'));

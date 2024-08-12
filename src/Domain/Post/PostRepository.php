@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Domain\Post;
 
 use App\Domain\Auth\AuthInterface;
+use App\Domain\Post\Collection\PostCollection;
+use App\Domain\Post\Collection\PostCollectionFactory;
 use App\Domain\Post\Tag\TagRepository;
 use Ramsey\Uuid\Uuid;
 use WalkWeb\NW\AppException;
@@ -81,6 +83,78 @@ class PostRepository
         }
 
         return PostFactory::create($data, $this->tagRepository->getByPostId($data['id'] ?? ''));
+    }
+
+    /**
+     * @param int $offset
+     * @param int $limit
+     * @param AuthInterface|null $user
+     * @return PostCollection
+     * @throws AppException
+     */
+    public function getCollection(int $offset, int $limit, ?AuthInterface $user = null): PostCollection
+    {
+        if ($user === null) {
+            return $this->getCollectionNoLikes($offset, $limit);
+        }
+
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT 
+       
+                `posts`.`id`,
+                `posts`.`title`,
+                `posts`.`slug`,
+                `posts`.`html_content`,
+                `posts`.`status_id`,
+                `posts`.`likes`,
+                `posts`.`dislikes`,
+                `posts`.`comments_count`,
+                `posts`.`published`,
+                `posts`.`created_at`,
+                `posts`.`updated_at`,
+       
+                `lk_account_like_post`.`value` as `user_reaction`,
+                
+                `accounts`.`name` as `author_name`
+           
+                FROM `posts` 
+    
+                JOIN `accounts` on `posts`.`author_id` = `accounts`.`id`
+                LEFT JOIN `lk_account_like_post` ON `posts`.`slug` = `lk_account_like_post`.`post_slug` AND `lk_account_like_post`.`account_id` = ?
+    
+                WHERE `posts`.`published` = 1 
+
+                ORDER BY `created_at` DESC
+
+                LIMIT ? OFFSET ?',
+            [
+                ['type' => 's', 'value' => $user->getId()],
+                ['type' => 'i', 'value' => $limit],
+                ['type' => 'i', 'value' => $offset],
+            ],
+        );
+
+        foreach ($data as &$datum) {
+
+            $datum['author_name'] = $datum['author_name'] ?? '';
+            $datum['user_reaction'] = $datum['user_reaction'] ?? 0;
+            $isLiked = true;
+
+            if ($user->getName() === $datum['author_name']) {
+                $isLiked = false;
+            }
+
+            if ($datum['user_reaction'] !== 0) {
+                $isLiked = false;
+            }
+
+            $datum['is_liked'] = $isLiked;
+
+            // TODO Mock
+            $datum['tags'] = [];
+        }
+
+        return PostCollectionFactory::create($data);
     }
 
     /**
@@ -224,5 +298,56 @@ class PostRepository
             ],
             true
         )['value'] ?? 0;
+    }
+
+    /**
+     * @param int $offset
+     * @param int $limit
+     * @return PostCollection
+     * @throws AppException
+     */
+    private function getCollectionNoLikes(int $offset, int $limit): PostCollection
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT 
+       
+                `posts`.`id`,
+                `posts`.`title`,
+                `posts`.`slug`,
+                `posts`.`html_content`,
+                `posts`.`status_id`,
+                `posts`.`likes`,
+                `posts`.`dislikes`,
+                `posts`.`comments_count`,
+                `posts`.`published`,
+                `posts`.`created_at`,
+                `posts`.`updated_at`,
+                
+                `accounts`.`name` as `author_name`
+           
+                FROM `posts` 
+    
+                JOIN `accounts` on `posts`.`author_id` = `accounts`.`id`
+    
+                WHERE `posts`.`published` = 1 
+
+                ORDER BY `created_at` DESC
+
+                LIMIT ? OFFSET ?',
+            [
+                ['type' => 'i', 'value' => $limit],
+                ['type' => 'i', 'value' => $offset],
+            ],
+        );
+
+        foreach ($data as &$datum) {
+            $datum['is_liked'] = false;
+            $datum['user_reaction'] = 0;
+
+            // TODO Mock
+            $datum['tags'] = [];
+        }
+
+        return PostCollectionFactory::create($data);
     }
 }
