@@ -28,6 +28,8 @@ $routes->post('post.create', '/post/create', 'App\\Handler\\Post\\CreatePostHand
 
 $routes->get('statistic', '/statistic', 'App\\Handler\\StatisticPageHandler');
 
+$routes->get('functionality', '/functionality', 'App\\Handler\\Info\\FunctionalityPageHandler');
+
 // TODO temporary methods
 $routes->get('account.add.exp', '/add/exp', 'App\\Handler\\Temporary\\AddExpHandler');
 $routes->post('account.reduced.energy', '/reduced/energy', 'App\\Handler\\Temporary\\ReducedEnergyHandler');

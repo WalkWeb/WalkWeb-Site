@@ -29,7 +29,7 @@ class CreatePostHandlerTest extends AbstractTest
             ],
             [AccountInterface::AUTH_TOKEN => $token]
         );
-        $response = $this->createApp()->handle($request);
+        $response = $this->app->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertTrue(self::jsonDecode($response->getBody())['success']);

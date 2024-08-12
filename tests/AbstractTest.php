@@ -14,6 +14,7 @@ use App\Domain\Account\Notice\NoticeCollection;
 use App\Domain\Account\Notice\NoticeRepository;
 use App\Domain\Auth\AuthFactory;
 use App\Domain\Auth\AuthInterface;
+use App\Domain\Auth\AuthRepository;
 use App\Domain\Theme\Theme;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -241,5 +242,15 @@ abstract class AbstractTest extends TestCase
             $this->getSendNoticeAction(),
             new NoticeCollection(),
         );
+    }
+
+    /**
+     * @param string $token
+     * @return AuthInterface
+     * @throws AppException
+     */
+    protected function getUser(string $token): AuthInterface
+    {
+        return (new AuthRepository(self::getContainer()))->get($token, $this->getSendNoticeAction());
     }
 }

@@ -49,7 +49,7 @@ use App\Domain\Auth\AuthInterface;
         <p>
             <a href="#">О проекте WalkWeb</a><br />
             <a href="/users/1">Пользователи</a><br />
-            <a href="#">Функционал</a><br />
+            <a href="/functionality">Функционал</a><br />
             <a href="#">Правила</a>
         </p>
     </div>

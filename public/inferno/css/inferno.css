@@ -890,6 +890,14 @@ input:focus {
     color: #249922;
 }
 
+.yellow {
+    color: #efc377;
+}
+
+.orange {
+    color: #ff7f50;
+}
+
 .center {
     text-align: center;
 }

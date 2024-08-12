@@ -86,6 +86,17 @@ class PostRepositoryTest extends AbstractTest
     }
 
     /**
+     * @throws AppException
+     */
+    public function testPostRepositoryGetCollection(): void
+    {
+        $user = $this->getUser('VBajfT8P6PFtrkHhCqb7ZNwIFG45a4');
+        $posts = $this->getRepository()->getCollection(0, 10, $user);
+
+        self::assertCount(2, $posts);
+    }
+
+    /**
      * @return array
      */
     public function getSuccessDataProvider(): array

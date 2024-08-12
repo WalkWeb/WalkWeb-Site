@@ -10,6 +10,8 @@ use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
+// TODO Перенести в Info
+
 class StatisticPageHandler extends AbstractHandler
 {
     /**
