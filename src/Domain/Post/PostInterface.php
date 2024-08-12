@@ -42,7 +42,7 @@ interface PostInterface extends ArrayableInterface
     public const IMAGE_TEMPLATE = '<div class="i_box"><a href="/$1" rel="gallery" class="pirobox_gall" target="_blank" title=""><img src="/$1" alt="" class="i_img" /></a></div>';
     public const VIDEO_PREFIX   = '<div class="videocontent"><div class="youvideo"><iframe width="560" height="315" src="https://www.youtube.com/embed/';
     public const VIDEO_SUFFIX   = '" frameborder="0" allowfullscreen></iframe></div></div>';
-    public const LINE           = '<div align="center"><div class="linehere1"><div class="linehere2"></div><div class="linehere3"></div><div class="linehere4">&nbsp;</div></div></div>';
+    public const LINE           = '<div class="line_box"><div class="line_row"><div class="line_left"></div><div class="line_right"></div><div class="line_center">&nbsp;</div></div></div>';
 
     /**
      * Возвращает ID поста
