@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Handler;
+namespace App\Handler\Info;
 
 use App\Domain\Statistic\Statistic;
 use App\Domain\Statistic\StatisticRepository;
+use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
-
-// TODO Перенести в Info
 
 class StatisticPageHandler extends AbstractHandler
 {

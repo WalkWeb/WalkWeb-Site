@@ -2,6 +2,7 @@
 
 $routes = new WalkWeb\NW\Route\RouteCollection();
 
+// user
 $routes->get('home', '/', 'App\\Handler\\MainHandler');
 $routes->get('account.page', '/u/{name}', 'App\\Handler\\Account\\AccountPageHandler', ['name' => '[a-zA-Z0-9а-яА-ЯёЁ]+']);
 $routes->get('account.registration.page', '/registration/{ref}', 'App\\Handler\\Account\\AccountRegistrationPageHandler', ['ref' => '[a-z0-9]+']);
@@ -17,20 +18,21 @@ $routes->post('account.notice.close.all', '/notice/all/close', 'App\\Handler\\Ac
 $routes->get('account.banned', '/banned', 'App\\Handler\\Account\\AccountBannedPageHandler');
 $routes->get('account.profile', '/profile', 'App\\Handler\\Account\\Profile\\ProfilePageHandler');
 $routes->get('account.list', '/users/{page}', 'App\\Handler\\Account\\AccountListPageHandler', ['page' => '\d+']);
-
 $routes->get('character.get', '/c/{id}', 'App\\Handler\\Character\\CharacterPageHandler', ['id' => '[a-zA-Z0-9-]+']);
 
+// post
 $routes->get('post.get', '/p/{slug}', 'App\\Handler\\Post\\PostPageHandler', ['slug' => '[a-zA-Z0-9-]+']);
 $routes->post('post.like', '/post/like/{slug}', 'App\\Handler\\Post\\LikePostHandler', ['slug' => '[a-zA-Z0-9-]+']);
 $routes->post('post.dislike', '/post/dislike/{slug}', 'App\\Handler\\Post\\DislikePostHandler', ['slug' => '[a-zA-Z0-9-]+']);
 $routes->get('post.create', '/post/create', 'App\\Handler\\Post\\CreatePostPageHandler');
 $routes->post('post.create', '/post/create', 'App\\Handler\\Post\\CreatePostHandler');
 
-$routes->get('statistic', '/statistic', 'App\\Handler\\StatisticPageHandler');
-
+// info
+$routes->get('statistic', '/statistic', 'App\\Handler\\Info\\StatisticPageHandler');
 $routes->get('functionality', '/functionality', 'App\\Handler\\Info\\FunctionalityPageHandler');
 
-// TODO temporary methods
+// temporary methods
+// TODO delete
 $routes->get('account.add.exp', '/add/exp', 'App\\Handler\\Temporary\\AddExpHandler');
 $routes->post('account.reduced.energy', '/reduced/energy', 'App\\Handler\\Temporary\\ReducedEnergyHandler');
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\src\Handler;
+namespace Test\src\Handler\Info;
 
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
