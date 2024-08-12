@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Account\MainCharacter;
 
+use App\Domain\Account\MainCharacter\Level\LevelInterface;
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
@@ -74,20 +75,19 @@ class MainCharacterRepository
     }
 
     /**
-     * TODO save()
-     *
-     * @param MainCharacterInterface $character
+     * @param string $mainCharacterId
+     * @param LevelInterface $level
      * @throws AppException
      */
-    public function update(MainCharacterInterface $character): void
+    public function save(string $mainCharacterId, LevelInterface $level): void
     {
         $this->container->getConnectionPool()->getConnection()->query(
             'UPDATE `characters_main` SET `level` = ?, `exp` = ?, `stats_point` = ? WHERE `id` = ?',
             [
-                ['type' => 'i', 'value' => $character->getLevel()->getLevel()],
-                ['type' => 'i', 'value' => $character->getLevel()->getExp()],
-                ['type' => 'i', 'value' => $character->getLevel()->getStatPoints()],
-                ['type' => 's', 'value' => $character->getId()],
+                ['type' => 'i', 'value' => $level->getLevel()],
+                ['type' => 'i', 'value' => $level->getExp()],
+                ['type' => 'i', 'value' => $level->getStatPoints()],
+                ['type' => 's', 'value' => $mainCharacterId],
             ]
         );
     }

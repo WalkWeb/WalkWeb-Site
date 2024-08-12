@@ -35,7 +35,7 @@ class AddExpHandler extends AbstractHandler
         $character = $repository->get($user->getMainCharacterId(), $this->getSendNoticeAction());
         $character->getLevel()->addExp(self::ADD_EXP);
 
-        $repository->update($character);
+        $repository->save($character->getId(), $character->getLevel());
 
         return $this->redirect('/profile');
     }

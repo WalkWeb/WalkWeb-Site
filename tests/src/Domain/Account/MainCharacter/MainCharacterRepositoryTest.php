@@ -51,12 +51,12 @@ class MainCharacterRepositoryTest extends AbstractTest
     }
 
     /**
-     * Test on success update MainCharacter
+     * Test on success save MainCharacter
      *
      * @throws AppException
      * @throws Exception
      */
-    public function testMainCharacterRepositoryUpdateSuccess(): void
+    public function testMainCharacterRepositorySaveSuccess(): void
     {
         $mainCharacterId = '2e437627-7b06-456a-b0c6-e70150492910';
 
@@ -68,7 +68,7 @@ class MainCharacterRepositoryTest extends AbstractTest
 
         $mainCharacter->getLevel()->addExp(500);
 
-        $this->getRepository()->update($mainCharacter);
+        $this->getRepository()->save($mainCharacter->getId(), $mainCharacter->getLevel());
 
         $mainCharacter = $this->getRepository()->get($mainCharacterId, $this->getSendNoticeAction());
 
