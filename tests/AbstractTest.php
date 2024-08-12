@@ -253,4 +253,18 @@ abstract class AbstractTest extends TestCase
     {
         return (new AuthRepository(self::getContainer()))->get($token, $this->getSendNoticeAction());
     }
+
+    /**
+     * @param string $token
+     * @return array
+     * @throws AppException
+     */
+    protected function getUserData(string $token): array
+    {
+        return self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `accounts` WHERE `auth_token` = ?',
+            [['type' => 's', 'value' => $token]],
+            true
+        );
+    }
 }

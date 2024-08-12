@@ -27,6 +27,9 @@ class CreatePostHandlerTest extends AbstractTest
         // Проверка изначального опыта
         self::assertEquals(450, $user->getLevel()->getExp());
 
+        // Проверка изначального количества постов
+        self::assertEquals(0, $this->getUserData($token)['post_count']);
+
         $request = new Request([
             'REQUEST_URI' => '/post/create', 'REQUEST_METHOD' => 'POST'],
             [
@@ -44,6 +47,9 @@ class CreatePostHandlerTest extends AbstractTest
         // Проверка того, что опыт увеличился
         $user = $this->getUser($token);
         self::assertEquals(450 + PostInterface::CREATE_EXP, $user->getLevel()->getExp());
+
+        // Проверка увеличения количества постов
+        self::assertEquals(1, $this->getUserData($token)['post_count']);
     }
 
     /**

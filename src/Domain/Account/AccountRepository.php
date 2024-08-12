@@ -214,6 +214,22 @@ class AccountRepository
     }
 
     /**
+     * TODO Можно подумать о вынесении этого метода в PostRepository, чтобы ради одного метода не создавать целый объект
+     *
+     * @param string $id
+     * @throws AppException
+     */
+    public function increasePostComment(string $id): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `accounts` SET `post_count` = `post_count` + 1 WHERE `id` = ?',
+            [
+                ['type' => 's', 'value' => $id],
+            ]
+        );
+    }
+
+    /**
      * @param string $login
      * @return bool
      * @throws AppException

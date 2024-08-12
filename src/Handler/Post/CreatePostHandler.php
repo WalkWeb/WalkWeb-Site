@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler\Post;
 
+use App\Domain\Account\AccountRepository;
 use App\Domain\Account\Energy\EnergyRepository;
 use App\Domain\Account\MainCharacter\MainCharacterRepository;
 use App\Domain\Post\DTO\CreatePostRequestFactory;
@@ -56,6 +57,7 @@ class CreatePostHandler extends AbstractHandler
             $postRepository = new PostRepository($this->container);
             $energyRepository = new EnergyRepository($this->container);
             $mainRepository = new MainCharacterRepository($this->container);
+            $accountRepository = new AccountRepository($this->container);
 
             $tags = $tagRepository->saveCollection($dto);
             $post = PostFactory::createNew($dto, $tags);
@@ -67,7 +69,7 @@ class CreatePostHandler extends AbstractHandler
             $user->getLevel()->addExp(PostInterface::CREATE_EXP);
             $mainRepository->save($user->getMainCharacterId(), $user->getLevel());
 
-            // TODO Увеличение количества постов у аккаунта
+            $accountRepository->increasePostComment($user->getId());
 
             return $this->json(['success' => true, 'slug' => $post->getSlug()]);
 
