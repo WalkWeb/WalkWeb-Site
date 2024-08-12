@@ -6,6 +6,7 @@ namespace Test\src\Handler\Post;
 
 use App\Domain\Account\AccountInterface;
 use App\Domain\Post\PostException;
+use App\Domain\Post\PostInterface;
 use App\Handler\Post\CreatePostHandler;
 use Exception;
 use Test\AbstractTest;
@@ -21,6 +22,11 @@ class CreatePostHandlerTest extends AbstractTest
     public function testCreatePostHandlerSuccess(): void
     {
         $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a4';
+        $user = $this->getUser($token);
+
+        // Проверка изначального опыта
+        self::assertEquals(450, $user->getLevel()->getExp());
+
         $request = new Request([
             'REQUEST_URI' => '/post/create', 'REQUEST_METHOD' => 'POST'],
             [
@@ -34,6 +40,10 @@ class CreatePostHandlerTest extends AbstractTest
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertTrue(self::jsonDecode($response->getBody())['success']);
         self::assertIsString(self::jsonDecode($response->getBody())['slug']);
+
+        // Проверка того, что опыт увеличился
+        $user = $this->getUser($token);
+        self::assertEquals(450 + PostInterface::CREATE_EXP, $user->getLevel()->getExp());
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Handler\Post;
 
 use App\Domain\Account\Energy\EnergyRepository;
+use App\Domain\Account\MainCharacter\MainCharacterRepository;
 use App\Domain\Post\DTO\CreatePostRequestFactory;
 use App\Domain\Post\PostException;
 use App\Domain\Post\PostFactory;
@@ -54,13 +55,17 @@ class CreatePostHandler extends AbstractHandler
             $tagRepository = new TagRepository($this->container);
             $postRepository = new PostRepository($this->container);
             $energyRepository = new EnergyRepository($this->container);
+            $mainRepository = new MainCharacterRepository($this->container);
 
             $tags = $tagRepository->saveCollection($dto);
             $post = PostFactory::createNew($dto, $tags);
             $postRepository->add($post);
 
-            $user->getEnergy()->editEnergy(-30);
+            $user->getEnergy()->editEnergy(-PostInterface::CREATE_ENERGY_COST);
             $energyRepository->save($user->getEnergy());
+
+            $user->getLevel()->addExp(PostInterface::CREATE_EXP);
+            $mainRepository->save($user->getMainCharacterId(), $user->getLevel());
 
             return $this->json(['success' => true, 'slug' => $post->getSlug()]);
 
