@@ -42,7 +42,7 @@ class CreatePostHandler extends AbstractHandler
             if ($user->getEnergy()->getEnergy() < PostInterface::CREATE_ENERGY_COST) {
                 return $this->json([
                     'success' => false,
-                    'error' => sprintf(PostException::NO_CREATE_ENERGY, PostInterface::CREATE_ENERGY_COST, $user->getEnergy()->getEnergy()),
+                    'error'   => sprintf(PostException::NO_CREATE_ENERGY, PostInterface::CREATE_ENERGY_COST, $user->getEnergy()->getEnergy()),
                 ]);
             }
 
