@@ -162,3 +162,7 @@ function updatePostRating(slug, rating) {
         rating_box.innerHTML = '<div id="post_rating_value"><span class="defaultRatingColor">' + rating + '</span></div>';
     }
 }
+
+function jsonParse(data) {
+    return JSON.parse(data.replace(/\n/g, "\\n"));
+}

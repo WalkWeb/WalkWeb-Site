@@ -21,8 +21,6 @@ use WalkWeb\NW\Response;
 
 class CreatePostHandler extends AbstractHandler
 {
-    public const NO_AUTH = 'No auth';
-
     /**
      * TODO Проверка кармы
      *

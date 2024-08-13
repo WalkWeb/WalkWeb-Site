@@ -14,6 +14,7 @@ use WalkWeb\NW\Response;
 
 abstract class AbstractHandler extends \WalkWeb\NW\AbstractHandler
 {
+    public const NO_AUTH      = 'No auth';
     public const MISS_USER    = 'Miss user';
     public const INVALID_USER = 'Invalid user';
 

@@ -233,8 +233,8 @@ function addImage(url) {
         '<div class="post_n_b">\n' +
         '    <div class="post_n_b_l"></div>\n' +
         '    <div class="post_n_b_img">\n' +
-        '        <a href="/' + url + '" rel="gallery" class="pirobox_gall first" target="_blank" title="">\n' +
-        '            <img src="/' + url + '" alt="" class="i_img" />\n' +
+        '        <a href="' + url + '" rel="gallery" class="pirobox_gall first" target="_blank" title="">\n' +
+        '            <img src="' + url + '" alt="" class="i_img" />\n' +
         '        </a>\n' +
         '    </div>\n' +
         '    <div class="post_create_context" style="display: none;">[img]' + url + '[/img]</div>\n' +
@@ -368,10 +368,10 @@ function uploadFile(file, i) {
     xhr.addEventListener('readystatechange', function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             data = jsonParse(this.response);
-            if (data.success === 1) {
+            if (data.success === true) {
 
                 // Добавляем изображение на страницу
-                addImage(data.dir + data.name);
+                addImage(data.file_path);
 
                 // Обновляем поле загруженных файлов
                 upload_width = Math.round(data.upload / data.upload_max * 100);
@@ -382,7 +382,6 @@ function uploadFile(file, i) {
 
                 // Проверяем, не превышен ли лимит загруженных файлов
                 if (data.upload > data.upload_max) {
-                    console.log('Превышен лимит загруженных файлов');
                     document.getElementById('pr_upload_width').className = 'pr_upload_limit';
                     document.getElementById('post_add_content_box').innerHTML = '<div onclick="addText()">&#10010; Текст</div><div onclick="addVideo()">&#10010; Видео</div><span>&#10010; Изображение</span><div onclick="addLine()">&#10010; Линия</div>';
                 }

@@ -27,6 +27,8 @@ $routes->post('post.dislike', '/post/dislike/{slug}', 'App\\Handler\\Post\\Disli
 $routes->get('post.create', '/post/create', 'App\\Handler\\Post\\CreatePostPageHandler');
 $routes->post('post.create', '/post/create', 'App\\Handler\\Post\\CreatePostHandler');
 
+$routes->post('image.upload.json', '/image/upload/json', 'App\\Handler\\Image\\UploadImageHandler');
+
 // info
 $routes->get('statistic', '/statistic', 'App\\Handler\\Info\\StatisticPageHandler');
 $routes->get('functionality', '/functionality', 'App\\Handler\\Info\\FunctionalityPageHandler');
