@@ -8,7 +8,7 @@ use Exception;
 
 class PostException extends Exception
 {
-    public const INVALID_ID                  = 'Incorrect "id" parameter, it required and type string';
+    public const INVALID_ID                  = 'Incorrect "id" parameter, it required and type string (uuid)';
     public const INVALID_TITLE               = 'Incorrect "title" parameter, it required and type string';
     public const INVALID_TITLE_LENGTH        = 'Incorrect "title", should be min-max length: ';
     public const INVALID_SLUG                = 'Incorrect "slug" parameter, it required and type string';

@@ -10,6 +10,8 @@ use WalkWeb\NW\MySQL\ConnectionPool;
 class Version_2024_08_13_00_00_03_57
 {
     /**
+     * TODO Подумать над добавлением: title, description. Но это если захочется делать полноценные галереи
+     *
      * @param ConnectionPool $connectionPool
      * @throws AppException
      */
@@ -20,7 +22,7 @@ class Version_2024_08_13_00_00_03_57
                 `id`         VARCHAR(36) PRIMARY KEY,             
                 `account_id` VARCHAR(36) NOT NULL,               
                 `name`       VARCHAR(40) NOT NULL,                
-                `dir`        VARCHAR(100),                        
+                `file_path`  VARCHAR(255),                        
                 `size`       INT UNSIGNED NOT NULL,               
                 `width`      MEDIUMINT UNSIGNED NOT NULL,         
                 `height`     MEDIUMINT UNSIGNED NOT NULL,        
