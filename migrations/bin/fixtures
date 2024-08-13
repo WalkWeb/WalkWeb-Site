@@ -57,7 +57,7 @@ try {
         INSERT INTO `accounts` (
             `id`, `login`, `name`, `password`, `email`, `email_verified`, `reg_complete`, `auth_token`,
             `verified_token`, `ip`, `ref`, `floor_id`, `status_id`, `group_id`, `energy_id`, `chat_status_id`,
-            `upload`, `notice`, `user_agent`, `can_like`, `created_at`, `updated_at`
+            `upload`, `notice`, `user_agent`, `can_like`, `post_count`, `comment_count`, `created_at`, `updated_at`
         ) VALUES
         -- 1
         (
@@ -81,6 +81,8 @@ try {
             1,
             'undefined',
             1,
+            2,
+            0,
             '2020-12-25 11:00:00',
             '2020-12-25 11:00:00'
         ),
@@ -106,6 +108,8 @@ try {
              0,
              'undefined',
              1,
+             1,
+             0,
              '2020-12-25 12:00:00',
              '2020-12-25 12:00:00'
          ),
@@ -131,6 +135,8 @@ try {
              0,
              'undefined',
              1,
+             0,
+             0,
              '2020-12-25 13:00:00',
              '2020-12-25 13:00:00'
          ),
@@ -156,6 +162,8 @@ try {
              0,
              'undefined',
              1,
+             0,
+             0, 
              '2020-12-25 14:00:00',
              '2020-12-25 14:00:00'
          ),
@@ -181,6 +189,8 @@ try {
              0,
              'undefined',
              1,
+             0,
+             0,
              '2020-12-25 15:00:00',
              '2020-12-25 15:00:00'
          ),
@@ -206,6 +216,8 @@ try {
              0,
              'undefined',
              1,
+             0,
+             0,
              '2020-12-25 16:00:00',
              '2020-12-25 16:00:00'
          ),
@@ -231,6 +243,8 @@ try {
              0,
              'undefined',
              1,
+             0,
+             0,
              '2020-12-25 17:00:00',
              '2020-12-25 17:00:00'
          ),
@@ -256,6 +270,8 @@ try {
              0,
              'undefined',
              1,
+             0,
+             0,
              '2020-12-25 18:00:00',
              '2020-12-25 18:00:00'
          ),
@@ -281,6 +297,8 @@ try {
              0,
              'undefined',
              1,
+             0,
+             0,
              '2020-12-25 19:00:00',
              '2020-12-25 19:00:00'
          ),
@@ -306,6 +324,8 @@ try {
              0,
              'undefined',
              0,
+             0,
+             0,
              '2020-12-25 20:00:00',
              '2020-12-25 20:00:00'
          ),
@@ -330,6 +350,8 @@ try {
             1,
             'undefined',
             1,
+            0,
+            0,
             '2020-12-25 21:00:00',
             '2020-12-25 21:00:00'
         );
@@ -503,6 +525,12 @@ try {
     $db->query("
         INSERT INTO `lk_account_like_post` (`id`, `account_id`, `post_slug`, `value`) VALUES
         ('b98dd4ea-1488-4dc1-8049-ad27e079cbad', '1e3a3b27-12da-4c73-a3a7-b83092705b04', 'slug-post-1-1000', 1)
+        ;
+    ");
+
+    $db->query("
+        INSERT INTO `images` (`id`, `account_id`, `name`, `file_path`, `size`, `width`, `height`, `created_at`) VALUES
+        ('11874a06-f9d6-4d98-ac0c-14f7c4678801', '1e3a3b27-12da-4c73-a3a7-b83092705b01', 'image_example', 'file_path/image_example.png', 12345, 1000, 800, '2024-06-15 16:30:00')
         ;
     ");
 
