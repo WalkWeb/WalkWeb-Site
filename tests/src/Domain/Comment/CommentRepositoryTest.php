@@ -56,6 +56,16 @@ class CommentRepositoryTest extends AbstractTest
     }
 
     /**
+     * @throws AppException
+     */
+    public function testCommentRepositoryGetCollection(): void
+    {
+        $comments = $this->getRepository()->getByPost('7684ad22-613b-4c65-9bad-b7dfdd394c02');
+
+        self::assertCount(3, $comments);
+    }
+    
+    /**
      * @return array
      */
     public function getSuccessDataProvider(): array
