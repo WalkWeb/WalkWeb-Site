@@ -9,6 +9,8 @@ use Exception;
 class CommentException extends Exception
 {
     public const NO_USER_AND_GUEST_NAME = 'No user or guest name';
+    public const ALREADY_EXIST          = 'CommentCollection: post to be added already exists';
+    public const EXPECTED_ARRAY         = 'CommentCollection: expected array data';
 
     public const INVALID_ID            = 'Incorrect "id" parameter, it required and type string (uuid)';
     public const INVALID_POST_ID       = 'Incorrect "post_id" parameter, it required and type string (uuid)';

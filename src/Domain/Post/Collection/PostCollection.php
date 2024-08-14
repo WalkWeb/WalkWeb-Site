@@ -7,7 +7,6 @@ namespace App\Domain\Post\Collection;
 use App\Domain\Post\PostException;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Traits\CollectionTrait;
-
 use Countable;
 use Iterator;
 
