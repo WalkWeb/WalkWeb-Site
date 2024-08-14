@@ -534,6 +534,14 @@ try {
         ;
     ");
 
+    $db->query("
+        INSERT INTO `post_comments` (`id`, `post_id`, `author_id`, `guest_name`, `message`, `approved`, `parent_id`, `level`, `likes`, `dislikes`, `created_at`, `updated_at`) VALUES
+        ('7d78bc1d-9919-4c56-bc89-f4bd2e433401', '7684ad22-613b-4c65-9bad-b7dfdd394c02', '1e3a3b27-12da-4c73-a3a7-b83092705b01', '', 'comment 1', 1, null, 0, 0, 0, '2024-06-16 16:00:00', '2024-06-16 16:00:00'),
+        ('7d78bc1d-9919-4c56-bc89-f4bd2e433402', '7684ad22-613b-4c65-9bad-b7dfdd394c02', '1e3a3b27-12da-4c73-a3a7-b83092705b04', '', 'comment 2', 1, null, 0, 3, 1, '2024-06-17 16:00:00', '2024-06-17 16:00:00'),
+        ('7d78bc1d-9919-4c56-bc89-f4bd2e433403', '7684ad22-613b-4c65-9bad-b7dfdd394c02', null, 'guest name', 'comment 3', 1, null, 0, 0, 1, '2024-06-18 16:00:00', '2024-06-18 16:00:00')
+        ;
+    ");
+
     echo "Fixtures Load\n";
     return 0;
 } catch (Exception $e) {

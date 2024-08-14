@@ -21,7 +21,7 @@ class Version_2024_08_13_23_48_33_37
                 `post_id`    VARCHAR(36) NOT NULL,
                 `author_id`  VARCHAR(36),      
                 `guest_name` VARCHAR(50) NOT NULL DEFAULT \'\',
-                `comment`    TEXT NOT NULL,
+                `message`    TEXT NOT NULL,
                 `approved`   TINYINT UNSIGNED NOT NULL,
                 `parent_id`  VARCHAR(36),
                 `level`      TINYINT UNSIGNED NOT NULL,
