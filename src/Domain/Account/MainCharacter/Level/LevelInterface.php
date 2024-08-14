@@ -41,6 +41,8 @@ interface LevelInterface
     /**
      * Возвращает значение уровня
      *
+     * TODO Rename getValue()
+     *
      * @return int
      */
     public function getLevel(): int;

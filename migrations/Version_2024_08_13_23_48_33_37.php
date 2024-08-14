@@ -20,6 +20,7 @@ class Version_2024_08_13_23_48_33_37
                 `id`         VARCHAR(36) PRIMARY KEY,       
                 `post_id`    VARCHAR(36) NOT NULL,
                 `author_id`  VARCHAR(36),      
+                `guest_name` VARCHAR(50) NOT NULL DEFAULT \'\',
                 `comment`    TEXT NOT NULL,
                 `approved`   TINYINT UNSIGNED NOT NULL,
                 `parent_id`  VARCHAR(36),
