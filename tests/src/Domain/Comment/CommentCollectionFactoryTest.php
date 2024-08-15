@@ -6,7 +6,6 @@ namespace Test\src\Domain\Comment;
 
 use App\Domain\Comment\CommentCollectionFactory;
 use App\Domain\Comment\CommentException;
-use App\Domain\Comment\CommentInterface;
 use DateTime;
 use Exception;
 use Test\AbstractTest;
@@ -45,7 +44,7 @@ class CommentCollectionFactoryTest extends AbstractTest
             } else {
                 self::assertNull($comment->getAuthorId());
                 self::assertEquals($data[$i]['guest_name'], $comment->getAuthorName());
-                self::assertEquals(CommentInterface::DEFAULT_AVATAR, $comment->getAuthorAvatar());
+                self::assertEquals(DEFAULT_AVATAR, $comment->getAuthorAvatar());
                 self::assertEquals(0, $comment->getAuthorLevel());
             }
 

@@ -75,3 +75,6 @@ define('ENERGY_RESTORE', 60);
 
 /** Максимальное количество игровых персонажей по умолчанию */
 define('MAX_CHARACTERS', 10);
+
+/** Аватар по умолчанию (для комментариев от незарегистрированных пользователей) */
+define('DEFAULT_AVATAR', '/img/avatars/game_avatar.png');

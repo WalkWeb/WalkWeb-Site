@@ -32,7 +32,7 @@ class CommentFactory
         $authorAvatar = self::stringOrNull($data, 'author_avatar', CommentException::INVALID_AUTHOR_AVATAR);
 
         if ($authorAvatar === null) {
-            $authorAvatar = CommentInterface::DEFAULT_AVATAR;
+            $authorAvatar = DEFAULT_AVATAR;
         }
 
         $authorLevel = self::intOrNull($data, 'author_level', CommentException::INVALID_AUTHOR_LEVEL);
@@ -88,7 +88,7 @@ class CommentFactory
             $postId,
             $user ? $user->getId() : null,
             $user ? $user->getName() : $guestName,
-            $user ? $user->getAvatar() : Comment::DEFAULT_AVATAR,
+            $user ? $user->getAvatar() : DEFAULT_AVATAR,
             $user ? $user->getLevel()->getLevel() : 0,
             $message,
             false,

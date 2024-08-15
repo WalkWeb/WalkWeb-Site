@@ -99,7 +99,9 @@ class CommentRepository
             LEFT JOIN `characters` ON `accounts`.`character_id` = `characters`.`id`
             LEFT JOIN `avatars` ON `characters`.`avatar_id` = `avatars`.`id`
                                  
-            WHERE `post_comments`.`post_id` = ?',
+            WHERE `post_comments`.`post_id` = ?
+            
+            ORDER BY `post_comments`.`created_at` DESC',
             [['type' => 's', 'value' => $postId]],
         );
 

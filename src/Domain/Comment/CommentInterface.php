@@ -9,8 +9,6 @@ use DateTimeInterface;
 
 interface CommentInterface
 {
-    public const DEFAULT_AVATAR = '';
-
     // TODO min-max value
 
     public function getId(): string;

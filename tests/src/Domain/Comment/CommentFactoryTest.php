@@ -6,7 +6,6 @@ namespace Test\src\Domain\Comment;
 
 use App\Domain\Comment\CommentException;
 use App\Domain\Comment\CommentFactory;
-use App\Domain\Comment\CommentInterface;
 use App\Domain\Post\Rating\Rating;
 use DateTime;
 use Exception;
@@ -43,7 +42,7 @@ class CommentFactoryTest extends AbstractTest
         } else {
             self::assertNull($comment->getAuthorId());
             self::assertEquals($data['guest_name'], $comment->getAuthorName());
-            self::assertEquals(CommentInterface::DEFAULT_AVATAR, $comment->getAuthorAvatar());
+            self::assertEquals(DEFAULT_AVATAR, $comment->getAuthorAvatar());
             self::assertEquals(0, $comment->getAuthorLevel());
         }
 
@@ -120,7 +119,7 @@ class CommentFactoryTest extends AbstractTest
         self::assertEquals($postId, $comment->getPostId());
         self::assertEquals(null, $comment->getAuthorId());
         self::assertEquals($guestName, $comment->getAuthorName());
-        self::assertEquals(CommentInterface::DEFAULT_AVATAR, $comment->getAuthorAvatar());
+        self::assertEquals(DEFAULT_AVATAR, $comment->getAuthorAvatar());
         self::assertEquals(0, $comment->getAuthorLevel());
         self::assertEquals($message, $comment->getMessage());
         self::assertFalse($comment->isApproved());

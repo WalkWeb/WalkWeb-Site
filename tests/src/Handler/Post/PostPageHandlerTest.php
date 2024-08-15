@@ -19,11 +19,12 @@ class PostPageHandlerTest extends AbstractTest
      */
     public function testPostPageHandlerUnauthorizedSuccess(string $template): void
     {
-        $request = new Request(['REQUEST_URI' => '/p/slug-post-1-1000']);
+        $request = new Request(['REQUEST_URI' => '/p/slug-post-2-1000']);
         $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
-        self::assertMatchesRegularExpression('/title post 1/', $response->getBody());
+        self::assertMatchesRegularExpression('/title post 2/', $response->getBody());
+        self::assertMatchesRegularExpression('/comment 3/', $response->getBody());
 
         // view like icon
         self::assertMatchesRegularExpression('/9650/', $response->getBody());
