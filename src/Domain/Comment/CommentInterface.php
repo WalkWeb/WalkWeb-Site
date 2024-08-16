@@ -9,6 +9,9 @@ use DateTimeInterface;
 
 interface CommentInterface
 {
+    public const CREATE_ENERGY_COST = 5;
+    public const CREATE_EXP         = 5;
+
     // TODO min-max value
 
     public function getId(): string;

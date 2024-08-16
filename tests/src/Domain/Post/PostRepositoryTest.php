@@ -97,6 +97,22 @@ class PostRepositoryTest extends AbstractTest
     }
 
     /**
+     * @throws AppException
+     */
+    public function testPostRepositoryGetIdBySlugSuccess(): void
+    {
+        self::assertEquals('7684ad22-613b-4c65-9bad-b7dfdd394c01', $this->getRepository()->getIdBySlug('slug-post-1-1000'));
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testPostRepositoryGetIdBySlugNotFound(): void
+    {
+        self::assertNull($this->getRepository()->getIdBySlug('slug-123-1-12312'));
+    }
+
+    /**
      * @return array
      */
     public function getSuccessDataProvider(): array

@@ -6,7 +6,6 @@ namespace App\Handler\Post;
 
 use App\Domain\Comment\CommentCollection;
 use App\Domain\Comment\CommentRepository;
-use App\Domain\Post\PostInterface;
 use App\Domain\Post\PostRepository;
 use App\Handler\AbstractHandler;
 use DateTimeInterface;
@@ -49,7 +48,11 @@ class PostPageHandler extends AbstractHandler
 
         $this->title = htmlspecialchars($post->getTitle()) . ' | ' . APP_NAME;
 
-        return $this->render('post/index', ['post' => $post, 'comments' => $comments]);
+        return $this->render('post/index', [
+            'post'     => $post,
+            'comments' => $comments,
+            'auth'     => $this->container->exist('user'),
+        ]);
     }
 
     /**

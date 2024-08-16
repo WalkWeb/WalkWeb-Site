@@ -3206,6 +3206,7 @@ a.news_link:hover {
     font-size: 120%;
     color: #a9825d;
     line-height: 125%;
+    width: 100%;
 }
 
 .comment_form_box textarea:focus {
@@ -3321,7 +3322,7 @@ a.news_link:hover {
     color: #d6b885;
     text-decoration: none;
     display: inline-block;
-    max-width: 100px;
+    max-width: 108px;
     overflow: hidden;
 }
 

@@ -28,6 +28,15 @@ if ($post->isLiked()) {
                   </div>';
 }
 
+if (isset($auth) && $auth === true) {
+    $onclick = "addComment('{$post->getSlug()}')";
+    $form = '<textarea rows="5" cols="50" class="input_text" name="comment" placeholder="" id="comment_content"></textarea>
+             <input type="submit" class="input_submit" id="create_comment_button" onclick="' . $onclick . '" value="Добавить" />
+             <p id="create_comment_button_message"></p>';
+} else {
+    $form = '<p class="center"> Чтобы оставлять комментарии необходимо <a href="/login" class="osnova">войти</a> или <a href="/registration" class="osnova">зарегистрироваться</a></p>';
+}
+
 ?>
 
 <div class="row_mc1" style="margin-top: -20px;">
@@ -85,16 +94,14 @@ if ($post->isLiked()) {
 <div class="row_com">
     <div id="comment_box">
         <?php
-        foreach ($comments as $comment) {
-
-            if ($comment->getAuthorId()) {
-                $author = '<a href="/u/' . $comment->getAuthorName() . '" title="" class="cm_author_a">' . $comment->getAuthorName() . '</a>
-                           <span class="cm_lvl">' . $comment->getAuthorLevel() . '</span>';
-            } else {
-                $author = '<span class="cm_author_guest">' . $comment->getAuthorName() . ' (guest)</span>';
-            }
-
-            echo '
+        if (count($comments) > 0) {
+            foreach ($comments as $comment) {
+                if ($comment->getAuthorId()) {
+                    $author = '<a href="/u/' . $comment->getAuthorName() . '" title="" class="cm_author_a">' . $comment->getAuthorName() . '</a> <span class="cm_lvl">' . $comment->getAuthorLevel() . '</span>';
+                } else {
+                    $author = '<span class="cm_author_guest">' . $comment->getAuthorName() . ' (guest)</span>';
+                }
+                echo '
             <div class="cm_con">
                 <div class="cm_con_left">
                     <div style="background-image: url(' . $comment->getAuthorAvatar() . ');" class="cm_ava"></div>
@@ -105,12 +112,18 @@ if ($post->isLiked()) {
                     <div class="cm_comment">' . $comment->getMessage() . '</div>
                 </div>
             </div>';
+            }
+
+            echo '<p id="no_comment_rvd" class="center" style="display: none;">Комментариев нет</p>';
+
+        } else {
+            echo '<p id="no_comment_rvd" class="center">Комментариев нет</p>';
         }
         ?>
     </div>
-    <div class="comment_form_box">
-        <!-- TODO Form add comment -->
-    </div>
+    <div class="comment_form_box"><?= $form ?></div>
 </div>
 
 <div class="newdiv_mc12"></div>
+
+<script src="/js/post.js?v=1.00"></script>

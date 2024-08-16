@@ -29,6 +29,9 @@ $routes->post('post.create', '/post/create', 'App\\Handler\\Post\\CreatePostHand
 
 $routes->post('image.upload.json', '/image/upload/json', 'App\\Handler\\Image\\UploadImageHandler');
 
+$routes->post('comment.create', '/comment/create', 'App\\Handler\\Comment\\CreateCommentHandler');
+
+
 // info
 $routes->get('statistic', '/statistic', 'App\\Handler\\Info\\StatisticPageHandler');
 $routes->get('functionality', '/functionality', 'App\\Handler\\Info\\FunctionalityPageHandler');

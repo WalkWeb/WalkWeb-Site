@@ -166,3 +166,9 @@ function updatePostRating(slug, rating) {
 function jsonParse(data) {
     return JSON.parse(data.replace(/\n/g, "\\n"));
 }
+
+function updateLevel(level, expAtLvl, expToLvl, expWidth) {
+    document.getElementById('auth_exp_width').style.width = expWidth + '%';
+    document.getElementById('auth_exp_at_lvl').innerHTML = expAtLvl;
+    document.getElementById('auth_exp_to_lvl').innerHTML = expToLvl;
+}

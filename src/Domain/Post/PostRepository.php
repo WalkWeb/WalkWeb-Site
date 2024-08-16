@@ -244,6 +244,26 @@ class PostRepository
 
     /**
      * @param string $slug
+     * @return string|null
+     * @throws AppException
+     */
+    public function getIdBySlug(string $slug): ?string
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `id` FROM `posts` WHERE `slug` = ?',
+            [['type' => 's', 'value' => $slug]],
+            true
+        );
+
+        if (!$data || !array_key_exists('id', $data) || !is_string($data['id'])) {
+            return null;
+        }
+
+        return $data['id'];
+    }
+
+    /**
+     * @param string $slug
      * @param string $accountId
      * @param int $value
      * @param bool $like

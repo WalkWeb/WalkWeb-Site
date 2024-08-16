@@ -112,4 +112,29 @@ class CommentRepository
 
         return CommentCollectionFactory::create($data);
     }
+
+    /**
+     * @param CommentInterface $comment
+     * @throws AppException
+     */
+    public function add(CommentInterface $comment): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'INSERT INTO `post_comments` (`id`, `post_id`, `author_id`, `message`, `approved`, `parent_id`, `level`, 
+                 `likes`, `dislikes`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [
+                ['type' => 's', 'value' => $comment->getId()],
+                ['type' => 's', 'value' => $comment->getPostId()],
+                ['type' => 's', 'value' => $comment->getAuthorId()],
+                ['type' => 's', 'value' => $comment->getMessage()],
+                ['type' => 'i', 'value' => (int)$comment->isApproved()],
+                ['type' => 's', 'value' => $comment->getParentId()],
+                ['type' => 'i', 'value' => $comment->getLevel()],
+                ['type' => 'i', 'value' => $comment->getRating()->getLikes()],
+                ['type' => 'i', 'value' => $comment->getRating()->getDislikes()],
+                ['type' => 's', 'value' => $comment->getCreatedAt()->format('Y-m-d H:i:s')],
+                ['type' => 's', 'value' => $comment->getUpdatedAt()->format('Y-m-d H:i:s')],
+            ]
+        );
+    }
 }

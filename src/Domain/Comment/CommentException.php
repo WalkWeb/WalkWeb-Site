@@ -25,4 +25,9 @@ class CommentException extends Exception
     public const INVALID_LEVEL         = 'Incorrect "level" parameter, it required and type int';
     public const INVALID_CREATED_AT    = 'Incorrect "created_at" parameter, it required and type string date';
     public const INVALID_UPDATED_AT    = 'Incorrect "updated_at" parameter, it required and type string date';
+
+    // CreateCommentRequest
+    public const INVALID_POST_SLUG     = 'Incorrect "post_slug" parameter, it required and type string';
+
+    public const NO_CREATE_ENERGY      = 'No energy to create comment. Need %d, have %d';
 }

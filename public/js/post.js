@@ -3,6 +3,11 @@ let create_post_energy = 30;
 let video_id = 1;
 let row_content = 2;
 
+let create_comment_mode = true;
+let create_comment_energy = 5;
+let comment_min_length = 5;
+let comment_max_length = 2000;
+
 document.addEventListener("DOMContentLoaded", checkCreatePostEnergy);
 document.addEventListener("DOMContentLoaded", addPasteEvent);
 
@@ -397,3 +402,172 @@ function uploadFile(file, i) {
     formData.append('file', file);
     xhr.send(formData);
 }
+
+/**
+ * Проверяет необходимое количество энергии для написания комментария
+ */
+function checkCreateCommentEnergy() {
+    let create_comment_button = document.getElementById('create_comment_button');
+    let create_comment_button_message = document.getElementById('create_comment_button_message');
+
+    if (energy < create_comment_energy && create_comment_mode === true) {
+        create_comment_mode = false;
+        create_comment_button.setAttribute('disabled', 'disabled');
+        create_comment_button_message.innerHTML = 'Недостаточно энергии для написания комментария';
+    }
+    if (energy >= create_comment_energy && create_comment_mode === false) {
+        create_comment_mode = true;
+        create_comment_button.removeAttribute('disabled');
+        create_comment_button_message.innerHTML = '';
+    }
+}
+
+/**
+ * Запускаем проверку на возможность создания комментария при загрузке страницы
+ */
+document.addEventListener("DOMContentLoaded", checkCreateCommentEnergy);
+
+/**
+ * Обрабатывает добавление нового комментария, и добавляет комментарий на страницу без обновления страницы
+ *
+ * @param postSlug
+ */
+function addComment(postSlug) {
+    let comment_content = document.getElementById('comment_content');
+
+    if (comment_content.value.length >= comment_min_length && comment_content.value.length <= comment_max_length) {
+        $.ajax({
+            url: '/comment/create',
+            data: {post_slug: postSlug, message: comment_content.value},
+            type: 'POST',
+            success: function(data) {
+                if (data.success === true) {
+                    let comment_box = document.getElementById('comment_box');
+                    let comment = createComment(data)
+                    comment_box.prepend(comment);
+
+                    comment_content.value = '';
+                    editEnergy(create_comment_energy);
+                    checkCreateCommentEnergy();
+                    updateLevel(data.level, data.exp_at_lvl, data.exp_to_lvl, data.exp_width);
+                    document.getElementById('no_comment_rvd').style.display = 'none';
+
+                } else {
+                    createNotification(data.error);
+                }
+            },
+            error: function() {
+                alert('Ошибка! Пожалуйста, обновите страницу!');
+            }
+        });
+    }
+
+    if (comment_content.value.length < comment_min_length) {
+        createNotification('Комментарий слишком короткий. Минимальное количество символов в комментарии: ' + comment_min_length);
+    }
+
+    if (comment_content.value.length > comment_max_length) {
+        createNotification('Комментарий слишком длинный. Максимальное количество символов в комментарии: ' + comment_max_length);
+    }
+}
+
+function createComment(data) {
+    let cm_con = createElement('div', null, 'cm_con');
+    let cm_con_left = createElement('div', cm_con, 'cm_con_left');
+    let cm_ava = createElement('div', cm_con_left, 'cm_ava');
+    cm_ava.style.backgroundImage = "url('" + data.avatar + "')";
+    let cm_author = createElement('div', cm_con_left, 'cm_author');
+    cm_author.innerHTML = '<a href="/u/' + data.name + '" title="" class="cm_author_a">' + data.name + '</a> <span class="cm_lvl">' + data.level + '</span>';
+    let cm_con_cent = createElement('div', cm_con, 'cm_con_cent');
+    let cm_date = createElement('div', cm_con_cent, 'cm_date');
+    cm_date.innerHTML = '<abbr title="">только что</abbr>';
+    let cm_comment = createElement('div', cm_con_cent, 'cm_comment');
+    cm_comment.innerHTML = data.message;
+
+    return cm_con;
+}
+
+function createElement(type, parent, className, idName) {
+    let element = document.createElement(type);
+    if (className) {
+        element.setAttribute('class', className);
+    }
+    if (idName) {
+        element.setAttribute('id', idName);
+    }
+    if (parent) {
+        parent.appendChild(element);
+    }
+
+    return element;
+}
+
+/**
+ * Обрабатывает запрос на «лайк» комментария
+ *
+ * @param id
+ * @param rating
+ */
+function likeComment(id, rating) {
+    $.ajax({
+        url: '/comment/like/' + id,
+        type: 'POST',
+        success: function(data) {
+            if (data.success === true) {
+                rating++;
+                updateCommentRating(id, rating);
+            } else {
+                createNotification(data.error);
+            }
+        },
+        error: function(){
+            alert('Ошибка! Пожалуйста, обновите страницу!');
+        }
+    });
+}
+
+/**
+ * Обрабатывает запрос на «дизлайк» комментария
+ *
+ * @param id
+ * @param rating
+ */
+function dislikeComment(id, rating) {
+    $.ajax({
+        url: '/comment/dislike/' + id,
+        type: 'POST',
+        success: function(data) {
+            if (data.success === 1) {
+                rating--;
+                updateCommentRating(id, rating);
+            } else {
+                createNotification(data.error);
+            }
+        },
+        error: function(){
+            alert('Ошибка! Пожалуйста, обновите страницу!');
+        }
+    });
+}
+
+/**
+ * Обновляет отображение рейтинга комментария
+ *
+ * @param id
+ * @param rating
+ */
+function updateCommentRating(id, rating) {
+    let rating_box = document.getElementById('com_v_' + id);
+
+    if (rating > 0) {
+        rating_box.innerHTML = '<div class="cm_rt_def"></div><div class="cm_rt green">' + rating + '</div><div class="cm_rt_def"></div>';
+    }
+    if (rating < 0) {
+        rating_box.innerHTML = '<div class="cm_rt_def"></div><div class="cm_rt red">' + rating + '</div><div class="cm_rt_def"></div>';
+    }
+    if (rating === 0) {
+        rating_box.innerHTML = '<div class="cm_rt_def"></div><div class="cm_rt">' + rating + '</div><div class="cm_rt_def"></div>';
+    }
+}
+
+

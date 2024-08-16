@@ -70,4 +70,4 @@ if (empty($user) || !($user instanceof AuthInterface)) {
 
 <p id="create_post_button_message"></p>
 
-<script src="/js/post.js?v=1.46"></script>
+<script src="/js/post.js?v=1.00"></script>
