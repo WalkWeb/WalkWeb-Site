@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Comment;
 
+use Ramsey\Uuid\Uuid;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 
@@ -135,6 +136,83 @@ class CommentRepository
                 ['type' => 's', 'value' => $comment->getCreatedAt()->format('Y-m-d H:i:s')],
                 ['type' => 's', 'value' => $comment->getUpdatedAt()->format('Y-m-d H:i:s')],
             ]
+        );
+    }
+
+    /**
+     * @param string $commentId
+     * @param string $accountId
+     * @param int $value
+     * @throws AppException
+     */
+    public function like(string $commentId, string $accountId, int $value): void
+    {
+        $this->changeRating($commentId, $accountId, $value);
+    }
+
+    /**
+     * @param string $id
+     * @param string $accountId
+     * @return bool
+     * @throws AppException
+     */
+    public function isOwner(string $id, string $accountId): bool
+    {
+        return (bool)$this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `id` FROM `post_comments` WHERE `author_id` = ? AND `id` = ?',
+            [
+                ['type' => 's', 'value' => $accountId],
+                ['type' => 's', 'value' => $id],
+            ],
+            true
+        );
+    }
+
+    /**
+     * @param string $id
+     * @param string $accountId
+     * @return bool
+     * @throws AppException
+     */
+    public function existLiked(string $id, string $accountId): bool
+    {
+        return (bool)$this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `id` FROM `lk_account_like_comment` WHERE `account_id` = ? AND `comment_id` = ?',
+            [
+                ['type' => 's', 'value' => $accountId],
+                ['type' => 's', 'value' => $id],
+            ],
+            true
+        );
+    }
+
+    /**
+     * @param string $id
+     * @param string $accountId
+     * @param int $value
+     * @param bool $like
+     * @throws AppException
+     */
+    private function changeRating(string $id, string $accountId, int $value, bool $like = true): void
+    {
+        $connection = $this->container->getConnectionPool()->getConnection();
+
+        $connection->query(
+            'INSERT INTO `lk_account_like_comment` (`id`, `account_id`, `comment_id`, `value`) VALUES (?, ?, ?, ?)',
+            [
+                ['type' => 's', 'value' => Uuid::uuid4()->toString()],
+                ['type' => 's', 'value' => $accountId],
+                ['type' => 's', 'value' => $id],
+                ['type' => 'i', 'value' => $like ? $value : -$value],
+            ],
+        );
+
+        $connection->query(
+            'UPDATE `post_comments` SET `likes` = `likes` + ? WHERE `id` = ?',
+            [
+                ['type' => 'i', 'value' => $value],
+                ['type' => 's', 'value' => $id],
+            ],
         );
     }
 }

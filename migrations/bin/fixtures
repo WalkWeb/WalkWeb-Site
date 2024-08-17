@@ -560,6 +560,12 @@ try {
         ;
     ");
 
+    $db->query("
+        INSERT INTO `lk_account_like_comment` (`id`, `account_id`, `comment_id`, `value`) VALUES
+        ('c389f554-fc40-486e-bed8-4680bcb09601', '1e3a3b27-12da-4c73-a3a7-b83092705b01', '7d78bc1d-9919-4c56-bc89-f4bd2e433402', 1)
+        ;
+    ");
+
     echo "Fixtures Load\n";
     return 0;
 } catch (Exception $e) {

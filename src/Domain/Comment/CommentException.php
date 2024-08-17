@@ -30,4 +30,9 @@ class CommentException extends Exception
     public const INVALID_POST_SLUG     = 'Incorrect "post_slug" parameter, it required and type string';
 
     public const NO_CREATE_ENERGY      = 'No energy to create comment. Need %d, have %d';
+
+    public const ERROR_NO_AUTH         = 'Изменять рейтинг комментариев могут только зарегистрированные и авторизованные пользователи.<br /><br /><a href="/registration/main">Зарегистрироваться</a> / <a href="/login">Войти</a>';
+    public const ERROR_DONT_LIKE       = 'Пока вам недоступен функционал изменения рейтинга комментариев';
+    public const ERROR_OWNER           = 'Нельзя изменять рейтинг своего комментария';
+    public const ERROR_ALREADY_LIKE    = 'Вы уже изменяли рейтинг этого комментария';
 }

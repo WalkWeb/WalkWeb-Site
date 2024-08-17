@@ -30,6 +30,7 @@ $routes->post('post.create', '/post/create', 'App\\Handler\\Post\\CreatePostHand
 $routes->post('image.upload.json', '/image/upload/json', 'App\\Handler\\Image\\UploadImageHandler');
 
 $routes->post('comment.create', '/comment/create', 'App\\Handler\\Comment\\CreateCommentHandler');
+$routes->post('comment.like', '/comment/like/{id}', 'App\\Handler\\Comment\\LikeCommentHandler', ['id' => '[a-zA-Z0-9-]+']);
 
 
 // info

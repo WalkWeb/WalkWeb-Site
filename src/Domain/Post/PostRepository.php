@@ -184,13 +184,13 @@ class PostRepository
     public function existLiked(string $slug, string $accountId): bool
     {
         return (bool)$this->container->getConnectionPool()->getConnection()->query(
-                'SELECT `id` FROM `lk_account_like_post` WHERE `account_id` = ? AND `post_slug` = ?',
-                [
-                    ['type' => 's', 'value' => $accountId],
-                    ['type' => 's', 'value' => $slug],
-                ],
-                true
-            );
+            'SELECT `id` FROM `lk_account_like_post` WHERE `account_id` = ? AND `post_slug` = ?',
+            [
+                ['type' => 's', 'value' => $accountId],
+                ['type' => 's', 'value' => $slug],
+            ],
+            true
+        );
     }
 
     /**
@@ -281,14 +281,14 @@ class PostRepository
      * @param bool $like
      * @throws AppException
      */
-    protected function changeRating(string $slug, string $accountId, int $value, bool $like = true): void
+    private function changeRating(string $slug, string $accountId, int $value, bool $like = true): void
     {
         $connection = $this->container->getConnectionPool()->getConnection();
 
         $connection->query(
             'INSERT INTO `lk_account_like_post` (`id`, `account_id`, `post_slug`, `value`) VALUES (?, ?, ?, ?)',
             [
-                ['type' => 's', 'value' => Uuid::uuid4()],
+                ['type' => 's', 'value' => Uuid::uuid4()->toString()],
                 ['type' => 's', 'value' => $accountId],
                 ['type' => 's', 'value' => $slug],
                 ['type' => 'i', 'value' => $like ? $value : -$value],
@@ -323,13 +323,13 @@ class PostRepository
     private function getUserReaction(string $slug, AuthInterface $user): int
     {
         return $this->container->getConnectionPool()->getConnection()->query(
-            'SELECT `value` FROM `lk_account_like_post` WHERE `account_id` = ? AND `post_slug` = ?',
-            [
-                ['type' => 's', 'value' => $user->getId()],
-                ['type' => 's', 'value' => $slug],
-            ],
-            true
-        )['value'] ?? 0;
+                'SELECT `value` FROM `lk_account_like_post` WHERE `account_id` = ? AND `post_slug` = ?',
+                [
+                    ['type' => 's', 'value' => $user->getId()],
+                    ['type' => 's', 'value' => $slug],
+                ],
+                true
+            )['value'] ?? 0;
     }
 
     /**
