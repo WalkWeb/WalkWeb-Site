@@ -31,7 +31,7 @@ $routes->post('image.upload.json', '/image/upload/json', 'App\\Handler\\Image\\U
 
 $routes->post('comment.create', '/comment/create', 'App\\Handler\\Comment\\CreateCommentHandler');
 $routes->post('comment.like', '/comment/like/{id}', 'App\\Handler\\Comment\\LikeCommentHandler', ['id' => '[a-zA-Z0-9-]+']);
-
+$routes->post('comment.dislike', '/comment/dislike/{id}', 'App\\Handler\\Comment\\DislikeCommentHandler', ['id' => '[a-zA-Z0-9-]+']);
 
 // info
 $routes->get('statistic', '/statistic', 'App\\Handler\\Info\\StatisticPageHandler');

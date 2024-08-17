@@ -151,6 +151,17 @@ class CommentRepository
     }
 
     /**
+     * @param string $commentId
+     * @param string $accountId
+     * @param int $value
+     * @throws AppException
+     */
+    public function dislike(string $commentId, string $accountId, int $value): void
+    {
+        $this->changeRating($commentId, $accountId, $value, false);
+    }
+
+    /**
      * @param string $id
      * @param string $accountId
      * @return bool
@@ -207,12 +218,22 @@ class CommentRepository
             ],
         );
 
-        $connection->query(
-            'UPDATE `post_comments` SET `likes` = `likes` + ? WHERE `id` = ?',
-            [
-                ['type' => 'i', 'value' => $value],
-                ['type' => 's', 'value' => $id],
-            ],
-        );
+        if ($like) {
+            $connection->query(
+                'UPDATE `post_comments` SET `likes` = `likes` + ? WHERE `id` = ?',
+                [
+                    ['type' => 'i', 'value' => $value],
+                    ['type' => 's', 'value' => $id],
+                ],
+            );
+        } else {
+            $connection->query(
+                'UPDATE `post_comments` SET `dislikes` = `dislikes` + ? WHERE `id` = ?',
+                [
+                    ['type' => 'i', 'value' => $value],
+                    ['type' => 's', 'value' => $id],
+                ],
+            );
+        }
     }
 }
