@@ -19,6 +19,7 @@ class Comment implements CommentInterface
     private bool $approved;
     private ?string $parentId;
     private int $level;
+    private bool $isLiked;
     private RatingInterface $rating;
     private DateTimeInterface $createdAt;
     private DateTimeInterface $updatedAt;
@@ -34,6 +35,7 @@ class Comment implements CommentInterface
         bool $approved,
         ?string $parentId,
         int $level,
+        bool $isLiked,
         RatingInterface $rating,
         DateTimeInterface $createdAt,
         DateTimeInterface $updatedAt
@@ -49,6 +51,7 @@ class Comment implements CommentInterface
         $this->approved = $approved;
         $this->parentId = $parentId;
         $this->level = $level;
+        $this->isLiked = $isLiked;
         $this->rating = $rating;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
@@ -132,6 +135,14 @@ class Comment implements CommentInterface
     public function getLevel(): int
     {
         return $this->level;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLiked(): bool
+    {
+        return $this->isLiked;
     }
 
     /**

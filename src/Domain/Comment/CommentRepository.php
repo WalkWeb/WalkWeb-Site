@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Comment;
 
+use App\Domain\Auth\AuthInterface;
 use Ramsey\Uuid\Uuid;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
@@ -62,17 +63,23 @@ class CommentRepository
 
         // TODO Mock
         $data['user_reaction'] = 0;
+        $data['is_liked'] = false;
 
         return CommentFactory::create($data);
     }
 
     /**
      * @param string $postId
+     * @param AuthInterface|null $user
      * @return CommentCollection
      * @throws AppException
      */
-    public function getByPost(string $postId): CommentCollection
+    public function getByPost(string $postId, ?AuthInterface $user = null): CommentCollection
     {
+        if ($user === null) {
+            return $this->getCollectionNoLikes($postId);
+        }
+
         $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT 
 
@@ -86,6 +93,7 @@ class CommentRepository
             `post_comments`.`level`,
             `post_comments`.`likes`,
             `post_comments`.`dislikes`,
+            `lk`.`value` as `user_reaction`,
             `post_comments`.`created_at`,
             `post_comments`.`updated_at`,
 
@@ -99,6 +107,7 @@ class CommentRepository
             LEFT JOIN `characters_main` ON `accounts`.`main_character_id` = `characters_main`.`id`
             LEFT JOIN `characters` ON `accounts`.`character_id` = `characters`.`id`
             LEFT JOIN `avatars` ON `characters`.`avatar_id` = `avatars`.`id`
+            LEFT JOIN `lk_account_like_comment` lk ON `accounts`.`id` = `lk`.`account_id` AND `post_comments`.`id` = `lk`.`comment_id`
                                  
             WHERE `post_comments`.`post_id` = ?
             
@@ -107,6 +116,18 @@ class CommentRepository
         );
 
         foreach ($data as &$datum) {
+            $isLiked = true;
+
+            if ($user->getId() === $datum['author_id']) {
+                $isLiked = false;
+            }
+
+            if ($datum['user_reaction'] !== 0) {
+                $isLiked = false;
+            }
+
+            $datum['is_liked'] = $isLiked;
+
             // TODO Mock
             $datum['user_reaction'] = 0;
         }
@@ -235,5 +256,53 @@ class CommentRepository
                 ],
             );
         }
+    }
+
+    /**
+     * @param string $postId
+     * @return CommentCollection
+     * @throws AppException
+     */
+    private function getCollectionNoLikes(string $postId): CommentCollection
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT 
+
+            `post_comments`.`id`,
+            `post_comments`.`post_id`,
+            `post_comments`.`author_id`,
+            `post_comments`.`guest_name`,
+            `post_comments`.`message`,
+            `post_comments`.`approved`,
+            `post_comments`.`parent_id`,
+            `post_comments`.`level`,
+            `post_comments`.`likes`,
+            `post_comments`.`dislikes`,
+            `post_comments`.`created_at`,
+            `post_comments`.`updated_at`,
+
+            `accounts`.`name` as `author_name`,
+            `avatars`.`origin_url` as `author_avatar`,
+            `characters_main`.`level` as `author_level`
+       
+            FROM `post_comments` 
+
+            LEFT JOIN `accounts` ON `accounts`.`id` = `post_comments`.`author_id`
+            LEFT JOIN `characters_main` ON `accounts`.`main_character_id` = `characters_main`.`id`
+            LEFT JOIN `characters` ON `accounts`.`character_id` = `characters`.`id`
+            LEFT JOIN `avatars` ON `characters`.`avatar_id` = `avatars`.`id`
+                                 
+            WHERE `post_comments`.`post_id` = ?
+            
+            ORDER BY `post_comments`.`created_at` DESC',
+            [['type' => 's', 'value' => $postId]],
+        );
+
+        foreach ($data as &$datum) {
+            $datum['is_liked'] = false;
+            $datum['user_reaction'] = 0;
+        }
+
+        return CommentCollectionFactory::create($data);
     }
 }

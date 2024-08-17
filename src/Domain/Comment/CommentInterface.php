@@ -24,6 +24,7 @@ interface CommentInterface
     public function isApproved(): bool;
     public function getParentId(): ?string;
     public function getLevel(): int;
+    public function isLiked(): bool;
     public function getRating(): RatingInterface;
     public function getCreatedAt(): DateTimeInterface;
     public function getUpdatedAt(): DateTimeInterface;

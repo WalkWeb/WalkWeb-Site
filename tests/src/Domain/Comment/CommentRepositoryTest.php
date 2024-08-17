@@ -57,13 +57,24 @@ class CommentRepositoryTest extends AbstractTest
     /**
      * @throws AppException
      */
-    public function testCommentRepositoryGetCollection(): void
+    public function testCommentRepositoryGetCollectionNoAuth(): void
     {
         $comments = $this->getRepository()->getByPost('7684ad22-613b-4c65-9bad-b7dfdd394c02');
 
         self::assertCount(3, $comments);
     }
-    
+
+    /**
+     * @throws AppException
+     */
+    public function testCommentRepositoryGetCollectionAuth(): void
+    {
+        $user = $this->getUser('VBajfT8P6PFtrkHhCqb7ZNwIFG45a1');
+        $comments = $this->getRepository()->getByPost('7684ad22-613b-4c65-9bad-b7dfdd394c02', $user);
+
+        self::assertCount(3, $comments);
+    }
+
     /**
      * @return array
      */

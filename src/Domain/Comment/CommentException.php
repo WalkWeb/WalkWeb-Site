@@ -23,6 +23,7 @@ class CommentException extends Exception
     public const INVALID_APPROVED      = 'Incorrect "approved" parameter, it required and type int';
     public const INVALID_PARENT_ID     = 'Incorrect "parent_id" parameter, it required and type string (uuid) or null';
     public const INVALID_LEVEL         = 'Incorrect "level" parameter, it required and type int';
+    public const INVALID_IS_LIKED      = 'Incorrect "is_liked" parameter, it required and type bool';
     public const INVALID_CREATED_AT    = 'Incorrect "created_at" parameter, it required and type string date';
     public const INVALID_UPDATED_AT    = 'Incorrect "updated_at" parameter, it required and type string date';
 
