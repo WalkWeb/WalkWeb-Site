@@ -50,17 +50,17 @@ if (isset($auth) && $auth === true) {
 <hr>
 
 <div class="tag_container">
-<?php
-foreach ($post->getTags() as $tag) {
-    echo '
+    <?php
+    foreach ($post->getTags() as $tag) {
+        echo '
     <div class="tag_box">
         <p><a href="#">
             <img src="' . $tag->getIcon() . '" alt="" class="see_also_img"><br>
             ' . $tag->getName() . '</a>
         </p>
     </div>';
-}
-?>
+    }
+    ?>
 </div>
 
 <hr>
@@ -89,16 +89,33 @@ foreach ($post->getTags() as $tag) {
                         $link = '';
                     }
 
+                    if ($comment->isLiked()) {
+                        $likePost = "likeComment('{$comment->getId()}', {$comment->getRating()->getRating()})";
+                        $dislikePost = "dislikeComment('{$comment->getId()}', {$comment->getRating()->getRating()})";
+                        $ratingBox = '<div id="com_' . $comment->getId() . '" class="cm_con_right">
+                          <div class="cm_rating_up" onclick="' . $likePost . '">&#9650;</div>
+                          <div class="cm_rating_value"><span class="' . $comment->getRating()->getColorClass() . '">' . $comment->getRating()->getRating() . '</span></div>
+                          <div class="cm_rating_down" onclick="' . $dislikePost . '">&#9660;</div>
+                      </div>';
+                    } else {
+                        $ratingBox = '<div class="cm_con_right">
+                          <div class="cm_rating_value">
+                              <span class="' . $comment->getRating()->getColorClass() . '">' . $comment->getRating()->getRating() . '</span>
+                          </div>
+                      </div>';
+                    }
+
                     echo '<div class="cm_con">
-                      <div class="cm_con_left">
-                          <div class="cm_ava" style="background-image: url(' . $comment->getAuthorAvatar() . ');">' . $link . '</div>
-                          <div class="cm_author">' . $author . '</div>
-                      </div>
-                      <div class="cm_con_cent">
-                          <div class="cm_date"><abbr title="' . $comment->getCreatedAt()->format('Y-m-d H:i:s') . '"><span class="cm_date">' . $this->getCreatedAtEasyData($comment->getCreatedAt()) . '</span></abbr></div>
-                          <div class="cm_comment">' . $comment->getMessage() . '</div>
-                      </div>
-                  </div>';
+                              <div class="cm_con_left">
+                                  <div class="cm_ava" style="background-image: url(' . $comment->getAuthorAvatar() . ');">' . $link . '</div>
+                                  <div class="cm_author">' . $author . '</div>
+                              </div>
+                              <div class="cm_con_cent">
+                                  ' . $ratingBox . '
+                                  <div class="cm_date"><abbr title="' . $comment->getCreatedAt()->format('Y-m-d H:i:s') . '">' . $this->getCreatedAtEasyData($comment->getCreatedAt()) . '</abbr></div>
+                                  <div class="cm_comment">' . $comment->getMessage() . '</div>
+                              </div>
+                          </div>';
                 }
 
                 echo '<p id="no_comment_rvd" class="center" style="display: none;">Комментариев нет</p>';
@@ -107,10 +124,12 @@ foreach ($post->getTags() as $tag) {
                 echo '<p id="no_comment_rvd" class="center">Комментариев нет</p>';
             }
             ?>
+
+            <?= $form ?>
         </div>
     </div>
 </div>
 
-<?= $form ?>
+
 
 <script src="/js/post.js?v=1.00"></script>

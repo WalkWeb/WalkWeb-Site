@@ -447,7 +447,7 @@ function addComment(postSlug) {
                     comment_box.prepend(comment);
 
                     comment_content.value = '';
-                    editEnergy(create_comment_energy);
+                    editEnergy(-create_comment_energy);
                     checkCreateCommentEnergy();
                     updateLevel(data.level, data.exp_at_lvl, data.exp_to_lvl, data.exp_width);
                     document.getElementById('no_comment_rvd').style.display = 'none';

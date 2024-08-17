@@ -784,7 +784,9 @@ td.avatar {
     line-height: 40px;
 }
 
-.defaultRatingColor {}
+.defaultRatingColor {
+    color: #666;
+}
 
 .positiveRatingColor {
     color: #247722;
@@ -1093,7 +1095,7 @@ td.avatar {
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
     font-size: 140%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .cm_con {
@@ -1149,13 +1151,54 @@ td.avatar {
 }
 
 .cm_add {
-    max-width: 90%;
+    max-width: 94%;
     min-height: 100px;
     margin: 0 auto 20px auto;
 }
 
 .cm_form {
     text-align: center;
+}
+
+.cm_con_right {
+    position: relative;
+    float: right;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    margin-right: 12px;
+    color: #333;
+}
+
+.cm_rating_value {
+    height: 30px;
+    text-align: center;
+    font-size: 100%;
+    line-height: 30px;
+    padding: 0 10px;
+}
+
+.cm_rating_up {
+    height: 20px;
+    text-align: center;
+    font-size: 110%;
+    line-height: 20px;
+}
+
+.cm_rating_up:hover {
+    color: #282;
+    cursor: pointer;
+}
+
+.cm_rating_down {
+    height: 20px;
+    text-align: center;
+    font-size: 110%;
+    line-height: 15px;
+}
+
+.cm_rating_down:hover {
+    color: #f22;
+    cursor: pointer;
 }
 
 /* Comment style end */
