@@ -25,9 +25,48 @@ class StatisticRepository
     public function getTotalUser(): int
     {
         return $this->container->getConnectionPool()->getConnection()->query(
-            'SELECT count(`id`) as `count` FROM `accounts`',
-            [],
-            true
-        )['count'] ?? 0;
+                'SELECT count(`id`) as `count` FROM `accounts`',
+                [],
+                true
+            )['count'] ?? 0;
+    }
+
+    /**
+     * @return int
+     * @throws AppException
+     */
+    public function getTotalPost(): int
+    {
+        return $this->container->getConnectionPool()->getConnection()->query(
+                'SELECT count(`id`) as `count` FROM `posts`',
+                [],
+                true
+            )['count'] ?? 0;
+    }
+
+    /**
+     * @return int
+     * @throws AppException
+     */
+    public function getTotalComments(): int
+    {
+        return $this->container->getConnectionPool()->getConnection()->query(
+                'SELECT count(`id`) as `count` FROM `post_comments`',
+                [],
+                true
+            )['count'] ?? 0;
+    }
+
+    /**
+     * @return int
+     * @throws AppException
+     */
+    public function getTotalTags(): int
+    {
+        return $this->container->getConnectionPool()->getConnection()->query(
+                'SELECT count(`id`) as `count` FROM `post_tags`',
+                [],
+                true
+            )['count'] ?? 0;
     }
 }

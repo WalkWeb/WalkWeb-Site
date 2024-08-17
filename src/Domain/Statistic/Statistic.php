@@ -19,8 +19,35 @@ class Statistic implements StatisticInterface
      * @return int
      * @throws AppException
      */
-    public function getTotalUser(): int
+    public function getTotalUsers(): int
     {
         return $this->repository->getTotalUser();
+    }
+
+    /**
+     * @return int
+     * @throws AppException
+     */
+    public function getTotalPosts(): int
+    {
+        return $this->repository->getTotalPost();
+    }
+
+    /**
+     * @return int
+     * @throws AppException
+     */
+    public function getTotalComments(): int
+    {
+        return $this->repository->getTotalComments();
+    }
+
+    /**
+     * @return int
+     * @throws AppException
+     */
+    public function getTotalTags(): int
+    {
+        return $this->repository->getTotalTags();
     }
 }

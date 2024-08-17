@@ -6,5 +6,8 @@ namespace App\Domain\Statistic;
 
 interface StatisticInterface
 {
-    public function getTotalUser(): int;
+    public function getTotalUsers(): int;
+    public function getTotalPosts(): int;
+    public function getTotalComments(): int;
+    public function getTotalTags(): int;
 }

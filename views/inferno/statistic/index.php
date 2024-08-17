@@ -9,6 +9,12 @@ if (empty($statistic) || !($statistic instanceof StatisticInterface)) {
     throw new AppException('Statistic page: miss $statistic');
 }
 
+$totalUsers = $statistic->getTotalUsers();
+$totalPosts = $statistic->getTotalPosts();
+$totalComments = $statistic->getTotalComments();
+$postOnUser = $totalUsers > 0 ? round($totalPosts / $totalUsers, 2) : 0;
+$commentOnUser = $totalUsers > 0 ? round($totalComments / $totalUsers, 2) : 0;
+
 ?>
 
 <h1><?= $this->title ?></h1>
@@ -17,22 +23,22 @@ if (empty($statistic) || !($statistic instanceof StatisticInterface)) {
 
 <ul>
     <li>
-        Пользователей: <?= $statistic->getTotalUser() ?>
+        Пользователей: <?= $totalUsers ?>
     </li>
     <li>
         Средний уровень: #
     </li>
     <li>
-        Общее количество постов: #
+        Общее количество постов: <?= $totalPosts ?>
     </li>
     <li>
-        Общее количество комментариев: #
+        Общее количество комментариев: <?= $totalComments ?>
     </li>
     <li>
-        Среднее количество постов на один аккаунт: #
+        Среднее количество постов на одного пользователя: <?= $postOnUser ?>
     </li>
     <li>
-        Среднее количество комментариев на один аккаунт: #
+        Среднее количество комментариев на одного пользователя: <?= $commentOnUser ?>
     </li>
     <li>
         Последний зарегистрированный: #
