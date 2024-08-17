@@ -263,6 +263,18 @@ class PostRepository
     }
 
     /**
+     * @param string $id
+     * @throws AppException
+     */
+    public function increaseCommentsCount(string $id): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `posts` SET `comments_count` = `comments_count` + 1 WHERE `id` = ?',
+            [['type' => 's', 'value' => $id]],
+        );
+    }
+
+    /**
      * @param string $slug
      * @param string $accountId
      * @param int $value

@@ -67,6 +67,8 @@ class CreateCommentHandler extends AbstractHandler
             $user->getLevel()->addExp(CommentInterface::CREATE_EXP);
             $mainRepository->save($user->getMainCharacterId(), $user->getLevel());
 
+            $postRepository->increaseCommentsCount($postId);
+
             // TODO Увеличение количества комментариев у юзера
 
             return $this->json([

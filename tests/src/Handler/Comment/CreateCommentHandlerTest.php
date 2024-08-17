@@ -7,6 +7,8 @@ namespace Test\src\Handler\Comment;
 use App\Domain\Account\AccountInterface;
 use App\Domain\Comment\CommentException;
 use App\Domain\Comment\CommentInterface;
+use App\Domain\Post\PostInterface;
+use App\Domain\Post\PostRepository;
 use App\Handler\Comment\CreateCommentHandler;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
@@ -26,6 +28,9 @@ class CreateCommentHandlerTest extends AbstractTest
 
         // Проверка изначального опыта
         self::assertEquals(450, $user->getLevel()->getExp());
+
+        // Проверка изначального количества комментариев у поста
+        self::assertEquals(0, $this->getPost($postSlug)->getCommentsCount());
 
         $request = new Request([
             'REQUEST_URI' => '/comment/create', 'REQUEST_METHOD' => 'POST'],
@@ -53,6 +58,9 @@ class CreateCommentHandlerTest extends AbstractTest
         // Проверка обновленного опыта
         $user = $this->getUser($token);
         self::assertEquals(450 + CommentInterface::CREATE_EXP, $user->getLevel()->getExp());
+
+        // Проверка обновленного количества комментариев у поста
+        self::assertEquals(1, $this->getPost($postSlug)->getCommentsCount());
     }
 
     /**
@@ -139,5 +147,15 @@ class CreateCommentHandlerTest extends AbstractTest
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertJsonError('No energy to create comment. Need 5, have 0', $response);
+    }
+
+    /**
+     * @param string $slug
+     * @return PostInterface
+     * @throws AppException
+     */
+    private function getPost(string $slug): PostInterface
+    {
+        return (new PostRepository(self::getContainer()))->get($slug);
     }
 }
