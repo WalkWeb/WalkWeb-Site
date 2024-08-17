@@ -30,7 +30,7 @@ foreach ($posts as $post) {
     echo '<div class="news_preview">
             <div class="news_preview_box">
                 <div class="news_preview_content">
-                    <div class="post_r_box" id="post_rating_box_' . $post->getSlug() . '">' . $ratingBox . '</div>
+                    ' . $ratingBox . '
                     <h2><a href="/p/' . $post->getSlug() . '" title="" class="news_link">' . $post->getTitle() . '</a></h2>
                     ' . $post->getHtmlContent() . '
                 </div><div class="news_preview_c_b">Показать полностью</div>

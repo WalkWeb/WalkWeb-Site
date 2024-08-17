@@ -91,9 +91,9 @@ class PostRepositoryTest extends AbstractTest
     public function testPostRepositoryGetCollection(): void
     {
         $user = $this->getUser('VBajfT8P6PFtrkHhCqb7ZNwIFG45a4');
-        $posts = $this->getRepository()->getCollection(0, 10, $user);
+        $posts = $this->getRepository()->getCollection(0, 20, $user);
 
-        self::assertCount(2, $posts);
+        self::assertCount(11, $posts);
     }
 
     /**
