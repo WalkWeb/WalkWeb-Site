@@ -473,16 +473,16 @@ function addComment(postSlug) {
 
 function createComment(data) {
     let cm_con = createElement('div', null, 'cm_con');
-    let cm_con_left = createElement('div', cm_con, 'cm_con_left');
-    let cm_ava = createElement('div', cm_con_left, 'cm_ava');
-    cm_ava.style.backgroundImage = "url('" + data.avatar + "')";
-    let cm_author = createElement('div', cm_con_left, 'cm_author');
-    cm_author.innerHTML = '<a href="/u/' + data.name + '" title="" class="cm_author_a">' + data.name + '</a> <span class="cm_lvl">' + data.level + '</span>';
-    let cm_con_cent = createElement('div', cm_con, 'cm_con_cent');
-    let cm_date = createElement('div', cm_con_cent, 'cm_date');
-    cm_date.innerHTML = '<abbr title="">только что</abbr>';
-    let cm_comment = createElement('div', cm_con_cent, 'cm_comment');
-    cm_comment.innerHTML = data.message;
+
+    cm_con.innerHTML =
+        '                <div class="cm_con_left">\n' +
+        '                    <div style="background-image: url(' + data.avatar + ');" class="cm_ava"></div>\n' +
+        '                    <div class="cm_author"><a href="/u/' + data.name + '" title="" class="cm_author_a">' + data.name + '</a> <span class="cm_lvl">' + data.level + '</span></div>\n' +
+        '                </div>\n' +
+        '                <div class="cm_con_cent">\n' +
+        '                    <div class="cm_date"><abbr title="">только что</abbr></div>\n' +
+        '                    <div class="cm_comment">' + data.message + '</div>\n' +
+        '                </div>';
 
     return cm_con;
 }

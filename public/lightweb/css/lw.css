@@ -1092,22 +1092,22 @@ td.avatar {
     margin-bottom: 20px;
 }
 
-.comment_row {
+.cm_con {
     display: flex;
     font-family: Arial, sans-serif;
     border-bottom: 1px dotted #ccc;
     margin-bottom: 10px;
 }
 
-.comment_user_box {
+.cm_con_left {
     width: 20%;
 }
 
-.comment_message {
+.cm_con_cent {
     width: 80%;
 }
 
-.comment_avatar {
+.cm_ava {
     width: 100px;
     height: 100px;
     background-size: cover;
@@ -1115,7 +1115,7 @@ td.avatar {
     margin: 0 auto;
 }
 
-.comment_name {
+.cm_author {
     text-align: center;
     padding: 5px 0 10px 0;
 }
@@ -1123,6 +1123,10 @@ td.avatar {
 .cm_date {
     color: #999;
     font-size: 80%;
+}
+
+.cm_comment {
+    padding: 10px 0 0 0;
 }
 
 .cm_author {
@@ -1138,6 +1142,16 @@ td.avatar {
     font-family: verdana, sans-serif;;
     color: #ee966f;
     font-size: 90%;
+}
+
+.cm_add {
+    max-width: 90%;
+    min-height: 100px;
+    margin: 0 auto 20px auto;
+}
+
+.cm_form {
+    text-align: center;
 }
 
 /* Comment style end */

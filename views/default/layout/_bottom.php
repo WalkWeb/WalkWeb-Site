@@ -16,9 +16,9 @@ use App\Domain\Auth\AuthInterface;
                       <a href="/profile" class="full"></a>
                       </div>
                       <div class="exp_background"></div>
-                      <div class="exp_fill" style="width: ' . $user->getLevel()->getExpBarWeight() . '%"></div>
+                      <div class="exp_fill" id="auth_exp_width" style="width: ' . $user->getLevel()->getExpBarWeight() . '%"></div>
                       <div class="exp_text">
-                      <p><abbr title="Ваш опыт">' . $user->getLevel()->getExpAtLevel() . '/' . $user->getLevel()->getExpToLevel() . '</abbr></p>
+                      <p><abbr title="Ваш опыт"><span id="auth_exp_at_lvl">' . $user->getLevel()->getExpAtLevel() . '</span>/<span id="auth_exp_to_lvl">' . $user->getLevel()->getExpToLevel() . '</span></abbr></p>
                       </div>
                       <div class="right_content_body">
                       <p><span class="lvl">' . $user->getLevel()->getLevel() . '</span> <a href="/u/' . $user->getName() . '" class="profile_link" title="Профиль">' . $user->getName() . '</a></p>

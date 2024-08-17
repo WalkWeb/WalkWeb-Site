@@ -28,6 +28,17 @@ if ($post->isLiked()) {
                   </div>';
 }
 
+if (isset($auth) && $auth === true) {
+    $onclick = "addComment('{$post->getSlug()}')";
+    $form = '<div class="cm_form">
+                 <textarea name="comment" id="comment_content" class="form cm_add"></textarea>
+                 <input type="submit" class="button center" id="create_comment_button" onclick="' . $onclick . '" value="Добавить" />
+             </div>
+             <p id="create_comment_button_message"></p>';
+} else {
+    $form = '<p class="center"> Чтобы оставлять комментарии необходимо <a href="/login" class="osnova">войти</a> или <a href="/registration" class="osnova">зарегистрироваться</a></p>';
+}
+
 ?>
 
 <?= $ratingBox ?>
@@ -65,29 +76,41 @@ foreach ($post->getTags() as $tag) {
         <div class="comment_head">
             Комментарии
         </div>
-        <?php
-        foreach ($comments as $comment) {
-
-            if ($comment->getAuthorId()) {
-                $author = '<a href="/u/' . $comment->getAuthorName() . '" title="" class="cm_author">' . $comment->getAuthorName() . '</a>
+        <div id="comment_box">
+            <?php
+            if (count($comments) > 0) {
+                foreach ($comments as $comment) {
+                    if ($comment->getAuthorId()) {
+                        $author = '<a href="/u/' . $comment->getAuthorName() . '" title="" class="cm_author">' . $comment->getAuthorName() . '</a>
                            <span class="cm_level">' . $comment->getAuthorLevel() . '</span>';
-                $link = '<a href="/u/' . $comment->getAuthorName() . '" class="full"></a>';
-            } else {
-                $author = '<span class="cm_guest">' . $comment->getAuthorName() . ' (guest)</span>';
-                $link = '';
-            }
+                        $link = '<a href="/u/' . $comment->getAuthorName() . '" class="full"></a>';
+                    } else {
+                        $author = '<span class="cm_guest">' . $comment->getAuthorName() . ' (guest)</span>';
+                        $link = '';
+                    }
 
-            echo '<div class="comment_row">
-                      <div class="comment_user_box">
-                          <div class="comment_avatar" style="background-image: url(' . $comment->getAuthorAvatar() . ');">' . $link . '</div>
-                          <div class="comment_name">' . $author . '</div>
+                    echo '<div class="cm_con">
+                      <div class="cm_con_left">
+                          <div class="cm_ava" style="background-image: url(' . $comment->getAuthorAvatar() . ');">' . $link . '</div>
+                          <div class="cm_author">' . $author . '</div>
                       </div>
-                      <div class="comment_message">
-                      ' . $comment->getMessage() . '<br /><br />
-                      <abbr title="' . $comment->getCreatedAt()->format('Y-m-d H:i:s') . '"><span class="cm_date">' . $this->getCreatedAtEasyData($comment->getCreatedAt()) . '</span></abbr>
+                      <div class="cm_con_cent">
+                          <div class="cm_date"><abbr title="' . $comment->getCreatedAt()->format('Y-m-d H:i:s') . '"><span class="cm_date">' . $this->getCreatedAtEasyData($comment->getCreatedAt()) . '</span></abbr></div>
+                          <div class="cm_comment">' . $comment->getMessage() . '</div>
                       </div>
                   </div>';
-        }
-        ?>
+                }
+
+                echo '<p id="no_comment_rvd" class="center" style="display: none;">Комментариев нет</p>';
+
+            } else {
+                echo '<p id="no_comment_rvd" class="center">Комментариев нет</p>';
+            }
+            ?>
+        </div>
     </div>
 </div>
+
+<?= $form ?>
+
+<script src="/js/post.js?v=1.00"></script>
