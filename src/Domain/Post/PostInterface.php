@@ -21,8 +21,24 @@ use App\Domain\Post\Tag\TagCollection;
  */
 interface PostInterface extends ArrayableInterface
 {
-    public const CREATE_ENERGY_COST = 30;
-    public const CREATE_EXP         = 30;
+    public const CREATE_ENERGY_COST  = 30;
+    public const CREATE_EXP          = 30;
+
+    public const STATUS_ID_SILVER    = 2;
+    public const STATUS_ID_GOLD      = 3;
+    public const STATUS_ID_DIAMOND   = 4;
+
+    public const LIKE_STATUS_SILVER  = 3;
+    public const LIKE_STATUS_GOLD    = 6;
+    public const LIKE_STATUS_DIAMOND = 12;
+
+    public const NAME_SILVER         = 'серебряный';
+    public const NAME_GOLD           = 'золотой';
+    public const NAME_DIAMOND        = 'бриллиантовый';
+
+    public const EXP_SILVER          = 200;
+    public const EXP_GOLD            = 500;
+    public const EXP_DIAMOND         = 1000;
 
     public const DEFAULT_PUBLISHED = true;
     public const DEFAULT_APPROVED  = true;

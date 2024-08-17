@@ -30,6 +30,6 @@ class Version_2024_08_17_11_52_42_26
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ');
 
-        echo "Add lk_account_like_comment\n";
+        echo "Added lk_account_like_comment\n";
     }
 }
