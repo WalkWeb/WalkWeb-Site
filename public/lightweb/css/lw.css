@@ -311,6 +311,10 @@ abbr {
     text-decoration: none;
 }
 
+.hidden {
+    display: none;
+}
+
 .exp_background {
     width: 100%;
     min-height: 16px;

@@ -537,7 +537,7 @@ function dislikeComment(id, rating) {
         url: '/comment/dislike/' + id,
         type: 'POST',
         success: function(data) {
-            if (data.success === 1) {
+            if (data.success === true) {
                 rating--;
                 updateCommentRating(id, rating);
             } else {
@@ -557,16 +557,16 @@ function dislikeComment(id, rating) {
  * @param rating
  */
 function updateCommentRating(id, rating) {
-    let rating_box = document.getElementById('com_v_' + id);
+    let rating_box = document.getElementById('com_' + id);
 
     if (rating > 0) {
-        rating_box.innerHTML = '<div class="cm_rt_def"></div><div class="cm_rt green">' + rating + '</div><div class="cm_rt_def"></div>';
+        rating_box.innerHTML = '<div class="cm_rating_value"><span class="positiveRatingColor">' + rating + '</span></div>';
     }
     if (rating < 0) {
-        rating_box.innerHTML = '<div class="cm_rt_def"></div><div class="cm_rt red">' + rating + '</div><div class="cm_rt_def"></div>';
+        rating_box.innerHTML = '<div class="cm_rating_value"><span class="negativeRatingColor">' + rating + '</span></div>';
     }
     if (rating === 0) {
-        rating_box.innerHTML = '<div class="cm_rt_def"></div><div class="cm_rt">' + rating + '</div><div class="cm_rt_def"></div>';
+        rating_box.innerHTML = '<div class="cm_rating_value"><span class="defaultRatingColor">' + rating + '</span></div>';
     }
 }
 

@@ -101,6 +101,23 @@ if (isset($auth) && $auth === true) {
                 } else {
                     $author = '<span class="cm_author_guest">' . $comment->getAuthorName() . ' (guest)</span>';
                 }
+
+                if ($comment->isLiked()) {
+                    $likePost = "likeComment('{$comment->getId()}', {$comment->getRating()->getRating()})";
+                    $dislikePost = "dislikeComment('{$comment->getId()}', {$comment->getRating()->getRating()})";
+                    $ratingBox = '<div id="com_' . $comment->getId() . '" class="cm_con_right">
+                      <div class="cm_rating_up" onclick="' . $likePost . '">&#9650;</div>
+                      <div class="cm_rating_value"><span class="' . $comment->getRating()->getColorClass() . '">' . $comment->getRating()->getRating() . '</span></div>
+                      <div class="cm_rating_down" onclick="' . $dislikePost . '">&#9660;</div>
+                  </div>';
+                } else {
+                    $ratingBox = '<div class="cm_con_right">
+                      <div class="cm_rating_value">
+                          <span class="' . $comment->getRating()->getColorClass() . '">' . $comment->getRating()->getRating() . '</span>
+                      </div>
+                  </div>';
+                }
+
                 echo '
             <div class="cm_con">
                 <div class="cm_con_left">
@@ -108,13 +125,14 @@ if (isset($auth) && $auth === true) {
                     <div class="cm_author">' . $author . '</div>
                 </div>
                 <div class="cm_con_cent">
+                    ' . $ratingBox . '
                     <div class="cm_date"><abbr title="' . $comment->getCreatedAt()->format('Y-m-d H:i:s') . '">' . $this->getCreatedAtEasyData($comment->getCreatedAt()) . '</abbr></div>
                     <div class="cm_comment">' . $comment->getMessage() . '</div>
                 </div>
             </div>';
             }
 
-            echo '<p id="no_comment_rvd" class="center" style="display: none;">Комментариев нет</p>';
+            echo '<p id="no_comment_rvd" class="center hidden">Комментариев нет</p>';
 
         } else {
             echo '<p id="no_comment_rvd" class="center">Комментариев нет</p>';

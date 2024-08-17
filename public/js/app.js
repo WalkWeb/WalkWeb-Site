@@ -132,7 +132,7 @@ function dislikePost(slug, rating) {
         success: function(data) {
             if (data.success === true) {
                 rating--;
-                updatePostRating(slug, rating);
+                updateCommentRating(slug, rating);
             } else {
                 createNotification(data.error);
             }

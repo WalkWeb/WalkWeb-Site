@@ -75,6 +75,10 @@ abbr {
     text-decoration: none;
 }
 
+.hidden {
+    display: none;
+}
+
 #main_box {
     max-width: 1540px;
     min-width: 1000px;
@@ -3230,14 +3234,8 @@ a.news_link:hover {
     float: left;
 }
 
-.cm_con_right {
-    width: 50px;
-    float: right;
-}
-
 .cm_con_cent {
     margin-left: 130px;
-    margin-right: 50px;
     min-height: 150px;
 }
 
@@ -3382,6 +3380,46 @@ a.news_link:hover {
     float: left;
     margin-top: 16px;
     margin-left: 60px;
+}
+
+.cm_con_right {
+    position: relative;
+    float: right;
+    background: #251e18;
+    border: 1px solid #382c22;
+    border-radius: 4px;
+}
+
+.cm_rating_value {
+    height: 40px;
+    text-align: center;
+    font-size: 130%;
+    line-height: 40px;
+    padding: 0 10px;
+}
+
+.cm_rating_up {
+    height: 20px;
+    text-align: center;
+    font-size: 150%;
+    line-height: 20px;
+}
+
+.cm_rating_up:hover {
+    color: #282;
+    cursor: pointer;
+}
+
+.cm_rating_down {
+    height: 20px;
+    text-align: center;
+    font-size: 150%;
+    line-height: 15px;
+}
+
+.cm_rating_down:hover {
+    color: #822;
+    cursor: pointer;
 }
 
 /* Comment style end */

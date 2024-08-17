@@ -107,15 +107,19 @@ class CommentRepository
             LEFT JOIN `characters_main` ON `accounts`.`main_character_id` = `characters_main`.`id`
             LEFT JOIN `characters` ON `accounts`.`character_id` = `characters`.`id`
             LEFT JOIN `avatars` ON `characters`.`avatar_id` = `avatars`.`id`
-            LEFT JOIN `lk_account_like_comment` lk ON `accounts`.`id` = `lk`.`account_id` AND `post_comments`.`id` = `lk`.`comment_id`
+            LEFT JOIN `lk_account_like_comment` lk ON `post_comments`.`id` = `lk`.`comment_id` AND `lk`.`account_id` = ?
                                  
             WHERE `post_comments`.`post_id` = ?
             
             ORDER BY `post_comments`.`created_at` DESC',
-            [['type' => 's', 'value' => $postId]],
+            [
+                ['type' => 's', 'value' => $user->getId()],
+                ['type' => 's', 'value' => $postId],
+            ],
         );
 
         foreach ($data as &$datum) {
+            $datum['user_reaction'] = $datum['user_reaction'] ?? 0;
             $isLiked = true;
 
             if ($user->getId() === $datum['author_id']) {
@@ -127,9 +131,6 @@ class CommentRepository
             }
 
             $datum['is_liked'] = $isLiked;
-
-            // TODO Mock
-            $datum['user_reaction'] = 0;
         }
 
         return CommentCollectionFactory::create($data);
