@@ -88,10 +88,10 @@ class PostRepositoryTest extends AbstractTest
     /**
      * @throws AppException
      */
-    public function testPostRepositoryGetCollection(): void
+    public function testPostRepositoryGetAll(): void
     {
         $user = $this->getUser('VBajfT8P6PFtrkHhCqb7ZNwIFG45a4');
-        $posts = $this->getRepository()->getCollection(0, 20, $user);
+        $posts = $this->getRepository()->getAll(0, 20, $user);
 
         self::assertCount(11, $posts);
     }
@@ -110,6 +110,27 @@ class PostRepositoryTest extends AbstractTest
     public function testPostRepositoryGetIdBySlugNotFound(): void
     {
         self::assertNull($this->getRepository()->getIdBySlug('slug-123-1-12312'));
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testPostRepositoryGetByTagAuth(): void
+    {
+        $user = $this->getUser('VBajfT8P6PFtrkHhCqb7ZNwIFG45a4');
+        $posts = $this->getRepository()->getPostByTag('path-of-exile', 0, 20, $user);
+
+        self::assertCount(1, $posts);
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testPostRepositoryGetByTagNoAuth(): void
+    {
+        $posts = $this->getRepository()->getPostByTag('path-of-exile', 0, 20);
+
+        self::assertCount(1, $posts);
     }
 
     /**

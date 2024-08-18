@@ -1203,5 +1203,33 @@ td.avatar {
 
 /* Comment style end */
 
+/* Tag style on /t/slug page start */
 
+div.t_box {
+    display: flex;
+    padding: 10px 30px 30px 0;
+}
 
+div.t_icon {
+    width: 100px;
+    height: 150px;
+    border: 1px solid #333;
+    background-size: cover;
+}
+
+div.t_content {
+    height: 150px;
+    padding-left: 20px;
+}
+
+span.t_head {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 160%;
+    color: #444;
+}
+
+span.t_link {
+    font-size: 120%;
+}
+
+/* Tag style on /t/slug page end */

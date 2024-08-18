@@ -32,7 +32,7 @@ class MainHandler extends AbstractHandler
         return $this->render(
             'index',
             [
-                'posts' => (new PostRepository($this->container))->getCollection(
+                'posts' => (new PostRepository($this->container))->getAll(
                     self::OFFSET,
                     self::LIMIT,
                     $this->container->exist('user') ? $this->getUser() : null

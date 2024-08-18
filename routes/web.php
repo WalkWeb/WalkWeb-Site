@@ -26,12 +26,15 @@ $routes->post('post.like', '/post/like/{slug}', 'App\\Handler\\Post\\LikePostHan
 $routes->post('post.dislike', '/post/dislike/{slug}', 'App\\Handler\\Post\\DislikePostHandler', ['slug' => '[a-zA-Z0-9-]+']);
 $routes->get('post.create', '/post/create', 'App\\Handler\\Post\\CreatePostPageHandler');
 $routes->post('post.create', '/post/create', 'App\\Handler\\Post\\CreatePostHandler');
-
 $routes->post('image.upload.json', '/image/upload/json', 'App\\Handler\\Image\\UploadImageHandler');
 
+// comment
 $routes->post('comment.create', '/comment/create', 'App\\Handler\\Comment\\CreateCommentHandler');
 $routes->post('comment.like', '/comment/like/{id}', 'App\\Handler\\Comment\\LikeCommentHandler', ['id' => '[a-zA-Z0-9-]+']);
 $routes->post('comment.dislike', '/comment/dislike/{id}', 'App\\Handler\\Comment\\DislikeCommentHandler', ['id' => '[a-zA-Z0-9-]+']);
+
+// tag
+$routes->get('tag.list', '/t/{slug}', 'App\\Handler\\Tag\\TagPageHandler', ['slug' => '[a-zA-Z0-9-]+']);
 
 // info
 $routes->get('statistic', '/statistic', 'App\\Handler\\Info\\StatisticPageHandler');

@@ -1,13 +1,30 @@
 <?php
 
 use App\Domain\Post\Collection\PostCollection;
+use App\Domain\Post\Tag\TagInterface;
 use WalkWeb\NW\AppException;
 
-$this->title = APP_NAME . ' — Интересное';
+if (empty($tag) || !($tag instanceof TagInterface)) {
+    throw new AppException('view.tag.index: miss or invalid $tag');
+}
 
 if (empty($posts) || !($posts instanceof PostCollection)) {
-    throw new AppException('view.index: miss or invalid $posts');
+    throw new AppException('view.tag.index: miss or invalid $posts');
 }
+
+$name = htmlspecialchars(strtoupper($tag->getName()));
+$this->title = 'Просмотр постов по тегу ' . $name . ' | ' . APP_NAME;
+
+echo '
+<div class="t_box">
+    <div class="t_icon" style="background-image: url(' . $tag->getIcon() . ')"></div>
+    <div class="t_content">
+        <span class="t_head">Просмотр постов по тегу<br />' . $name . '</span><br /><br />
+        <span class="t_link">Все подряд | <a href="#">5+</a> | <a href="#">10+</a> | <a href="#">20+</a> | <a href="#">Лучшие</a></span>
+    </div>
+</div>
+
+<hr><br /><br />';
 
 foreach ($posts as $post) {
     if ($post->isLiked()) {
@@ -39,3 +56,4 @@ foreach ($posts as $post) {
         ' . $post->getHtmlContent() . '
     </div>';
 }
+
