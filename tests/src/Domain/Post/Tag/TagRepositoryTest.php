@@ -64,6 +64,32 @@ class TagRepositoryTest extends AbstractTest
     }
 
     /**
+     * @dataProvider getBySlugDataProvider
+     * @param string $slug
+     * @throws AppException
+     */
+    public function testTagRepositoryGetBySlugSuccess(string $slug): void
+    {
+        $tag = $this->getRepository()->getBySlug($slug);
+        $data = $this->getDataBySlug($slug);
+
+        self::assertEquals($data['id'], $tag->getId());
+        self::assertEquals($data['name'], $tag->getName());
+        self::assertEquals($data['slug'], $tag->getSlug());
+        self::assertEquals($data['icon'], $tag->getIcon());
+        self::assertEquals($data['preview_post_id'], $tag->getPreviewPostId());
+        self::assertEquals($data['approved'], $tag->isApproved());
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testTagRepositoryGetBySlugNotFound(): void
+    {
+        self::assertNull($this->getRepository()->getBySlug('abc-123'));
+    }
+
+    /**
      * @dataProvider saveDataProvider
      * @param TagInterface $tag
      * @throws AppException
@@ -161,6 +187,30 @@ class TagRepositoryTest extends AbstractTest
 
     /**
      * @return array
+     */
+    public function getBySlugDataProvider(): array
+    {
+        return [
+            [
+                'diablo-2',
+            ],
+            [
+                'Blizzard',
+            ],
+            [
+                'rpg',
+            ],
+            [
+                'news',
+            ],
+            [
+                'path-of-exile',
+            ],
+        ];
+    }
+
+    /**
+     * @return array
      * @throws AppException
      */
     public function saveDataProvider(): array
@@ -235,6 +285,20 @@ class TagRepositoryTest extends AbstractTest
         return self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT `id`, `name`, `slug`, `icon`, `preview_post_id`, `approved` FROM `post_tags` WHERE `name` = ?',
             [['type' => 's', 'value' => $name]],
+            true
+        );
+    }
+
+    /**
+     * @param string $slug
+     * @return array
+     * @throws AppException
+     */
+    private function getDataBySlug(string $slug): array
+    {
+        return self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT `id`, `name`, `slug`, `icon`, `preview_post_id`, `approved` FROM `post_tags` WHERE `slug` = ?',
+            [['type' => 's', 'value' => $slug]],
             true
         );
     }

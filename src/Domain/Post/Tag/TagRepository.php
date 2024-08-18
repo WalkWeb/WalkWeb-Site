@@ -25,9 +25,29 @@ class TagRepository
      */
     public function getByName(string $name): ?TagInterface
     {
-        $data =             $this->container->getConnectionPool()->getConnection()->query(
+        $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT `id`, `name`, `slug`, `icon`, `preview_post_id`, `approved` FROM `post_tags` WHERE `name` = ?',
             [['type' => 's', 'value' => mb_strtolower($name)]],
+            true
+        );
+
+        if (!$data) {
+            return null;
+        }
+
+        return TagFactory::create($data);
+    }
+
+    /**
+     * @param string $slug
+     * @return TagInterface|null
+     * @throws AppException
+     */
+    public function getBySlug(string $slug): ?TagInterface
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `id`, `name`, `slug`, `icon`, `preview_post_id`, `approved` FROM `post_tags` WHERE `slug` = ?',
+            [['type' => 's', 'value' => mb_strtolower($slug)]],
             true
         );
 
