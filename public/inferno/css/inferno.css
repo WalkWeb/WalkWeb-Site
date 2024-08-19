@@ -3324,6 +3324,10 @@ a.news_link:hover {
     overflow: hidden;
 }
 
+.cm_author_a:hover {
+    text-decoration: underline;
+}
+
 .cm_author_guest {
     font-family: arial, sans-serif;
     color: #a9825d;
@@ -3333,11 +3337,7 @@ a.news_link:hover {
     overflow: hidden;
 }
 
-.cm_author_a:hover {
-    text-decoration: underline;
-}
-
-.cm_lvl {
+.cm_level {
     font-family: verdana, sans-serif;;
     color: #ee966f;
     display: inline-block;

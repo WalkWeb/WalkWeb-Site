@@ -13,11 +13,10 @@ function closeNotice(id) {
         url: '/notice/close/' + id,
         type: 'POST',
         success: function(data) {
-            if (data.success === 1) {
+            if (data.success === true) {
                 console.log('closeNotice: Ok');
             } else {
-                // TODO
-                //createNotification(data.error);
+                createNotification(data.error);
             }
         },
         error: function() {
@@ -33,11 +32,10 @@ function closeAllNotice() {
         url: '/notice/all/close',
         type: 'POST',
         success: function(data) {
-            if (data.success === 1) {
-                console.log('closeNotice: Ok');
+            if (data.success === true) {
+                console.log('closeAllNotice: Ok');
             } else {
-                // TODO
-                //createNotification(data.error);
+                createNotification(data.error);
             }
         },
         error: function() {

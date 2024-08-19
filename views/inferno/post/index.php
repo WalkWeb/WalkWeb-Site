@@ -97,7 +97,8 @@ if (isset($auth) && $auth === true) {
         if (count($comments) > 0) {
             foreach ($comments as $comment) {
                 if ($comment->getAuthorId()) {
-                    $author = '<a href="/u/' . $comment->getAuthorName() . '" title="" class="cm_author_a">' . $comment->getAuthorName() . '</a> <span class="cm_lvl">' . $comment->getAuthorLevel() . '</span>';
+                    $author = '<a href="/u/' . $comment->getAuthorName() . '" title="" class="cm_author_a">' . $comment->getAuthorName() . '</a> 
+                        <span class="cm_level">' . $comment->getAuthorLevel() . '</span>';
                 } else {
                     $author = '<span class="cm_author_guest">' . $comment->getAuthorName() . ' (guest)</span>';
                 }
