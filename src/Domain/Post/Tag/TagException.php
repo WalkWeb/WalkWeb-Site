@@ -9,6 +9,8 @@ use Exception;
 class TagException extends Exception
 {
     public const EXPECTED_ARRAY          = 'TagCollectionFactory: expected array data';
+    public const NOT_FOUND               = 'Тег не найден';
+    public const UNKNOWN_RATING          = 'Указан неизвестный рейтинг';
 
     public const INVALID_ID              = 'Incorrect "id" parameter, it required and type string';
     public const INVALID_NAME            = 'Incorrect "name" parameter, it required and type string';

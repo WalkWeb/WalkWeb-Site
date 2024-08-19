@@ -34,7 +34,7 @@ $routes->post('comment.like', '/comment/like/{id}', 'App\\Handler\\Comment\\Like
 $routes->post('comment.dislike', '/comment/dislike/{id}', 'App\\Handler\\Comment\\DislikeCommentHandler', ['id' => '[a-zA-Z0-9-]+']);
 
 // tag
-$routes->get('tag.list', '/t/{slug}', 'App\\Handler\\Tag\\TagPageHandler', ['slug' => '[a-zA-Z0-9-]+']);
+$routes->get('tag.list', '/t/{slug}/{rating}', 'App\\Handler\\Tag\\TagPageHandler', ['slug' => '[a-zA-Z0-9-]+', 'rating' => '[a-z]+']);
 
 // info
 $routes->get('statistic', '/statistic', 'App\\Handler\\Info\\StatisticPageHandler');

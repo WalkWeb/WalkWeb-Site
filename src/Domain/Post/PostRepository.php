@@ -138,17 +138,30 @@ class PostRepository
     }
 
     /**
+     * TODO Подумать над оптимизацией запроса - убрать HAVING
+     *
      * @param string $tagSlug
      * @param int $offset
      * @param int $limit
+     * @param int $minRating
+     * @param bool $best
      * @param AuthInterface|null $user
      * @return PostCollection
      * @throws AppException
      */
-    public function getPostByTag(string $tagSlug, int $offset, int $limit, ?AuthInterface $user = null): PostCollection
+    public function getPostByTag(
+        string $tagSlug,
+        int $offset,
+        int $limit,
+        int $minRating,
+        bool $best = false,
+        ?AuthInterface $user = null
+    ): PostCollection
     {
+        $order = $best ? '`rating` DESC ' : '`created_at` DESC ';
+
         if ($user === null) {
-            return $this->getPostByTagNoLikes($tagSlug, $offset, $limit);
+            return $this->getPostByTagNoLikes($tagSlug, $offset, $limit, $minRating, $best);
         }
 
         $data = $this->container->getConnectionPool()->getConnection()->query(
@@ -161,6 +174,7 @@ class PostRepository
                 `posts`.`status_id`,
                 `posts`.`likes`,
                 `posts`.`dislikes`,
+                `posts`.`likes` - `posts`.`dislikes` as `rating`,
                 `posts`.`comments_count`,
                 `posts`.`published`,
                 `posts`.`created_at`,
@@ -179,12 +193,13 @@ class PostRepository
     
                 WHERE `posts`.`published` = 1 AND `post_tags`.`slug` = ?
 
-                ORDER BY `created_at` DESC
+                HAVING `rating` > ?
 
-                LIMIT ? OFFSET ?',
+                ORDER BY ' . $order . ' LIMIT ? OFFSET ?',
             [
                 ['type' => 's', 'value' => $user->getId()],
                 ['type' => 's', 'value' => $tagSlug],
+                ['type' => 'i', 'value' => $minRating],
                 ['type' => 'i', 'value' => $limit],
                 ['type' => 'i', 'value' => $offset],
             ],
@@ -194,14 +209,20 @@ class PostRepository
     }
 
     /**
+     * TODO Подумать над оптимизацией запроса - убрать HAVING
+     *
      * @param string $tagSlug
      * @param int $offset
      * @param int $limit
+     * @param int $minRating
+     * @param bool $best
      * @return PostCollection
      * @throws AppException
      */
-    public function getPostByTagNoLikes(string $tagSlug, int $offset, int $limit): PostCollection
+    public function getPostByTagNoLikes(string $tagSlug, int $offset, int $limit, int $minRating, bool $best = false): PostCollection
     {
+        $order = $best ? '`rating` DESC ' : '`created_at` DESC ';
+
         $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT 
        
@@ -212,6 +233,7 @@ class PostRepository
                 `posts`.`status_id`,
                 `posts`.`likes`,
                 `posts`.`dislikes`,
+                `posts`.`likes` - `posts`.`dislikes` as `rating`,
                 `posts`.`comments_count`,
                 `posts`.`published`,
                 `posts`.`created_at`,
@@ -227,11 +249,12 @@ class PostRepository
 
                 WHERE `posts`.`published` = 1 AND `post_tags`.`slug` = ?
 
-                ORDER BY `created_at` DESC
+                HAVING `rating` > ?
 
-                LIMIT ? OFFSET ?',
+                ORDER BY ' . $order . ' LIMIT ? OFFSET ?',
             [
                 ['type' => 's', 'value' => $tagSlug],
+                ['type' => 'i', 'value' => $minRating],
                 ['type' => 'i', 'value' => $limit],
                 ['type' => 'i', 'value' => $offset],
             ],

@@ -10,6 +10,7 @@ use App\Domain\Post\PostRepository;
 use App\Domain\Post\Status\PostStatusInterface;
 use App\Domain\Post\Tag\TagCollection;
 use App\Domain\Post\Tag\TagRepository;
+use App\Handler\Tag\TagPageHandler;
 use DateTime;
 use Exception;
 use Test\AbstractTest;
@@ -113,14 +114,36 @@ class PostRepositoryTest extends AbstractTest
     }
 
     /**
+     * @dataProvider getByTagAuthDataProvider
+     * @param string $tag
+     * @param int $offset
+     * @param int $limit
+     * @param int $minRating
+     * @param bool $bestPost
+     * @param int $expectedPost
+     * @param array $expectedPosts
      * @throws AppException
      */
-    public function testPostRepositoryGetByTagAuth(): void
+    public function testPostRepositoryGetByTagAuth(
+        string $tag,
+        int $offset,
+        int $limit,
+        int $minRating,
+        bool $bestPost,
+        int $expectedPost,
+        array $expectedPosts
+    ): void
     {
         $user = $this->getUser('VBajfT8P6PFtrkHhCqb7ZNwIFG45a4');
-        $posts = $this->getRepository()->getPostByTag('path-of-exile', 0, 20, $user);
+        $posts = $this->getRepository()->getPostByTag($tag, $offset, $limit, $minRating, $bestPost, $user);
 
-        self::assertCount(1, $posts);
+        self::assertCount($expectedPost, $posts);
+
+        $i = 0;
+        foreach ($posts as $post) {
+            self::assertEquals($expectedPosts[$i], $post->getTitle());
+            $i++;
+        }
     }
 
     /**
@@ -128,9 +151,9 @@ class PostRepositoryTest extends AbstractTest
      */
     public function testPostRepositoryGetByTagNoAuth(): void
     {
-        $posts = $this->getRepository()->getPostByTag('path-of-exile', 0, 20);
+        $posts = $this->getRepository()->getPostByTag('path-of-exile', 0, 20, -10);
 
-        self::assertCount(1, $posts);
+        self::assertCount(3, $posts);
     }
 
     /**
@@ -203,6 +226,43 @@ class PostRepositoryTest extends AbstractTest
                     'created_at'       => '2019-08-12 19:00:00',
                     'updated_at'       => '2019-08-15 20:20:00',
                 ], new TagCollection()),
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getByTagAuthDataProvider(): array
+    {
+        return [
+            // rpg: all
+            [
+                'rpg', 0, 10, -10, false, 4, ['title post 8', 'title post 5', 'title post 4', 'title post 1']
+            ],
+            // rpg: check offset
+            [
+                'rpg', 2, 10, -10, false, 2, ['title post 4', 'title post 1']
+            ],
+            // rpg: check limit
+            [
+                'rpg', 0, 2, -10, false, 2, ['title post 8', 'title post 5']
+            ],
+            // rpg: check minRating
+            [
+                'rpg', 0, 10, TagPageHandler::RATING_TOP, false, 1, ['title post 8']
+            ],
+            // news: all
+            [
+                'news', 0, 10, TagPageHandler::RATING_ALL, false, 4, ['title post 9', 'title post 6', 'title post 5', 'title post 2']
+            ],
+            // news: top
+            [
+                'news', 0, 10, TagPageHandler::RATING_TOP, false, 2, ['title post 9', 'title post 2']
+            ],
+            // news: best
+            [
+                'news', 0, 10, TagPageHandler::RATING_ALL, true, 4, ['title post 2', 'title post 9', 'title post 6', 'title post 5']
             ],
         ];
     }
