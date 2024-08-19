@@ -6,6 +6,7 @@ namespace Test\src\Domain\Comment;
 
 use App\Domain\Comment\CommentException;
 use App\Domain\Comment\CommentFactory;
+use App\Domain\Comment\CommentInterface;
 use App\Domain\Post\Rating\Rating;
 use DateTime;
 use Exception;
@@ -212,6 +213,7 @@ class CommentFactoryTest extends AbstractTest
 
     /**
      * @return array
+     * @throws AppException
      */
     public function createFailDataProvider(): array
     {
@@ -509,6 +511,52 @@ class CommentFactoryTest extends AbstractTest
                     'updated_at'    => '2024-06-16 16:00:00',
                 ],
                 CommentException::INVALID_MESSAGE,
+            ],
+            // message over min length
+            [
+                [
+                    'id'            => '7d78bc1d-9919-4c56-bc89-f4bd2e433401',
+                    'post_id'       => '7684ad22-613b-4c65-9bad-b7dfdd394c02',
+                    'author_id'     => '1e3a3b27-12da-4c73-a3a7-b83092705b01',
+                    'guest_name'    => '',
+                    'message'       => '',
+                    'approved'      => 1,
+                    'parent_id'     => null,
+                    'level'         => 0,
+                    'likes'         => 0,
+                    'dislikes'      => 0,
+                    'user_reaction' => 0,
+                    'author_name'   => 'DemoUser',
+                    'author_avatar' => '/img/avatars/it/analyst/male/01.jpg',
+                    'author_level'  => 1,
+                    'is_liked'      => true,
+                    'created_at'    => '2024-06-16 16:00:00',
+                    'updated_at'    => '2024-06-16 16:00:00',
+                ],
+                CommentException::INVALID_MESSAGE_LENGTH . CommentInterface::COMMENT_MIN_LENGTH . '-' . CommentInterface::COMMENT_MAX_LENGTH,
+            ],
+            // message over max length
+            [
+                [
+                    'id'            => '7d78bc1d-9919-4c56-bc89-f4bd2e433401',
+                    'post_id'       => '7684ad22-613b-4c65-9bad-b7dfdd394c02',
+                    'author_id'     => '1e3a3b27-12da-4c73-a3a7-b83092705b01',
+                    'guest_name'    => '',
+                    'message'       => self::generateString(CommentInterface::COMMENT_MAX_LENGTH + 1),
+                    'approved'      => 1,
+                    'parent_id'     => null,
+                    'level'         => 0,
+                    'likes'         => 0,
+                    'dislikes'      => 0,
+                    'user_reaction' => 0,
+                    'author_name'   => 'DemoUser',
+                    'author_avatar' => '/img/avatars/it/analyst/male/01.jpg',
+                    'author_level'  => 1,
+                    'is_liked'      => true,
+                    'created_at'    => '2024-06-16 16:00:00',
+                    'updated_at'    => '2024-06-16 16:00:00',
+                ],
+                CommentException::INVALID_MESSAGE_LENGTH . CommentInterface::COMMENT_MIN_LENGTH . '-' . CommentInterface::COMMENT_MAX_LENGTH,
             ],
             // miss approved
             [

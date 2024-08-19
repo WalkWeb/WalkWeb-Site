@@ -12,7 +12,8 @@ interface CommentInterface
     public const CREATE_ENERGY_COST = 5;
     public const CREATE_EXP         = 5;
 
-    // TODO min-max value
+    public const COMMENT_MIN_LENGTH = 1;
+    public const COMMENT_MAX_LENGTH = 2000;
 
     public function getId(): string;
     public function getPostId(): string;

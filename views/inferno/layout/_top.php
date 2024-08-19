@@ -58,7 +58,7 @@ use App\Domain\Auth\AuthInterface;
                     <a href="/" title="DUSK WORLD" class="head_text">ПОСТЫ</a>
                 </div>
                 <div class="menu_head_el" id="menu_head_2">
-                    <a href="#" title="ДЕМО ПОДЗЕМЕЛЬЯ" class="head_text">ДЕМО ПОДЗЕМЕЛЬЯ</a>
+                    <a href="#" title="ИГРАТЬ" class="head_text">ИГРАТЬ</a>
                 </div>
                 <div class="menu_head_el" id="menu_head_3">
                     <a href="#" title="РЕЙТИНГИ" class="head_text">РЕЙТИНГИ</a>

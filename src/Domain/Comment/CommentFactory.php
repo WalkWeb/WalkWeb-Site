@@ -41,6 +41,15 @@ class CommentFactory
             $authorLevel = 0;
         }
 
+        $message = self::string($data, 'message', CommentException::INVALID_MESSAGE);
+
+        self::stringMinMaxLength(
+            $message,
+            CommentInterface::COMMENT_MIN_LENGTH,
+            CommentInterface::COMMENT_MAX_LENGTH,
+            CommentException::INVALID_MESSAGE_LENGTH . CommentInterface::COMMENT_MIN_LENGTH . '-' . CommentInterface::COMMENT_MAX_LENGTH
+        );
+
         return new Comment(
             self::uuid($data, 'id', CommentException::INVALID_ID),
             self::uuid($data, 'post_id', CommentException::INVALID_POST_ID),
@@ -48,7 +57,7 @@ class CommentFactory
             $authorName,
             $authorAvatar,
             $authorLevel,
-            self::string($data, 'message', CommentException::INVALID_MESSAGE),
+            $message,
             (bool)self::int($data, 'approved', CommentException::INVALID_APPROVED),
             self::uuidOrNull($data, 'parent_id', CommentException::INVALID_PARENT_ID),
             self::int($data, 'level', CommentException::INVALID_LEVEL),

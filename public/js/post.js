@@ -5,7 +5,7 @@ let row_content = 2;
 
 let create_comment_mode = true;
 let create_comment_energy = 5;
-let comment_min_length = 5;
+let comment_min_length = 1;
 let comment_max_length = 2000;
 
 document.addEventListener("DOMContentLoaded", checkCreatePostEnergy);

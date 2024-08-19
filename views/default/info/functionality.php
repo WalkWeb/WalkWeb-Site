@@ -21,7 +21,7 @@ $this->title = APP_NAME . ' — Функционал проекта';
 
 <ul>
     <li><span class="orange">Регистрация</span></li>
-    <li><span class="orange">Подтверждения email</span></li>
+    <li><span class="orange">Подтверждение email</span></li>
     <li><span class="red">Восстановление пароля</span></li>
     <li><span class="red">Изменение пароля</span></li>
     <li><span class="green">Авторизация</span></li>
@@ -94,8 +94,9 @@ $this->title = APP_NAME . ' — Функционал проекта';
 <ul>
     <li><span class="red">Создание сообщества</span></li>
     <li><span class="red">Подписка на сообщество</span></li>
-    <li><span class="red">Функционал привязки постов к сообществу</span></li>
-    <li><span class="red">Функционал получения особой валюты создателю сообщества при новых подписчиках</span></li>
+    <li><span class="red">Привязка постов к сообществу</span></li>
+    <li><span class="red">Получение особой валюты создателю сообщества при новых подписчиках</span></li>
+    <li><span class="red">Повышение уровня сообщества, новые возможности с новыми уровнями</span></li>
 </ul>
 
 <h2>Темы (база языков программирования)</h2>
