@@ -485,7 +485,7 @@ function createComment(data) {
         '                <div class="cm_con_cent">\n' +
         '                    <div class="cm_con_right"><div class="cm_rating_value"><span class="defaultRatingColor">0</span></div></div>\n' +
         '                    <div class="cm_date"><abbr title="">только что</abbr></div>\n' +
-        '                    <div class="cm_comment">' + data.message + '</div>\n' +
+        '                    <div class="cm_comment">' + data.message.replace(/(?:\r\n|\r|\n)/g, '<br>') + '</div>\n' +
         '                </div>';
 
     return cm_con;

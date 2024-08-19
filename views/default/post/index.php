@@ -113,7 +113,7 @@ if (isset($auth) && $auth === true) {
                               <div class="cm_con_cent">
                                   ' . $ratingBox . '
                                   <div class="cm_date"><abbr title="' . $comment->getCreatedAt()->format('Y-m-d H:i:s') . '">' . $this->getCreatedAtEasyData($comment->getCreatedAt()) . '</abbr></div>
-                                  <div class="cm_comment">' . $comment->getMessage() . '</div>
+                                  <div class="cm_comment">' . str_replace([PHP_EOL], ['<br />'], $comment->getMessage()) . '</div>
                               </div>
                           </div>';
                 }
