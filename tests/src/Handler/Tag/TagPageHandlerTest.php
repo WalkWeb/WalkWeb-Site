@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Test\src\Handler\Tag;
 
 use App\Domain\Post\Tag\TagException;
+use App\Domain\Post\Tag\TagInterface;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
@@ -70,5 +71,37 @@ class TagPageHandlerTest extends AbstractTest
 
         self::assertEquals(Response::NOT_FOUND, $response->getStatusCode());
         self::assertMatchesRegularExpression('/' . TagException::UNKNOWN_RATING . '/', $response->getBody());
+    }
+
+    /**
+     * @dataProvider slugDataProvider
+     * @param string $slug
+     * @throws AppException
+     */
+    public function testTagPageHandlerInvalidSlug(string $slug): void
+    {
+        $request = new Request(['REQUEST_URI' => "/t/$slug/all"]);
+
+        $this->expectException(AppException::class);
+        $this->expectExceptionMessage(
+            TagException::INVALID_SLUG_LENGTH . TagInterface::SLUG_MIN_LENGTH . '-' . TagInterface::SLUG_MAX_LENGTH
+        );
+        $this->app->handle($request);
+    }
+
+    /**
+     * @return array[]
+     * @throws AppException
+     */
+    public function slugDataProvider(): array
+    {
+        return [
+            [
+                self::generateString(TagInterface::SLUG_MIN_LENGTH - 1),
+            ],
+            [
+                self::generateString(TagInterface::SLUG_MAX_LENGTH + 1),
+            ],
+        ];
     }
 }

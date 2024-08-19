@@ -6,6 +6,7 @@ namespace App\Handler\Tag;
 
 use App\Domain\Post\PostRepository;
 use App\Domain\Post\Tag\TagException;
+use App\Domain\Post\Tag\TagInterface;
 use App\Domain\Post\Tag\TagRepository;
 use App\Handler\AbstractHandler;
 use DateTimeInterface;
@@ -53,8 +54,13 @@ class TagPageHandler extends AbstractHandler
 
         $slug = $request->slug;
         $rating = $request->rating;
+        $slugLength = mb_strlen($slug);
 
-        // TODO Валидация slug
+        if ($slugLength < TagInterface::SLUG_MIN_LENGTH || $slugLength > TagInterface::SLUG_MAX_LENGTH) {
+            throw new AppException(
+                TagException::INVALID_SLUG_LENGTH . TagInterface::SLUG_MIN_LENGTH . '-' . TagInterface::SLUG_MAX_LENGTH
+            );
+        }
 
         if ($rating !== self::BEST_POST && !array_key_exists($rating, self::$ratings)) {
             return $this->render(
