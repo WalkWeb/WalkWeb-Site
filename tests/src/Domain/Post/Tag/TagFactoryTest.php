@@ -6,6 +6,7 @@ namespace Test\src\Domain\Post\Tag;
 
 use App\Domain\Post\Tag\TagException;
 use App\Domain\Post\Tag\TagFactory;
+use App\Domain\Post\Tag\TagInterface;
 use Exception;
 use Ramsey\Uuid\Uuid;
 use Test\AbstractTest;
@@ -105,10 +106,14 @@ class TagFactoryTest extends AbstractTest
         ];
     }
 
+    /**
+     * @return array
+     * @throws AppException
+     */
     public function failDataProvider(): array
     {
         return [
-            // отсутствует id
+            // miss id
             [
                 [
                     'name'            => 'новости',
@@ -119,7 +124,7 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_ID,
             ],
-            // id некорректного типа
+            // id invalid type
             [
                 [
                     'id'              => 10,
@@ -131,7 +136,7 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_ID,
             ],
-            // отсутствует name
+            // miss name
             [
                 [
                     'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
@@ -142,7 +147,7 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_NAME,
             ],
-            // name некорректного типа
+            // name invalid type
             [
                 [
                     'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
@@ -154,7 +159,31 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_NAME,
             ],
-            // отсутствует slug
+            // name over min length
+            [
+                [
+                    'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
+                    'name'            => self::generateString(TagInterface::NAME_MIN_LENGTH - 1),
+                    'slug'            => 'novosti',
+                    'icon'            => 'icon-1.png',
+                    'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
+                    'approved'        => 1,
+                ],
+                TagException::INVALID_NAME_LENGTH . TagInterface::NAME_MIN_LENGTH . '-' . TagInterface::NAME_MAX_LENGTH,
+            ],
+            // name over max length
+            [
+                [
+                    'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
+                    'name'            => self::generateString(TagInterface::NAME_MAX_LENGTH + 1),
+                    'slug'            => 'novosti',
+                    'icon'            => 'icon-1.png',
+                    'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
+                    'approved'        => 1,
+                ],
+                TagException::INVALID_NAME_LENGTH . TagInterface::NAME_MIN_LENGTH . '-' . TagInterface::NAME_MAX_LENGTH,
+            ],
+            // miss slug
             [
                 [
                     'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
@@ -165,7 +194,7 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_SLUG,
             ],
-            // slug некорректного типа
+            // slug invalid type
             [
                 [
                     'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
@@ -177,7 +206,31 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_SLUG,
             ],
-            // отсутствует icon
+            // slug over min length
+            [
+                [
+                    'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
+                    'name'            => 'новости',
+                    'slug'            => self::generateString(TagInterface::SLUG_MIN_LENGTH - 1),
+                    'icon'            => 'icon-1.png',
+                    'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
+                    'approved'        => 1,
+                ],
+                TagException::INVALID_SLUG_LENGTH . TagInterface::SLUG_MIN_LENGTH . '-' . TagInterface::SLUG_MAX_LENGTH,
+            ],
+            // slug over max length
+            [
+                [
+                    'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
+                    'name'            => 'новости',
+                    'slug'            => self::generateString(TagInterface::SLUG_MAX_LENGTH + 1),
+                    'icon'            => 'icon-1.png',
+                    'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
+                    'approved'        => 1,
+                ],
+                TagException::INVALID_SLUG_LENGTH . TagInterface::SLUG_MIN_LENGTH . '-' . TagInterface::SLUG_MAX_LENGTH,
+            ],
+            // miss icon
             [
                 [
                     'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
@@ -188,7 +241,7 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_ICON,
             ],
-            // icon некорректного типа
+            // icon invalid type
             [
                 [
                     'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
@@ -200,7 +253,19 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_ICON,
             ],
-            // отсутствует preview_post_id
+            // icon over max length
+            [
+                [
+                    'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
+                    'name'            => 'новости',
+                    'slug'            => 'novosti',
+                    'icon'            => self::generateString(TagInterface::ICON_MAX_LENGTH + 1),
+                    'preview_post_id' => '9ee22e72-13f3-4675-a612-d28844b43f40',
+                    'approved'        => 1,
+                ],
+                TagException::INVALID_ICON_LENGTH . TagInterface::ICON_MIN_LENGTH . '-' . TagInterface::ICON_MAX_LENGTH,
+            ],
+            // miss preview_post_id
             [
                 [
                     'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
@@ -211,7 +276,7 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_PREVIEW_POST_ID,
             ],
-            // preview_post_id некорректного типа
+            // preview_post_id invalid type
             [
                 [
                     'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
@@ -223,7 +288,7 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_PREVIEW_POST_ID,
             ],
-            // отсутствует approved
+            // miss approved
             [
                 [
                     'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
@@ -234,7 +299,7 @@ class TagFactoryTest extends AbstractTest
                 ],
                 TagException::INVALID_APPROVED,
             ],
-            // approved некорректного типа
+            // approved invalid type
             [
                 [
                     'id'              => '83d9fb1c-c417-4528-8745-adfd0af24f2c',
