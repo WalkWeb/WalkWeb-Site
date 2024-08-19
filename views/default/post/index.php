@@ -73,7 +73,7 @@ if (isset($auth) && $auth === true) {
 
 <div class="comment_container">
     <div class="comment_content">
-        <div class="comment_head">
+        <div class="comment_head" id="comment">
             Комментарии
         </div>
         <div id="comment_box">

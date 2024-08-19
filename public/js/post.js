@@ -451,6 +451,9 @@ function addComment(postSlug) {
                     checkCreateCommentEnergy();
                     updateLevel(data.level, data.exp_at_lvl, data.exp_to_lvl, data.exp_width);
                     document.getElementById('no_comment_rvd').style.display = 'none';
+                    document.getElementById("comment").scrollIntoView({
+                        behavior: 'smooth'
+                    });
 
                 } else {
                     createNotification(data.error);
