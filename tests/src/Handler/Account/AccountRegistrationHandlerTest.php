@@ -121,6 +121,22 @@ class AccountRegistrationHandlerTest extends AbstractTest
         self::assertEquals($account['id'], $data[0]['account_id']);
         self::assertEquals(NoticeInterface::REGISTER_START, $data[0]['message']);
         self::assertEquals(1, $data[0]['view']);
+
+        // check account_carma
+
+        $data = self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `account_carma` WHERE `account_id` = ? AND `season_id` = ?',
+            [
+                ['type' => 's', 'value' => $account['id']],
+                ['type' => 'i', 'value' => ACTIVE_SEASON],
+            ],
+            true
+        );
+
+        self::assertEquals($account['id'], $data['account_id']);
+        self::assertEquals(ACTIVE_SEASON, $data['season_id']);
+        self::assertEquals(0, $data['carma']);
+        self::assertEquals(0, $data['uses']);
     }
 
     /**

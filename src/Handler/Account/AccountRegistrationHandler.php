@@ -8,6 +8,8 @@ use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountFactory;
 use App\Domain\Account\AccountInterface;
 use App\Domain\Account\AccountRepository;
+use App\Domain\Account\Carma\CarmaFactory;
+use App\Domain\Account\Carma\CarmaRepository;
 use App\Domain\Account\Character\Avatar\AvatarInterface;
 use App\Domain\Account\Character\Avatar\AvatarRepository;
 use App\Domain\Account\Character\CharacterException;
@@ -24,7 +26,6 @@ use App\Domain\Account\MainCharacter\MainCharacterInterface;
 use App\Domain\Account\MainCharacter\MainCharacterRepository;
 use App\Domain\Account\Notice\Action\SendNoticeAction;
 use App\Domain\Account\Notice\Action\SendNoticeActionInterface;
-use App\Domain\Account\Notice\NoticeException;
 use App\Domain\Account\Notice\NoticeInterface;
 use App\Domain\Account\Notice\NoticeRepository;
 use Exception;
@@ -43,6 +44,7 @@ class AccountRegistrationHandler extends AbstractHandler
     private GenesisRepository $genesisRepository;
     private ProfessionRepository $professionRepository;
     private AvatarRepository $avatarRepository;
+    private CarmaRepository $carmaRepository;
 
     public function __construct(
         Container $container,
@@ -52,7 +54,8 @@ class AccountRegistrationHandler extends AbstractHandler
         CharacterRepository $characterRepository = null,
         GenesisRepository $genesisRepository = null,
         ProfessionRepository $professionRepository = null,
-        AvatarRepository $avatarRepository = null
+        AvatarRepository $avatarRepository = null,
+        CarmaRepository $carmaRepository = null
     )
     {
         parent::__construct($container);
@@ -63,6 +66,7 @@ class AccountRegistrationHandler extends AbstractHandler
         $this->genesisRepository = $genesisRepository ?? new GenesisRepository($this->container);
         $this->professionRepository = $professionRepository ?? new ProfessionRepository($this->container);
         $this->avatarRepository = $avatarRepository ?? new AvatarRepository($this->container);
+        $this->carmaRepository = $carmaRepository ?? new CarmaRepository($this->container);
     }
 
     /**
@@ -101,6 +105,7 @@ class AccountRegistrationHandler extends AbstractHandler
             $character = $this->createCharacter($requestDto, $account, $mainCharacter, $genesis, $profession, $avatar);
             $this->accountRepository->setMainCharacterId($account, $mainCharacter);
             $this->accountRepository->setCharacterId($account, $character);
+            $this->carmaRepository->add(CarmaFactory::createNew($account->getId()));
             $this->container->getCookies()->set(AccountInterface::AUTH_TOKEN, $account->getAuthToken());
             $this->sendMail($account);
             $this->sendNotice($account);
@@ -258,7 +263,7 @@ class AccountRegistrationHandler extends AbstractHandler
 
     /**
      * @param AccountInterface $account
-     * @throws NoticeException
+     * @throws AppException
      */
     private function sendNotice(AccountInterface $account): void
     {
