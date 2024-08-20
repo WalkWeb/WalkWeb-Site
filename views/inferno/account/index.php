@@ -82,7 +82,11 @@ $this->title = APP_NAME . ' — Ваш профиль';
                         </dl>
                         <dl>
                             <dt>Карма:</dt>
-                            <dd>#</dd>
+                            <dd>
+                                <span class="<?= $account->getCarma()->getCarmaColoClass() ?>">
+                                    <?= $account->getCarma()->getCarmaSign() . $account->getCarma()->getCarma() ?>
+                                </span>
+                            </dd>
                         </dl>
                         <dl>
                             <dt>Количество постов:</dt>

@@ -14,4 +14,6 @@ interface CarmaInterface
     public function getCarma(): int;
     public function getUses(): int;
     public function getAvailable(): int;
+    public function getCarmaSign(): string;
+    public function getCarmaColoClass(): string;
 }

@@ -70,16 +70,25 @@ class AccountRepository
             `characters_main`.`upload_bonus` as `upload_bonus`,
             `characters_main`.`stats_point` as `character_stat_points`,
 
-            `avatars`.`origin_url` as `avatar`
+            `avatars`.`origin_url` as `avatar`,
+
+            `account_carma`.`id` as `carma_id`,
+            `account_carma`.`season_id`,
+            `account_carma`.`carma`,
+            `account_carma`.`uses` as `carma_uses`
 
             FROM `accounts` 
 
             JOIN `characters_main` ON `accounts`.`id` = `characters_main`.`account_id`
             JOIN `characters` ON `accounts`.`character_id` = `characters`.`id`
             JOIN `avatars` ON `characters`.`avatar_id` = `avatars`.`id`
+            JOIN `account_carma` ON `accounts`.`id` = `account_carma`.`account_id` AND `account_carma`.`season_id` = ?
 
             WHERE `name` = ?',
-            [['type' => 's', 'value' => $name]],
+            [
+                ['type' => 'i', 'value' => ACTIVE_SEASON],
+                ['type' => 's', 'value' => $name],
+            ],
             true
         );
 

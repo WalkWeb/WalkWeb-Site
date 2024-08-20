@@ -8,7 +8,6 @@ use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountFactory;
 use App\Domain\Account\AccountInterface;
 use App\Domain\Account\AccountRepository;
-use App\Domain\Account\Carma\CarmaFactory;
 use App\Domain\Account\Carma\CarmaRepository;
 use App\Domain\Account\Character\Avatar\AvatarInterface;
 use App\Domain\Account\Character\Avatar\AvatarRepository;
@@ -105,7 +104,7 @@ class AccountRegistrationHandler extends AbstractHandler
             $character = $this->createCharacter($requestDto, $account, $mainCharacter, $genesis, $profession, $avatar);
             $this->accountRepository->setMainCharacterId($account, $mainCharacter);
             $this->accountRepository->setCharacterId($account, $character);
-            $this->carmaRepository->add(CarmaFactory::createNew($account->getId()));
+            $this->carmaRepository->add($account->getCarma());
             $this->container->getCookies()->set(AccountInterface::AUTH_TOKEN, $account->getAuthToken());
             $this->sendMail($account);
             $this->sendNotice($account);

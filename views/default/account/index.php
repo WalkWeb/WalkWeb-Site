@@ -34,6 +34,7 @@ $canLike = $account->isCanLike() ? 'да' : 'нет';
     Пол: <?= $account->getFloor()->getName() ?><br />
     Статус: <?= $account->getStatus()->getName() ?><br />
     Группа: <?= $account->getGroup()->getName() ?><br />
+    Карма: <span class="<?= $account->getCarma()->getCarmaColoClass() ?>"><?= $account->getCarma()->getCarmaSign() . $account->getCarma()->getCarma() ?></span>
     Дата регистрации: <?= $account->getCreatedAt()->format('Y-m-d H:i:s') ?><br />
     Последнее обновление данных: <?= $account->getUpdatedAt()->format('Y-m-d H:i:s') ?>
 </p>

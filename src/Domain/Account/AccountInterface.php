@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Account;
 
+use App\Domain\Account\Carma\CarmaInterface;
 use App\Domain\Account\Floor\FloorInterface;
 use App\Domain\Account\Group\AccountGroupInterface;
 use App\Domain\Account\MainCharacter\MainCharacterInterface;
@@ -74,6 +75,7 @@ interface AccountInterface
     public function getStatus(): AccountStatus;
     public function getGroup(): AccountGroupInterface;
     public function getUpload(): AccountUpload;
+    public function getCarma(): CarmaInterface;
     public function getCreatedAt(): DateTimeInterface;
     public function getUpdatedAt(): DateTimeInterface;
 }

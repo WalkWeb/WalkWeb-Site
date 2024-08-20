@@ -114,7 +114,11 @@ $rise = $account->getMainCharacter()->getLevel()->getStatPoints() > 0;
                         </dl>
                         <dl>
                             <dt>Карма:</dt>
-                            <dd>#</dd>
+                            <dd>
+                                <span class="<?= $account->getCarma()->getCarmaColoClass() ?>">
+                                    <?= $account->getCarma()->getCarmaSign() . $account->getCarma()->getCarma() ?>
+                                </span>
+                            </dd>
                         </dl>
                         <dl>
                             <dt>Количество постов:</dt>

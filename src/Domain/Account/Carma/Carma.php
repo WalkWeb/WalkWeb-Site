@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace App\Domain\Account\Carma;
 
 use App\Domain\Account\Character\Season\Season;
+use App\Domain\Account\Traits\CarmaTrait;
 
 class Carma implements CarmaInterface
 {
+    use CarmaTrait;
+
     private string $id;
     private string $accountId;
     private Season $season;

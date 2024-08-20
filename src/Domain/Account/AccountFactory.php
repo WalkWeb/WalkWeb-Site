@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Account;
 
+use App\Domain\Account\Carma\Carma;
+use App\Domain\Account\Carma\CarmaFactory;
 use App\Domain\Account\Character\Avatar\AvatarInterface;
+use App\Domain\Account\Character\Season\Season;
 use App\Domain\Account\DTO\CreateAccountRequest;
 use App\Domain\Account\Floor\Floor;
 use App\Domain\Account\Group\AccountGroup;
@@ -67,6 +70,7 @@ class AccountFactory
             new AccountStatus(self::int($data, 'status_id', AccountException::INVALID_STATUS_ID)),
             new AccountGroup(self::int($data, 'group_id', AccountException::INVALID_GROUP_ID)),
             self::uploadValidate($data, $mainCharacter),
+            CarmaFactory::create($data),
             self::date($data, 'created_at', AccountException::INVALID_CREATED_AT),
             self::date($data, 'updated_at', AccountException::INVALID_UPDATED_AT),
             $mainCharacter,
@@ -86,8 +90,10 @@ class AccountFactory
     {
         // TODO Если user_agent больше допустимой длины - то просто обрезать его, без ошибки
 
+        $id = Uuid::uuid4()->toString();
+
         return new Account(
-            Uuid::uuid4()->toString(),
+            $id,
             $request->getLogin(),
             $request->getLogin(),
             $avatar->getOriginUrl(),
@@ -108,6 +114,7 @@ class AccountFactory
             new AccountStatus(AccountStatusInterface::ACTIVE),
             new AccountGroup(AccountGroupInterface::USER),
             new AccountUpload(0, UploadInterface::UPLOAD_MAX_BASE),
+            new Carma(Uuid::uuid4()->toString(), $id, new Season(ACTIVE_SEASON), 0, 0),
             new DateTime(),
             new DateTime(),
             null,

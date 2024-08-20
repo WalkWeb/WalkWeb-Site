@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Account;
 
+use App\Domain\Account\Carma\CarmaInterface;
 use App\Domain\Account\Floor\FloorInterface;
 use App\Domain\Account\Group\AccountGroupInterface;
 use App\Domain\Account\MainCharacter\MainCharacterInterface;
@@ -36,6 +37,7 @@ class Account implements AccountInterface
     private AccountStatus $status;
     private AccountGroupInterface $group;
     private AccountUpload $upload;
+    private CarmaInterface $carma;
     private DateTimeInterface $createdAt;
     private DateTimeInterface $updatedAt;
 
@@ -61,6 +63,7 @@ class Account implements AccountInterface
         AccountStatus $status,
         AccountGroupInterface $group,
         AccountUpload $upload,
+        CarmaInterface $carma,
         DateTimeInterface $createdAt,
         DateTimeInterface $updatedAt,
         ?MainCharacterInterface $mainCharacter
@@ -87,6 +90,7 @@ class Account implements AccountInterface
         $this->status = $status;
         $this->group = $group;
         $this->upload = $upload;
+        $this->carma = $carma;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->mainCharacter = $mainCharacter;
@@ -288,6 +292,14 @@ class Account implements AccountInterface
     public function getUpload(): AccountUpload
     {
         return $this->upload;
+    }
+
+    /**
+     * @return CarmaInterface
+     */
+    public function getCarma(): CarmaInterface
+    {
+        return $this->carma;
     }
 
     /**

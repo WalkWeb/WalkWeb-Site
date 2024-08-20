@@ -6,12 +6,15 @@ namespace App\Domain\Account\Collection;
 
 use App\Domain\Account\Group\AccountGroupInterface;
 use App\Domain\Account\Status\AccountStatusInterface;
+use App\Domain\Account\Traits\CarmaTrait;
 
 /**
  * Объект для вывода списка аккаунтов - минимальный набор данных
  */
 class AccountList implements AccountListInterface
 {
+    use CarmaTrait;
+
     private string $id;
     private string $avatar;
     private string $name;
@@ -126,33 +129,5 @@ class AccountList implements AccountListInterface
     public function getCarma(): int
     {
         return $this->carma;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCarmaSign(): string
-    {
-        if ($this->carma > 0) {
-            return '+';
-        }
-
-        return '';
-    }
-
-    /**
-     * @return string
-     */
-    public function getCarmaColoClass(): string
-    {
-        if ($this->carma > 0) {
-            return 'positiveRatingColor';
-        }
-
-        if ($this->carma < 0) {
-            return 'negativeRatingColor';
-        }
-
-        return 'defaultRatingColor';
     }
 }

@@ -6,6 +6,8 @@ namespace Test\src\Domain\Account;
 
 use App\Domain\Account\Account;
 use App\Domain\Account\AccountException;
+use App\Domain\Account\Carma\Carma;
+use App\Domain\Account\Character\Season\Season;
 use App\Domain\Account\Floor\Floor;
 use App\Domain\Account\Group\AccountGroup;
 use App\Domain\Account\Status\AccountStatus;
@@ -44,6 +46,7 @@ class AccountTest extends AbstractTest
         $status = new AccountStatus(1);
         $group = new AccountGroup(10);
         $upload = new AccountUpload(0, 10000);
+        $carma = new Carma('0d462231-3a33-4df6-95e5-ee7b99d27530', $id, new Season(ACTIVE_SEASON), 20, 5);
         $createdAt = new DateTime('2020-12-25 20:00:00');
         $updatedAt = new DateTime('2020-12-25 20:00:00');
 
@@ -69,6 +72,7 @@ class AccountTest extends AbstractTest
             $status,
             $group,
             $upload,
+            $carma,
             $createdAt,
             $updatedAt,
             null,
@@ -95,6 +99,7 @@ class AccountTest extends AbstractTest
         self::assertEquals($status, $account->getStatus());
         self::assertEquals($group, $account->getGroup());
         self::assertEquals($upload, $account->getUpload());
+        self::assertEquals($carma, $account->getCarma());
         self::assertEquals($createdAt, $account->getCreatedAt());
         self::assertEquals($updatedAt, $account->getUpdatedAt());
 

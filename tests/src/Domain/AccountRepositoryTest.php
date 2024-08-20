@@ -15,7 +15,6 @@ class AccountRepositoryTest extends AbstractTest
      * Test on success get account from database by name
      *
      * @throws AppException
-     * @throws AccountException
      */
     public function testAccountRepositoryGetSuccess(): void
     {
@@ -30,7 +29,6 @@ class AccountRepositoryTest extends AbstractTest
     /**
      * Test on not found account from database by name
      *
-     * @throws AccountException
      * @throws AppException
      */
     public function testAccountRepositoryGetFail(): void
