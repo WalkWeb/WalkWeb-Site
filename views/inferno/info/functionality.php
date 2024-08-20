@@ -40,6 +40,7 @@ $this->title = APP_NAME . ' — Функционал проекта';
 
 <ul>
     <li><span class="green">Профиль</span></li>
+    <li><span class="red">Функционал увеличения характеристик</span></li>
     <li><span class="red">Функционал увеличения энергии</span></li>
     <li><span class="red">Функционал увеличения места на диске</span></li>
     <li><span class="red">Список своих постов</span></li>

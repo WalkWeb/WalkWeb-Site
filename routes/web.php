@@ -39,6 +39,7 @@ $routes->get('tag.list', '/t/{slug}/{rating}', 'App\\Handler\\Tag\\TagPageHandle
 // info
 $routes->get('statistic', '/statistic', 'App\\Handler\\Info\\StatisticPageHandler');
 $routes->get('functionality', '/functionality', 'App\\Handler\\Info\\FunctionalityPageHandler');
+$routes->get('rules', '/rules', 'App\\Handler\\Info\\RulesPageHandler');
 
 // ratings
 $routes->get('top.account.level', '/top/account/level', 'App\\Handler\\Rating\\AccountLevelRatingPageHandler');
