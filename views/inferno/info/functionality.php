@@ -123,6 +123,10 @@ $this->title = APP_NAME . ' — Функционал проекта';
     <li><span class="red">Рейтинг сообществ</span></li>
 </ul>
 
+<div class="line_box"><div class="line_row"><div class="line_left"></div><div class="line_right"></div><div class="line_center">&nbsp;</div></div></div>
+
+<p class="center"><i>Функционал ниже можно добавлять уже после анонса новой демо-версии</i></p>
+
 <h2>Файлы</h2>
 
 <ul>
