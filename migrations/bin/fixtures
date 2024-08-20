@@ -491,6 +491,22 @@ try {
 
 
     $db->query("
+        INSERT INTO `account_carma` (`id`, `account_id`, `season_id`, `carma`, `uses`) VALUES
+        ('d61daaa1-fc3d-4ef4-ba69-6d7830960d01', '1e3a3b27-12da-4c73-a3a7-b83092705b01', 1, 0, 0),
+        ('d61daaa1-fc3d-4ef4-ba69-6d7830960d02', '1e3a3b27-12da-4c73-a3a7-b83092705b02', 1, 3, 0),
+        ('d61daaa1-fc3d-4ef4-ba69-6d7830960d03', '1e3a3b27-12da-4c73-a3a7-b83092705b03', 1, 11, 5),
+        ('d61daaa1-fc3d-4ef4-ba69-6d7830960d04', '1e3a3b27-12da-4c73-a3a7-b83092705b04', 1, 43, 20),
+        ('d61daaa1-fc3d-4ef4-ba69-6d7830960d05', '1e3a3b27-12da-4c73-a3a7-b83092705b05', 1, 31, 15),
+        ('d61daaa1-fc3d-4ef4-ba69-6d7830960d06', '1e3a3b27-12da-4c73-a3a7-b83092705b06', 1, 6, 0),
+        ('d61daaa1-fc3d-4ef4-ba69-6d7830960d07', '1e3a3b27-12da-4c73-a3a7-b83092705b07', 1, 3, 0),
+        ('d61daaa1-fc3d-4ef4-ba69-6d7830960d08', '1e3a3b27-12da-4c73-a3a7-b83092705b08', 1, 0, 0),
+        ('d61daaa1-fc3d-4ef4-ba69-6d7830960d09', '1e3a3b27-12da-4c73-a3a7-b83092705b09', 1, 2, 0),
+        ('d61daaa1-fc3d-4ef4-ba69-6d7830960d10', '1e3a3b27-12da-4c73-a3a7-b83092705b10', 1, 0, 0),
+        ('d61daaa1-fc3d-4ef4-ba69-6d7830960d11', '1e3a3b27-12da-4c73-a3a7-b83092705b11', 1, 1, 0);
+    ");
+
+
+    $db->query("
         INSERT INTO `posts` (`id`, `author_id`, `title`, `slug`, `content`, `html_content`, 
         `status_id`, `likes`, `dislikes`, `comments_count`, `published`, `approved`, `moderated`, `created_at`, `updated_at`) VALUES
         ('7684ad22-613b-4c65-9bad-b7dfdd394c01', '1e3a3b27-12da-4c73-a3a7-b83092705b01', 'title post 1', 'slug-post-1-1000', '[p]content #1[/p]', '<p>html content #1</p>', 
