@@ -30,6 +30,8 @@ class AccountListFactory
             self::int($data, 'exp', AccountException::INVALID_EXP),
             new AccountStatus(self::int($data, 'status_id', AccountException::INVALID_STATUS_ID)),
             new AccountGroup(self::int($data, 'group_id', AccountException::INVALID_GROUP_ID)),
+            self::int($data, 'post_count', AccountException::INVALID_POST_COUNT),
+            self::int($data, 'comment_count', AccountException::INVALID_COMMENT_COUNT),
             self::int($data, 'carma', AccountException::INVALID_CARMA),
         );
     }

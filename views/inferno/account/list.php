@@ -53,6 +53,7 @@ $pagination = $pagination ?? '';
                             <td><p><span class="tna">Группа</span></p></td>
                             <td><p><span class="tna">Статус</span></p></td>
                             <td><p><span class="tna">Постов</span></p></td>
+                            <td><p><span class="tna">Комментариев</span></p></td>
                             <td><p><span class="tna">Карма</span></p></td>
                         </tr>
                         <?php
@@ -65,7 +66,8 @@ $pagination = $pagination ?? '';
                                     <td><p><span class="text_dam">' . $account->getLevel() . '</span></p></td>
                                     <td><p><span class="text_dam">' . $account->getGroup()->getName() . '</span></p></td>
                                     <td><p><span class="text_dam">' . $account->getStatus()->getName() . '</span></p></td>
-                                    <td><p><span class="text_dam">#</span></p></td>
+                                    <td><p><span class="text_dam">' . $account->getPostCount() . '</span></p></td>
+                                    <td><p><span class="text_dam">' . $account->getCommentCount() . '</span></p></td>
                                     <td><p><span class="' . $account->getCarmaColoClass() . '">' . $account->getCarmaSign() . $account->getCarma() . '</span></p></td>
                                 </tr>
                             ';
@@ -81,6 +83,7 @@ $pagination = $pagination ?? '';
                             <td><p><span class="tna">Группа</span></p></td>
                             <td><p><span class="tna">Статус</span></p></td>
                             <td><p><span class="tna">Постов</span></p></td>
+                            <td><p><span class="tna">Комментариев</span></p></td>
                             <td><p><span class="tna">Карма</span></p></td>
                         </tr>
                     </table>

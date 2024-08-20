@@ -16,6 +16,8 @@ interface AccountListInterface
     public function getExp(): int;
     public function getGroup(): AccountGroupInterface;
     public function getStatus(): AccountStatusInterface;
+    public function getPostCount(): int;
+    public function getCommentCount(): int;
     public function getCarma(): int;
     public function getCarmaSign(): string;
     public function getCarmaColoClass(): string;

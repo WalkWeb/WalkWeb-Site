@@ -70,8 +70,8 @@ if (empty($accounts) || !($accounts instanceof AccountCollection)) {
                                     <td><p><span class="text_dam">' . $account->getLevel() . '</span></p></td>
                                     <td><p><span class="text_dam">' . $account->getExp() . '</span></p></td>
                                     <td><p><a href="/u/'. $account->getName() . '" title="" class="acc_info_name ">' . $account->getName() . '</a></p></td>
-                                    <td><p><span class="text_dam">#</span></p></td>
-                                    <td><p><span class="text_dam">#</span></p></td>
+                                    <td><p><span class="text_dam">' . $account->getPostCount() . '</span></p></td>
+                                    <td><p><span class="text_dam">' . $account->getCommentCount() . '</span></p></td>
                                     <td><p><span class="' . $account->getCarmaColoClass() . '">' . $account->getCarmaSign() . $account->getCarma() . '</span></p></td>
                                 </tr>
                             ';

@@ -37,6 +37,8 @@ class RatingRepository
                 `accounts`.`name`,
                 `accounts`.`status_id`,
                 `accounts`.`group_id`,
+                `accounts`.`post_count`,
+                `accounts`.`comment_count`,
                 `characters_main`.`level`,
                 `characters_main`.`exp`,
                 `avatars`.`small_url` as `avatar`,

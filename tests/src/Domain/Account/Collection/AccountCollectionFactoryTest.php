@@ -14,7 +14,6 @@ class AccountCollectionFactoryTest extends AbstractTest
     /**
      * @dataProvider successDataProvider
      * @param array $data
-     * @throws AccountException
      * @throws AppException
      */
     public function testAccountCollectionFactorySuccess(array $data): void
@@ -41,7 +40,6 @@ class AccountCollectionFactoryTest extends AbstractTest
      * @dataProvider failDataProvider
      * @param array $data
      * @param string $error
-     * @throws AccountException
      * @throws AppException
      */
     public function testAccountCollectionFactoryFail(array $data, string $error): void
@@ -60,34 +58,40 @@ class AccountCollectionFactoryTest extends AbstractTest
             [
                 [
                     [
-                        'id'        => 'ea5885e8-242b-4953-bb0f-7e2b86c318d1',
-                        'avatar'    => 'avatar-1.png',
-                        'name'      => 'name-1',
-                        'level'     => 3,
-                        'exp'       => 275,
-                        'status_id' => 1,
-                        'group_id'  => 10,
-                        'carma'     => 10,
+                        'id'            => 'ea5885e8-242b-4953-bb0f-7e2b86c318d1',
+                        'avatar'        => 'avatar-1.png',
+                        'name'          => 'name-1',
+                        'level'         => 3,
+                        'exp'           => 275,
+                        'status_id'     => 1,
+                        'group_id'      => 10,
+                        'post_count'    => 4,
+                        'comment_count' => 7,
+                        'carma'         => 10,
                     ],
                     [
-                        'id'        => 'ea5885e8-242b-4953-bb0f-7e2b86c318d2',
-                        'avatar'    => 'avatar-2.png',
-                        'name'      => 'name-2',
-                        'level'     => 5,
-                        'exp'       => 1275,
-                        'status_id' => 2,
-                        'group_id'  => 20,
-                        'carma'     => -32,
+                        'id'            => 'ea5885e8-242b-4953-bb0f-7e2b86c318d2',
+                        'avatar'        => 'avatar-2.png',
+                        'name'          => 'name-2',
+                        'level'         => 5,
+                        'exp'           => 1275,
+                        'status_id'     => 2,
+                        'group_id'      => 20,
+                        'post_count'    => 4,
+                        'comment_count' => 7,
+                        'carma'         => -32,
                     ],
                     [
-                        'id'        => 'ea5885e8-242b-4953-bb0f-7e2b86c318d3',
-                        'avatar'    => 'avatar-3.png',
-                        'name'      => 'name-3',
-                        'level'     => 1,
-                        'exp'       => 12,
-                        'status_id' => 1,
-                        'group_id'  => 10,
-                        'carma'     => 21,
+                        'id'            => 'ea5885e8-242b-4953-bb0f-7e2b86c318d3',
+                        'avatar'        => 'avatar-3.png',
+                        'name'          => 'name-3',
+                        'level'         => 1,
+                        'exp'           => 12,
+                        'status_id'     => 1,
+                        'group_id'      => 10,
+                        'post_count'    => 4,
+                        'comment_count' => 7,
+                        'carma'         => 21,
                     ],
                 ],
             ],
@@ -101,24 +105,28 @@ class AccountCollectionFactoryTest extends AbstractTest
             [
                 [
                     [
-                        'id'        => 'ea5885e8-242b-4953-bb0f-7e2b86c318d1',
-                        'avatar'    => 'avatar-1.png',
-                        'name'      => 'name-1',
-                        'level'     => 3,
-                        'exp'       => 275,
-                        'status_id' => 1,
-                        'group_id'  => 10,
-                        'carma'     => 10,
+                        'id'            => 'ea5885e8-242b-4953-bb0f-7e2b86c318d1',
+                        'avatar'        => 'avatar-1.png',
+                        'name'          => 'name-1',
+                        'level'         => 3,
+                        'exp'           => 275,
+                        'status_id'     => 1,
+                        'group_id'      => 10,
+                        'post_count'    => 4,
+                        'comment_count' => 7,
+                        'carma'         => 10,
                     ],
                     [
-                        'id'        => 'ea5885e8-242b-4953-bb0f-7e2b86c318d1',
-                        'avatar'    => 'avatar-2.png',
-                        'name'      => 'name-2',
-                        'level'     => 5,
-                        'exp'       => 1275,
-                        'status_id' => 2,
-                        'group_id'  => 20,
-                        'carma'     => -32,
+                        'id'            => 'ea5885e8-242b-4953-bb0f-7e2b86c318d1',
+                        'avatar'        => 'avatar-2.png',
+                        'name'          => 'name-2',
+                        'level'         => 5,
+                        'exp'           => 1275,
+                        'status_id'     => 2,
+                        'group_id'      => 20,
+                        'post_count'    => 4,
+                        'comment_count' => 7,
+                        'carma'         => -32,
                     ],
                 ],
                 AccountException::ALREADY_EXIST,
@@ -127,14 +135,16 @@ class AccountCollectionFactoryTest extends AbstractTest
             [
                 [
                     [
-                        'id'        => 'ea5885e8-242b-4953-bb0f-7e2b86c318d1',
-                        'avatar'    => 'avatar-1.png',
-                        'name'      => 'name-1',
-                        'level'     => 3,
-                        'exp'       => 275,
-                        'status_id' => 1,
-                        'group_id'  => 10,
-                        'carma'     => 10,
+                        'id'            => 'ea5885e8-242b-4953-bb0f-7e2b86c318d1',
+                        'avatar'        => 'avatar-1.png',
+                        'name'          => 'name-1',
+                        'level'         => 3,
+                        'exp'           => 275,
+                        'status_id'     => 1,
+                        'group_id'      => 10,
+                        'post_count'    => 4,
+                        'comment_count' => 7,
+                        'carma'         => 10,
                     ],
                     'string',
                 ],

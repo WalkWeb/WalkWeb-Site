@@ -19,8 +19,8 @@ class AccountList implements AccountListInterface
     private int $exp;
     private AccountStatusInterface $status;
     private AccountGroupInterface $group;
-    //private int $postCount;
-    //private int $commentCount;
+    private int $postCount;
+    private int $commentCount;
     private int $carma;
 
     public function __construct(
@@ -31,6 +31,8 @@ class AccountList implements AccountListInterface
         int $exp,
         AccountStatusInterface $status,
         AccountGroupInterface $group,
+        int $postCount,
+        int $commentCount,
         int $carma
     )
     {
@@ -41,6 +43,8 @@ class AccountList implements AccountListInterface
         $this->exp = $exp;
         $this->status = $status;
         $this->group = $group;
+        $this->postCount = $postCount;
+        $this->commentCount = $commentCount;
         $this->carma = $carma;
     }
 
@@ -98,6 +102,22 @@ class AccountList implements AccountListInterface
     public function getStatus(): AccountStatusInterface
     {
         return $this->status;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPostCount(): int
+    {
+        return $this->postCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCommentCount(): int
+    {
+        return $this->commentCount;
     }
 
     /**
