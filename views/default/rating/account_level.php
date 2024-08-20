@@ -34,7 +34,7 @@ if (count($accounts) > 0) {
                 <td><a href="/u/' . $account->getName() . '" >' . $account->getName() . '</a></td>
                 <td>#</td>
                 <td>#</td>
-                <td>' . $account->getCarma() . '</td>
+               <td><span class="' . $account->getCarmaColoClass() . '">' . $account->getCarmaSign() . $account->getCarma() . '</span></td>
              </tr>';
         $i++;
     }

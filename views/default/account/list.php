@@ -34,7 +34,7 @@ if ($total === 0) {
                 <td>' . $account->getLevel() . '</td>
                 <td>' . $account->getGroup()->getName() . '</td>
                 <td>' . $account->getStatus()->getName() . '</td>
-                <td>' . $account->getCarma() . '</td>
+                <td><span class="' . $account->getCarmaColoClass() . '">' . $account->getCarmaSign() . $account->getCarma() . '</span></td>
              </tr>';
     }
 

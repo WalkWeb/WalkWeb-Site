@@ -39,24 +39,21 @@ class RatingRepository
                 `accounts`.`group_id`,
                 `characters_main`.`level`,
                 `characters_main`.`exp`,
-                `avatars`.`small_url` as `avatar`
+                `avatars`.`small_url` as `avatar`,
+                `account_carma`.`carma`
 
                 FROM `accounts` 
 
                 JOIN `characters_main` on `accounts`.`id` = `characters_main`.`account_id`
                 JOIN `characters` on `accounts`.`character_id` = `characters`.`id`
                 JOIN `avatars` on `characters`.`avatar_id` = `avatars`.`id`
+                JOIN `account_carma` ON `accounts`.`id` = `account_carma`.`account_id`
 
-                ORDER BY `characters_main`.`exp` DESC LIMIT ?',
+                ORDER BY `characters_main`.`exp` DESC, `created_at` LIMIT ?',
             [
                 ['type' => 'i', 'value' => self::LIMIT],
             ]
         );
-
-        // TODO Mock
-        foreach ($data as &$datum) {
-            $datum['carma'] = 0;
-        }
 
         return AccountCollectionFactory::create($data);
     }

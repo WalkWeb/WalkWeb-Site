@@ -38,25 +38,22 @@ class AccountListRepository
                 `accounts`.`group_id`,
                 `characters_main`.`level`,
                 `characters_main`.`exp`,
-                `avatars`.`small_url` as `avatar`
+                `avatars`.`small_url` as `avatar`,
+                `account_carma`.`carma`
 
                 FROM `accounts` 
 
-                JOIN `characters_main` on `accounts`.`id` = `characters_main`.`account_id`
-                JOIN `characters` on `accounts`.`character_id` = `characters`.`id`
-                JOIN `avatars` on `characters`.`avatar_id` = `avatars`.`id`
+                JOIN `characters_main` ON `accounts`.`id` = `characters_main`.`account_id`
+                JOIN `characters` ON `accounts`.`character_id` = `characters`.`id`
+                JOIN `avatars` ON `characters`.`avatar_id` = `avatars`.`id`
+                JOIN `account_carma` ON `accounts`.`id` = `account_carma`.`account_id`
 
-                ORDER BY `created_at` LIMIT ? OFFSET ?',
+                ORDER BY `created_at`, `created_at` LIMIT ? OFFSET ?',
             [
                 ['type' => 'i', 'value' => $limit],
                 ['type' => 'i', 'value' => $offset],
             ]
         );
-
-        // TODO Mock
-        foreach ($data as &$datum) {
-            $datum['carma'] = 0;
-        }
 
         return AccountCollectionFactory::create($data);
     }

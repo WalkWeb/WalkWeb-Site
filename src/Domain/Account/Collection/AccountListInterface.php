@@ -17,4 +17,6 @@ interface AccountListInterface
     public function getGroup(): AccountGroupInterface;
     public function getStatus(): AccountStatusInterface;
     public function getCarma(): int;
+    public function getCarmaSign(): string;
+    public function getCarmaColoClass(): string;
 }

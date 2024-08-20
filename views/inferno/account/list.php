@@ -65,8 +65,8 @@ $pagination = $pagination ?? '';
                                     <td><p><span class="text_dam">' . $account->getLevel() . '</span></p></td>
                                     <td><p><span class="text_dam">' . $account->getGroup()->getName() . '</span></p></td>
                                     <td><p><span class="text_dam">' . $account->getStatus()->getName() . '</span></p></td>
-                                    <td><p><span class="text_dam">' . $account->getCarma() . '</span></p></td>
-                                    <td><p>-</p></td>
+                                    <td><p><span class="text_dam">#</span></p></td>
+                                    <td><p><span class="' . $account->getCarmaColoClass() . '">' . $account->getCarmaSign() . $account->getCarma() . '</span></p></td>
                                 </tr>
                             ';
                             }

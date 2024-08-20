@@ -14,10 +14,10 @@ class AccountListRepositoryTest extends AbstractTest
      * @dataProvider getAllDataProvider
      * @param int $offset
      * @param int $limit
-     * @param $data
+     * @param array $data
      * @throws AppException
      */
-    public function testAccountListRepositoryGetAll(int $offset, int $limit, $data): void
+    public function testAccountListRepositoryGetAll(int $offset, int $limit, array $data): void
     {
         $accounts = $this->getRepository()->getAll($offset, $limit);
 
@@ -33,6 +33,8 @@ class AccountListRepositoryTest extends AbstractTest
             self::assertEquals($data[$i]['status_id'], $account->getStatus()->getId());
             self::assertEquals($data[$i]['group_id'], $account->getGroup()->getId());
             self::assertEquals($data[$i]['carma'], $account->getCarma());
+            self::assertEquals($data[$i]['sign'], $account->getCarmaSign());
+            self::assertEquals($data[$i]['color'], $account->getCarmaColoClass());
             $i++;
         }
     }
@@ -65,6 +67,8 @@ class AccountListRepositoryTest extends AbstractTest
                         'status_id' => 1,
                         'group_id'  => 10,
                         'carma'     => 0,
+                        'sign'      => '',
+                        'color'     => 'defaultRatingColor',
                     ],
                     [
                         'id'        => self::BLOCKED_USER,
@@ -74,7 +78,9 @@ class AccountListRepositoryTest extends AbstractTest
                         'exp'       => 54,
                         'status_id' => 2,
                         'group_id'  => 10,
-                        'carma'     => 0,
+                        'carma'     => 3,
+                        'sign'      => '+',
+                        'color'     => 'positiveRatingColor',
                     ],
                 ],
             ],
@@ -91,7 +97,9 @@ class AccountListRepositoryTest extends AbstractTest
                         'exp'       => 150,
                         'status_id' => 1,
                         'group_id'  => 10,
-                        'carma'     => 0,
+                        'carma'     => 11,
+                        'sign'      => '+',
+                        'color'     => 'positiveRatingColor',
                     ],
                     [
                         'id'        => self::DEMO_MODERATOR,
@@ -101,7 +109,9 @@ class AccountListRepositoryTest extends AbstractTest
                         'exp'       => 450,
                         'status_id' => 1,
                         'group_id'  => 20,
-                        'carma'     => 0,
+                        'carma'     => 43,
+                        'sign'      => '+',
+                        'color'     => 'positiveRatingColor',
                     ],
                 ],
             ],

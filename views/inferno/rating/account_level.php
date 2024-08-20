@@ -63,7 +63,6 @@ if (empty($accounts) || !($accounts instanceof AccountCollection)) {
                         if (count($accounts) > 0) {
                             $i = 1;
                             foreach ($accounts as $account) {
-
                                 echo '
                                 <tr class="tbc2">
                                     <td><p><span class="text_dam">' . $i . '</span></p></td>
@@ -73,7 +72,7 @@ if (empty($accounts) || !($accounts instanceof AccountCollection)) {
                                     <td><p><a href="/u/'. $account->getName() . '" title="" class="acc_info_name ">' . $account->getName() . '</a></p></td>
                                     <td><p><span class="text_dam">#</span></p></td>
                                     <td><p><span class="text_dam">#</span></p></td>
-                                    <td><p>' . $account->getCarma() . '</p></td>
+                                    <td><p><span class="' . $account->getCarmaColoClass() . '">' . $account->getCarmaSign() . $account->getCarma() . '</span></p></td>
                                 </tr>
                             ';
                                 $i++;

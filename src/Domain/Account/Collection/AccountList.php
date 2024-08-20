@@ -107,4 +107,32 @@ class AccountList implements AccountListInterface
     {
         return $this->carma;
     }
+
+    /**
+     * @return string
+     */
+    public function getCarmaSign(): string
+    {
+        if ($this->carma > 0) {
+            return '+';
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getCarmaColoClass(): string
+    {
+        if ($this->carma > 0) {
+            return 'positiveRatingColor';
+        }
+
+        if ($this->carma < 0) {
+            return 'negativeRatingColor';
+        }
+
+        return 'defaultRatingColor';
+    }
 }
