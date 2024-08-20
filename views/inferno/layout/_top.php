@@ -61,7 +61,7 @@ use App\Domain\Auth\AuthInterface;
                     <a href="#" title="ИГРАТЬ" class="head_text">ИГРАТЬ</a>
                 </div>
                 <div class="menu_head_el" id="menu_head_3">
-                    <a href="#" title="РЕЙТИНГИ" class="head_text">РЕЙТИНГИ</a>
+                    <a href="/top/account/level" title="РЕЙТИНГИ" class="head_text">РЕЙТИНГИ</a>
                 </div>
                 <div class="menu_head_el" id="menu_head_4">
                     <a href="#" title="ОТЗЫВЫ" class="head_text">ОТЗЫВЫ</a>

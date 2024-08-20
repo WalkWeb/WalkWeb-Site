@@ -40,6 +40,9 @@ $routes->get('tag.list', '/t/{slug}/{rating}', 'App\\Handler\\Tag\\TagPageHandle
 $routes->get('statistic', '/statistic', 'App\\Handler\\Info\\StatisticPageHandler');
 $routes->get('functionality', '/functionality', 'App\\Handler\\Info\\FunctionalityPageHandler');
 
+// ratings
+$routes->get('top.account.level', '/top/account/level', 'App\\Handler\\Rating\\AccountLevelRatingPageHandler');
+
 // temporary methods
 // TODO delete
 $routes->get('account.add.exp', '/add/exp', 'App\\Handler\\Temporary\\AddExpHandler');

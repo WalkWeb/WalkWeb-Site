@@ -12,7 +12,6 @@ class AccountCollectionFactory
     /**
      * @param array $data
      * @return AccountCollection
-     * @throws AccountException
      * @throws AppException
      */
     public static function create(array $data): AccountCollection

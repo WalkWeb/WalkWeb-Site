@@ -18,7 +18,6 @@ class AccountListFactory
     /**
      * @param array $data
      * @return AccountListInterface
-     * @throws AccountException
      * @throws AppException
      */
     public static function create(array $data): AccountListInterface

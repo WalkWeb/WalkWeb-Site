@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Handler\Account;
 
-use App\Domain\Account\AccountException;
 use App\Domain\Account\Collection\AccountListRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
@@ -24,7 +23,6 @@ class AccountListPageHandler extends AbstractHandler
      * @param Request $request
      * @return Response
      * @throws AppException
-     * @throws AccountException
      */
     public function __invoke(Request $request): Response
     {

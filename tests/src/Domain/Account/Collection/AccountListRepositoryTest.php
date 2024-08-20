@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Account\Collection;
 
-use App\Domain\Account\AccountException;
 use App\Domain\Account\Collection\AccountListRepository;
 use Test\AbstractTest;
 use WalkWeb\NW\AppException;
@@ -17,7 +16,6 @@ class AccountListRepositoryTest extends AbstractTest
      * @param int $limit
      * @param $data
      * @throws AppException
-     * @throws AccountException
      */
     public function testAccountListRepositoryGetAll(int $offset, int $limit, $data): void
     {

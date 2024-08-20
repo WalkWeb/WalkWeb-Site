@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Account\Collection;
+namespace App\Domain\Rating;
 
-use App\Domain\Account\AccountException;
+use App\Domain\Account\Collection\AccountCollection;
+use App\Domain\Account\Collection\AccountCollectionFactory;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 
-class AccountListRepository
+class RatingRepository
 {
+    private const LIMIT = 30;
+
     private Container $container;
 
     public function __construct(Container $container)
@@ -22,12 +25,10 @@ class AccountListRepository
      *
      * TODO Добавить фильтрацию по theme (для этого нужно добавить больше аккаунтов в фикстуры)
      *
-     * @param int $offset
-     * @param int $limit
      * @return AccountCollection
      * @throws AppException
      */
-    public function getAll(int $offset, int $limit): AccountCollection
+    public function getTopAccountLevel(): AccountCollection
     {
         $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT
@@ -46,10 +47,9 @@ class AccountListRepository
                 JOIN `characters` on `accounts`.`character_id` = `characters`.`id`
                 JOIN `avatars` on `characters`.`avatar_id` = `avatars`.`id`
 
-                ORDER BY `created_at` LIMIT ? OFFSET ?',
+                ORDER BY `characters_main`.`exp` DESC LIMIT ?',
             [
-                ['type' => 'i', 'value' => $limit],
-                ['type' => 'i', 'value' => $offset],
+                ['type' => 'i', 'value' => self::LIMIT],
             ]
         );
 
@@ -59,16 +59,5 @@ class AccountListRepository
         }
 
         return AccountCollectionFactory::create($data);
-    }
-
-    /**
-     * @return int
-     * @throws AppException
-     */
-    public function getTotal(): int
-    {
-        return $this->container->getConnectionPool()->getConnection()->query(
-            'SELECT count(`id`) as `total` FROM `accounts`', [], true
-        )['total'];
     }
 }
