@@ -885,28 +885,8 @@ input:focus {
     cursor: default;
 }
 
-.red {
-    color: #cd0b0b;
-}
-
-.green {
-    color: #249922;
-}
-
-.yellow {
-    color: #efc377;
-}
-
-.orange {
-    color: #ff7f50;
-}
-
 .center {
     text-align: center;
-}
-
-.small {
-    font-size: 90%;
 }
 
 /* Profile style page start */
@@ -1857,8 +1837,8 @@ table.d_table {
 }
 
 .table_td_ava {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     background-size: cover;
 }
 
@@ -3454,3 +3434,114 @@ span.t_link {
 }
 
 /* Tag style on /t/slug page end */
+
+/* Rating style start */
+
+.table_td_rating {
+    width: 100px; height: 100px;
+}
+
+.first_icon, .second_icon, .third_icon, .fourth_icon, .fifth_icon {
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    margin: 0 auto;
+}
+
+.first_sign, .second_sign, .third_sign, .fourth_sign, .fifth_sign {
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+}
+
+.first_icon {
+    background-image: url(/icon/rating/rating-1.png);
+}
+
+.second_icon {
+    background-image: url(/icon/rating/rating-2.png);
+}
+
+.third_icon {
+    background-image: url(/icon/rating/rating-3.png);
+}
+
+.fourth_icon {
+    background-image: url(/icon/rating/rating-4.png);
+}
+
+.fifth_icon {
+    background-image: url(/icon/rating/rating-4.png);
+}
+
+.first_sign {
+    background-image: url(/icon/rating/sign-1.png);
+}
+
+.second_sign {
+    background-image: url(/icon/rating/sign-2.png);
+}
+
+.third_sign {
+    background-image: url(/icon/rating/sign-3.png);
+}
+
+.fourth_sign {
+    background-image: url(/icon/rating/sign-4.png);
+}
+
+.fifth_sign {
+    background-image: url(/icon/rating/sign-5.png);
+}
+
+.rating_name {
+    text-decoration: none;
+    font-size: 120%;
+    color: #b9b982;
+}
+
+/* Rating style end */
+
+/* Colors start */
+
+.red {
+    color: #cd0b0b;
+}
+
+.green {
+    color: #249922;
+}
+
+.yellow {
+    color: #efc377;
+}
+
+.orange {
+    color: #ff7f50;
+}
+
+.rich_yellow {
+    color: #ffa500;
+}
+
+.blue {
+    color: #657bdd;
+}
+
+/* Colors end */
+
+/* Fond sizes start */
+
+.small {
+    font-size: 90%;
+}
+
+.big {
+    font-size: 110%;
+}
+
+.very_big {
+    font-size: 120%;
+}
+
+/* Fond sizes end */

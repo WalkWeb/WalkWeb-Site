@@ -52,8 +52,8 @@ if (empty($accounts) || !($accounts instanceof AccountCollection)) {
                             <td><p><span class="tna">№</span></p></td>
                             <td><p><span class="tna">Аватар</span></p></td>
                             <td><p><span class="tna">Уровень</span></p></td>
-                            <td><p><span class="tna">Опыт</span></p></td>
                             <td><p><span class="tna">Имя</span></p></td>
+                            <td><p><span class="tna">Опыт</span></p></td>
                             <td><p><span class="tna">Постов</span></p></td>
                             <td><p><span class="tna">Комментариев</span></p></td>
                             <td><p><span class="tna">Карма</span></p></td>
@@ -63,15 +63,36 @@ if (empty($accounts) || !($accounts instanceof AccountCollection)) {
                         if (count($accounts) > 0) {
                             $i = 1;
                             foreach ($accounts as $account) {
+
+                                switch ($i) {
+                                    case 1:
+                                        $td = '<td class="table_td_rating"><div class="first_icon"><div class="first_sign"></div></div></td>';
+                                        break;
+                                    case 2:
+                                        $td = '<td class="table_td_rating"><div class="second_icon"><div class="second_sign"></div></div></td>';
+                                        break;
+                                    case 3:
+                                        $td = '<td class="table_td_rating"><div class="third_icon"><div class="third_sign"></div></div></td>';
+                                        break;
+                                    case 4:
+                                        $td = '<td class="table_td_rating"><div class="fourth_icon"><div class="fourth_sign"></div></div></td>';
+                                        break;
+                                    case 5:
+                                        $td = '<td class="table_td_rating"><div class="fifth_icon"><div class="fifth_sign"></div></div></td>';
+                                        break;
+                                    default:
+                                        $td = '<td><p><span class="blue very_big">' . $i . '</span></p></td>';
+                                }
+
                                 echo '
                                 <tr class="tbc2">
-                                    <td><p><span class="text_dam">' . $i . '</span></p></td>
+                                    ' . $td . '
                                     <td class="table_td_ava" style="background-image: url(' . $account->getAvatar() . ');"><a href="/u/' . $account->getName() . '" class="full"></a></td>
-                                    <td><p><span class="text_dam">' . $account->getLevel() . '</span></p></td>
-                                    <td><p><span class="text_dam">' . $account->getExp() . '</span></p></td>
-                                    <td><p><a href="/u/'. $account->getName() . '" title="" class="acc_info_name ">' . $account->getName() . '</a></p></td>
-                                    <td><p><span class="text_dam">' . $account->getPostCount() . '</span></p></td>
-                                    <td><p><span class="text_dam">' . $account->getCommentCount() . '</span></p></td>
+                                    <td><p><span class="rich_yellow very_big">' . $account->getLevel() . '</span></p></td>
+                                    <td><p><a href="/u/'. $account->getName() . '" title="" class="rating_name">' . $account->getName() . '</a></p></td>
+                                    <td><p>' . $account->getExp() . '</p></td>
+                                    <td><p>' . $account->getPostCount() . '</p></td>
+                                    <td><p>' . $account->getCommentCount() . '</p></td>
                                     <td><p><span class="' . $account->getCarmaColoClass() . '">' . $account->getCarmaSign() . $account->getCarma() . '</span></p></td>
                                 </tr>
                             ';
@@ -86,8 +107,8 @@ if (empty($accounts) || !($accounts instanceof AccountCollection)) {
                             <td><p><span class="tna">№</span></p></td>
                             <td><p><span class="tna">Аватар</span></p></td>
                             <td><p><span class="tna">Уровень</span></p></td>
-                            <td><p><span class="tna">Опыт</span></p></td>
                             <td><p><span class="tna">Имя</span></p></td>
+                            <td><p><span class="tna">Опыт</span></p></td>
                             <td><p><span class="tna">Постов</span></p></td>
                             <td><p><span class="tna">Комментариев</span></p></td>
                             <td><p><span class="tna">Карма</span></p></td>
