@@ -21,12 +21,12 @@ class CarmaFactoryTest extends AbstractTest
     {
         $carma = CarmaFactory::create($data);
 
-        self::assertEquals($data['id'], $carma->getId());
-        self::assertEquals($data['account_id'], $carma->getAccountId());
+        self::assertEquals($data['carma_id'], $carma->getId());
+        self::assertEquals($data['id'], $carma->getAccountId());
         self::assertEquals($data['season_id'], $carma->getSeason()->getId());
         self::assertEquals($data['carma'], $carma->getCarma());
-        self::assertEquals($data['uses'], $carma->getUses());
-        self::assertEquals($data['carma'] - $data['uses'], $carma->getAvailable());
+        self::assertEquals($data['carma_uses'], $carma->getUses());
+        self::assertEquals($data['carma'] - $data['carma_uses'], $carma->getAvailable());
     }
 
     /**
@@ -73,29 +73,29 @@ class CarmaFactoryTest extends AbstractTest
         return [
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'carma_id'   => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'id'         => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
                     'season_id'  => 1,
                     'carma'      => 0,
-                    'uses'       => 0,
+                    'carma_uses' => 0,
                 ],
             ],
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'carma_id'   => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'id'         => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
                     'season_id'  => 1,
                     'carma'      => 20,
-                    'uses'       => 10,
+                    'carma_uses' => 10,
                 ],
             ],
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'carma_id'   => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'id'         => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
                     'season_id'  => 1,
                     'carma'      => -30,
-                    'uses'       => -10,
+                    'carma_uses' => -10,
                 ],
             ],
         ];
@@ -107,130 +107,130 @@ class CarmaFactoryTest extends AbstractTest
     public function failDataProvider(): array
     {
         return [
-            // miss id
+            // miss carma_id
             [
                 [
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'id'         => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
                     'season_id'  => 1,
                     'carma'      => 0,
-                    'uses'       => 0,
+                    'carma_uses' => 0,
                 ],
                 CarmaException::INVALID_ID,
             ],
-            // id invalid type
+            // carma_id invalid type
             [
                 [
-                    'id'         => 100,
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'carma_id'   => 100,
+                    'id'         => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
                     'season_id'  => 1,
                     'carma'      => 0,
-                    'uses'       => 0,
+                    'carma_uses' => 0,
                 ],
                 CarmaException::INVALID_ID,
             ],
-            // id invalid uuid
+            // carma_id invalid uuid
             [
                 [
-                    'id'         => '10ae6563-8caf-4107-84ad-6dafb6526xxx',
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'carma_id'   => '10ae6563-8caf-4107-84ad-6dafb6526xxx',
+                    'id'         => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
                     'season_id'  => 1,
                     'carma'      => 0,
-                    'uses'       => 0,
+                    'carma_uses' => 0,
                 ],
                 CarmaException::INVALID_ID,
             ],
-            // miss account_id
+            // miss account_id (id)
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'carma_id'   => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
                     'season_id'  => 1,
                     'carma'      => 0,
-                    'uses'       => 0,
+                    'carma_uses' => 0,
                 ],
                 CarmaException::INVALID_ACCOUNT_ID,
             ],
-            // account_id invalid type
+            // account_id (id) invalid type
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
-                    'account_id' => 123,
+                    'carma_id'   => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'id'         => 123,
                     'season_id'  => 1,
                     'carma'      => 0,
-                    'uses'       => 0,
+                    'carma_uses' => 0,
                 ],
                 CarmaException::INVALID_ACCOUNT_ID,
             ],
-            // account_id invalid type
+            // account_id (id) invalid type
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
-                    'account_id' => '559f534e-7f44-488a-9984-aa4fea2686e3___',
+                    'carma_id'   => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'id'         => '559f534e-7f44-488a-9984-aa4fea2686e3___',
                     'season_id'  => 1,
                     'carma'      => 0,
-                    'uses'       => 0,
+                    'carma_uses' => 0,
                 ],
                 CarmaException::INVALID_ACCOUNT_ID,
             ],
             // miss season_id
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'carma_id'   => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'id'         => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
                     'carma'      => 0,
-                    'uses'       => 0,
+                    'carma_uses' => 0,
                 ],
                 CarmaException::INVALID_SEASON_ID,
             ],
             // season_id invalid type
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'carma_id'   => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'id'         => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
                     'season_id'  => '1',
                     'carma'      => 0,
-                    'uses'       => 0,
+                    'carma_uses' => 0,
                 ],
                 CarmaException::INVALID_SEASON_ID,
             ],
             // miss carma
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'carma_id'   => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'id'         => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
                     'season_id'  => 1,
-                    'uses'       => 0,
+                    'carma_uses' => 0,
                 ],
                 CarmaException::INVALID_CARMA,
             ],
             // carma invalid type
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'carma_id'   => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'id'         => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
                     'season_id'  => 1,
                     'carma'      => null,
-                    'uses'       => 0,
+                    'carma_uses' => 0,
                 ],
                 CarmaException::INVALID_CARMA,
             ],
             // miss uses
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
-                    'season_id'  => 1,
-                    'carma'      => 0,
+                    'carma_id'  => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'id'        => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'season_id' => 1,
+                    'carma'     => 0,
                 ],
                 CarmaException::INVALID_USES,
             ],
             // uses invalid type
             [
                 [
-                    'id'         => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
-                    'account_id' => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
+                    'carma_id'   => 'cee36175-7f1b-432a-b5cb-cc67432fb5b3',
+                    'id'         => '76c09c1e-93db-47a0-bf3b-9a9795c817b1',
                     'season_id'  => 1,
                     'carma'      => 0,
-                    'uses'       => true,
+                    'carma_uses' => true,
                 ],
                 CarmaException::INVALID_USES,
             ],

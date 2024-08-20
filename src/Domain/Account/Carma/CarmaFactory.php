@@ -14,6 +14,8 @@ class CarmaFactory
     use ValidationTrait;
 
     /**
+     * Т.к. объект будет создаваться в рамках данных об аккаунте, используется нестандартное обозначение для account_id
+     *
      * @param array $data
      * @return CarmaInterface
      * @throws AppException
@@ -21,11 +23,11 @@ class CarmaFactory
     public static function create(array $data): CarmaInterface
     {
         return new Carma(
-            self::uuid($data, 'id', CarmaException::INVALID_ID),
-            self::uuid($data, 'account_id', CarmaException::INVALID_ACCOUNT_ID),
+            self::uuid($data, 'carma_id', CarmaException::INVALID_ID),
+            self::uuid($data, 'id', CarmaException::INVALID_ACCOUNT_ID),
             new Season(self::int($data, 'season_id', CarmaException::INVALID_SEASON_ID)),
             self::int($data, 'carma', CarmaException::INVALID_CARMA),
-            self::int($data, 'uses', CarmaException::INVALID_USES),
+            self::int($data, 'carma_uses', CarmaException::INVALID_USES),
         );
     }
 

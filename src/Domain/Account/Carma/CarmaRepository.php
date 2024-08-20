@@ -17,6 +17,38 @@ class CarmaRepository
     }
 
     /**
+     * @param string $accountId
+     * @param int $seasonId
+     * @return CarmaInterface|null
+     * @throws AppException
+     */
+    public function get(string $accountId, int $seasonId): ?CarmaInterface
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT
+       
+                `id` as `carma_id`,
+                `account_id` as `id`,
+                `season_id`,
+                `carma`,
+                `uses` as `carma_uses`
+
+                FROM `account_carma` WHERE `account_id` = ? AND `season_id` = ?',
+            [
+                ['type' => 's', 'value' => $accountId],
+                ['type' => 'i', 'value' => $seasonId],
+            ],
+            true
+        );
+
+        if (!$data) {
+            return null;
+        }
+
+        return CarmaFactory::create($data);
+    }
+
+    /**
      * @param CarmaInterface $carma
      * @throws AppException
      */
