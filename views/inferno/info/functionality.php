@@ -113,14 +113,15 @@ $this->title = APP_NAME . ' — Функционал проекта';
 
 <ul>
     <li><span class="green">Рейтинг пользователей по уровню аккаунта</span></li>
-    <li><span class="red">Рейтинг пользователей по карме</span></li>
+    <li><span class="green">Рейтинг пользователей по карме</span></li>
     <li><span class="red">Рейтинг рас</span></li>
-    <li><span class="red">Рейтинг персонажей по уровню</span></li>
-    <li><span class="red">Рейтинг персонажей по классам</span></li>
     <li><span class="red">Рейтинг игр: общий</span></li>
     <li><span class="red">Рейтинг игр: по жанрам</span></li>
     <li><span class="red">Рейтинг самых ожидаемых игр</span></li>
     <li><span class="red">Рейтинг сообществ</span></li>
+    <!-- TODO Будет актуально только после добавления игрового функционала -->
+    <!--    <li><span class="red">Рейтинг персонажей по уровню</span></li>-->
+    <!--    <li><span class="red">Рейтинг персонажей по классам</span></li>-->
 </ul>
 
 <div class="line_box"><div class="line_row"><div class="line_left"></div><div class="line_right"></div><div class="line_center">&nbsp;</div></div></div>

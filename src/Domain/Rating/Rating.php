@@ -24,4 +24,13 @@ class Rating implements RatingInterface
     {
         return $this->repository->getTopAccountLevel();
     }
+
+    /**
+     * @return AccountCollection
+     * @throws AppException
+     */
+    public function getTopAccountCarma(): AccountCollection
+    {
+        return $this->repository->getTopAccountCarma();
+    }
 }

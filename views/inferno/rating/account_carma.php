@@ -3,7 +3,7 @@
 use App\Domain\Account\Collection\AccountCollection;
 use WalkWeb\NW\AppException;
 
-$this->title = APP_NAME . ' — Самые высокоуровневые пользователи';
+$this->title = APP_NAME . ' — Пользователи с наибольшей кармой';
 
 if (empty($accounts) || !($accounts instanceof AccountCollection)) {
     throw new AppException('view.rating.account_level: miss accounts');
@@ -12,8 +12,8 @@ if (empty($accounts) || !($accounts instanceof AccountCollection)) {
 ?>
 
 <p class="text center">
-    Уровень |
-    <a href="/top/account/carma" title="" class="osnova">Карма</a> |
+    <a href="/top/account/level" title="" class="osnova">Уровень</a> |
+    Карма |
     <a href="#" title="" class="osnova">Сообщества</a> |
     <a href="#" title="" class="osnova">Игры</a> |
     <a href="#" title="" class="osnova">Расы</a>
@@ -33,7 +33,7 @@ if (empty($accounts) || !($accounts instanceof AccountCollection)) {
                 <td class="blt"></td>
                 <td class="tl"></td>
                 <td class="tc" rowspan="2">
-                    Самые высокоуровневые пользователи
+                    Пользователи с наибольшей кармой
                 </td>
                 <td class="tr"></td>
                 <td class="brt"></td>

@@ -16,4 +16,12 @@ interface RatingInterface
      * @return AccountCollection
      */
     public function getTopAccountLevel(): AccountCollection;
+
+    /**
+     * Возвращает топ-30 аккаунтов по количеству кармы MainCharacter
+     *
+     * @throws AppException
+     * @return AccountCollection
+     */
+    public function getTopAccountCarma(): AccountCollection;
 }

@@ -9,19 +9,19 @@ use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
-class AccountLevelRatingPageHandlerTest extends AbstractTest
+class AccountCarmaRatingPageHandlerTest extends AbstractTest
 {
     /**
      * @dataProvider templateDataProvider
      * @param string $template
      * @throws AppException
      */
-    public function testAccountLevelRatingPageHandler(string $template): void
+    public function testAccountCarmaRatingPageHandler(string $template): void
     {
-        $request = new Request(['REQUEST_URI' => '/top/account/level']);
+        $request = new Request(['REQUEST_URI' => '/top/account/carma']);
         $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
-        self::assertMatchesRegularExpression('/Самые высокоуровневые пользователи/', $response->getBody());
+        self::assertMatchesRegularExpression('/Пользователи с наибольшей кармой/', $response->getBody());
     }
 }

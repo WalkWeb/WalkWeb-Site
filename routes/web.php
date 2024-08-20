@@ -42,6 +42,7 @@ $routes->get('functionality', '/functionality', 'App\\Handler\\Info\\Functionali
 
 // ratings
 $routes->get('top.account.level', '/top/account/level', 'App\\Handler\\Rating\\AccountLevelRatingPageHandler');
+$routes->get('top.account.carma', '/top/account/carma', 'App\\Handler\\Rating\\AccountCarmaRatingPageHandler');
 
 // temporary methods
 // TODO delete
