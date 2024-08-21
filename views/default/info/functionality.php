@@ -29,6 +29,7 @@ $this->title = APP_NAME . ' — Функционал проекта';
     <li><span class="green">Выход</span></li>
     <li><span class="green">Энергия</span></li>
     <li><span class="green">Уровень</span></li>
+    <li><span class="orange">Карма</span></li>
     <li><span class="orange">Уведомления</span></li>
     <li><span class="green">Страница пользователя</span></li>
     <li><span class="red">Установка своего аватара (для высокоуровневых пользователей)</span></li>

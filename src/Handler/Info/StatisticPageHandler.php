@@ -22,7 +22,7 @@ class StatisticPageHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
-        return $this->render('statistic/index', [
+        return $this->render('info/statistic', [
             'statistic' => new Statistic(new StatisticRepository($this->getContainer())),
         ]);
     }
