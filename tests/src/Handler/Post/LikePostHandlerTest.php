@@ -21,6 +21,7 @@ class LikePostHandlerTest extends AbstractTest
     {
         $authToken = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a3';
         $accountId = '1e3a3b27-12da-4c73-a3a7-b83092705b03';
+        $authorId = '1e3a3b27-12da-4c73-a3a7-b83092705b01';
         $slug = 'slug-post-1-1000';
 
         // Проверяем изначальный рейтинг
@@ -28,6 +29,9 @@ class LikePostHandlerTest extends AbstractTest
 
         self::assertEquals(0, $data['likes']);
         self::assertEquals(0, $data['dislikes']);
+
+        // Проверяем изначальную карму автора
+        self::assertEquals(0 , $this->getCarmaData($authorId)['carma']);
 
         // Отправляем запрос на лайк
         $request = new Request(
@@ -45,6 +49,9 @@ class LikePostHandlerTest extends AbstractTest
 
         self::assertEquals(1, $data['likes']);
         self::assertEquals(0, $data['dislikes']);
+
+        // Проверяем обновленную карму автора
+        self::assertEquals(1 , $this->getCarmaData($authorId)['carma']);
 
         // Проверяем запись в таблице lk_account_like_post
         $data = $this->getLikeData($slug, $accountId);
@@ -260,6 +267,22 @@ class LikePostHandlerTest extends AbstractTest
             'SELECT * FROM `lk_account_like_post` WHERE `post_slug` = ? AND `account_id` = ?',
             [
                 ['type' => 's', 'value' => $slug],
+                ['type' => 's', 'value' => $accountId],
+            ],
+            true
+        );
+    }
+
+    /**
+     * @param string $accountId
+     * @return array
+     * @throws AppException
+     */
+    private function getCarmaData(string $accountId): array
+    {
+        return self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `account_carma` WHERE `account_id` = ?',
+            [
                 ['type' => 's', 'value' => $accountId],
             ],
             true

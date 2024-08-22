@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler\Post;
 
+use App\Domain\Account\Carma\CarmaRepository;
 use App\Domain\Post\PostRepository;
 use App\Handler\AbstractHandler;
 use App\Handler\Post\Traits\LikePostTrait;
@@ -22,13 +23,16 @@ class LikePostHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
-        $repository = new PostRepository($this->container);
+        $postRepository = new PostRepository($this->container);
+        $carmaRepository = new CarmaRepository($this->container);
 
-        if ($response = $this->validateRequest($request, $repository)) {
+        if ($response = $this->validateRequest($request, $postRepository)) {
             return $response;
         }
 
-        $repository->like($request->slug, $this->getUser()->getId(), 1);
+        $slug = $request->slug;
+        $postRepository->like($slug, $this->getUser()->getId(), 1);
+        $carmaRepository->changeRating($postRepository->getAuthorId($slug), 1);
 
         // TODO Проверка необходимости изменения статуса поста
         // TODO Добавление опыта автору посту, в случае изменения статуса поста

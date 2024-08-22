@@ -86,6 +86,26 @@ class PostRepository
     }
 
     /**
+     * @param string $slug
+     * @return string|null
+     * @throws AppException
+     */
+    public function getAuthorId(string $slug): ?string
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `author_id` FROM `posts` WHERE `slug` = ?',
+            [['type' => 's', 'value' => $slug]],
+            true
+        );
+
+        if (!$data || !array_key_exists('author_id', $data) || !is_string($data['author_id'])) {
+            throw new AppException(PostException::GET_AUTHOR_ERROR);
+        }
+
+        return $data['author_id'];
+    }
+
+    /**
      * @param int $offset
      * @param int $limit
      * @param AuthInterface|null $user

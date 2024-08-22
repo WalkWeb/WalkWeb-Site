@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Post;
 
+use App\Domain\Post\PostException;
 use App\Domain\Post\PostFactory;
 use App\Domain\Post\PostInterface;
 use App\Domain\Post\PostRepository;
@@ -157,6 +158,24 @@ class PostRepositoryTest extends AbstractTest
     }
 
     /**
+     * @dataProvider getAuthorIdDataProvider
+     * @param string $slug
+     * @param string $expectedAuthorId
+     * @throws AppException
+     */
+    public function testPostRepositoryGetAuthorIdSuccess(string $slug, string $expectedAuthorId): void
+    {
+        self::assertEquals($expectedAuthorId, $this->getRepository()->getAuthorId($slug));
+    }
+
+    public function testPostRepositoryGetAuthorIdFail(): void
+    {
+        $this->expectException(AppException::class);
+        $this->expectExceptionMessage(PostException::GET_AUTHOR_ERROR);
+        $this->getRepository()->getAuthorId('unknown_slug');
+    }
+
+    /**
      * @return array
      */
     public function getSuccessDataProvider(): array
@@ -263,6 +282,31 @@ class PostRepositoryTest extends AbstractTest
             // news: best
             [
                 'news', 0, 10, TagPageHandler::RATING_ALL, true, 4, ['title post 2', 'title post 9', 'title post 6', 'title post 5']
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAuthorIdDataProvider(): array
+    {
+        return [
+            [
+                'slug-post-1-1000',
+                '1e3a3b27-12da-4c73-a3a7-b83092705b01',
+            ],
+            [
+                'slug-post-5-1000',
+                '1e3a3b27-12da-4c73-a3a7-b83092705b03',
+            ],
+            [
+                'slug-post-8-1000',
+                '1e3a3b27-12da-4c73-a3a7-b83092705b04',
+            ],
+            [
+                'slug-post-12-1000',
+                '1e3a3b27-12da-4c73-a3a7-b83092705b08',
             ],
         ];
     }

@@ -65,4 +65,20 @@ class CarmaRepository
             ]
         );
     }
+
+    /**
+     * @param string $accountId
+     * @param int $change
+     * @throws AppException
+     */
+    public function changeRating(string $accountId, int $change): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `account_carma` SET `carma` = `carma` + ? WHERE `account_id` = ?',
+            [
+                ['type' => 'i', 'value' => $change],
+                ['type' => 's', 'value' => $accountId],
+            ]
+        );
+    }
 }
