@@ -11,10 +11,6 @@ class GenesisRepository
 {
     private Container $container;
 
-    /**
-     * GenesisRepository constructor.
-     * @param Container $container
-     */
     public function __construct(Container $container)
     {
         $this->container = $container;
