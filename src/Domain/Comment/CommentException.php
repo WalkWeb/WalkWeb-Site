@@ -37,4 +37,7 @@ class CommentException extends Exception
     public const ERROR_DONT_LIKE        = 'Пока вам недоступен функционал изменения рейтинга комментариев';
     public const ERROR_OWNER            = 'Нельзя изменять рейтинг своего комментария';
     public const ERROR_ALREADY_LIKE     = 'Вы уже изменяли рейтинг этого комментария';
+
+    // repository
+    public const GET_AUTHOR_ERROR       = 'Author comment could not be reached';
 }

@@ -69,6 +69,26 @@ class CommentRepository
     }
 
     /**
+     * @param string $id
+     * @return string|null
+     * @throws AppException
+     */
+    public function getAuthorId(string $id): ?string
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `author_id` FROM `post_comments` WHERE `id` = ?',
+            [['type' => 's', 'value' => $id]],
+            true
+        );
+
+        if (!$data || !array_key_exists('author_id', $data) || (!is_string($data['author_id']) && !is_null($data['author_id']))) {
+            throw new AppException(CommentException::GET_AUTHOR_ERROR);
+        }
+
+        return $data['author_id'];
+    }
+
+    /**
      * @param string $postId
      * @param AuthInterface|null $user
      * @return CommentCollection

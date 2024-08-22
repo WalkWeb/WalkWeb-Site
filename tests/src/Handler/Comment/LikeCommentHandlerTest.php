@@ -18,17 +18,21 @@ class LikeCommentHandlerTest extends AbstractTest
     /**
      * @throws AppException
      */
-    public function testLikeCommentHandlerSuccess(): void
+    public function testLikeCommentHandlerUserSuccess(): void
     {
         $authToken = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a3';
         $accountId = '1e3a3b27-12da-4c73-a3a7-b83092705b03';
         $commendId = '7d78bc1d-9919-4c56-bc89-f4bd2e433401';
+        $authorId = '1e3a3b27-12da-4c73-a3a7-b83092705b01';
 
         // Проверяем изначальный рейтинг
         $comment = $this->getComment($commendId);
 
         self::assertEquals(0, $comment->getRating()->getLikes());
         self::assertEquals(0, $comment->getRating()->getDislikes());
+
+        // Проверяем изначальную карму автора
+        self::assertEquals(0 , $this->getCarmaData($authorId)['carma']);
 
         // Отправляем запрос на лайк
         $request = new Request(
@@ -46,6 +50,49 @@ class LikeCommentHandlerTest extends AbstractTest
 
         self::assertEquals(1, $comment->getRating()->getLikes());
         self::assertEquals(0, $comment->getRating()->getDislikes());
+
+        // Проверяем обновленную карму автора
+        self::assertEquals(1 , $this->getCarmaData($authorId)['carma']);
+
+        // Проверяем запись в таблице lk_account_like_comment
+        $data = $this->getLikeData($commendId, $accountId);
+
+        self::assertEquals($accountId, $data['account_id']);
+        self::assertEquals($commendId, $data['comment_id']);
+        self::assertEquals(1, $data['value']);
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testLikeCommentHandlerGuestSuccess(): void
+    {
+        $authToken = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a3';
+        $accountId = '1e3a3b27-12da-4c73-a3a7-b83092705b03';
+        $commendId = '7d78bc1d-9919-4c56-bc89-f4bd2e433403';
+
+        // Проверяем изначальный рейтинг
+        $comment = $this->getComment($commendId);
+
+        self::assertEquals(0, $comment->getRating()->getLikes());
+        self::assertEquals(1, $comment->getRating()->getDislikes());
+
+        // Отправляем запрос на лайк
+        $request = new Request(
+            ['REQUEST_URI' => '/comment/like/' . $commendId, 'REQUEST_METHOD' => 'POST'],
+            [],
+            [AccountInterface::AUTH_TOKEN => $authToken]
+        );
+        $response = $this->app->handle($request);
+
+        self::assertEquals(Response::OK, $response->getStatusCode());
+        self::assertEquals(self::jsonEncode(['success' => true]), $response->getBody());
+
+        // Проверяем обновленный рейтинг
+        $comment = $this->getComment($commendId);
+
+        self::assertEquals(1, $comment->getRating()->getLikes());
+        self::assertEquals(1, $comment->getRating()->getDislikes());
 
         // Проверяем запись в таблице lk_account_like_comment
         $data = $this->getLikeData($commendId, $accountId);
@@ -216,6 +263,22 @@ class LikeCommentHandlerTest extends AbstractTest
             'SELECT * FROM `lk_account_like_comment` WHERE `comment_id` = ? AND `account_id` = ?',
             [
                 ['type' => 's', 'value' => $commentId],
+                ['type' => 's', 'value' => $accountId],
+            ],
+            true
+        );
+    }
+
+    /**
+     * @param string $accountId
+     * @return array
+     * @throws AppException
+     */
+    private function getCarmaData(string $accountId): array
+    {
+        return self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `account_carma` WHERE `account_id` = ?',
+            [
                 ['type' => 's', 'value' => $accountId],
             ],
             true

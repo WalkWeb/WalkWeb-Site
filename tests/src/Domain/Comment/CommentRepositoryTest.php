@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Comment;
 
+use App\Domain\Comment\CommentException;
 use App\Domain\Comment\CommentRepository;
 use DateTime;
 use Exception;
@@ -76,6 +77,24 @@ class CommentRepositoryTest extends AbstractTest
     }
 
     /**
+     * @dataProvider getAuthorIdDataProvider
+     * @param string $commentId
+     * @param string|null $expectedAuthorId
+     * @throws AppException
+     */
+    public function testCommentRepositoryGetAuthorIdSuccess(string $commentId, ?string $expectedAuthorId): void
+    {
+        self::assertEquals($expectedAuthorId, $this->getRepository()->getAuthorId($commentId));
+    }
+
+    public function testCommentRepositoryGetAuthorIdNotFound(): void
+    {
+        $this->expectException(AppException::class);
+        $this->expectExceptionMessage(CommentException::GET_AUTHOR_ERROR);
+        $this->getRepository()->getAuthorId('52f24c49-63c2-4901-a472-cbab04127654');
+    }
+
+    /**
      * @return array
      */
     public function getSuccessDataProvider(): array
@@ -137,6 +156,27 @@ class CommentRepositoryTest extends AbstractTest
                     'created_at'    => '2024-06-18 16:00:00',
                     'updated_at'    => '2024-06-18 16:00:00',
                 ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getAuthorIdDataProvider(): array
+    {
+        return [
+            [
+                '7d78bc1d-9919-4c56-bc89-f4bd2e433401',
+                '1e3a3b27-12da-4c73-a3a7-b83092705b01',
+            ],
+            [
+                '7d78bc1d-9919-4c56-bc89-f4bd2e433402',
+                '1e3a3b27-12da-4c73-a3a7-b83092705b04',
+            ],
+            [
+                '7d78bc1d-9919-4c56-bc89-f4bd2e433403',
+                null,
             ],
         ];
     }

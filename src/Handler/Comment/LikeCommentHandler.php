@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler\Comment;
 
+use App\Domain\Account\Carma\CarmaRepository;
 use App\Domain\Comment\CommentRepository;
 use App\Handler\AbstractHandler;
 use App\Handler\Comment\Traits\LikeCommentTrait;
@@ -22,13 +23,20 @@ class LikeCommentHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
-        $repository = new CommentRepository($this->container);
+        $commentRepository = new CommentRepository($this->container);
+        $carmaRepository = new CarmaRepository($this->container);
 
-        if ($response = $this->validateRequest($request, $repository)) {
+        if ($response = $this->validateRequest($request, $commentRepository)) {
             return $response;
         }
 
-        $repository->like($request->id, $this->getUser()->getId(), 1);
+        $id = $request->id;
+        $commentRepository->like($id, $this->getUser()->getId(), 1);
+
+        // Если комментария написан от гостя - ничью карму менять не нужно
+        if ($authorId = $commentRepository->getAuthorId($id)) {
+            $carmaRepository->changeRating($authorId, 1);
+        }
 
         return $this->json(['success' => true]);
     }
