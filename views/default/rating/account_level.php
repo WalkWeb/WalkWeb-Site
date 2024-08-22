@@ -14,7 +14,7 @@ if (empty($accounts) || !($accounts instanceof AccountCollection)) {
 <p class="text center">
     Уровень |
     <a href="/top/account/carma" title="" class="osnova">Карма</a> |
-    <a href="#" title="" class="osnova">Профессии</a> |
+    <a href="/top/account/genesis" title="" class="osnova">Профессии</a> |
     <a href="#" title="" class="osnova">Сообщества</a> |
     <a href="#" title="" class="osnova">Языки программирования</a>
 </p>

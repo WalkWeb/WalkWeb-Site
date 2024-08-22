@@ -44,6 +44,7 @@ $routes->get('rules', '/rules', 'App\\Handler\\Info\\RulesPageHandler');
 // ratings
 $routes->get('top.account.level', '/top/account/level', 'App\\Handler\\Rating\\AccountLevelRatingPageHandler');
 $routes->get('top.account.carma', '/top/account/carma', 'App\\Handler\\Rating\\AccountCarmaRatingPageHandler');
+$routes->get('top.account.genesis', '/top/account/genesis', 'App\\Handler\\Rating\\GenesisRatingPageHandler');
 
 // temporary methods
 // TODO delete

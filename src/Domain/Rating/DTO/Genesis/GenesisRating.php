@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Rating\DTO\Genesis;
 
+use App\Domain\Account\Traits\CarmaTrait;
+
 class GenesisRating implements GenesisRatingInterface
 {
+    use CarmaTrait;
+
     private int $id;
     private string $icon;
     private string $name;
     private int $memberCount;
     private int $postCount;
     private int $commentCount;
-    private int $carmaCount;
+    private int $carma;
 
     public function __construct(int $id, string $icon, string $name, int $memberCount, int $postCount, int $commentCount, int $carmaCount)
     {
@@ -22,7 +26,7 @@ class GenesisRating implements GenesisRatingInterface
         $this->memberCount = $memberCount;
         $this->postCount = $postCount;
         $this->commentCount = $commentCount;
-        $this->carmaCount = $carmaCount;
+        $this->carma = $carmaCount;
     }
 
     /**
@@ -78,6 +82,6 @@ class GenesisRating implements GenesisRatingInterface
      */
     public function getCarmaCount(): int
     {
-        return $this->carmaCount;
+        return $this->carma;
     }
 }

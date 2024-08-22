@@ -13,4 +13,6 @@ interface GenesisRatingInterface
     public function getPostCount(): int;
     public function getCommentCount(): int;
     public function getCarmaCount(): int;
+    public function getCarmaSign(): string;
+    public function getCarmaColoClass(): string;
 }

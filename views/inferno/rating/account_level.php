@@ -16,7 +16,7 @@ if (empty($accounts) || !($accounts instanceof AccountCollection)) {
     <a href="/top/account/carma" title="" class="osnova">Карма</a> |
     <a href="#" title="" class="osnova">Сообщества</a> |
     <a href="#" title="" class="osnova">Игры</a> |
-    <a href="#" title="" class="osnova">Расы</a>
+    <a href="/top/account/genesis" title="" class="osnova">Расы</a>
 </p>
 
 <div class="content_box">

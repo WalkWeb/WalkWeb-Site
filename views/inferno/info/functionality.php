@@ -116,7 +116,7 @@ $this->title = APP_NAME . ' — Функционал проекта';
 <ul>
     <li><span class="green">Рейтинг пользователей по уровню аккаунта</span></li>
     <li><span class="green">Рейтинг пользователей по карме</span></li>
-    <li><span class="red">Рейтинг рас</span></li>
+    <li><span class="green">Рейтинг рас</span></li>
     <li><span class="red">Рейтинг игр: общий</span></li>
     <li><span class="red">Рейтинг игр: по жанрам</span></li>
     <li><span class="red">Рейтинг самых ожидаемых игр</span></li>

@@ -39,6 +39,25 @@ class GenesisRepositoryTest extends AbstractTest
     }
 
     /**
+     * @dataProvider topDataProvider
+     * @param int $themeId
+     * @param array $expectedTop
+     * @throws AppException
+     */
+    public function testGenesisRepositoryGetTop(int $themeId, array $expectedTop): void
+    {
+        $top = $this->getRepository()->getTop($themeId);
+
+        self::assertCount(6, $top);
+
+        $i = 0;
+        foreach ($top as $genesis) {
+            self::assertEquals($expectedTop[$i], $genesis->getName());
+            $i++;
+        }
+    }
+
+    /**
      * @return array
      */
     public function successDataProvider(): array
@@ -57,6 +76,37 @@ class GenesisRepositoryTest extends AbstractTest
                 '/img/icon/genesis_default.png',
                 'Managers',
                 'Manager',
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function topDataProvider(): array
+    {
+        return [
+            [
+                1,
+                [
+                    'Designers',
+                    'Devops',
+                    'Analysts',
+                    'Trainees',
+                    'Programmers',
+                    'Managers',
+                ],
+            ],
+            [
+                2,
+                [
+                    'Angels',
+                    'People',
+                    'Elves',
+                    'Orcs',
+                    'Dwarfs',
+                    'Demons',
+                ],
             ],
         ];
     }

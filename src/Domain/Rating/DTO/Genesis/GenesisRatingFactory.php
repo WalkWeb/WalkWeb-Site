@@ -23,9 +23,9 @@ class GenesisRatingFactory
             self::string($data, 'icon', GenesisRatingException::INVALID_ICON),
             self::string($data, 'name', GenesisRatingException::INVALID_NAME),
             (int)self::intOrNull($data, 'member_count', GenesisRatingException::INVALID_MEMBER_COUNT),
-            (int)self::intOrNull($data, 'post_count', GenesisRatingException::INVALID_POST_COUNT),
-            (int)self::intOrNull($data, 'comment_count', GenesisRatingException::INVALID_COMMENT_COUNT),
-            (int)self::intOrNull($data, 'carma_count', GenesisRatingException::INVALID_CARMA_COUNT),
+            (int)self::stringOrNull($data, 'post_count', GenesisRatingException::INVALID_POST_COUNT),
+            (int)self::stringOrNull($data, 'comment_count', GenesisRatingException::INVALID_COMMENT_COUNT),
+            (int)self::stringOrNull($data, 'carma_count', GenesisRatingException::INVALID_CARMA_COUNT),
         );
     }
 }
