@@ -100,12 +100,12 @@ class GenesisRepositoryTest extends AbstractTest
             [
                 2,
                 [
-                    'Angels',
                     'People',
                     'Elves',
+                    'Demons',
+                    'Angels',
                     'Orcs',
                     'Dwarfs',
-                    'Demons',
                 ],
             ],
         ];

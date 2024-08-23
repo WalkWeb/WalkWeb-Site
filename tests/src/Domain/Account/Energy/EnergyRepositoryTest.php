@@ -36,7 +36,7 @@ class EnergyRepositoryTest extends AbstractTest
      */
     public function testEnergyRepositoryGetSuccess(): void
     {
-        $id = '17746e87-4e15-4c60-8b2f-8cb01032c47a';
+        $id = '2dad01e1-af9d-479d-9f48-92823f585801';
         $repository = new EnergyRepository(self::getContainer());
 
         $energy = $repository->get($id);

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Auth;
 
-use App\Domain\Account\Notice\NoticeException;
 use App\Domain\Account\Notice\NoticeFactory;
 use App\Domain\Auth\AuthRepository;
 use Exception;
@@ -26,7 +25,6 @@ class AuthRepositoryTest extends AbstractTest
      * @param array $level
      * @param string $avatar
      * @throws AppException
-     * @throws NoticeException
      */
     public function testAuthRepositoryGetSuccess(
         string $authToken,
@@ -100,7 +98,7 @@ class AuthRepositoryTest extends AbstractTest
                 self::DEMO_USER,
                 'DemoUser',
                 1,
-                '2dad01e1-af9d-479d-9f48-92823f585827',
+                '2dad01e1-af9d-479d-9f48-92823f585801',
                 [
                     [
                         'id'         => 'd92bce7f-112d-442c-8a75-bf440f477af1',
@@ -143,7 +141,7 @@ class AuthRepositoryTest extends AbstractTest
                 self::BLOCKED_USER,
                 'BlockedUser',
                 2,
-                '17746e87-4e15-4c60-8b2f-8cb01032c47a',
+                '2dad01e1-af9d-479d-9f48-92823f585802',
                 [],
                 'level'                  => [
                     'account_id'            => '68435c80-eb31-4756-a260-a00900e5db9f',

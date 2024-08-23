@@ -19,7 +19,7 @@ class RatingTest extends AbstractTest
     {
         $users = $this->getRating()->getTopAccountLevel();
 
-        self::assertCount(11, $users);
+        self::assertCount(14, $users);
 
         $i = 0;
         foreach ($users as $user) {

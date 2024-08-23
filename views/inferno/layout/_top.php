@@ -57,14 +57,14 @@ use App\Domain\Auth\AuthInterface;
                 <div class="menu_head_el" id="menu_head_1">
                     <a href="/" title="DUSK WORLD" class="head_text">ПОСТЫ</a>
                 </div>
+                <div class="menu_head_el" id="menu_head_4">
+                    <a href="#" title="ОТЗЫВЫ" class="head_text">ИГРЫ</a>
+                </div>
                 <div class="menu_head_el" id="menu_head_2">
-                    <a href="#" title="ИГРАТЬ" class="head_text">ИГРАТЬ</a>
+                    <a href="#" title="СООБЩЕСТВА" class="head_text">СООБЩЕСТВА</a>
                 </div>
                 <div class="menu_head_el" id="menu_head_3">
                     <a href="/top/account/level" title="РЕЙТИНГИ" class="head_text">РЕЙТИНГИ</a>
-                </div>
-                <div class="menu_head_el" id="menu_head_4">
-                    <a href="#" title="ОТЗЫВЫ" class="head_text">ОТЗЫВЫ</a>
                 </div>
                 <div class="menu_head_el" id="menu_head_5">
                     <a href="#" title="ДНЕВНИКИ РАЗРАБОТКИ" class="head_text">ДНЕВНИКИ РАЗРАБОТКИ</a>

@@ -25,6 +25,6 @@ class StatisticPageHandlerTest extends AbstractTest
 
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Статистика/', $response->getBody());
-        self::assertMatchesRegularExpression('/Пользователей: 11/', $response->getBody());
+        self::assertMatchesRegularExpression('/Пользователей: 14/', $response->getBody());
     }
 }
