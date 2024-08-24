@@ -65,13 +65,20 @@ if (isset($auth) && $auth === true) {
                 <div class="tag_container">
                     <?php
                     foreach ($post->getTags() as $tag) {
-                        echo '
-                        <div class="tag_box">
-                            <p><a href="/t/' . $tag->getSlug() . '/all">
-                                <img src="' . $tag->getIcon() . '" alt="" /><br>
-                                ' . $tag->getName() . '</a>
-                            </p>
-                        </div>';
+                        if ($tag->getIcon()) {
+                            echo '
+                            <div class="tag_box">
+                                <p><a href="/t/' . $tag->getSlug() . '/all">
+                                    <img src="' . $tag->getIcon() . '" alt="" /><br>
+                                    ' . $tag->getName() . '</a>
+                                </p>
+                            </div>';
+                        } else {
+                            echo '
+                            <div class="tag_box">
+                                <p><a href="/t/' . $tag->getSlug() . '/all">' . $tag->getName() . '</a></p>
+                            </div>';
+                        }
                     }
                     ?>
                 </div>

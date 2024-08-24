@@ -730,6 +730,7 @@ td.avatar {
     text-transform: uppercase;
     font-size: 70%;
     font-family: 'Open Sans', sans-serif;
+    word-break: break-all;
 }
 
 .tag_box img {

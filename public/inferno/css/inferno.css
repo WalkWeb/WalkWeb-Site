@@ -2692,8 +2692,9 @@ img.i_img {
     text-align: center;
     text-transform: uppercase;
     font-size: 70%;
-    font-family: 'Open Sans', sans-serif;
+    font-family: Arial, sans-serif;
     flex-direction: row-reverse;
+    word-break: break-all;
 }
 
 .tag_box p {
