@@ -44,7 +44,7 @@ class TagFactory
         return new Tag(
             Uuid::uuid4()->toString(),
             mb_strtolower($tag),
-            mb_strtolower(self::transliterate($tag)) . '-' . random_int(100, 999),
+            mb_strtolower(self::transliterate($tag)) . '-' . random_int(100, 999), // TODO Подумать над убиранием префикса
             '',
             null,
             false

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Post;
 
+use App\Domain\Post\DTO\CreatePostRequestFactory;
 use App\Domain\Post\PostException;
 use App\Domain\Post\PostFactory;
 use App\Domain\Post\PostInterface;
@@ -64,7 +65,7 @@ class PostRepositoryTest extends AbstractTest
      * @param PostInterface $post
      * @throws AppException
      */
-    public function testPostRepositoryAdd(PostInterface $post): void
+    public function testPostRepositoryAddNoTag(PostInterface $post): void
     {
         $this->getRepository()->add($post);
 
@@ -85,6 +86,44 @@ class PostRepositoryTest extends AbstractTest
         // TODO
         self::assertEquals(1, $data['approved']);
         self::assertEquals(0, $data['moderated']);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testPostRepositoryAddTags(): void
+    {
+        $user = $this->getUser('VBajfT8P6PFtrkHhCqb7ZNwIFG45a1');
+        $request = CreatePostRequestFactory::create([
+            'title'   => 'title',
+            'content' => 'content',
+            'tags'    => ['new-tag', 'news'],
+        ], $user);
+
+        $tags = $this->getTagRepository()->saveCollection($request);
+        $post = PostFactory::createNew($request, $tags);
+
+        $this->getRepository()->add($post);
+
+        $data = $this->getData($post->getSlug());
+
+        self::assertEquals($post->getId(), $data['id']);
+        self::assertEquals($post->getAuthor()->getId(), $data['author_id']);
+        self::assertEquals($post->getTitle(), $data['title']);
+        self::assertEquals($post->getSlug(), $data['slug']);
+        self::assertEquals($post->getContent(), $data['content']);
+        self::assertEquals($post->getHtmlContent(), $data['html_content']);
+        self::assertEquals($post->getStatus()->getId(), $data['status_id']);
+        self::assertEquals($post->getRating()->getLikes(), $data['likes']);
+        self::assertEquals($post->getRating()->getDislikes(), $data['dislikes']);
+        self::assertEquals($post->getCommentsCount(), $data['comments_count']);
+        self::assertEquals($post->isPublished(), $data['published']);
+
+        // TODO
+        self::assertEquals(1, $data['approved']);
+        self::assertEquals(0, $data['moderated']);
+
+        self::assertSameSize($post->getTags(), $this->getTagLinks($post->getId()));
     }
 
     /**
@@ -372,6 +411,19 @@ class PostRepositoryTest extends AbstractTest
             WHERE `posts`.`slug` = ?',
             [['type' => 's', 'value' => $slug]],
             true
+        );
+    }
+
+    /**
+     * @param string $postId
+     * @return array
+     * @throws AppException
+     */
+    private function getTagLinks(string $postId): array
+    {
+        return self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `lk_post_tag` WHERE `post_id` = ?',
+            [['type' => 's', 'value' => $postId]],
         );
     }
 }

@@ -366,6 +366,17 @@ class PostRepository
                 ['type' => 'i', 'value' => 0], // TODO
             ]
         );
+
+        foreach ($post->getTags() as $tag) {
+            $this->container->getConnectionPool()->getConnection()->query(
+                'INSERT INTO `lk_post_tag` (`id`, `post_id`, `tag_id`) VALUES (?, ?, ?)',
+                [
+                    ['type' => 's', 'value' => Uuid::uuid4()->toString()],
+                    ['type' => 's', 'value' => $post->getId()],
+                    ['type' => 's', 'value' => $tag->getId()],
+                ]
+            );
+        }
     }
 
     /**

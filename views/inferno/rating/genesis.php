@@ -53,7 +53,6 @@ if (empty($top) || !($top instanceof GenesisRatingCollection)) {
                         <tbody>
                         <tr class="header">
                             <td><p><span class="tna">№</span></p></td>
-                            <td><p><span class="tna"></span></p></td>
                             <td><p><span class="tna">Раса</span></p></td>
                             <td><p><span class="tna">Численность</span></p></td>
                             <td><p><span class="tna">Постов</span></p></td>
@@ -66,8 +65,7 @@ if (empty($top) || !($top instanceof GenesisRatingCollection)) {
                             echo '
                                 <tr class="tbc2">
                                     <td><p><span class="text_dam">' . $i . '</span></p></td>
-                                    <td width="80"><img src="' . $genesis->getIcon() . '" alt="" width="80" /></td>
-                                    <td><p><span class="text_dam">' . $genesis->getName() . '</span></p></td>
+                                    <td><p><span class="text_dam"><img src="' . $genesis->getIcon() . '" alt="" width="80" /><br />' . $genesis->getName() . '</span></p></td>
                                     <td><p><span class="text_dam">' . $genesis->getMemberCount() . '</span></p></td>
                                     <td><p><span class="text_dam">' . $genesis->getPostCount() . '</span></p></td>
                                     <td><p><span class="text_dam">' . $genesis->getCommentCount() . '</span></p></td>
@@ -79,7 +77,6 @@ if (empty($top) || !($top instanceof GenesisRatingCollection)) {
                         ?>
                         <tr class="header">
                             <td><p><span class="tna">№</span></p></td>
-                            <td><p><span class="tna"></span></p></td>
                             <td><p><span class="tna">Раса</span></p></td>
                             <td><p><span class="tna">Численность</span></p></td>
                             <td><p><span class="tna">Постов</span></p></td>

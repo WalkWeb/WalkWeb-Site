@@ -54,7 +54,7 @@ if (isset($auth) && $auth === true) {
     foreach ($post->getTags() as $tag) {
         echo '
     <div class="tag_box">
-        <p><a href="/t/' . $tag->getSlug() . '">
+        <p><a href="/t/' . $tag->getSlug() . '/all">
             <img src="' . $tag->getIcon() . '" alt="" class="see_also_img"><br>
             ' . $tag->getName() . '</a>
         </p>
