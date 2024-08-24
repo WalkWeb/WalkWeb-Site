@@ -52,9 +52,9 @@ $this->title = APP_NAME . ' — Функционал проекта';
 
 <ul>
     <li><span class="orange">Список постов на главной, фильтрация по рейтингу</span></li>
-    <li><span class="green">Просмотр постов</span></li>
-    <li><span class="orange">Добавление постов</span></li>
-    <li><span class="red">Редактирование постов</span></li>
+    <li><span class="green">Просмотр поста</span></li>
+    <li><span class="green">Добавление поста</span></li>
+    <li><span class="red">Редактирование поста</span></li>
     <li><span class="green">Изменение рейтинга чужих постов</span></li>
     <li><span class="red">Повышение статуса поста при получении определенного количества лайков и получение дополнительного опыта автору поста</span></li>
     <li><span class="red">Увеличение функционала при создании постов с ростом уровня аккаунта</span></li>

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Handler\Account\Profile;
 
-use App\Domain\Account\AccountException;
 use App\Domain\Account\AccountRepository;
 use App\Domain\Account\Character\Collection\CharacterCollectionRepository;
 use App\Handler\AbstractHandler;
@@ -18,7 +17,6 @@ class ProfilePageHandler extends AbstractHandler
      * @param Request $request
      * @return Response
      * @throws AppException
-     * @throws AccountException
      */
     public function __invoke(Request $request): Response
     {

@@ -46,6 +46,9 @@ $routes->get('top.account.level', '/top/account/level', 'App\\Handler\\Rating\\A
 $routes->get('top.account.carma', '/top/account/carma', 'App\\Handler\\Rating\\AccountCarmaRatingPageHandler');
 $routes->get('top.account.genesis', '/top/account/genesis', 'App\\Handler\\Rating\\GenesisRatingPageHandler');
 
+// admin panel
+$routes->get('panel.index', '/panel', 'App\\Handler\\Panel\\PanelPageHandler');
+
 // temporary methods
 // TODO delete
 $routes->get('account.add.exp', '/add/exp', 'App\\Handler\\Temporary\\AddExpHandler');
