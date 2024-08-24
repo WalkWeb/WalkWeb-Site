@@ -6,6 +6,7 @@ namespace App\Domain\Comment;
 
 use App\Domain\Post\Rating\RatingInterface;
 use DateTimeInterface;
+use WalkWeb\NW\AppException;
 
 class Comment implements CommentInterface
 {
@@ -18,6 +19,7 @@ class Comment implements CommentInterface
     private string $message;
     private bool $approved;
     private ?string $parentId;
+    private CommentCollection $children;
     private int $level;
     private bool $isLiked;
     private RatingInterface $rating;
@@ -55,6 +57,7 @@ class Comment implements CommentInterface
         $this->rating = $rating;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+        $this->children = new CommentCollection();
     }
 
     /**
@@ -127,6 +130,23 @@ class Comment implements CommentInterface
     public function getParentId(): ?string
     {
         return $this->parentId;
+    }
+
+    /**
+     * @param CommentInterface $comment
+     * @throws AppException
+     */
+    public function addChildren(CommentInterface $comment): void
+    {
+        $this->children->add($comment);
+    }
+
+    /**
+     * @return CommentCollection
+     */
+    public function getChildren(): CommentCollection
+    {
+        return $this->children;
     }
 
     /**

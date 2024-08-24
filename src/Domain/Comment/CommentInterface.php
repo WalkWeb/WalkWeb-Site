@@ -6,6 +6,7 @@ namespace App\Domain\Comment;
 
 use App\Domain\Post\Rating\RatingInterface;
 use DateTimeInterface;
+use WalkWeb\NW\AppException;
 
 interface CommentInterface
 {
@@ -24,6 +25,13 @@ interface CommentInterface
     public function getMessage(): string;
     public function isApproved(): bool;
     public function getParentId(): ?string;
+
+    /**
+     * @param CommentInterface $comment
+     * @throws AppException
+     */
+    public function addChildren(CommentInterface $comment): void;
+    public function getChildren(): CommentCollection;
     public function getLevel(): int;
     public function isLiked(): bool;
     public function getRating(): RatingInterface;
