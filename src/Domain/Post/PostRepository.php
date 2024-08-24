@@ -158,8 +158,6 @@ class PostRepository
     }
 
     /**
-     * TODO Подумать над оптимизацией запроса - убрать HAVING
-     *
      * @param string $tagSlug
      * @param int $offset
      * @param int $limit
@@ -194,7 +192,7 @@ class PostRepository
                 `posts`.`status_id`,
                 `posts`.`likes`,
                 `posts`.`dislikes`,
-                `posts`.`likes` - `posts`.`dislikes` as `rating`,
+                `posts`.`rating`,
                 `posts`.`comments_count`,
                 `posts`.`published`,
                 `posts`.`created_at`,
@@ -211,9 +209,7 @@ class PostRepository
                 JOIN `post_tags` ON `lk_post_tag`.`tag_id` = `post_tags`.`id`
                 LEFT JOIN `lk_account_like_post` ON `posts`.`slug` = `lk_account_like_post`.`post_slug` AND `lk_account_like_post`.`account_id` = ?
     
-                WHERE `posts`.`published` = 1 AND `post_tags`.`slug` = ?
-
-                HAVING `rating` > ?
+                WHERE `posts`.`published` = 1 AND `post_tags`.`slug` = ? AND `posts`.`rating` > ?
 
                 ORDER BY ' . $order . ' LIMIT ? OFFSET ?',
             [
@@ -229,8 +225,6 @@ class PostRepository
     }
 
     /**
-     * TODO Подумать над оптимизацией запроса - убрать HAVING
-     *
      * @param string $tagSlug
      * @param int $offset
      * @param int $limit
@@ -253,7 +247,7 @@ class PostRepository
                 `posts`.`status_id`,
                 `posts`.`likes`,
                 `posts`.`dislikes`,
-                `posts`.`likes` - `posts`.`dislikes` as `rating`,
+                `posts`.`rating`,
                 `posts`.`comments_count`,
                 `posts`.`published`,
                 `posts`.`created_at`,
@@ -267,9 +261,7 @@ class PostRepository
                 JOIN `lk_post_tag` ON `posts`.`id` = `lk_post_tag`.`post_id`
                 JOIN `post_tags` ON `lk_post_tag`.`tag_id` = `post_tags`.`id`
 
-                WHERE `posts`.`published` = 1 AND `post_tags`.`slug` = ?
-
-                HAVING `rating` > ?
+                WHERE `posts`.`published` = 1 AND `post_tags`.`slug` = ? AND `posts`.`rating` > ?
 
                 ORDER BY ' . $order . ' LIMIT ? OFFSET ?',
             [
