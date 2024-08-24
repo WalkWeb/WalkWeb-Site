@@ -1042,6 +1042,44 @@ td.avatar {
     display: none;
 }
 
+.add_tag_title {
+    margin-top: 40px;
+}
+
+#add_tag {
+    border: 1px dashed #444;
+    outline:none;
+    padding: 10px 30px;
+    font-size: 120%;
+    color: #333;
+    font-family: arial, sans-serif;
+}
+
+#added_tags {
+    display: flex;
+    margin: 10px 0;
+}
+
+#added_tags div {
+    color: #ccc;
+    padding: 2px 10px;
+    background: #333;
+    border-radius: 10px;
+    font-size: 110%;
+    margin-right: 10px;
+}
+
+#added_tags span {
+    font-size: 150%;
+    color: #a11;
+    vertical-align: middle;
+}
+
+#added_tags span:hover {
+    cursor: pointer;
+    color: #f11;
+}
+
 /* Create post style end */
 
 /* hr style start */

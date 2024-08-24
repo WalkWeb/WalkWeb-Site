@@ -46,9 +46,6 @@ class CreatePostHandler extends AbstractHandler
 
             $data = $request->getBody();
 
-            // TODO Mock
-            $data['tags'] = [];
-
             $dto = CreatePostRequestFactory::create($data, $user);
 
             $tagRepository = new TagRepository($this->container);

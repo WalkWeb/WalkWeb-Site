@@ -15,6 +15,9 @@ class CreatePostRequestFactory
     use ValidationTrait;
 
     /**
+     * TODO Добавить проверку, что указано несколько одинаковых новых тегов
+     * TODO Убирать пробелы до и после названия тега, переводить в нижний регистр
+     *
      * @param array $data
      * @param AuthInterface $user
      * @return CreatePostRequest

@@ -7,6 +7,7 @@ let create_comment_mode = true;
 let create_comment_energy = 5;
 let comment_min_length = 1;
 let comment_max_length = 2000;
+let tags = []
 
 document.addEventListener("DOMContentLoaded", checkCreatePostEnergy);
 document.addEventListener("DOMContentLoaded", addPasteEvent);
@@ -63,7 +64,7 @@ function createPost() {
             if (validateFullContent(content)) {
                 $.ajax({
                     url: '/post/create',
-                    data: {title: title, content: content},
+                    data: {title: title, content: content, tags: tags},
                     type: 'POST',
                     success: function(data) {
                         if (data.success === true) {
@@ -574,4 +575,14 @@ function updateCommentRating(id, rating) {
     }
 }
 
+function removeTag(string) {
+    let tag = document.getElementById(string);
+    tag.style.display = 'none';
+    tags.splice(tags.indexOf(string), 1);
+}
 
+function addTag(tag) {
+    tags.push(tag);
+    let added_tags = document.getElementById('added_tags');
+    added_tags.innerHTML += '<div id="' + tag + '">' + tag + ' <span onclick="removeTag(\'' + tag + '\')">×</span></div>';
+}

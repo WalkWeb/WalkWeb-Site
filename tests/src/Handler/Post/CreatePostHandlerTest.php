@@ -35,6 +35,7 @@ class CreatePostHandlerTest extends AbstractTest
             [
                 'title'   => 'Title',
                 'content' => '[p]text text text[/p]',
+                'tags'    => ['tag-1', 'tag-2'],
             ],
             [AccountInterface::AUTH_TOKEN => $token]
         );
@@ -82,6 +83,7 @@ class CreatePostHandlerTest extends AbstractTest
             [
                 'title'   => 'Title',
                 'content' => '[p]text text text[/p]',
+                'tags'    => [],
             ],
         );
         $response = $this->createApp()->handle($request);
@@ -101,6 +103,7 @@ class CreatePostHandlerTest extends AbstractTest
             [
                 'title'   => 'Title',
                 'content' => '[p]text text text[/p]',
+                'tags'    => [],
             ],
             [AccountInterface::AUTH_TOKEN => $token]
         );
@@ -127,6 +130,7 @@ class CreatePostHandlerTest extends AbstractTest
                 [
                     'title'   => 't',
                     'content' => 'content',
+                    'tags'    => [],
                 ],
                 'Incorrect "title", should be min-max length: 2-80',
             ],
@@ -134,6 +138,7 @@ class CreatePostHandlerTest extends AbstractTest
             [
                 [
                     'title'   => 'title',
+                    'tags'    => [],
                 ],
                 'Incorrect "content" parameter, it required and type string',
             ],

@@ -28,9 +28,7 @@ if (empty($user) || !($user instanceof AuthInterface)) {
 
 <div class="post_create_box">
     <div id="post_create_title" contenteditable="true" spellcheck="true"><br /></div>
-
     <div id="post_create_content">
-
         <div class="post_n_r" id="post_row_c_1">
             <div class="post_n_b">
                 <div class="post_n_b_l"></div>
@@ -38,8 +36,10 @@ if (empty($user) || !($user instanceof AuthInterface)) {
                 <div class="post_n_b_r" onclick="rowDelete(1)">&times;</div>
             </div>
         </div>
-
     </div>
+    <p class="add_tag_title">Теги, через запятую:</p>
+    <div id="added_tags"></div>
+    <div id="add_tag" contenteditable="true" spellcheck="true" aria-multiline="true"></div>
 </div>
 
 <div id="post_add_content_box">
@@ -71,3 +71,16 @@ if (empty($user) || !($user instanceof AuthInterface)) {
 <p id="create_post_button_message"></p>
 
 <script src="/js/post.js?v=1.00"></script>
+
+<script>
+    let input_tags = document.getElementById('add_tag')
+    input_tags.oninput = function() {
+        let tag = input_tags.innerHTML;
+        let last = tag.length - 1;
+        if (tag[last] === ',') {
+            let add = tag.slice(0, -1);
+            addTag(add);
+            input_tags.innerHTML = '';
+        }
+    };
+</script>
