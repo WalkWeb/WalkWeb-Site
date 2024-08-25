@@ -763,27 +763,27 @@ try {
            `menu`, `owner_id`, `total_post_count`, `silver_post_count`, `gold_post_count`, `diamond_post_count`, `total_comment_count`, `created_at`, `updated_at`
            ) VALUES
          (
-         '19b2d329-4ca0-4c07-8fb5-18a3a3e80001', 3, 'Diablo 2: База знаний', 'diablo-2-wiki', 'description-1', '/img/community/diablo-2.jpg', '', '', 165, null, 
+         '19b2d329-4ca0-4c07-8fb5-18a3a3e80001', 3, 'Diablo 2: База знаний', 'diablo-2-wiki', 'Огромное количество информации о классике Action-RPG жанра: Diablo 2 Resurrected. Прохождение, механики, билды по прокачке, уникальные предметы и много другой полезной информации', '/img/community/diablo-2.jpg', '', '', 165, null, 
          '', '1e3a3b27-12da-4c73-a3a7-b83092705b01', 652, 65, 24, 16, 16932, '2024-06-25 19:00:00', '2024-06-25 19:00:00'
          ),
          (
-         '19b2d329-4ca0-4c07-8fb5-18a3a3e80002', 2, 'Fallout 4: База знаний', 'fallout-4-wiki', 'description-2', '/img/community/fallout-4.jpg', '', '', 95, null, 
+         '19b2d329-4ca0-4c07-8fb5-18a3a3e80002', 2, 'Fallout 4: База знаний', 'fallout-4-wiki', 'В пустоши не выжить без подготовки — в этом сообществе собрана самая нужна и полезная информация по игре Fallout 4', '/img/community/fallout-4.jpg', '', '', 95, null, 
          '', '1e3a3b27-12da-4c73-a3a7-b83092705b01', 224, 18, 6, 1, 6423, '2024-06-26 18:00:00', '2024-06-26 18:00:00'
          ),
          (
-         '19b2d329-4ca0-4c07-8fb5-18a3a3e80003', 1, 'Ведьмак 3: База знаний', 'witcher-3-wiki', 'description-3', '/img/community/witcher-3.jpg', '', '', 117, null, 
+         '19b2d329-4ca0-4c07-8fb5-18a3a3e80003', 1, 'Ведьмак 3: База знаний', 'witcher-3-wiki', 'База знаний по заключительной, третьей части Ведьмака, в которой знаменитая история Геральта из Ривии подходит к завершению', '/img/community/witcher-3.jpg', '', '', 117, null, 
          '', '1e3a3b27-12da-4c73-a3a7-b83092705b02', 392, 54, 23, 7, 8571, '2024-06-17 12:00:00', '2024-06-17 12:00:00'
          ),
          (
-         '19b2d329-4ca0-4c07-8fb5-18a3a3e80004', 3, 'Скайрим: База знаний', 'skyrim-wiki', 'description-4', '/img/community/skyrim.jpg', '', '', 69, null, 
+         '19b2d329-4ca0-4c07-8fb5-18a3a3e80004', 3, 'Скайрим: База знаний', 'skyrim-wiki', 'База знаний по самой известной части пятой The Elder Scrolls: Скайрим. Много полезной информации, в том числе есть справочник и учебник по драньему языку', '/img/community/skyrim.jpg', '', '', 69, null, 
          '', '1e3a3b27-12da-4c73-a3a7-b83092705b01', 322, 53, 27, 8, 15492, '2024-06-28 20:00:00', '2024-06-28 20:00:00'
          ),
          (
-         '19b2d329-4ca0-4c07-8fb5-18a3a3e80005', 4, 'Path of Exile: База знаний', 'path-of-exile-wiki', 'description-5', '/img/community/path-of-exile.jpg', '', '', 35, null, 
+         '19b2d329-4ca0-4c07-8fb5-18a3a3e80005', 4, 'Path of Exile: База знаний', 'path-of-exile-wiki', 'База знаний по духовному наследнику серии Diablo: Path of Exile. Мрачная Acting-RPG с массой сложных и интересных механик. К сожалению база знаний заброшена автором из-за недостатка времени', '/img/community/path-of-exile.jpg', '', '', 35, null, 
          '', '1e3a3b27-12da-4c73-a3a7-b83092705b03', 715, 87, 51, 21, 4315, '2024-06-29 16:00:00', '2024-06-29 16:00:00'
          ),
          (
-         '19b2d329-4ca0-4c07-8fb5-18a3a3e80006', 1, 'Divine Divinity', 'divine-divinity-wiki', 'description-6', '/img/community/divine-divinity.jpg', '', '', 16, null, 
+         '19b2d329-4ca0-4c07-8fb5-18a3a3e80006', 1, 'Divine Divinity', 'divine-divinity-wiki', 'База знаний по старой и необоснованно забытой замечательной RPG игре Divine Divinity', '/img/community/divine-divinity.jpg', '', '', 16, null, 
          '', '1e3a3b27-12da-4c73-a3a7-b83092705b04', 220, 16, 4, 0, 549, '2024-06-30 18:00:00', '2024-06-30 18:00:00'
          )
         ;

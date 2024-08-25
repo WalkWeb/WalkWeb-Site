@@ -18,6 +18,7 @@ $routes->post('account.notice.close.all', '/notice/all/close', 'App\\Handler\\Ac
 $routes->get('account.banned', '/banned', 'App\\Handler\\Account\\AccountBannedPageHandler');
 $routes->get('account.profile', '/profile', 'App\\Handler\\Account\\Profile\\ProfilePageHandler');
 $routes->get('account.list', '/users/{page}', 'App\\Handler\\Account\\AccountListPageHandler', ['page' => '\d+']);
+// TODO Change to /p/{id}
 $routes->get('character.get', '/c/{id}', 'App\\Handler\\Character\\CharacterPageHandler', ['id' => '[a-zA-Z0-9-]+']);
 
 // post
@@ -45,6 +46,9 @@ $routes->get('rules', '/rules', 'App\\Handler\\Info\\RulesPageHandler');
 $routes->get('top.account.level', '/top/account/level', 'App\\Handler\\Rating\\AccountLevelRatingPageHandler');
 $routes->get('top.account.carma', '/top/account/carma', 'App\\Handler\\Rating\\AccountCarmaRatingPageHandler');
 $routes->get('top.account.genesis', '/top/account/genesis', 'App\\Handler\\Rating\\GenesisRatingPageHandler');
+
+// community
+$routes->get('community.list', '/community/{page}', 'App\\Handler\\Community\\CommunityListPageHandler', ['page' => '\d+']);
 
 // admin panel
 $routes->get('panel.index', '/panel', 'App\\Handler\\Panel\\PanelPageHandler');

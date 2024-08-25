@@ -15,6 +15,8 @@ class CreatePostRequestFactory
     use ValidationTrait;
 
     /**
+     * TODO Добавить проверку на максимальное количество тегов у поста
+     *
      * @param array $data
      * @param AuthInterface $user
      * @return CreatePostRequest

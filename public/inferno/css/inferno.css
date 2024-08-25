@@ -3457,6 +3457,7 @@ div.t_icon {
     height: 150px;
     border: 1px solid #333;
     background-size: cover;
+    background-position: center;
 }
 
 div.t_content {
@@ -3586,3 +3587,60 @@ span.t_link {
 }
 
 /* Fond sizes end */
+
+/* Community list style start */
+
+.com_box {
+    min-height: 100px;
+    margin-bottom: 20px;
+    padding: 0 30px;
+    display: flex;
+}
+
+.com_box p {
+    padding: 0;
+}
+
+.com_l {
+    width: 20%;
+}
+
+.com_r {
+    width: 80%;
+    padding: 0 20px;
+}
+
+.com_icon {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #333;
+}
+
+a.com_link {
+    font-size: 160%;
+    text-decoration: none;
+    color: #b9b982;
+    font-family: Times New Roman, sans-serif;
+}
+
+a.com_link:hover {
+    color: #d51d1d;
+}
+
+.com_desc {
+    margin: 10px 0;
+}
+
+.com_info {
+    margin: 10px 0 0 0;
+}
+
+.com_hr {
+    width: 50%;
+    border-bottom: 1px solid #333;
+}
+
+/* Community list style end */
