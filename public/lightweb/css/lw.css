@@ -1138,10 +1138,13 @@ td.avatar {
 }
 
 .cm_con {
-    display: flex;
     font-family: Arial, sans-serif;
     border-bottom: 1px dotted #ccc;
     margin-bottom: 10px;
+}
+
+.cm_bias {
+    display: flex;
 }
 
 .cm_con_left {

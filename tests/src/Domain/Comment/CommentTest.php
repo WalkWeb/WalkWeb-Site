@@ -31,6 +31,9 @@ class CommentTest extends AbstractTest
         self::assertEquals($expectedCollection, $comment->getChildren());
     }
 
+    /**
+     * @return array
+     */
     public function addChildrenDataProvider(): array
     {
         return [

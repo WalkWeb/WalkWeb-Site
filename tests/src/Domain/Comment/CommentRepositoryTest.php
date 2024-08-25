@@ -62,7 +62,7 @@ class CommentRepositoryTest extends AbstractTest
     {
         $comments = $this->getRepository()->getByPost('7684ad22-613b-4c65-9bad-b7dfdd394c02');
 
-        self::assertCount(3, $comments);
+        self::assertCount(27, $comments);
     }
 
     /**
@@ -73,7 +73,7 @@ class CommentRepositoryTest extends AbstractTest
         $user = $this->getUser('VBajfT8P6PFtrkHhCqb7ZNwIFG45a1');
         $comments = $this->getRepository()->getByPost('7684ad22-613b-4c65-9bad-b7dfdd394c02', $user);
 
-        self::assertCount(3, $comments);
+        self::assertCount(27, $comments);
     }
 
     /**
@@ -92,6 +92,28 @@ class CommentRepositoryTest extends AbstractTest
         $this->expectException(AppException::class);
         $this->expectExceptionMessage(CommentException::GET_AUTHOR_ERROR);
         $this->getRepository()->getAuthorId('52f24c49-63c2-4901-a472-cbab04127654');
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testCommentRepositoryGetCorrectTree(): void
+    {
+        $user = $this->getUser('VBajfT8P6PFtrkHhCqb7ZNwIFG45a5');
+        $comments = $this->getRepository()->getByPost('7684ad22-613b-4c65-9bad-b7dfdd394c05', $user);
+
+        self::assertCount(1, $comments);
+
+        $i = 0;
+        foreach ($comments as $comment) {
+            if ($i === 0) {
+                self::assertCount(1, $comment->getChildren());
+            }
+            if ($i === 1) {
+                self::assertCount(1, $comment->getChildren());
+            }
+            $i++;
+        }
     }
 
     /**

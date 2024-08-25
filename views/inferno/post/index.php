@@ -1,6 +1,7 @@
 <?php
 
 use App\Domain\Comment\CommentCollection;
+use App\Domain\Pieces\View\CommentView;
 use App\Domain\Post\PostInterface;
 use WalkWeb\NW\AppException;
 
@@ -103,41 +104,7 @@ if (isset($auth) && $auth === true) {
         <?php
         if (count($comments) > 0) {
             foreach ($comments as $comment) {
-                if ($comment->getAuthorId()) {
-                    $author = '<a href="/u/' . $comment->getAuthorName() . '" title="" class="cm_author_a">' . $comment->getAuthorName() . '</a> 
-                        <span class="cm_level">' . $comment->getAuthorLevel() . '</span>';
-                } else {
-                    $author = '<span class="cm_author_guest">' . $comment->getAuthorName() . ' (guest)</span>';
-                }
-
-                if ($comment->isLiked()) {
-                    $likePost = "likeComment('{$comment->getId()}', {$comment->getRating()->getRating()})";
-                    $dislikePost = "dislikeComment('{$comment->getId()}', {$comment->getRating()->getRating()})";
-                    $ratingBox = '<div id="com_' . $comment->getId() . '" class="cm_con_right">
-                      <div class="cm_rating_up" onclick="' . $likePost . '">&#9650;</div>
-                      <div class="cm_rating_value"><span class="' . $comment->getRating()->getColorClass() . '">' . $comment->getRating()->getRating() . '</span></div>
-                      <div class="cm_rating_down" onclick="' . $dislikePost . '">&#9660;</div>
-                  </div>';
-                } else {
-                    $ratingBox = '<div class="cm_con_right">
-                      <div class="cm_rating_value">
-                          <span class="' . $comment->getRating()->getColorClass() . '">' . $comment->getRating()->getRating() . '</span>
-                      </div>
-                  </div>';
-                }
-
-                echo '
-            <div class="cm_con">
-                <div class="cm_con_left">
-                    <div style="background-image: url(' . $comment->getAuthorAvatar() . ');" class="cm_ava"></div>
-                    <div class="cm_author">' . $author . '</div>
-                </div>
-                <div class="cm_con_cent">
-                    ' . $ratingBox . '
-                    <div class="cm_date"><abbr title="' . $comment->getCreatedAt()->format('Y-m-d H:i:s') . '">' . $this->getCreatedAtEasyData($comment->getCreatedAt()) . '</abbr></div>
-                    <div class="cm_comment">' . str_replace([PHP_EOL], ['<br />'], $comment->getMessage()) . '</div>
-                </div>
-            </div>';
+                echo CommentView::printComment($comment);
             }
 
             echo '<p id="no_comment_rvd" class="center hidden">Комментариев нет</p>';

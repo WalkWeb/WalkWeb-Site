@@ -131,7 +131,7 @@ class CommentRepository
                                  
             WHERE `post_comments`.`post_id` = ?
             
-            ORDER BY `post_comments`.`created_at` DESC',
+            ORDER BY `post_comments`.`created_at`',
             [
                 ['type' => 's', 'value' => $user->getId()],
                 ['type' => 's', 'value' => $postId],
@@ -315,7 +315,7 @@ class CommentRepository
                                  
             WHERE `post_comments`.`post_id` = ?
             
-            ORDER BY `post_comments`.`created_at` DESC',
+            ORDER BY `post_comments`.`created_at`',
             [['type' => 's', 'value' => $postId]],
         );
 

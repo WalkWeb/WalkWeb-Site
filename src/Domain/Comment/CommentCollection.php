@@ -19,16 +19,27 @@ class CommentCollection implements Iterator, Countable
     private array $elements = [];
 
     /**
-     * @param CommentInterface $post
+     * @var CommentInterface[]
+     */
+    private array $added = [];
+
+    /**
+     * @param CommentInterface $comment
      * @throws AppException
      */
-    public function add(CommentInterface $post): void
+    public function add(CommentInterface $comment): void
     {
-        if (array_key_exists($post->getId(), $this->elements)) {
+        if (array_key_exists($comment->getId(), $this->elements)) {
             throw new AppException(CommentException::ALREADY_EXIST);
         }
 
-        $this->elements[$post->getId()] = $post;
+        if ($comment->getParentId() && array_key_exists($comment->getParentId(), $this->added)) {
+            $this->added[$comment->getParentId()]->addChildren($comment);
+            $this->added[$comment->getId()] = $comment;
+        } else {
+            $this->elements[$comment->getId()] = $comment;
+            $this->added[$comment->getId()] = $comment;
+        }
     }
 
     public function current(): CommentInterface

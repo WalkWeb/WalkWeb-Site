@@ -3241,20 +3241,22 @@ a.news_link:hover {
 }
 
 .cm_con {
-    width: 100%;
     margin-bottom: 20px;
-    border-bottom: 1px dotted #937150;
-    min-height: 200px;
+}
+
+.cm_bias {
+    margin-bottom: 20px;
+    display: flex;
 }
 
 .cm_con_left {
-    width: 130px;
-    float: left;
+    width: 15%;
+    border-bottom: 1px dotted #937150;
 }
 
 .cm_con_cent {
-    margin-left: 130px;
-    min-height: 150px;
+    width: 85%;
+    border-bottom: 1px dotted #937150;
 }
 
 .cm_con_f {
@@ -3265,6 +3267,7 @@ a.news_link:hover {
 .cm_ava {
     width: 130px;
     height: 150px;
+    margin: 0 auto;
     background-size: cover;
     background-position: center;
 }

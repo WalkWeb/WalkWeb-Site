@@ -21,6 +21,6 @@ class StatisticTest extends AbstractTest
 
         self::assertEquals(14, $statistic->getTotalUsers());
         self::assertEquals(12, $statistic->getTotalPosts());
-        self::assertEquals(7, $statistic->getTotalComments());
+        self::assertEquals(43, $statistic->getTotalComments());
     }
 }
