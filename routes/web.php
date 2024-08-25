@@ -18,8 +18,7 @@ $routes->post('account.notice.close.all', '/notice/all/close', 'App\\Handler\\Ac
 $routes->get('account.banned', '/banned', 'App\\Handler\\Account\\AccountBannedPageHandler');
 $routes->get('account.profile', '/profile', 'App\\Handler\\Account\\Profile\\ProfilePageHandler');
 $routes->get('account.list', '/users/{page}', 'App\\Handler\\Account\\AccountListPageHandler', ['page' => '\d+']);
-// TODO Change to /p/{id}
-$routes->get('character.get', '/c/{id}', 'App\\Handler\\Character\\CharacterPageHandler', ['id' => '[a-zA-Z0-9-]+']);
+$routes->get('character.get', '/h/{id}', 'App\\Handler\\Character\\CharacterPageHandler', ['id' => '[a-zA-Z0-9-]+']);
 
 // post
 $routes->get('post.get', '/p/{slug}', 'App\\Handler\\Post\\PostPageHandler', ['slug' => '[a-zA-Z0-9-]+']);

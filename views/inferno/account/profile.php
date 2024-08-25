@@ -242,7 +242,7 @@ $rise = $account->getMainCharacter()->getLevel()->getStatPoints() > 0;
             <?php
             foreach ($characters as $character) {
                 echo '
-                    <a href="/c/' . $character->getId() . '" title="" class="pr_char_link">
+                    <a href="/h/' . $character->getId() . '" title="" class="pr_char_link">
                     <div class="pr_char_box">
                         <div class="profile_char_container">
                             <div class="profile_char_ava_cont">

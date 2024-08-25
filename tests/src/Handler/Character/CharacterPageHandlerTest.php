@@ -21,7 +21,7 @@ class CharacterPageHandlerTest extends AbstractTest
      */
     public function testCharacterPageHandlerSuccess(string $template): void
     {
-        $request = new Request(['REQUEST_URI' => '/c/277bbc70-cb4a-49a9-8de2-3fd5c1308c01']);
+        $request = new Request(['REQUEST_URI' => '/h/277bbc70-cb4a-49a9-8de2-3fd5c1308c01']);
         $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
@@ -36,7 +36,7 @@ class CharacterPageHandlerTest extends AbstractTest
      */
     public function testCharacterPageHandlerNotFound(string $template): void
     {
-        $request = new Request(['REQUEST_URI' => '/c/277bbc70-cb4a-49a9-8de2-3fd5c1308c33']);
+        $request = new Request(['REQUEST_URI' => '/h/277bbc70-cb4a-49a9-8de2-3fd5c1308c33']);
         $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::NOT_FOUND, $response->getStatusCode());
