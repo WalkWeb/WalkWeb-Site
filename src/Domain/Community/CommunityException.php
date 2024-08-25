@@ -8,7 +8,8 @@ use Exception;
 
 class CommunityException extends Exception
 {
-    // TODO min-max value
+    public const ALREADY_EXIST               = 'CommunityCollection: community to be added already exists';
+    public const EXPECTED_ARRAY              = 'CommunityCollectionFactory: expected array data';
 
     public const INVALID_ID                  = 'Incorrect "id" parameter, it required and type string (uuid)';
     public const INVALID_LEVEL               = 'Incorrect parameter "level", it required and type integer';

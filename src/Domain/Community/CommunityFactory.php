@@ -12,6 +12,8 @@ class CommunityFactory
     use ValidationTrait;
 
     /**
+     * TODO min-max value
+     *
      * @param array $data
      * @return CommunityInterface
      * @throws AppException
