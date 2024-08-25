@@ -15,9 +15,6 @@ class CreatePostRequestFactory
     use ValidationTrait;
 
     /**
-     * TODO Добавить проверку, что указано несколько одинаковых новых тегов
-     * TODO Убирать пробелы до и после названия тега, переводить в нижний регистр
-     *
      * @param array $data
      * @param AuthInterface $user
      * @return CreatePostRequest
@@ -32,6 +29,12 @@ class CreatePostRequestFactory
         foreach ($data['tags'] as $tag) {
             if (!is_string($tag)) {
                 throw new AppException(PostException::INVALID_TAG);
+            }
+
+            $tag = trim($tag);
+
+            if (in_array($tag, $tags, true)) {
+                continue;
             }
 
             $tags[] = $tag;

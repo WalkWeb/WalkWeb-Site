@@ -43,6 +43,23 @@ class CreatePostRequestFactoryTest extends AbstractTest
     }
 
     /**
+     * @throws AppException
+     */
+    public function testCreatePostRequestFactoryCreateDoubleTag(): void
+    {
+        $user = $this->createUser();
+        $data = [
+            'title'   => 'title',
+            'content' => 'content',
+            'tags'    => ['tag-1', ' tag-1 ', 'tag-2'],
+        ];
+
+        $request = CreatePostRequestFactory::create($data, $user);
+
+        self::assertEquals(['tag-1', 'tag-2'], $request->getTags());
+    }
+
+    /**
      * @return array
      */
     public function successDataProvider(): array
