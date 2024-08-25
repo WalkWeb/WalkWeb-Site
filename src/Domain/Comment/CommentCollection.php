@@ -46,4 +46,12 @@ class CommentCollection implements Iterator, Countable
     {
         return current($this->elements);
     }
+
+    public function revert(): void
+    {
+        $this->elements = array_reverse($this->elements);
+        foreach ($this->elements as $comment) {
+            $comment->getChildren()->revert();
+        }
+    }
 }

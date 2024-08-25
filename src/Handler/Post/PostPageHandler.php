@@ -42,6 +42,7 @@ class PostPageHandler extends AbstractHandler
         if ($post->getCommentsCount() > 0) {
             $commentRepository = new CommentRepository($this->container);
             $comments = $commentRepository->getByPost($post->getId(), $user);
+            $comments->revert();
         } else {
             $comments = new CommentCollection();
         }
