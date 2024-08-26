@@ -1,6 +1,8 @@
 <?php
 
 use App\Domain\Comment\CommentCollection;
+use App\Domain\Community\BlankCommunity;
+use App\Domain\Community\CommunityInterface;
 use App\Domain\Pieces\View\CommentView;
 use App\Domain\Post\PostInterface;
 use WalkWeb\NW\AppException;
@@ -12,6 +14,12 @@ if (empty($post) || !($post instanceof PostInterface)) {
 if (empty($comments) || !($comments instanceof CommentCollection)) {
     throw new AppException('post/index view: miss or invalid $comments');
 }
+
+if (empty($community) || !($community instanceof CommunityInterface)) {
+    throw new AppException('post/index view: invalid $community');
+}
+
+$this->title = htmlspecialchars($post->getTitle()) . ' | ' . APP_NAME;
 
 if ($post->isLiked()) {
     $likePost = "likePost('{$post->getSlug()}', {$post->getRating()->getRating()})";
@@ -38,9 +46,36 @@ if (isset($auth) && $auth === true) {
     $form = '<p class="center"> Чтобы оставлять комментарии необходимо <a href="/login" class="osnova">войти</a> или <a href="/registration" class="osnova">зарегистрироваться</a></p>';
 }
 
+$mainDiv = 'class="row_mc1"';
+
+if (!($community instanceof BlankCommunity)) {
+
+    $mainDiv = 'class="news_preview" style="margin-top: -20px;"';
+
+    // TODO Add community menu, delete description
+
+    echo '
+    <div class="c_box">
+        <div class="c_l">
+            <div class="c_icon_small" style="background-image: url(' . $community->getIcon() . ');">
+                <a href="/c/' . $community->getSlug() . '" class="full"></a>
+            </div>
+        </div>
+        <div class="c_content">
+            <a href="/c/' . $community->getSlug() . '" class="c_head">' . $community->getName() . '</a><br /><br />
+            <span class="c_link">' . $community->getDescription() . '</span><br /><br />
+            <span class="c_link">
+                    <span class="yellow">' . $community->getTotalPostCount() . '</span> постов |
+                    <span class="orange">' . $community->getTotalCommentCount() . '</span> комментариев |
+                    <span class="blue">' . $community->getFollowers() . '</span> подписчиков
+            </span>
+        </div>
+    </div>';
+}
+
 ?>
 
-<div class="row_mc1" style="margin-top: -20px;">
+<div <?= $mainDiv?> >
     <div class="content_main_box">
 
         <div class="content_post_main">
@@ -116,7 +151,5 @@ if (isset($auth) && $auth === true) {
     </div>
     <div class="comment_form_box"><?= $form ?></div>
 </div>
-
-<div class="newdiv_mc12"></div>
 
 <script src="/js/post.js?v=1.00"></script>

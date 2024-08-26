@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace App\Handler\Post;
 
+use App\Domain\Auth\AuthInterface;
 use App\Domain\Comment\CommentCollection;
 use App\Domain\Comment\CommentRepository;
+use App\Domain\Community\BlankCommunity;
+use App\Domain\Community\CommunityInterface;
+use App\Domain\Community\CommunityRepository;
+use App\Domain\Post\PostException;
+use App\Domain\Post\PostInterface;
 use App\Domain\Post\PostRepository;
 use App\Handler\AbstractHandler;
 use DateTimeInterface;
@@ -39,21 +45,33 @@ class PostPageHandler extends AbstractHandler
             );
         }
 
-        if ($post->getCommentsCount() > 0) {
-            $commentRepository = new CommentRepository($this->container);
-            $comments = $commentRepository->getByPost($post->getId(), $user);
-            $comments->revert();
-        } else {
-            $comments = new CommentCollection();
+        return $this->render('post/index', [
+            'post'      => $post,
+            'comments'  => $this->getComments($post, $user),
+            'auth'      => $this->container->exist('user'),
+            'community' => $this->getCommunity($post),
+        ]);
+    }
+
+    /**
+     * @param PostInterface $post
+     * @return CommunityInterface|null
+     * @throws AppException
+     */
+    public function getCommunity(PostInterface $post): CommunityInterface
+    {
+        if ($post->getCommunitySlug()) {
+            $communityRepository = new CommunityRepository($this->container);
+            $community = $communityRepository->get($post->getCommunitySlug());
+
+            if (!$community) {
+                throw new AppException(PostException::INVALID_COMMUNITY . $post->getCommunitySlug());
+            }
+
+            return $community;
         }
 
-        $this->title = htmlspecialchars($post->getTitle()) . ' | ' . APP_NAME;
-
-        return $this->render('post/index', [
-            'post'     => $post,
-            'comments' => $comments,
-            'auth'     => $this->container->exist('user'),
-        ]);
+        return new BlankCommunity();
     }
 
     /**
@@ -63,5 +81,24 @@ class PostPageHandler extends AbstractHandler
     protected function getCreatedAtEasyData(DateTimeInterface $date): string
     {
         return self::getElapsedTime($date);
+    }
+
+    /**
+     * @param PostInterface $post
+     * @param AuthInterface|null $user
+     * @return CommentCollection
+     * @throws AppException
+     */
+    private function getComments(PostInterface $post, ?AuthInterface $user): CommentCollection
+    {
+        if ($post->getCommentsCount() > 0) {
+            $commentRepository = new CommentRepository($this->container);
+            $comments = $commentRepository->getByPost($post->getId(), $user);
+            $comments->revert();
+
+            return $comments;
+        }
+
+        return new CommentCollection();
     }
 }

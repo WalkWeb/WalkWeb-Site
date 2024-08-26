@@ -1,6 +1,8 @@
 <?php
 
 use App\Domain\Comment\CommentCollection;
+use App\Domain\Community\BlankCommunity;
+use App\Domain\Community\CommunityInterface;
 use App\Domain\Pieces\View\CommentView;
 use App\Domain\Post\PostInterface;
 use WalkWeb\NW\AppException;
@@ -12,6 +14,12 @@ if (empty($post) || !($post instanceof PostInterface)) {
 if (empty($comments) || !($comments instanceof CommentCollection)) {
     throw new AppException('post/index view: miss $comments');
 }
+
+if (empty($community) || !($community instanceof CommunityInterface)) {
+    throw new AppException('post/index view: invalid $community');
+}
+
+$this->title = htmlspecialchars($post->getTitle()) . ' | ' . APP_NAME;
 
 if ($post->isLiked()) {
     $likePost = "likePost('{$post->getSlug()}', {$post->getRating()->getRating()})";
@@ -38,6 +46,29 @@ if (isset($auth) && $auth === true) {
              <p id="create_comment_button_message"></p>';
 } else {
     $form = '<p class="center"> Чтобы оставлять комментарии необходимо <a href="/login" class="osnova">войти</a> или <a href="/registration" class="osnova">зарегистрироваться</a></p>';
+}
+
+if (!($community instanceof BlankCommunity)) {
+
+    // TODO Add community menu, delete description
+
+    echo '
+    <div class="c_box">
+        <div class="c_l">
+            <div class="c_icon_small" style="background-image: url(' . $community->getIcon() . ');">
+                <a href="/c/' . $community->getSlug() . '" class="full"></a>
+            </div>
+        </div>
+        <div class="c_content">
+            <a href="/c/' . $community->getSlug() . '" class="c_head">' . $community->getName() . '</a><br /><br />
+            <span class="c_link">' . $community->getDescription() . '</span><br /><br />
+            <span class="c_link">
+                    <span class="yellow">' . $community->getTotalPostCount() . '</span> постов |
+                    <span class="orange">' . $community->getTotalCommentCount() . '</span> комментариев |
+                    <span class="blue">' . $community->getFollowers() . '</span> подписчиков
+            </span>
+        </div>
+    </div>';
 }
 
 ?>

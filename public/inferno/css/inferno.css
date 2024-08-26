@@ -164,6 +164,7 @@ abbr {
 }
 
 .row_mc1 {
+    margin-top: -20px;
     background:
             url('/inferno/images/bglefttop2.png') left top no-repeat,
             url('/inferno/images/bgrighttop2.png') right top no-repeat,
@@ -2729,6 +2730,14 @@ img.i_img {
     color: #cd0b0b;
 }
 
+.c_icon_small {
+    width: 90px;
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #333;
+}
+
 /* Post style end */
 
 /* Pop-up message style start */
@@ -3696,10 +3705,11 @@ div.c_r a:hover {
     color: #d39e00;
 }
 
-span.c_head {
+.c_head {
     font-family: Times New Roman, sans-serif;
     font-size: 160%;
     color: #b9b982;
+    text-decoration: none;
 }
 
 span.c_link {

@@ -23,7 +23,7 @@ $rise = $account->getMainCharacter()->getLevel()->getStatPoints() > 0;
 
 ?>
 
-<div class="row_mc1" style="margin-top: -20px;">
+<div class="row_mc1">
     <div class="content_profile_box">
 
         <h1 class="pr_title"><?= $account->getName() ?></h1>

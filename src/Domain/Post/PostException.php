@@ -47,4 +47,5 @@ class PostException extends Exception
 
     // repository
     public const GET_AUTHOR_ERROR   = 'Author post could not be reached';
+    public const INVALID_COMMUNITY  = 'Community given, but not found, slug: ';
 }

@@ -412,6 +412,8 @@ a.profile_link:hover {
     text-decoration: underline;
 }
 
+/* Colors start */
+
 .red {
     color: #a71d2a;
 }
@@ -427,6 +429,12 @@ a.profile_link:hover {
 .orange {
     color: #ff4500;
 }
+
+.blue {
+    color: #0062cc;
+}
+
+/* Colors end */
 
 .notice_box {
     margin-bottom: 20px;
@@ -795,6 +803,14 @@ td.avatar {
 
 .negativeRatingColor {
     color: #cd0b0b;
+}
+
+.c_icon_small {
+    width: 90px;
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #333;
 }
 
 /* Post style end */
@@ -1343,7 +1359,7 @@ a.com_link:hover {
 
 div.c_box {
     display: flex;
-    padding: 10px 30px 30px 30px;
+    padding: 10px 0 30px 0;
 }
 
 div.c_l {
@@ -1392,9 +1408,11 @@ div.c_r a:hover {
     color: #ccc;
 }
 
-span.c_head {
+.c_head {
     font-family: Times New Roman, sans-serif;
     font-size: 160%;
+    text-decoration: none;
+    color: #333;
 }
 
 span.c_link {
