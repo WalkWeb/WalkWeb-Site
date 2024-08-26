@@ -3192,7 +3192,11 @@ a.news_link {
 
 a.news_link:hover {
     color: #5176d5;
-    text-decoration: underline;
+}
+
+.com_tl {
+    text-decoration: none;
+    color: #d6b885;
 }
 
 /* Post list style end */

@@ -73,7 +73,7 @@ class PostPageHandlerTest extends AbstractTest
         $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
-        self::assertMatchesRegularExpression('/title post 1/', $response->getBody());
+        self::assertMatchesRegularExpression('/Title post 1/', $response->getBody());
 
         // no view like icon
         self::assertDoesNotMatchRegularExpression('/9650/', $response->getBody());
@@ -105,19 +105,19 @@ class PostPageHandlerTest extends AbstractTest
             [
                 'default',
                 'slug-post-2-1000',
-                'title post 2',
+                'Title post 2',
                 'comment 3',
             ],
             [
                 'inferno',
                 'slug-post-2-1000',
-                'title post 2',
+                'Title post 2',
                 'comment 3',
             ],
             [
                 'inferno',
                 'slug-post-5-1000',
-                'title post 5',
+                'Title post 5',
                 'comment 41',
             ],
         ];
@@ -133,21 +133,21 @@ class PostPageHandlerTest extends AbstractTest
                 'default',
                 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a7',
                 'slug-post-2-1000',
-                'title post 2',
+                'Title post 2',
                 'comment 3',
             ],
             [
                 'inferno',
                 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a7',
                 'slug-post-2-1000',
-                'title post 2',
+                'Title post 2',
                 'comment 3',
             ],
             [
                 'inferno',
                 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a5',
                 'slug-post-5-1000',
-                'title post 5',
+                'Title post 5',
                 'comment 41',
             ],
         ];

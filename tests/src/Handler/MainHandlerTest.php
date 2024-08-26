@@ -25,7 +25,8 @@ class MainHandlerTest extends AbstractTest
         $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
-        self::assertMatchesRegularExpression('/title post 1/', $response->getBody());
+        self::assertMatchesRegularExpression('/Title post 11/', $response->getBody());
+        self::assertMatchesRegularExpression('/Divine Divinity/', $response->getBody());
     }
 
     /**

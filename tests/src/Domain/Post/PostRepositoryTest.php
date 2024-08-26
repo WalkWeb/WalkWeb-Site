@@ -296,31 +296,31 @@ class PostRepositoryTest extends AbstractTest
         return [
             // rpg: all
             [
-                'rpg', 0, 10, -10, false, 4, ['title post 8', 'title post 5', 'title post 4', 'title post 1']
+                'rpg', 0, 10, -10, false, 4, ['Title post 8', 'Title post 5', 'Title post 4', 'Title post 1']
             ],
             // rpg: check offset
             [
-                'rpg', 2, 10, -10, false, 2, ['title post 4', 'title post 1']
+                'rpg', 2, 10, -10, false, 2, ['Title post 4', 'Title post 1']
             ],
             // rpg: check limit
             [
-                'rpg', 0, 2, -10, false, 2, ['title post 8', 'title post 5']
+                'rpg', 0, 2, -10, false, 2, ['Title post 8', 'Title post 5']
             ],
             // rpg: check minRating
             [
-                'rpg', 0, 10, TagPageHandler::RATING_TOP, false, 1, ['title post 8']
+                'rpg', 0, 10, TagPageHandler::RATING_TOP, false, 1, ['Title post 8']
             ],
             // news: all
             [
-                'news', 0, 10, TagPageHandler::RATING_ALL, false, 4, ['title post 9', 'title post 6', 'title post 5', 'title post 2']
+                'news', 0, 10, TagPageHandler::RATING_ALL, false, 4, ['Title post 9', 'Title post 6', 'Title post 5', 'Title post 2']
             ],
             // news: top
             [
-                'news', 0, 10, TagPageHandler::RATING_TOP, false, 2, ['title post 9', 'title post 2']
+                'news', 0, 10, TagPageHandler::RATING_TOP, false, 2, ['Title post 9', 'Title post 2']
             ],
             // news: best
             [
-                'news', 0, 10, TagPageHandler::RATING_ALL, true, 4, ['title post 2', 'title post 9', 'title post 6', 'title post 5']
+                'news', 0, 10, TagPageHandler::RATING_ALL, true, 4, ['Title post 2', 'Title post 9', 'Title post 6', 'Title post 5']
             ],
         ];
     }

@@ -26,7 +26,7 @@ class TagPageHandlerTest extends AbstractTest
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Просмотр постов по тегу/', $response->getBody());
         self::assertMatchesRegularExpression('/PATH OF EXILE/', $response->getBody());
-        self::assertMatchesRegularExpression('/title post 2/', $response->getBody());
+        self::assertMatchesRegularExpression('/Title post 2/', $response->getBody());
     }
 
     /**
@@ -42,7 +42,7 @@ class TagPageHandlerTest extends AbstractTest
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression('/Просмотр постов по тегу/', $response->getBody());
         self::assertMatchesRegularExpression('/PATH OF EXILE/', $response->getBody());
-        self::assertMatchesRegularExpression('/title post 2/', $response->getBody());
+        self::assertMatchesRegularExpression('/Title post 2/', $response->getBody());
     }
 
     /**

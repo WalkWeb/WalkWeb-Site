@@ -26,10 +26,16 @@ foreach ($posts as $post) {
                       </div>';
     }
 
+    $communityLink = '';
+
+    if ($post->getCommunitySlug()) {
+        $communityLink = '<a href="/c/' . $post->getCommunitySlug() . '" class="com_tl">' . $post->getCommunityName() . '</a> » ';
+    }
+
     echo '
     <div class="post_box">
         ' . $ratingBox . '
-        <a href="/p/' . $post->getSlug() . '" class="post_link">
+        ' . $communityLink . '<a href="/p/' . $post->getSlug() . '" class="post_link">
             ' . $post->getTitle() . '
         </a>
         <p>
