@@ -93,8 +93,8 @@ $this->title = APP_NAME . ' — Функционал проекта';
 <h2>Сообщества</h2>
 
 <ul>
-    <li><span class="red">Просмотр списка сообществ</span></li>
-    <li><span class="red">Просмотр сообщества</span></li>
+    <li><span class="orange">Просмотр списка сообществ</span></li>
+    <li><span class="orange">Просмотр сообщества</span></li>
     <li><span class="red">Создание сообщества</span></li>
     <li><span class="red">Подписка на сообщество</span></li>
     <li><span class="red">Привязка постов к сообществу</span></li>

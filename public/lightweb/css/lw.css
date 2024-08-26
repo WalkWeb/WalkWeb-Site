@@ -1332,3 +1332,73 @@ a.com_link:hover {
 }
 
 /* Community list style end */
+
+/* Community page style start */
+
+div.c_box {
+    display: flex;
+    padding: 10px 30px 30px 30px;
+}
+
+div.c_l {
+}
+
+div.c_icon {
+    width: 100px;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #333;
+}
+
+div.c_content {
+    padding-left: 20px;
+}
+
+div.c_r {
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+    font-size: 120%;
+}
+
+div.c_r a {
+    color: #ffffff;
+    background: #363539;
+    display: inline-block;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 100%;
+    line-height: 1.428571429;
+    border-radius: 5px;
+    user-select: none;
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+div.c_r a:hover {
+    color: #ccc;
+}
+
+span.c_head {
+    font-family: Times New Roman, sans-serif;
+    font-size: 160%;
+}
+
+span.c_link {
+    font-size: 120%;
+}
+
+.c_hr {
+    margin: 0 auto 20px auto;
+    width: 80%;
+    border-bottom: 1px solid #333;
+}
+
+/* Community page style start */

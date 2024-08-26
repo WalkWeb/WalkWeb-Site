@@ -48,6 +48,7 @@ $routes->get('top.account.genesis', '/top/account/genesis', 'App\\Handler\\Ratin
 
 // community
 $routes->get('community.list', '/community/{page}', 'App\\Handler\\Community\\CommunityListPageHandler', ['page' => '\d+']);
+$routes->get('community.get', '/c/{slug}', 'App\\Handler\\Community\\CommunityPageHandler', ['slug' => '[a-zA-Z0-9-]+']);
 
 // admin panel
 $routes->get('panel.index', '/panel', 'App\\Handler\\Panel\\PanelPageHandler');

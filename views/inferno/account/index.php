@@ -230,7 +230,7 @@ $this->title = APP_NAME . ' — Ваш профиль';
 
 <?php
 
-echo '<p class="text" align="center"><b>' . $account->getName() . '</b> пока ничего не ' . ($account->getFloor()->getId() === 1 ? 'написал' : 'написала') . '</p>';
+echo '<p class="text center"><b>' . $account->getName() . '</b> пока ничего не ' . ($account->getFloor()->getId() === 1 ? 'написал' : 'написала') . '</p>';
 
 ?>
 

@@ -6,11 +6,11 @@ use App\Domain\Post\PostInterface;
 use WalkWeb\NW\AppException;
 
 if (empty($post) || !($post instanceof PostInterface)) {
-    throw new AppException('post/index view: miss $post');
+    throw new AppException('post/index view: miss or invalid $post');
 }
 
 if (empty($comments) || !($comments instanceof CommentCollection)) {
-    throw new AppException('post/index view: miss $comments');
+    throw new AppException('post/index view: miss or invalid $comments');
 }
 
 if ($post->isLiked()) {
