@@ -24,6 +24,8 @@ class Post implements PostInterface
     private bool $published;
     private TagCollection $tags;
     private bool $isLiked;
+    private string $communitySlug;
+    private string $communityName;
     private DateTimeInterface $createdAt;
     private ?DateTimeInterface $updatedAt;
 
@@ -40,6 +42,8 @@ class Post implements PostInterface
         bool $published,
         TagCollection $collection,
         bool $isLiked,
+        string $communitySlug,
+        string $communityName,
         DateTimeInterface $createdAt,
         ?DateTimeInterface $updatedAt = null
     )
@@ -56,6 +60,8 @@ class Post implements PostInterface
         $this->published = $published;
         $this->tags = $collection;
         $this->isLiked = $isLiked;
+        $this->communitySlug = $communitySlug;
+        $this->communityName = $communityName;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
     }
@@ -196,6 +202,22 @@ class Post implements PostInterface
     public function isLiked(): bool
     {
         return $this->isLiked;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommunitySlug(): string
+    {
+        return $this->communitySlug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommunityName(): string
+    {
+        return $this->communityName;
     }
 
     /**

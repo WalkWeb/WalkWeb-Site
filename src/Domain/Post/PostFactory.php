@@ -46,6 +46,8 @@ class PostFactory
             (bool)self::int($data, 'published', PostException::INVALID_PUBLISHED),
             $tags,
             self::bool($data, 'is_liked', PostException::INVALID_IS_LIKED),
+            self::stringOrNull($data, 'community_slug', PostException::INVALID_COMMUNITY_SLUG) ?? '',
+            self::stringOrNull($data, 'community_name', PostException::INVALID_COMMUNITY_NAME) ?? '',
             self::date($data, 'created_at', PostException::INVALID_CREATED_AT),
             self::dateOrNull($data, 'updated_at', PostException::INVALID_UPDATED_AT),
         );
@@ -80,6 +82,8 @@ class PostFactory
             PostInterface::DEFAULT_PUBLISHED,
             $tags,
             false,
+            '', // TODO
+            '',
             new DateTime(),
         );
     }

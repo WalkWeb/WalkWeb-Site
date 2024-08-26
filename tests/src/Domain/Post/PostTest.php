@@ -46,6 +46,8 @@ class PostTest extends AbstractTest
         $published = true;
         $tags = new TagCollection();
         $isLiked = true;
+        $communitySlug = 'community-slug';
+        $communityName = 'community-name';
         $createdAt = new DateTime('2019-08-12 14:46:02');
         $updatedAt = null;
 
@@ -62,6 +64,8 @@ class PostTest extends AbstractTest
             $published,
             $tags,
             $isLiked,
+            $communitySlug,
+            $communityName,
             $createdAt,
             $updatedAt
         );
@@ -78,6 +82,8 @@ class PostTest extends AbstractTest
         self::assertEquals($published, $post->isPublished());
         self::assertEquals($tags, $post->getTags());
         self::assertEquals($isLiked, $post->isLiked());
+        self::assertEquals($communitySlug, $post->getCommunitySlug());
+        self::assertEquals($communityName, $post->getCommunityName());
         self::assertEquals($createdAt, $post->getCreatedAt());
         self::assertEquals($updatedAt, $post->getUpdatedAt());
 
@@ -254,6 +260,8 @@ class PostTest extends AbstractTest
             false,
             new TagCollection(),
             false,
+            '',
+            '',
             new DateTime()
         );
     }

@@ -175,6 +175,20 @@ interface PostInterface extends ArrayableInterface
     public function isLiked(): bool;
 
     /**
+     * Возвращает slug сообщества, если пост относится к сообществу
+     *
+     * @return string
+     */
+    public function getCommunitySlug(): string;
+
+    /**
+     * Возвращает название сообщества, если пост относится к сообществу
+     *
+     * @return string
+     */
+    public function getCommunityName(): string;
+
+    /**
      * Возвращает дату создания поста
      *
      * @return DateTimeInterface

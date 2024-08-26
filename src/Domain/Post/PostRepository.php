@@ -53,7 +53,10 @@ class PostRepository
        
             `characters_main`.`level` as `author_level`,
        
-            `avatars`.`small_url` as `author_avatar`
+            `avatars`.`small_url` as `author_avatar`,
+       
+            `communities`.`slug` as `community_slug`,
+            `communities`.`name` as `community_name`
 
             FROM `posts` 
 
@@ -61,6 +64,7 @@ class PostRepository
             JOIN `characters_main` on `accounts`.`id` = `characters_main`.`account_id`
             JOIN `characters` on `accounts`.`character_id` = `characters`.`id`
             JOIN `avatars` on `characters`.`avatar_id` = `avatars`.`id`
+            LEFT JOIN `communities` on `posts`.`community_id` = `communities`.`id`    
 
             WHERE `posts`.`slug` = ?',
             [['type' => 's', 'value' => $slug]],
