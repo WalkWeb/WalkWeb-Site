@@ -58,12 +58,16 @@ if (count($posts) > 0) {
                           </div>';
         }
 
+        $communityLink = '';
+
+        if ($post->getCommunitySlug()) {
+            $communityLink = '<a href="/c/' . $post->getCommunitySlug() . '" class="com_tl">' . $post->getCommunityName() . '</a> » ';
+        }
+
         echo '
         <div class="post_box">
             ' . $ratingBox . '
-            <a href="/p/' . $post->getSlug() . '" class="post_link">
-                ' . $post->getTitle() . '
-            </a>
+            ' . $communityLink . '<a href="/p/' . $post->getSlug() . '" class="post_link">' . $post->getTitle() . '</a>
             <p>
                 <span class="post_details"><a href="/u/' . $post->getAuthorName() . '" title="" class="osnova">' . $post->getAuthorName() . '</a></span>
                 <span class="post_details">php, web, html</span>

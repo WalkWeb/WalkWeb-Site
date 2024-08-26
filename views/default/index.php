@@ -35,9 +35,7 @@ foreach ($posts as $post) {
     echo '
     <div class="post_box">
         ' . $ratingBox . '
-        ' . $communityLink . '<a href="/p/' . $post->getSlug() . '" class="post_link">
-            ' . $post->getTitle() . '
-        </a>
+        ' . $communityLink . '<a href="/p/' . $post->getSlug() . '" class="post_link">' . $post->getTitle() . '</a>
         <p>
             <span class="post_details"><a href="/u/' . $post->getAuthorName() . '" title="" class="osnova">' . $post->getAuthorName() . '</a></span>
             <span class="post_details">php, web, html</span>

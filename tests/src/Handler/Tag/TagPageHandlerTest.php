@@ -27,6 +27,7 @@ class TagPageHandlerTest extends AbstractTest
         self::assertMatchesRegularExpression('/Просмотр постов по тегу/', $response->getBody());
         self::assertMatchesRegularExpression('/PATH OF EXILE/', $response->getBody());
         self::assertMatchesRegularExpression('/Title post 2/', $response->getBody());
+        self::assertMatchesRegularExpression('/Fallout 4: База знаний/', $response->getBody());
     }
 
     /**
