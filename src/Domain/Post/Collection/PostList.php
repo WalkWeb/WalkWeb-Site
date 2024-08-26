@@ -18,6 +18,8 @@ class PostList implements PostListInterface
     private int $commentCount;
     private array $tags;
     private bool $isLiked;
+    private string $communitySlug;
+    private string $communityName;
     private DateTimeInterface $createdAt;
 
     public function __construct(
@@ -30,6 +32,8 @@ class PostList implements PostListInterface
         int $commentCount,
         array $tags,
         bool $isLiked,
+        string $communitySlug,
+        string $communityName,
         DateTimeInterface $createdAt
     )
     {
@@ -42,6 +46,8 @@ class PostList implements PostListInterface
         $this->commentCount = $commentCount;
         $this->tags = $tags;
         $this->isLiked = $isLiked;
+        $this->communitySlug = $communitySlug;
+        $this->communityName = $communityName;
         $this->createdAt = $createdAt;
     }
 
@@ -115,6 +121,22 @@ class PostList implements PostListInterface
     public function isLiked(): bool
     {
         return $this->isLiked;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommunitySlug(): string
+    {
+        return $this->communitySlug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommunityName(): string
+    {
+        return $this->communityName;
     }
 
     /**

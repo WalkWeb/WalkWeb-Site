@@ -36,6 +36,8 @@ class PostCollectionFactoryTest extends AbstractTest
             self::assertEquals($data[$i]['tags'], $post->getTags());
             self::assertEquals($data[$i]['is_liked'], $post->isLiked());
             self::assertEquals($data[$i]['author_name'], $post->getAuthorName());
+            self::assertEquals($data[$i]['community_slug'] ?? '', $post->getCommunitySlug());
+            self::assertEquals($data[$i]['community_name'] ?? '', $post->getCommunityName());
             self::assertEquals(new DateTime($data[$i]['created_at']), $post->getCreatedAt());
             $i++;
         }
@@ -81,6 +83,8 @@ class PostCollectionFactoryTest extends AbstractTest
                             ],
                         ],
                         'is_liked'       => true,
+                        'community_slug' => null,
+                        'community_name' => null,
                         'author_name'    => 'Name',
                         'created_at'     => '2019-08-12 19:05:19',
                     ],
@@ -104,6 +108,8 @@ class PostCollectionFactoryTest extends AbstractTest
                             ],
                         ],
                         'is_liked'       => true,
+                        'community_slug' => 'diablo-2-wiki',
+                        'community_name' => 'Diablo 2: Wiki',
                         'author_name'    => 'Name',
                         'created_at'     => '2019-08-12 19:05:19',
                     ],
@@ -141,6 +147,8 @@ class PostCollectionFactoryTest extends AbstractTest
                             ],
                         ],
                         'is_liked'       => true,
+                        'community_slug' => null,
+                        'community_name' => null,
                         'author_name'    => 'Name',
                         'created_at'     => '2019-08-12 19:05:19',
                     ],
@@ -164,6 +172,8 @@ class PostCollectionFactoryTest extends AbstractTest
                             ],
                         ],
                         'is_liked'       => true,
+                        'community_slug' => null,
+                        'community_name' => null,
                         'author_name'    => 'Name',
                         'created_at'     => '2019-08-12 19:05:19',
                     ],
@@ -194,6 +204,8 @@ class PostCollectionFactoryTest extends AbstractTest
                             ],
                         ],
                         'is_liked'       => true,
+                        'community_slug' => null,
+                        'community_name' => null,
                         'author_name'    => 'Name',
                         'created_at'     => '2019-08-12 19:05:19',
                     ],

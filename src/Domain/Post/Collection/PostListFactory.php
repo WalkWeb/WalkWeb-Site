@@ -47,6 +47,8 @@ class PostListFactory
             self::int($data, 'comments_count', PostException::INVALID_COMMENTS_COUNT),
             $tags,
             self::bool($data, 'is_liked', PostException::INVALID_IS_LIKED),
+            self::stringOrNull($data, 'community_slug', PostException::INVALID_COMMUNITY_SLUG) ?? '',
+            self::stringOrNull($data, 'community_name', PostException::INVALID_COMMUNITY_NAME) ?? '',
             self::date($data, 'created_at', PostException::INVALID_CREATED_AT),
         );
     }

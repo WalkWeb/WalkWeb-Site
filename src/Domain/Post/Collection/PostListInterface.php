@@ -18,5 +18,7 @@ interface PostListInterface
     public function getCommentCount(): int;
     public function getTags(): array;
     public function isLiked(): bool;
+    public function getCommunitySlug(): string;
+    public function getCommunityName(): string;
     public function getCreatedAt(): DateTimeInterface;
 }

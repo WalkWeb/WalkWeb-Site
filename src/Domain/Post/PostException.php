@@ -23,6 +23,8 @@ class PostException extends Exception
     public const INVALID_TAGS                = 'Incorrect "tags" parameter, it required and type array';
     public const INVALID_TAG                 = 'Incorrect "tag" parameter, it required and type string';
     public const INVALID_IS_LIKED            = 'Incorrect "is_liked" data, expected bool';
+    public const INVALID_COMMUNITY_SLUG      = 'Incorrect "community_slug" parameter, it required and type string or null';
+    public const INVALID_COMMUNITY_NAME      = 'Incorrect "community_name" parameter, it required and type string or null';
     public const INVALID_CREATED_AT          = 'Incorrect "created_at" parameter, it required and type string date';
     public const INVALID_UPDATED_AT          = 'Incorrect "updated_at" parameter, expected string date or empty';
 

@@ -135,13 +135,17 @@ class PostRepository
        
                 `lk_account_like_post`.`value` as `user_reaction`,
                 
-                `accounts`.`name` as `author_name`
+                `accounts`.`name` as `author_name`,
+       
+                `communities`.`slug` as `community_slug`,
+                `communities`.`name` as `community_name`
            
                 FROM `posts` 
     
                 JOIN `accounts` on `posts`.`author_id` = `accounts`.`id`
                 LEFT JOIN `lk_account_like_post` ON `posts`.`slug` = `lk_account_like_post`.`post_slug` AND `lk_account_like_post`.`account_id` = ?
-    
+                LEFT JOIN `communities` on `posts`.`community_id` = `communities`.`id`    
+
                 WHERE `posts`.`published` = 1 
 
                 ORDER BY `created_at` DESC
@@ -200,7 +204,10 @@ class PostRepository
        
                 `lk_account_like_post`.`value` as `user_reaction`,
                 
-                `accounts`.`name` as `author_name`
+                `accounts`.`name` as `author_name`,
+       
+                `communities`.`slug` as `community_slug`,
+                `communities`.`name` as `community_name`
            
                 FROM `posts` 
     
@@ -208,7 +215,8 @@ class PostRepository
                 JOIN `lk_post_tag` ON `posts`.`id` = `lk_post_tag`.`post_id`
                 JOIN `post_tags` ON `lk_post_tag`.`tag_id` = `post_tags`.`id`
                 LEFT JOIN `lk_account_like_post` ON `posts`.`slug` = `lk_account_like_post`.`post_slug` AND `lk_account_like_post`.`account_id` = ?
-    
+                LEFT JOIN `communities` on `posts`.`community_id` = `communities`.`id`    
+
                 WHERE `posts`.`published` = 1 AND `post_tags`.`slug` = ? AND `posts`.`rating` > ?
 
                 ORDER BY ' . $order . ' LIMIT ? OFFSET ?',
@@ -253,13 +261,17 @@ class PostRepository
                 `posts`.`created_at`,
                 `posts`.`updated_at`,
                 
-                `accounts`.`name` as `author_name`
+                `accounts`.`name` as `author_name`,
+       
+                `communities`.`slug` as `community_slug`,
+                `communities`.`name` as `community_name`
            
                 FROM `posts` 
     
                 JOIN `accounts` on `posts`.`author_id` = `accounts`.`id`
                 JOIN `lk_post_tag` ON `posts`.`id` = `lk_post_tag`.`post_id`
                 JOIN `post_tags` ON `lk_post_tag`.`tag_id` = `post_tags`.`id`
+                LEFT JOIN `communities` on `posts`.`community_id` = `communities`.`id`
 
                 WHERE `posts`.`published` = 1 AND `post_tags`.`slug` = ? AND `posts`.`rating` > ?
 
@@ -484,11 +496,15 @@ class PostRepository
                 `posts`.`created_at`,
                 `posts`.`updated_at`,
                 
-                `accounts`.`name` as `author_name`
+                `accounts`.`name` as `author_name`,
+       
+                `communities`.`slug` as `community_slug`,
+                `communities`.`name` as `community_name`
            
                 FROM `posts` 
     
                 JOIN `accounts` on `posts`.`author_id` = `accounts`.`id`
+                LEFT JOIN `communities` on `posts`.`community_id` = `communities`.`id`
     
                 WHERE `posts`.`published` = 1 
 
