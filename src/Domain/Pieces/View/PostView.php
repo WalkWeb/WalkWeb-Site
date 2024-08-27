@@ -11,7 +11,7 @@ class PostView
 {
     use DateTrait;
 
-    public static function printPost(PostListInterface $post): string
+    public static function printPost(PostListInterface $post, bool $skipCommunityLink = false): string
     {
         if ($post->isLiked()) {
             $likePost = "likePost('{$post->getSlug()}', {$post->getRating()->getRating()})";
@@ -31,7 +31,7 @@ class PostView
 
         $communityLink = '';
 
-        if ($post->getCommunitySlug()) {
+        if (!$skipCommunityLink && $post->getCommunitySlug()) {
             $communityLink = '<a href="/c/' . $post->getCommunitySlug() . '" class="com_tl">' . $post->getCommunityName() . '</a> » ';
         }
 

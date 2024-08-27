@@ -113,14 +113,26 @@ class PostRepository
      * @param int $offset
      * @param int $limit
      * @param AuthInterface|null $user
+     * @param string|null $communitySlug
      * @return PostCollection
      * @throws AppException
      */
-    public function getAll(int $offset, int $limit, ?AuthInterface $user = null): PostCollection
+    public function getAll(int $offset, int $limit, ?AuthInterface $user = null, ?string $communitySlug = null): PostCollection
     {
         if ($user === null) {
-            return $this->getAllNoLikes($offset, $limit);
+            return $this->getAllNoLikes($offset, $limit, $communitySlug);
         }
+
+        $params = [
+            ['type' => 's', 'value' => $user->getId()],
+        ];
+
+        if ($communitySlug) {
+            $params[] = ['type' => 's', 'value' => $communitySlug];
+        }
+
+        $params[] = ['type' => 'i', 'value' => $limit];
+        $params[] = ['type' => 'i', 'value' => $offset];
 
         $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT 
@@ -150,16 +162,12 @@ class PostRepository
                 LEFT JOIN `lk_account_like_post` ON `posts`.`slug` = `lk_account_like_post`.`post_slug` AND `lk_account_like_post`.`account_id` = ?
                 LEFT JOIN `communities` on `posts`.`community_id` = `communities`.`id`    
 
-                WHERE `posts`.`published` = 1 
+                WHERE `posts`.`published` = 1 ' . $this->getCommunityFilter($communitySlug) . '
 
                 ORDER BY `created_at` DESC
 
                 LIMIT ? OFFSET ?',
-            [
-                ['type' => 's', 'value' => $user->getId()],
-                ['type' => 'i', 'value' => $limit],
-                ['type' => 'i', 'value' => $offset],
-            ],
+            $params,
         );
 
         return PostCollectionFactory::create($this->postDataRefinement($data, $user));
@@ -480,11 +488,21 @@ class PostRepository
     /**
      * @param int $offset
      * @param int $limit
+     * @param string|null $communitySlug
      * @return PostCollection
      * @throws AppException
      */
-    private function getAllNoLikes(int $offset, int $limit): PostCollection
+    private function getAllNoLikes(int $offset, int $limit, ?string $communitySlug = null): PostCollection
     {
+        $params = [];
+
+        if ($communitySlug) {
+            $params[] = ['type' => 's', 'value' => $communitySlug];
+        }
+
+        $params[] = ['type' => 'i', 'value' => $limit];
+        $params[] = ['type' => 'i', 'value' => $offset];
+
         $data = $this->container->getConnectionPool()->getConnection()->query(
             'SELECT 
        
@@ -510,15 +528,12 @@ class PostRepository
                 JOIN `accounts` on `posts`.`author_id` = `accounts`.`id`
                 LEFT JOIN `communities` on `posts`.`community_id` = `communities`.`id`
     
-                WHERE `posts`.`published` = 1 
+                WHERE `posts`.`published` = 1 ' . $this->getCommunityFilter($communitySlug) . '
 
                 ORDER BY `created_at` DESC
 
                 LIMIT ? OFFSET ?',
-            [
-                ['type' => 'i', 'value' => $limit],
-                ['type' => 'i', 'value' => $offset],
-            ],
+            $params,
         );
 
         return PostCollectionFactory::create($this->postDataRefinementNoLikes($data));
@@ -569,5 +584,18 @@ class PostRepository
         }
 
         return $data;
+    }
+
+    /**
+     * @param string|null $communitySlug
+     * @return string
+     */
+    private function getCommunityFilter(?string $communitySlug = null): string
+    {
+        if ($communitySlug) {
+            return 'AND `communities`.`slug` = ?';
+        }
+
+        return '';
     }
 }

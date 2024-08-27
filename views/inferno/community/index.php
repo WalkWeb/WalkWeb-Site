@@ -1,6 +1,7 @@
 <?php
 
 use App\Domain\Community\CommunityInterface;
+use App\Domain\Pieces\View\PostView;
 use App\Domain\Post\Collection\PostCollection;
 use WalkWeb\NW\AppException;
 
@@ -36,10 +37,13 @@ $this->title = $community->getName() . ' | ' . APP_NAME;
         </div>
     </div>
 </div>
-<div class="c_hr"></div>
 
 <?php
 
 if (count($posts) === 0) {
-    echo '<p class="center">В сообществе пока нет материалов</p>';
+    echo '<div class="c_hr"></div><p class="center">В сообществе пока нет материалов</p>';
+} else {
+    foreach ($posts as $post) {
+        echo PostView::printPost($post, true);
+    }
 }

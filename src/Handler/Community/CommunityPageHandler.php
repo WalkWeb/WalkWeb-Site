@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Handler\Community;
 
 use App\Domain\Community\CommunityRepository;
-use App\Domain\Post\Collection\PostCollection;
+use App\Domain\Post\PostRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
@@ -37,7 +37,13 @@ class CommunityPageHandler extends AbstractHandler
                 Response::NOT_FOUND
             );
         }
-        
-        return $this->render('community/index', ['community' => $community, 'posts' => new PostCollection()]);
+
+        $postRepository = new PostRepository($this->container);
+        $user = $this->container->exist('user') ? $this->getUser() : null;
+
+        return $this->render('community/index', [
+            'community' => $community,
+            'posts'     => $postRepository->getAll(0, 20, $user, $community->getSlug()),
+        ]);
     }
 }

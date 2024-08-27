@@ -21,11 +21,11 @@ foreach ($communities as $community) {
     <div class="com_box">
         <div class="com_l">
             <div class="com_icon" style="background-image: url(' . $community->getIcon() . ');">
-                <a href="#" class="full"></a>
+                <a href="/c/' . $community->getSlug() . '" class="full"></a>
             </div>
         </div>
         <div class="com_r">
-            <a href="#" class="com_link">' . $community->getName() . '</a>
+            <a href="/c/' . $community->getSlug() . '" class="com_link">' . $community->getName() . '</a>
             <p class="com_desc">' . $community->getDescription() . '</p>
             <div class="com_hr"></div>
             <p class="com_info">
