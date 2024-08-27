@@ -3249,7 +3249,7 @@ a.news_link:hover {
 
 #comment_box {
     margin: 0 auto;
-    padding: 15px 50px 0 50px;
+    padding: 5px 50px 0 50px;
 }
 
 .comment_form_box {
@@ -3279,21 +3279,24 @@ a.news_link:hover {
 }
 
 .cm_con {
-    margin-bottom: 20px;
 }
 
 .cm_bias {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
 }
 
 .cm_con_left {
-    width: 15%;
+    width: 120px;
     border-bottom: 1px dotted #937150;
 }
 
+.cm_com_ava_box {
+    width: 130px;
+}
+
 .cm_con_cent {
-    width: 85%;
+    flex-grow: 1;
     border-bottom: 1px dotted #937150;
 }
 
@@ -3303,11 +3306,12 @@ a.news_link:hover {
 }
 
 .cm_ava {
-    width: 130px;
-    height: 150px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto;
     background-size: cover;
     background-position: center;
+    border: 1px solid #333;
 }
 
 .cm_rt_up {
@@ -3369,8 +3373,8 @@ a.news_link:hover {
 }
 
 .cm_author {
-    padding: 10px 0;
-    font-size: 120%;
+    padding: 10px 0 5px 0;
+    font-size: 115%;
     text-align: center;
 }
 

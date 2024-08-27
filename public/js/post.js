@@ -478,15 +478,18 @@ function addComment(postSlug) {
 function createComment(data) {
     let cm_con = createElement('div', null, 'cm_con');
 
-    cm_con.innerHTML =
-        '                <div class="cm_con_left">\n' +
-        '                    <div style="background-image: url(' + data.avatar + ');" class="cm_ava"></div>\n' +
-        '                    <div class="cm_author"><a href="/u/' + data.name + '" title="" class="cm_author_a">' + data.name + '</a> <span class="cm_level">' + data.level + '</span></div>\n' +
-        '                </div>\n' +
-        '                <div class="cm_con_cent">\n' +
-        '                    <div class="cm_con_right"><div class="cm_rating_value"><span class="defaultRatingColor">0</span></div></div>\n' +
-        '                    <div class="cm_date"><abbr title="">только что</abbr></div>\n' +
-        '                    <div class="cm_comment">' + data.message.replace(/(?:\r\n|\r|\n)/g, '<br>') + '</div>\n' +
+    cm_con.innerHTML = '<div class="cm_bias">\n' +
+        '                    <div class="cm_con_left">\n' +
+        '                        <div class="cm_com_ava_box">\n' +
+        '                            <div style="background-image: url(' + data.avatar + ');" class="cm_ava"></div>\n' +
+        '                            <div class="cm_author"><a href="/u/' + data.name + '" title="" class="cm_author_a">' + data.name + '</a> <span class="cm_level">' + data.level + '</span></div>\n' +
+        '                        </div>\n' +
+        '                    </div>\n' +
+        '                    <div class="cm_con_cent">\n' +
+        '                        <div class="cm_con_right"><div class="cm_rating_value"><span class="defaultRatingColor">0</span></div></div>\n' +
+        '                        <div class="cm_date"><abbr title="">только что</abbr></div>\n' +
+        '                        <div class="cm_comment">' + data.message.replace(/(?:\r\n|\r|\n)/g, '<br>') + '</div>\n' +
+        '                    </div>\n' +
         '                </div>';
 
     return cm_con;

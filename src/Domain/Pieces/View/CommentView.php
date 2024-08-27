@@ -50,8 +50,10 @@ class CommentView
             <div class="cm_con">
                 <div class="cm_bias" style="padding-left: ' . $padding . 'px;">
                     <div class="cm_con_left">
-                        <div style="background-image: url(' . $comment->getAuthorAvatar() . ');" class="cm_ava"></div>
-                        <div class="cm_author">' . $author . '</div>
+                        <div class="cm_com_ava_box">
+                            <div style="background-image: url(' . $comment->getAuthorAvatar() . ');" class="cm_ava"></div>
+                            <div class="cm_author">' . $author . '</div>
+                        </div>
                     </div>
                     <div class="cm_con_cent">
                         ' . $ratingBox . '
