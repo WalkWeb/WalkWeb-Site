@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
-use App\Domain\Post\Collection\PostListInterface;
 use App\Domain\Post\PostRepository;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
-use WalkWeb\NW\Traits\DateTrait;
 
 class MainHandler extends AbstractHandler
 {
-    use DateTrait;
-
     public const OFFSET = 0;
     public const LIMIT  = 10;
 
@@ -39,14 +35,5 @@ class MainHandler extends AbstractHandler
                 ),
             ],
         );
-    }
-
-    /**
-     * @param PostListInterface $post
-     * @return string
-     */
-    protected function getCreatedAtEasyData(PostListInterface $post): string
-    {
-        return self::getElapsedTime($post->getCreatedAt());
     }
 }

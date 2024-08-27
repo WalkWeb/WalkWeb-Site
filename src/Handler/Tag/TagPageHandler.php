@@ -9,16 +9,12 @@ use App\Domain\Post\Tag\TagException;
 use App\Domain\Post\Tag\TagInterface;
 use App\Domain\Post\Tag\TagRepository;
 use App\Handler\AbstractHandler;
-use DateTimeInterface;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
-use WalkWeb\NW\Traits\DateTrait;
 
 class TagPageHandler extends AbstractHandler
 {
-    use DateTrait;
-
     // TODO Вынести функционал фильтров в отдельный класс, т.к. будет применяться не только в тегах
 
     public const BEST_POST    = 'best';
@@ -98,14 +94,5 @@ class TagPageHandler extends AbstractHandler
             'rating' => $rating,
             'posts'  => $postRepository->getPostByTag($slug, self::OFFSET, self::LIMIT, $minRating, $best, $user),
         ]);
-    }
-
-    /**
-     * @param DateTimeInterface $date
-     * @return string
-     */
-    protected function getCreatedAtEasyData(DateTimeInterface $date): string
-    {
-        return self::getElapsedTime($date);
     }
 }

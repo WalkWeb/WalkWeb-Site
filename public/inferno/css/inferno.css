@@ -3208,6 +3208,31 @@ a.news_link:hover {
     color: #d6b885;
 }
 
+.news_footer {
+    display: flex;
+}
+
+.news_fl {
+    font-size: 125%;
+    line-height: 125%;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.news_fr {
+    font-size: 125%;
+    line-height: 125%;
+    text-align: right;
+    flex-grow: 1;
+}
+
+.news_com_icon {
+    width: 16px;
+    height: 12px;
+    display: inline-block;
+    background-image: url(/inferno/images/comment.gif);
+}
+
 /* Post list style end */
 
 /* Comment style start */
