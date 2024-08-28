@@ -94,6 +94,11 @@ class BlankCommunity implements CommunityInterface
         return 0;
     }
 
+    public function isJoined(): bool
+    {
+        return false;
+    }
+
     public function getCreatedAt(): DateTimeInterface
     {
         return new DateTime();

@@ -38,6 +38,7 @@ class CommunityFactory
             self::int($data, 'gold_post_count', CommunityException::INVALID_GOLD_POST_COUNT),
             self::int($data, 'diamond_post_count', CommunityException::INVALID_DIAMOND_POST_COUNT),
             self::int($data, 'total_comment_count', CommunityException::INVALID_TOTAL_COMMENT_COUNT),
+            (bool)self::intOrNull($data, 'is_joined', CommunityException::INVALID_IS_JOINED),
             self::date($data, 'created_at', CommunityException::INVALID_CREATED_AT),
             self::date($data, 'updated_at', CommunityException::INVALID_UPDATED_AT),
         );

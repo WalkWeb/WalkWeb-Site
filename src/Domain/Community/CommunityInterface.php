@@ -25,6 +25,7 @@ interface CommunityInterface
     public function getGoldPostCount(): int;
     public function getDiamondPostCount(): int;
     public function getTotalCommentCount(): int;
+    public function isJoined(): bool;
     public function getCreatedAt(): DateTimeInterface;
     public function getUpdatedAt(): DateTimeInterface;
 }

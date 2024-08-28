@@ -30,6 +30,7 @@ class CommunityException extends Exception
     public const INVALID_GOLD_POST_COUNT     = 'Incorrect parameter "gold_post_count", it required and type integer';
     public const INVALID_DIAMOND_POST_COUNT  = 'Incorrect parameter "diamond_post_count", it required and type integer';
     public const INVALID_TOTAL_COMMENT_COUNT = 'Incorrect parameter "total_comment_count", it required and type integer';
+    public const INVALID_IS_JOINED           = 'Incorrect parameter "is_joined", it required and type integer or null';
     public const INVALID_CREATED_AT          = 'Incorrect "created_at" parameter, it required and type string date';
     public const INVALID_UPDATED_AT          = 'Incorrect "updated_at" parameter, it required and type string date';
 }

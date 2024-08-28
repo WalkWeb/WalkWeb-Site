@@ -25,6 +25,7 @@ class Community implements CommunityInterface
     private int $goldPostCount;
     private int $diamondPostCount;
     private int $totalCommentCount;
+    private bool $isJoined;
     private DateTimeInterface $createdAt;
     private DateTimeInterface $updatedAt;
 
@@ -46,6 +47,7 @@ class Community implements CommunityInterface
         int $goldPostCount,
         int $diamondPostCount,
         int $totalCommentCount,
+        bool $isJoined,
         DateTimeInterface $createdAt,
         DateTimeInterface $updatedAt
     )
@@ -67,6 +69,7 @@ class Community implements CommunityInterface
         $this->goldPostCount = $goldPostCount;
         $this->diamondPostCount = $diamondPostCount;
         $this->totalCommentCount = $totalCommentCount;
+        $this->isJoined = $isJoined;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
     }
@@ -205,6 +208,14 @@ class Community implements CommunityInterface
     public function getTotalCommentCount(): int
     {
         return $this->totalCommentCount;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isJoined(): bool
+    {
+        return $this->isJoined;
     }
 
     /**

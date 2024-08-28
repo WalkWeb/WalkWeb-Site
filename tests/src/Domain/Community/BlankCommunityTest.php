@@ -31,6 +31,7 @@ class BlankCommunityTest extends AbstractTest
         self::assertEquals(0, $community->getGoldPostCount());
         self::assertEquals(0, $community->getDiamondPostCount());
         self::assertEquals(0, $community->getTotalCommentCount());
+        self::assertFalse($community->isJoined());
         self::assertEquals((new DateTime())->format(self::DATE_FORMAT), $community->getCreatedAt()->format(self::DATE_FORMAT));
         self::assertEquals((new DateTime())->format(self::DATE_FORMAT), $community->getUpdatedAt()->format(self::DATE_FORMAT));
     }

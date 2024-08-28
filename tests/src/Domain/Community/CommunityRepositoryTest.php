@@ -12,6 +12,33 @@ use WalkWeb\NW\AppException;
 class CommunityRepositoryTest extends AbstractTest
 {
     /**
+     * @dataProvider getDataProvider
+     * @param string $slug
+     * @param bool $isJoined
+     * @param string|null $token
+     * @throws AppException
+     */
+    public function testCommunityRepositoryGetAuth(string $slug, bool $isJoined, ?string $token = null): void
+    {
+        $user = $token ? $this->getUser($token) : null;
+
+        $community = $this->getRepository()->get($slug, $user);
+
+        self::assertEquals($slug, $community->getSlug());
+        self::assertEquals($isJoined, $community->isJoined());
+    }
+
+    /**
+     * @throws AppException
+     */
+    public function testCommunityRepositoryGetNotFoundAuth(): void
+    {
+        self::assertNull(
+            $this->getRepository()->get('not-found', $this->getUser('VBajfT8P6PFtrkHhCqb7ZNwIFG4a11'))
+        );
+    }
+
+    /**
      * @dataProvider getAllDataProvider
      * @param array $expectedNames
      * @throws AppException
@@ -102,6 +129,39 @@ class CommunityRepositoryTest extends AbstractTest
         $this->expectException(AppException::class);
         $this->expectExceptionMessage(CommunityException::MEMBER_NOT_FOUND);
         $this->getRepository()->leave('1e3a3b27-12da-4c73-a3a7-b83092705b11', '749fbc18-55f2-41b8-b341-265b24e05b97');
+    }
+
+    /**
+     * @return array
+     */
+    public function getDataProvider(): array
+    {
+        return [
+            // no auth
+            [
+                'diablo-2-wiki',
+                false,
+                null,
+            ],
+            // no join
+            [
+                'diablo-2-wiki',
+                false,
+                'VBajfT8P6PFtrkHhCqb7ZNwIFG4a14',
+            ],
+            // active = 0
+            [
+                'diablo-2-wiki',
+                false,
+                'VBajfT8P6PFtrkHhCqb7ZNwIFG4a12',
+            ],
+            // active = 1
+            [
+                'diablo-2-wiki',
+                true,
+                'VBajfT8P6PFtrkHhCqb7ZNwIFG4a11',
+            ],
+        ];
     }
 
     /**
