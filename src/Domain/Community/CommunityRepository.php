@@ -46,6 +46,26 @@ class CommunityRepository
     }
 
     /**
+     * @param string $slug
+     * @return string
+     * @throws AppException
+     */
+    public function getId(string $slug): string
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `id` FROM `communities` WHERE `slug` = ?',
+            [['type' => 's', 'value' => $slug]],
+            true
+        );
+
+        if (!$data) {
+            return '';
+        }
+
+        return (string)$data['id'];
+    }
+
+    /**
      * @return CommunityCollection
      * @throws AppException
      */
@@ -91,6 +111,8 @@ class CommunityRepository
                 ]
             );
         }
+
+        // TODO increased community count members
     }
 
     /**
@@ -105,6 +127,9 @@ class CommunityRepository
                 'UPDATE `lk_account_community` SET `active` = 0 WHERE `id` = ?',
                 [['type' => 's', 'value' => $id]]
             );
+
+            // TODO reduced community count members
+
         } else {
             throw new AppException(CommunityException::MEMBER_NOT_FOUND);
         }
