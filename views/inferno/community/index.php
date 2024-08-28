@@ -27,13 +27,19 @@ $this->title = $community->getName() . ' | ' . APP_NAME;
         <span class="c_link">
                 <span class="yellow"><?= $community->getTotalPostCount() ?></span> постов |
                 <span class="orange"><?= $community->getTotalCommentCount() ?></span> комментариев |
-                <span class="blue"><?= $community->getFollowers() ?></span> подписчиков
+                <span class="blue" id="community_followers"><?= $community->getFollowers() ?></span> подписчиков
         </span><br /><br />
         <span class="c_link">Все подряд | <a href="#">3+</a> | <a href="#">5+</a> | <a href="#">10+</a> | <a href="#">Лучшие</a></span>
     </div>
     <div>
         <div class="c_r">
-            <a href="#">Подписаться</a>
+            <?php
+            if ($community->isJoined()) {
+                echo '<div id="join_community"><span onclick="leaveCommunity(\'' . $community->getSlug() . '\', ' . $community->getFollowers() . ')">Выйти</span></div>';
+            } else {
+                echo '<div id="join_community"><span onclick="joinCommunity(\'' . $community->getSlug() . '\', ' . $community->getFollowers() . ')">Присоединиться</span></div>';
+            }
+            ?>
         </div>
     </div>
 </div>

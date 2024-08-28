@@ -8,7 +8,6 @@ function closeNotice(id) {
     let notice = document.getElementById('notice_' + id);
     notice.remove();
 
-    // Отправляем запрос на удаление уведомления
     $.ajax({
         url: '/notice/close/' + id,
         type: 'POST',
@@ -169,4 +168,55 @@ function updateLevel(level, expAtLvl, expToLvl, expWidth) {
     document.getElementById('auth_exp_width').style.width = expWidth + '%';
     document.getElementById('auth_exp_at_lvl').innerHTML = expAtLvl;
     document.getElementById('auth_exp_to_lvl').innerHTML = expToLvl;
+}
+
+function joinCommunity(slug, memberCount) {
+    console.log('join')
+    console.log(slug)
+    console.log(memberCount)
+
+    $.ajax({
+        url: '/community/join/' + slug,
+        type: 'POST',
+        success: function(data) {
+            if (data.success === true) {
+                memberCount++;
+                document.getElementById('community_followers').
+                    innerHTML = memberCount;
+                document.getElementById('join_community').
+                    innerHTML = '<span onclick="leaveCommunity(\'' + slug + '\', ' + memberCount + ')">Выйти</span>';
+            } else {
+                createNotification(data.error);
+            }
+        },
+        error: function() {
+            alert('Ошибка! Пожалуйста, обновите страницу!');
+        }
+    });
+}
+
+function leaveCommunity(slug, memberCount) {
+    console.log('leave')
+    console.log(slug)
+    console.log(memberCount)
+
+    $.ajax({
+        url: '/community/leave/' + slug,
+        type: 'POST',
+        success: function(data) {
+            if (data.success === true) {
+                memberCount--;
+                document.getElementById('community_followers').
+                    innerHTML = memberCount;
+                document.getElementById('join_community').
+                    innerHTML = '<span onclick="joinCommunity(\'' + slug + '\', ' + memberCount + ')">Присоединиться</span>';
+
+            } else {
+                createNotification(data.error);
+            }
+        },
+        error: function() {
+            alert('Ошибка! Пожалуйста, обновите страницу!');
+        }
+    });
 }

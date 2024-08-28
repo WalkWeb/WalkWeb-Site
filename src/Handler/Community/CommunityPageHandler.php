@@ -28,7 +28,8 @@ class CommunityPageHandler extends AbstractHandler
 
         $this->layoutUrl = 'layout/index.php';
         $repository = new CommunityRepository($this->container);
-        $community = $repository->get($request->slug);
+        $user = $this->container->exist('user') ? $this->getUser() : null;
+        $community = $repository->get($request->slug, $user);
 
         if (!$community) {
             return $this->render(
@@ -39,7 +40,7 @@ class CommunityPageHandler extends AbstractHandler
         }
 
         $postRepository = new PostRepository($this->container);
-        $user = $this->container->exist('user') ? $this->getUser() : null;
+
 
         return $this->render('community/index', [
             'community' => $community,

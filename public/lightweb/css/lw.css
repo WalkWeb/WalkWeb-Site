@@ -1660,7 +1660,7 @@ div.c_r {
     font-size: 120%;
 }
 
-div.c_r a {
+div.c_r span {
     color: #ffffff;
     background: #363539;
     display: inline-block;
@@ -1679,7 +1679,7 @@ div.c_r a {
     text-decoration: none;
 }
 
-div.c_r a:hover {
+div.c_r span:hover {
     color: #ccc;
 }
 
