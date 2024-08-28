@@ -790,6 +790,13 @@ try {
     ");
 
 
+    $db->query("
+        INSERT INTO `lk_account_community` (`id`, `account_id`, `community_id`, `active`) VALUES
+        ('b6ccadb5-159c-428f-b4fe-048b7465c001', '1e3a3b27-12da-4c73-a3a7-b83092705b11', '19b2d329-4ca0-4c07-8fb5-18a3a3e80001', 1),
+        ('b6ccadb5-159c-428f-b4fe-048b7465c002', '1e3a3b27-12da-4c73-a3a7-b83092705b12', '19b2d329-4ca0-4c07-8fb5-18a3a3e80001', 0)
+        ;
+    ");
+
 
     echo "Fixtures Load\n";
     return 0;

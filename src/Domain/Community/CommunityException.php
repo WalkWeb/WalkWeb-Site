@@ -10,6 +10,7 @@ class CommunityException extends Exception
 {
     public const ALREADY_EXIST               = 'CommunityCollection: community to be added already exists';
     public const EXPECTED_ARRAY              = 'CommunityCollectionFactory: expected array data';
+    public const MEMBER_NOT_FOUND            = 'Member not found';
 
     public const INVALID_ID                  = 'Incorrect "id" parameter, it required and type string (uuid)';
     public const INVALID_LEVEL               = 'Incorrect parameter "level", it required and type integer';

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Community;
 
+use Ramsey\Uuid\Uuid;
 use WalkWeb\NW\AppException;
 use WalkWeb\NW\Container;
 
@@ -61,5 +62,75 @@ class CommunityRepository
 
                 ORDER BY `followers` DESC',
         ));
+    }
+
+    /**
+     * For future mechanics, it is necessary to distinguish between completely new user of the community, from user who
+     * has previously joined, but then leave
+     *
+     * For this reason, an additional parameter active is used
+     *
+     * @param string $accountId
+     * @param string $communityId
+     * @throws AppException
+     */
+    public function join(string $accountId, string $communityId): void
+    {
+        if ($id = $this->existMember($accountId, $communityId)) {
+            $this->container->getConnectionPool()->getConnection()->query(
+                'UPDATE `lk_account_community` SET `active` = 1 WHERE `id` = ?',
+                [['type' => 's', 'value' => $id]]
+            );
+        } else {
+            $this->container->getConnectionPool()->getConnection()->query(
+                'INSERT INTO `lk_account_community` (`id`, `account_id`, `community_id`) VALUES (?, ?, ?)',
+                [
+                    ['type' => 's', 'value' => Uuid::uuid4()->toString()],
+                    ['type' => 's', 'value' => $accountId],
+                    ['type' => 's', 'value' => $communityId],
+                ]
+            );
+        }
+    }
+
+    /**
+     * @param string $accountId
+     * @param string $communityId
+     * @throws AppException
+     */
+    public function leave(string $accountId, string $communityId): void
+    {
+        if ($id = $this->existMember($accountId, $communityId)) {
+            $this->container->getConnectionPool()->getConnection()->query(
+                'UPDATE `lk_account_community` SET `active` = 0 WHERE `id` = ?',
+                [['type' => 's', 'value' => $id]]
+            );
+        } else {
+            throw new AppException(CommunityException::MEMBER_NOT_FOUND);
+        }
+    }
+
+    /**
+     * @param string $accountId
+     * @param string $communityId
+     * @return string|null
+     * @throws AppException
+     */
+    private function existMember(string $accountId, string $communityId): ?string
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `id` FROM `lk_account_community` WHERE `account_id` = ? AND `community_id` = ?',
+            [
+                ['type' => 's', 'value' => $accountId],
+                ['type' => 's', 'value' => $communityId],
+            ],
+            true
+        );
+
+        if (!$data) {
+            return null;
+        }
+
+        return (string)$data['id'];
     }
 }
