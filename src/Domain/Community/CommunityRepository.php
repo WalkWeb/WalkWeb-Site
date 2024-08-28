@@ -132,7 +132,10 @@ class CommunityRepository
             );
         }
 
-        // TODO increased community count members
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `communities` SET `followers` = `followers` + 1 WHERE `id` = ?',
+            [['type' => 's', 'value' => $communityId]]
+        );
     }
 
     /**
@@ -148,7 +151,10 @@ class CommunityRepository
                 [['type' => 's', 'value' => $id]]
             );
 
-            // TODO reduced community count members
+            $this->container->getConnectionPool()->getConnection()->query(
+                'UPDATE `communities` SET `followers` = `followers` - 1 WHERE `id` = ?',
+                [['type' => 's', 'value' => $communityId]]
+            );
 
         } else {
             throw new AppException(CommunityException::MEMBER_NOT_FOUND);

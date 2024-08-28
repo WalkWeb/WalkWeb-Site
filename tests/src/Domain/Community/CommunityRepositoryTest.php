@@ -60,19 +60,24 @@ class CommunityRepositoryTest extends AbstractTest
      * @dataProvider joinNewDataProvider
      * @param string $accountId
      * @param string $communityId
+     * @param int $followers
      * @throws AppException
      */
-    public function testCommunityRepositoryJoinNew(string $accountId, string $communityId): void
+    public function testCommunityRepositoryJoinNew(string $accountId, string $communityId, int $followers): void
     {
-        self::assertEquals([], $this->getData($accountId, $communityId));
+        self::assertEquals($followers, $this->getCommunityData($communityId)['followers']);
+
+        self::assertEquals([], $this->getLinkData($accountId, $communityId));
 
         $this->getRepository()->join($accountId, $communityId);
 
-        $data = $this->getData($accountId, $communityId);
+        $data = $this->getLinkData($accountId, $communityId);
 
         self::assertEquals($accountId, $data['account_id']);
         self::assertEquals($communityId, $data['community_id']);
         self::assertEquals(1, $data['active']);
+
+        self::assertEquals($followers + 1, $this->getCommunityData($communityId)['followers']);
     }
 
     /**
@@ -83,7 +88,9 @@ class CommunityRepositoryTest extends AbstractTest
         $accountId = '1e3a3b27-12da-4c73-a3a7-b83092705b12';
         $communityId = '19b2d329-4ca0-4c07-8fb5-18a3a3e80001';
 
-        $data = $this->getData($accountId, $communityId);
+        self::assertEquals(165, $this->getCommunityData($communityId)['followers']);
+
+        $data = $this->getLinkData($accountId, $communityId);
 
         self::assertEquals($accountId, $data['account_id']);
         self::assertEquals($communityId, $data['community_id']);
@@ -91,11 +98,13 @@ class CommunityRepositoryTest extends AbstractTest
 
         $this->getRepository()->join($accountId, $communityId);
 
-        $data = $this->getData($accountId, $communityId);
+        $data = $this->getLinkData($accountId, $communityId);
 
         self::assertEquals($accountId, $data['account_id']);
         self::assertEquals($communityId, $data['community_id']);
         self::assertEquals(1, $data['active']);
+
+        self::assertEquals(165 + 1, $this->getCommunityData($communityId)['followers']);
     }
 
     /**
@@ -106,7 +115,9 @@ class CommunityRepositoryTest extends AbstractTest
         $accountId = '1e3a3b27-12da-4c73-a3a7-b83092705b11';
         $communityId = '19b2d329-4ca0-4c07-8fb5-18a3a3e80001';
 
-        $data = $this->getData($accountId, $communityId);
+        self::assertEquals(165, $this->getCommunityData($communityId)['followers']);
+
+        $data = $this->getLinkData($accountId, $communityId);
 
         self::assertEquals($accountId, $data['account_id']);
         self::assertEquals($communityId, $data['community_id']);
@@ -114,11 +125,13 @@ class CommunityRepositoryTest extends AbstractTest
 
         $this->getRepository()->leave($accountId, $communityId);
 
-        $data = $this->getData($accountId, $communityId);
+        $data = $this->getLinkData($accountId, $communityId);
 
         self::assertEquals($accountId, $data['account_id']);
         self::assertEquals($communityId, $data['community_id']);
         self::assertEquals(0, $data['active']);
+
+        self::assertEquals(165 - 1, $this->getCommunityData($communityId)['followers']);
     }
 
     /**
@@ -192,10 +205,12 @@ class CommunityRepositoryTest extends AbstractTest
             [
                 self::DEMO_USER,
                 '19b2d329-4ca0-4c07-8fb5-18a3a3e80001',
+                165,
             ],
             [
                 self::DEMO_MODERATOR,
                 '19b2d329-4ca0-4c07-8fb5-18a3a3e80002',
+                95,
             ],
         ];
     }
@@ -215,12 +230,28 @@ class CommunityRepositoryTest extends AbstractTest
      * @return array
      * @throws AppException
      */
-    public function getData(string $accountId, string $communityId): array
+    public function getLinkData(string $accountId, string $communityId): array
     {
         return self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT * FROM `lk_account_community` WHERE `account_id` = ? AND `community_id` = ?',
             [
                 ['type' => 's', 'value' => $accountId],
+                ['type' => 's', 'value' => $communityId],
+            ],
+            true
+        );
+    }
+
+    /**
+     * @param string $communityId
+     * @return array
+     * @throws AppException
+     */
+    public function getCommunityData(string $communityId): array
+    {
+        return self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `communities` WHERE `id` = ?',
+            [
                 ['type' => 's', 'value' => $communityId],
             ],
             true
