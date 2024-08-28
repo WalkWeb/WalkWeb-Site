@@ -11,7 +11,7 @@ use WalkWeb\NW\AppException;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
-class JoinCommunityHandler extends AbstractHandler
+class LeaveCommunityHandler extends AbstractHandler
 {
     /**
      * @param Request $request
@@ -33,8 +33,11 @@ class JoinCommunityHandler extends AbstractHandler
             return $this->json(['success' => false, 'error' => CommunityException::NOT_FOUND]);
         }
 
-        $repository->join($this->getUser()->getId(), $communityId);
-
-        return $this->json(['success' => true]);
+        try {
+            $repository->leave($this->getUser()->getId(), $communityId);
+            return $this->json(['success' => true]);
+        } catch (AppException $e) {
+            return $this->json(['success' => false, 'error' => $e->getMessage()]);
+        }
     }
 }
