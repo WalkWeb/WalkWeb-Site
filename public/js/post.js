@@ -63,7 +63,7 @@ function createPost() {
 
             if (validateFullContent(content)) {
                 $.ajax({
-                    url: '/post/create',
+                    url: '/post/create/default',
                     data: {title: title, content: content, tags: tags},
                     type: 'POST',
                     success: function(data) {

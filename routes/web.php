@@ -24,8 +24,8 @@ $routes->get('character.get', '/h/{id}', 'App\\Handler\\Character\\CharacterPage
 $routes->get('post.get', '/p/{slug}', 'App\\Handler\\Post\\PostPageHandler', ['slug' => '[a-zA-Z0-9-]+']);
 $routes->post('post.like', '/post/like/{slug}', 'App\\Handler\\Post\\LikePostHandler', ['slug' => '[a-zA-Z0-9-]+']);
 $routes->post('post.dislike', '/post/dislike/{slug}', 'App\\Handler\\Post\\DislikePostHandler', ['slug' => '[a-zA-Z0-9-]+']);
-$routes->get('post.create', '/post/create', 'App\\Handler\\Post\\CreatePostPageHandler');
-$routes->post('post.create', '/post/create', 'App\\Handler\\Post\\CreatePostHandler');
+$routes->get('post.create', '/post/create/{slug}', 'App\\Handler\\Post\\CreatePostPageHandler', ['slug' => '[a-zA-Z0-9-]+']);
+$routes->post('post.create', '/post/create/{slug}', 'App\\Handler\\Post\\CreatePostHandler', ['slug' => '[a-zA-Z0-9-]+']);
 $routes->post('image.upload.json', '/image/upload/json', 'App\\Handler\\Image\\UploadImageHandler');
 
 // comment

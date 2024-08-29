@@ -33,6 +33,8 @@ interface EnergyInterface
     /**
      * Текущая энергия
      *
+     * TODO Подумать над переименовыванием в getValue(), чтобы не было $user->getEnergy()->getEnergy()
+     *
      * @return int
      */
     public function getEnergy(): int;

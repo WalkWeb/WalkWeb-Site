@@ -16,6 +16,8 @@ use WalkWeb\NW\Response;
 
 class CreatePostHandlerTest extends AbstractTest
 {
+    private const URI = '/post/create/default';
+
     /**
      * @throws AppException
      */
@@ -31,7 +33,7 @@ class CreatePostHandlerTest extends AbstractTest
         self::assertEquals(0, $this->getUserData($token)['post_count']);
 
         $request = new Request([
-            'REQUEST_URI' => '/post/create', 'REQUEST_METHOD' => 'POST'],
+            'REQUEST_URI' => self::URI, 'REQUEST_METHOD' => 'POST'],
             [
                 'title'   => 'Title',
                 'content' => '[p]text text text[/p]',
@@ -63,7 +65,7 @@ class CreatePostHandlerTest extends AbstractTest
     {
         $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
         $request = new Request([
-            'REQUEST_URI' => '/post/create', 'REQUEST_METHOD' => 'POST'],
+            'REQUEST_URI' => self::URI, 'REQUEST_METHOD' => 'POST'],
             $data,
             [AccountInterface::AUTH_TOKEN => $token]
         );
@@ -79,7 +81,7 @@ class CreatePostHandlerTest extends AbstractTest
     public function testCreatePostHandlerNoAuth(): void
     {
         $request = new Request([
-            'REQUEST_URI' => '/post/create', 'REQUEST_METHOD' => 'POST'],
+            'REQUEST_URI' => self::URI, 'REQUEST_METHOD' => 'POST'],
             [
                 'title'   => 'Title',
                 'content' => '[p]text text text[/p]',
@@ -99,7 +101,7 @@ class CreatePostHandlerTest extends AbstractTest
     {
         $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a8';
         $request = new Request([
-            'REQUEST_URI' => '/post/create', 'REQUEST_METHOD' => 'POST'],
+            'REQUEST_URI' => self::URI, 'REQUEST_METHOD' => 'POST'],
             [
                 'title'   => 'Title',
                 'content' => '[p]text text text[/p]',

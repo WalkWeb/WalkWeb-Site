@@ -20,7 +20,7 @@ class CreatePostPageHandlerTest extends AbstractTest
     public function testCreatePostPageHandlerSuccess(string $template): void
     {
         $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a1';
-        $request = new Request(['REQUEST_URI' => '/post/create'], [], [AccountInterface::AUTH_TOKEN => $token]);
+        $request = new Request(['REQUEST_URI' => '/post/create/default'], [], [AccountInterface::AUTH_TOKEN => $token]);
         $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
@@ -34,7 +34,7 @@ class CreatePostPageHandlerTest extends AbstractTest
      */
     public function testCreatePostPageHandlerNoAuth(string $template): void
     {
-        $request = new Request(['REQUEST_URI' => '/post/create']);
+        $request = new Request(['REQUEST_URI' => '/post/create/default']);
         $response = $this->createApp($template)->handle($request);
 
         self::assertEquals(Response::OK, $response->getStatusCode());
