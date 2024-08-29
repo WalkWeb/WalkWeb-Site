@@ -16,11 +16,35 @@ use App\Domain\Post\Tag\TagRepository;
 use App\Handler\AbstractHandler;
 use Exception;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
 class CreatePostHandler extends AbstractHandler
 {
+    private TagRepository $tagRepository;
+    private PostRepository $postRepository;
+    private EnergyRepository $energyRepository;
+    private MainCharacterRepository $mainRepository;
+    private AccountRepository $accountRepository;
+
+    public function __construct(
+        Container $container,
+        ?TagRepository $tagRepository = null,
+        ?PostRepository $postRepository = null,
+        ?EnergyRepository $energyRepository = null,
+        ?MainCharacterRepository $mainRepository = null,
+        ?AccountRepository $accountRepository = null
+    )
+    {
+        parent::__construct($container);
+        $this->tagRepository = $tagRepository ?? new TagRepository($this->container);
+        $this->postRepository = $postRepository ?? new PostRepository($this->container, $this->tagRepository);
+        $this->energyRepository = $energyRepository ?? new EnergyRepository($this->container);
+        $this->mainRepository = $mainRepository ?? new MainCharacterRepository($this->container);
+        $this->accountRepository = $accountRepository ?? new AccountRepository($this->container);
+    }
+
     /**
      * TODO Проверка кармы
      *
@@ -48,23 +72,17 @@ class CreatePostHandler extends AbstractHandler
 
             $dto = CreatePostRequestFactory::create($data, $user);
 
-            $tagRepository = new TagRepository($this->container);
-            $postRepository = new PostRepository($this->container);
-            $energyRepository = new EnergyRepository($this->container);
-            $mainRepository = new MainCharacterRepository($this->container);
-            $accountRepository = new AccountRepository($this->container);
-
-            $tags = $tagRepository->saveCollection($dto);
-            $post = PostFactory::createNew($dto, $tags);
-            $postRepository->add($post);
+            $tags = $this->tagRepository->saveCollection($dto);
+            $post = PostFactory::createNew($dto, $tags, $request->slug);
+            $this->postRepository->add($post);
 
             $user->getEnergy()->editEnergy(-PostInterface::CREATE_ENERGY_COST);
-            $energyRepository->save($user->getEnergy());
+            $this->energyRepository->save($user->getEnergy());
 
             $user->getLevel()->addExp(PostInterface::CREATE_EXP);
-            $mainRepository->save($user->getMainCharacterId(), $user->getLevel());
+            $this->mainRepository->save($user->getMainCharacterId(), $user->getLevel());
 
-            $accountRepository->increasePostCount($user->getId());
+            $this->accountRepository->increasePostCount($user->getId());
 
             return $this->json(['success' => true, 'slug' => $post->getSlug()]);
 

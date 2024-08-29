@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Test\src\Domain\Post;
 
+use App\Domain\Community\CommunityException;
 use App\Domain\Post\DTO\CreatePostRequestFactory;
 use App\Domain\Post\PostException;
 use App\Domain\Post\PostFactory;
@@ -63,9 +64,10 @@ class PostRepositoryTest extends AbstractTest
     /**
      * @dataProvider addDataProvider
      * @param PostInterface $post
+     * @param string|null $communityId
      * @throws AppException
      */
-    public function testPostRepositoryAddNoTag(PostInterface $post): void
+    public function testPostRepositoryAddNoTag(PostInterface $post, ?string $communityId): void
     {
         $this->getRepository()->add($post);
 
@@ -82,6 +84,7 @@ class PostRepositoryTest extends AbstractTest
         self::assertEquals($post->getRating()->getDislikes(), $data['dislikes']);
         self::assertEquals($post->getCommentsCount(), $data['comments_count']);
         self::assertEquals($post->isPublished(), $data['published']);
+        self::assertEquals($communityId, $data['community_id']);
 
         // TODO
         self::assertEquals(1, $data['approved']);
@@ -101,7 +104,7 @@ class PostRepositoryTest extends AbstractTest
         ], $user);
 
         $tags = $this->getTagRepository()->saveCollection($request);
-        $post = PostFactory::createNew($request, $tags);
+        $post = PostFactory::createNew($request, $tags, PostInterface::NO_COMMUNITY);
 
         $this->getRepository()->add($post);
 
@@ -124,6 +127,18 @@ class PostRepositoryTest extends AbstractTest
         self::assertEquals(0, $data['moderated']);
 
         self::assertSameSize($post->getTags(), $this->getTagLinks($post->getId()));
+    }
+
+    /**
+     * @dataProvider unknownCommunityDataProvider
+     * @param PostInterface $post
+     * @throws AppException
+     */
+    public function testPostRepositoryUnknownCommunity(PostInterface $post): void
+    {
+        $this->expectException(AppException::class);
+        $this->expectExceptionMessage(CommunityException::NOT_FOUND . ': ' . $post->getCommunitySlug());
+        $this->getRepository()->add($post);
     }
 
     /**
@@ -269,11 +284,12 @@ class PostRepositoryTest extends AbstractTest
                     'author_avatar'    => 'avatar.png',
                     'author_level'     => 25,
                     'author_status_id' => 1,
-                    'community_slug'   => null,
-                    'community_name'   => null,
+                    'community_slug'   => 'diablo-2-wiki',
+                    'community_name'   => 'Diablo 2: База знаний',
                     'created_at'       => '2019-08-12 19:05:19',
                     'updated_at'       => null,
                 ], new TagCollection()),
+                '19b2d329-4ca0-4c07-8fb5-18a3a3e80001',
             ],
             [
                 PostFactory::create([
@@ -299,6 +315,42 @@ class PostRepositoryTest extends AbstractTest
                     'created_at'       => '2019-08-12 19:00:00',
                     'updated_at'       => '2019-08-15 20:20:00',
                 ], new TagCollection()),
+                null,
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     * @throws AppException
+     */
+    public function unknownCommunityDataProvider(): array
+    {
+        return [
+            [
+                PostFactory::create([
+                    'id'               => 'b5d82b2c-6be2-42a0-85c6-821a170c68eb',
+                    'title'            => 'Title',
+                    'slug'             => 'title-slug',
+                    'content'          => '[p]Post content[/p]',
+                    'html_content'     => '<p>Post content</p>',
+                    'status_id'        => PostStatusInterface::DEFAULT,
+                    'likes'            => 12,
+                    'dislikes'         => 2,
+                    'user_reaction'    => 1,
+                    'comments_count'   => 3,
+                    'published'        => 1,
+                    'is_liked'         => true,
+                    'author_id'        => self::DEMO_MODERATOR,
+                    'author_name'      => 'Name',
+                    'author_avatar'    => 'avatar.png',
+                    'author_level'     => 25,
+                    'author_status_id' => 1,
+                    'community_slug'   => 'unknown-community',
+                    'community_name'   => null,
+                    'created_at'       => '2019-08-12 19:05:19',
+                    'updated_at'       => null,
+                ], new TagCollection()), PostInterface::NO_COMMUNITY,
             ],
         ];
     }
@@ -429,6 +481,7 @@ class PostRepositoryTest extends AbstractTest
             `posts`.`published`,
             `posts`.`approved`,
             `posts`.`moderated`,
+            `posts`.`community_id`,
             `posts`.`created_at`,
             `posts`.`updated_at`,
             

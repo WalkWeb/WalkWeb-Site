@@ -56,10 +56,11 @@ class PostFactory
     /**
      * @param CreatePostRequest $request
      * @param TagCollection $tags
+     * @param string $communitySlug
      * @return PostInterface
      * @throws Exception
      */
-    public static function createNew(CreatePostRequest $request, TagCollection $tags): PostInterface
+    public static function createNew(CreatePostRequest $request, TagCollection $tags, string $communitySlug): PostInterface
     {
         $slug = strtolower(self::transliterate($request->getTitle())) . '-' . random_int(10000, 99999);
 
@@ -82,7 +83,7 @@ class PostFactory
             PostInterface::DEFAULT_PUBLISHED,
             $tags,
             false,
-            '', // TODO
+            $communitySlug,
             '',
             new DateTime(),
         );

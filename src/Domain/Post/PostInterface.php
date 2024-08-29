@@ -61,6 +61,8 @@ interface PostInterface extends ArrayableInterface
     public const VIDEO_SUFFIX   = '" frameborder="0" allowfullscreen></iframe></div></div>';
     public const LINE           = '<div class="line_box"><div class="line_row"><div class="line_left"></div><div class="line_right"></div><div class="line_center">&nbsp;</div></div></div>';
 
+    public const NO_COMMUNITY        = 'default';
+
     /**
      * Возвращает ID поста
      *

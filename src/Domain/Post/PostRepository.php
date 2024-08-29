@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Domain\Post;
 
 use App\Domain\Auth\AuthInterface;
+use App\Domain\Community\CommunityException;
+use App\Domain\Community\CommunityRepository;
 use App\Domain\Post\Collection\PostCollection;
 use App\Domain\Post\Collection\PostCollectionFactory;
 use App\Domain\Post\Tag\TagRepository;
@@ -16,11 +18,17 @@ class PostRepository
 {
     private Container $container;
     private TagRepository $tagRepository;
+    private CommunityRepository $communityRepository;
 
-    public function __construct(Container $container, ?TagRepository $tagRepository = null)
+    public function __construct(
+        Container $container,
+        ?TagRepository $tagRepository = null,
+        ?CommunityRepository $communityRepository = null
+    )
     {
         $this->container = $container;
         $this->tagRepository = $tagRepository ?? new TagRepository($container);
+        $this->communityRepository = $communityRepository ?? new CommunityRepository($this->container);
     }
 
     /**
@@ -363,9 +371,19 @@ class PostRepository
      */
     public function add(PostInterface $post): void
     {
+        if ($post->getCommunitySlug() === '' || $post->getCommunitySlug() === PostInterface::NO_COMMUNITY) {
+            $communityId = null;
+        } else {
+            $communityId = $this->communityRepository->getId($post->getCommunitySlug());
+
+            if (!$communityId) {
+                throw new AppException(CommunityException::NOT_FOUND . ': ' . $post->getCommunitySlug());
+            }
+        }
+
         $this->container->getConnectionPool()->getConnection()->query(
             'INSERT INTO `posts` (`id`, `author_id`, `title`, `slug`, `content`, `html_content`, `status_id`, `comments_count`,
-                 `likes`, `dislikes`, `published`, `approved`, `moderated`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                 `likes`, `dislikes`, `published`, `approved`, `moderated`, `community_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [
                 ['type' => 's', 'value' => $post->getId()],
                 ['type' => 's', 'value' => $post->getAuthor()->getId()],
@@ -380,6 +398,7 @@ class PostRepository
                 ['type' => 'i', 'value' => (int)$post->isPublished()],
                 ['type' => 'i', 'value' => 1], // TODO
                 ['type' => 'i', 'value' => 0], // TODO
+                ['type' => 's', 'value' => $communityId],
             ]
         );
 

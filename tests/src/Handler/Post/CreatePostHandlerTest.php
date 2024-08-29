@@ -19,9 +19,12 @@ class CreatePostHandlerTest extends AbstractTest
     private const URI = '/post/create/default';
 
     /**
+     * @dataProvider successDataProvider
+     * @param string $communitySlug
+     * @param string|null $communityId
      * @throws AppException
      */
-    public function testCreatePostHandlerSuccess(): void
+    public function testCreatePostHandlerSuccess(string $communitySlug, ?string $communityId): void
     {
         $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a4';
         $user = $this->getUser($token);
@@ -33,7 +36,7 @@ class CreatePostHandlerTest extends AbstractTest
         self::assertEquals(0, $this->getUserData($token)['post_count']);
 
         $request = new Request([
-            'REQUEST_URI' => self::URI, 'REQUEST_METHOD' => 'POST'],
+            'REQUEST_URI' => '/post/create/' . $communitySlug, 'REQUEST_METHOD' => 'POST'],
             [
                 'title'   => 'Title',
                 'content' => '[p]text text text[/p]',
@@ -43,9 +46,11 @@ class CreatePostHandlerTest extends AbstractTest
         );
         $response = $this->app->handle($request);
 
+        $responseData = self::jsonDecode($response->getBody());
+
         self::assertEquals(Response::OK, $response->getStatusCode());
-        self::assertTrue(self::jsonDecode($response->getBody())['success']);
-        self::assertIsString(self::jsonDecode($response->getBody())['slug']);
+        self::assertTrue($responseData['success']);
+        self::assertIsString($responseData['slug']);
 
         // Проверка того, что опыт увеличился
         $user = $this->getUser($token);
@@ -53,6 +58,8 @@ class CreatePostHandlerTest extends AbstractTest
 
         // Проверка увеличения количества постов
         self::assertEquals(1, $this->getUserData($token)['post_count']);
+
+        self::assertEquals($communityId, $this->getData($responseData['slug'])['community_id']);
     }
 
     /**
@@ -121,6 +128,20 @@ class CreatePostHandlerTest extends AbstractTest
         self::assertJsonError(sprintf(PostException::NO_CREATE_ENERGY, 30, 0), $response);
     }
 
+    public function successDataProvider(): array
+    {
+        return [
+            [
+                PostInterface::NO_COMMUNITY,
+                null,
+            ],
+            [
+                'path-of-exile-wiki',
+                '19b2d329-4ca0-4c07-8fb5-18a3a3e80005',
+            ],
+        ];
+    }
+
     /**
      * @return array
      */
@@ -145,5 +166,19 @@ class CreatePostHandlerTest extends AbstractTest
                 'Incorrect "content" parameter, it required and type string',
             ],
         ];
+    }
+
+    /**
+     * @param string $slug
+     * @return array
+     * @throws AppException
+     */
+    private function getData(string $slug): array
+    {
+        return self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `posts` WHERE `slug` = ?',
+            [['type' => 's', 'value' => $slug]],
+            true
+        );
     }
 }

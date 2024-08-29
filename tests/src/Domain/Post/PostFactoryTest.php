@@ -93,13 +93,15 @@ class PostFactoryTest extends AbstractTest
     }
 
     /**
+     * @dataProvider newDataProvider
+     * @param string $communitySlug
      * @throws Exception
      */
-    public function testPostFactoryCreateNewSuccess(): void
+    public function testPostFactoryCreateNewSuccess(string $communitySlug): void
     {
         $request = $this->createRequest();
         $tags = new TagCollection();
-        $post = PostFactory::createNew($request, $tags);
+        $post = PostFactory::createNew($request, $tags, $communitySlug);
 
         self::assertTrue(Uuid::isValid($post->getId()));
         self::assertTrue(mb_strlen($post->getSlug()) > 10);
@@ -119,6 +121,7 @@ class PostFactoryTest extends AbstractTest
         self::assertFalse($post->isLiked());
         self::assertTrue((new DateTime())->diff($post->getCreatedAt())->s <= 1);
         self::assertEquals($tags, $post->getTags());
+        self::assertEquals($communitySlug, $post->getCommunitySlug());
     }
 
     /**
@@ -1224,6 +1227,21 @@ class PostFactoryTest extends AbstractTest
             ],
 
             // Проверка валидации параметров автора сделана в AuthorFactoryTest
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function newDataProvider(): array
+    {
+        return [
+            [
+                'default',
+            ],
+            [
+                'diablo-2-wiki',
+            ],
         ];
     }
 
