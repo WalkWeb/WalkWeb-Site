@@ -24,8 +24,13 @@ class CreatePostRequestFactoryTest extends AbstractTest
 
         self::assertEquals($data['title'], $request->getTitle());
         self::assertEquals($data['content'], $request->getContent());
-        self::assertEquals($data['tags'], $request->getTags());
         self::assertEquals($user, $request->getAuthor());
+
+        if ($data['tags'] === '[]') {
+            self::assertEquals([], $request->getTags());
+        } else {
+            self::assertEquals($data['tags'], $request->getTags());
+        }
     }
 
     /**
@@ -70,6 +75,13 @@ class CreatePostRequestFactoryTest extends AbstractTest
                     'title'   => 'title',
                     'content' => 'content',
                     'tags'    => ['tag-1', 'tag-2', 'tag-3'],
+                ],
+            ],
+            [
+                [
+                    'title'   => 'title',
+                    'content' => 'content',
+                    'tags'    => '[]',
                 ],
             ],
         ];

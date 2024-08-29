@@ -62,6 +62,10 @@ function createPost() {
             });
 
             if (validateFullContent(content)) {
+                if (tags.length === 0) {
+                    tags = '[]';
+                }
+
                 $.ajax({
                     url: '/post/create/default',
                     data: {title: title, content: content, tags: tags},

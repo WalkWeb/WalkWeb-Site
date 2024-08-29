@@ -24,6 +24,10 @@ class CreatePostRequestFactory
      */
     public static function create(array $data, AuthInterface $user): CreatePostRequest
     {
+        if (array_key_exists('tags', $data) && $data['tags'] === '[]') {
+            $data['tags'] = [];
+        }
+
         self::array($data, 'tags', PostException::INVALID_TAGS);
 
         $tags = [];
