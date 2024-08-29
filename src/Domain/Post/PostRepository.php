@@ -540,6 +540,22 @@ class PostRepository
     }
 
     /**
+     * @param string $id
+     * @return string|null
+     * @throws AppException
+     */
+    public function getCommunityId(string $id): ?string
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `community_id` FROM `posts` WHERE `id` = ?',
+            [['type' => 's', 'value' => $id]],
+            true
+        );
+
+        return $data['community_id'] ?? null;
+    }
+
+    /**
      * @param array $data
      * @param AuthInterface $user
      * @return array

@@ -162,6 +162,18 @@ class CommunityRepository
     }
 
     /**
+     * @param string $id
+     * @throws AppException
+     */
+    public function increaseCommentCount(string $id): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `communities` SET `total_comment_count` = `total_comment_count` + 1 WHERE `id` = ?',
+            [['type' => 's', 'value' => $id]],
+        );
+    }
+
+    /**
      * @param string $accountId
      * @param string $communityId
      * @return string|null

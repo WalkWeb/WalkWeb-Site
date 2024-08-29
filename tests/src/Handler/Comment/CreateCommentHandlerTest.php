@@ -18,22 +18,30 @@ use WalkWeb\NW\Response;
 class CreateCommentHandlerTest extends AbstractTest
 {
     /**
+     * @dataProvider successDataProvider
+     * @param string $token
+     * @param string $postSlug
+     * @param int $exp
+     * @param string|null $communityId
      * @throws AppException
      */
-    public function testCreateCommentHandlerSuccess(): void
+    public function testCreateCommentHandlerSuccess(string $token, string $postSlug, int $exp, ?string $communityId): void
     {
-        $token = 'VBajfT8P6PFtrkHhCqb7ZNwIFG45a4';
         $user = $this->getUser($token);
-        $postSlug = 'slug-post-1-1000';
 
         // Проверка изначального опыта
-        self::assertEquals(450, $user->getLevel()->getExp());
+        self::assertEquals($exp, $user->getLevel()->getExp());
 
         // Проверка изначального количества комментариев у поста
         self::assertEquals(0, $this->getPost($postSlug)->getCommentsCount());
 
         // Проверка изначального количества комментариев у пользователя
         self::assertEquals(0, $this->getUserData($token)['comment_count']);
+
+        if ($communityId) {
+            // Проверка изначального количества комментариев у сообщества
+            self::assertEquals(16932, $this->getCommunityData($communityId)['total_comment_count']);
+        }
 
         $request = new Request([
             'REQUEST_URI' => '/comment/create', 'REQUEST_METHOD' => 'POST'],
@@ -67,6 +75,11 @@ class CreateCommentHandlerTest extends AbstractTest
 
         // Проверка обновленного количества комментариев у пользователя
         self::assertEquals(1, $this->getUserData($token)['comment_count']);
+
+        if ($communityId) {
+            // Проверка обновленного количества комментариев у сообщества
+            self::assertEquals(16932 + 1, $this->getCommunityData($communityId)['total_comment_count']);
+        }
     }
 
     /**
@@ -155,6 +168,26 @@ class CreateCommentHandlerTest extends AbstractTest
         self::assertJsonError('No energy to create comment. Need 5, have 0', $response);
     }
 
+    public function successDataProvider(): array
+    {
+        return [
+            // no community
+            [
+                'VBajfT8P6PFtrkHhCqb7ZNwIFG45a4',
+                'slug-post-1-1000',
+                450,
+                null,
+            ],
+            // exist community
+            [
+                'VBajfT8P6PFtrkHhCqb7ZNwIFG45a4',
+                'slug-post-9-1000',
+                450,
+                '19b2d329-4ca0-4c07-8fb5-18a3a3e80001',
+            ],
+        ];
+    }
+
     /**
      * @param string $slug
      * @return PostInterface
@@ -163,5 +196,19 @@ class CreateCommentHandlerTest extends AbstractTest
     private function getPost(string $slug): PostInterface
     {
         return (new PostRepository(self::getContainer()))->get($slug);
+    }
+
+    /**
+     * @param string $id
+     * @return array
+     * @throws AppException
+     */
+    private function getCommunityData(string $id): array
+    {
+        return self::getContainer()->getConnectionPool()->getConnection()->query(
+            'SELECT * FROM `communities` WHERE `id` = ?',
+            [['type' => 's', 'value' => $id]],
+            true
+        );
     }
 }

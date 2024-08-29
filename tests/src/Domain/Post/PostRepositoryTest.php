@@ -215,6 +215,17 @@ class PostRepositoryTest extends AbstractTest
     }
 
     /**
+     * @dataProvider getCommunityIdDataProvider
+     * @param string $id
+     * @param string|null $communityId
+     * @throws AppException
+     */
+    public function testPostRepositoryGetCommunityId(string $id, ?string $communityId = null): void
+    {
+        self::assertEquals($communityId, $this->getRepository()->getCommunityId($id));
+    }
+
+    /**
      * @return array
      */
     public function getSuccessDataProvider(): array
@@ -350,6 +361,30 @@ class PostRepositoryTest extends AbstractTest
             [
                 'slug-post-12-1000',
                 '1e3a3b27-12da-4c73-a3a7-b83092705b08',
+            ],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getCommunityIdDataProvider(): array
+    {
+        return [
+            // exist community
+            [
+                '7684ad22-613b-4c65-9bad-b7dfdd394c11',
+                '19b2d329-4ca0-4c07-8fb5-18a3a3e80006',
+            ],
+            // no community
+            [
+                '7684ad22-613b-4c65-9bad-b7dfdd394c01',
+                null,
+            ],
+            // unknown post id
+            [
+                '454c1963-042e-4f06-bf09-24fc52df0948',
+                null,
             ],
         ];
     }

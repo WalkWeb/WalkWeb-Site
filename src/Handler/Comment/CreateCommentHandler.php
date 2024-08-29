@@ -12,16 +12,44 @@ use App\Domain\Comment\CommentFactory;
 use App\Domain\Comment\CommentInterface;
 use App\Domain\Comment\CommentRepository;
 use App\Domain\Comment\DTO\CreateCommentRequestFactory;
+use App\Domain\Community\CommunityRepository;
 use App\Domain\Post\PostRepository;
 use App\Handler\AbstractHandler;
 use Exception;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
 class CreateCommentHandler extends AbstractHandler
 {
     public const UNKNOWN_POST = 'Unknown post slug';
+
+    private PostRepository $postRepository;
+    private EnergyRepository $energyRepository;
+    private CommentRepository $commentRepository;
+    private MainCharacterRepository $mainRepository;
+    private AccountRepository $accountRepository;
+    private CommunityRepository $communityRepository;
+
+    public function __construct(
+        Container $container,
+        PostRepository $postRepository = null,
+        EnergyRepository $energyRepository = null,
+        CommentRepository $commentRepository = null,
+        MainCharacterRepository $mainRepository = null,
+        AccountRepository $accountRepository = null,
+        CommunityRepository $communityRepository = null
+    )
+    {
+        parent::__construct($container);
+        $this->postRepository = $postRepository ?? new PostRepository($this->container);
+        $this->energyRepository = $energyRepository ?? new EnergyRepository($this->container) ;
+        $this->commentRepository = $commentRepository ?? new CommentRepository($this->container);
+        $this->mainRepository = $mainRepository ?? new MainCharacterRepository($this->container);
+        $this->accountRepository = $accountRepository ?? new AccountRepository($this->container);
+        $this->communityRepository = $communityRepository ?? new CommunityRepository($this->container);
+    }
 
     /**
      * TODO Проверка кармы
@@ -48,32 +76,27 @@ class CreateCommentHandler extends AbstractHandler
 
             $dto = CreateCommentRequestFactory::create($request->getBody());
 
-            $postRepository = new PostRepository($this->container);
-
-            $postId = $postRepository->getIdBySlug($dto->getPostSlug());
+            $postId = $this->postRepository->getIdBySlug($dto->getPostSlug());
 
             if (!$postId) {
                 return $this->json(['success' => false, 'error' => self::UNKNOWN_POST]);
             }
 
-            $energyRepository = new EnergyRepository($this->container);
-            $commentRepository = new CommentRepository($this->container);
-            $mainRepository = new MainCharacterRepository($this->container);
-            $accountRepository = new AccountRepository($this->container);
-
             $comment = CommentFactory::createNew($postId, $dto->getMessage(), $user);
-            $commentRepository->add($comment);
+            $this->commentRepository->add($comment);
 
             $user->getEnergy()->editEnergy(-CommentInterface::CREATE_ENERGY_COST);
-            $energyRepository->save($user->getEnergy());
+            $this->energyRepository->save($user->getEnergy());
 
             $user->getLevel()->addExp(CommentInterface::CREATE_EXP);
-            $mainRepository->save($user->getMainCharacterId(), $user->getLevel());
+            $this->mainRepository->save($user->getMainCharacterId(), $user->getLevel());
 
-            $postRepository->increaseCommentsCount($postId);
-            $accountRepository->increaseCommentCount($user->getId());
+            $this->postRepository->increaseCommentsCount($postId);
+            $this->accountRepository->increaseCommentCount($user->getId());
 
-            // TODO Увеличение количества комментариев у сообщества, если оно есть
+            if ($communityId = $this->postRepository->getCommunityId($postId)) {
+                $this->communityRepository->increaseCommentCount($communityId);
+            }
 
             return $this->json([
                 'success'    => true,
