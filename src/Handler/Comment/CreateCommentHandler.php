@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler\Comment;
 
+use App\Domain\Account\AccountRepository;
 use App\Domain\Account\Energy\EnergyRepository;
 use App\Domain\Account\MainCharacter\MainCharacterRepository;
 use App\Domain\Comment\CommentException;
@@ -48,15 +49,17 @@ class CreateCommentHandler extends AbstractHandler
             $dto = CreateCommentRequestFactory::create($request->getBody());
 
             $postRepository = new PostRepository($this->container);
-            $energyRepository = new EnergyRepository($this->container);
-            $commentRepository = new CommentRepository($this->container);
-            $mainRepository = new MainCharacterRepository($this->container);
 
             $postId = $postRepository->getIdBySlug($dto->getPostSlug());
 
             if (!$postId) {
                 return $this->json(['success' => false, 'error' => self::UNKNOWN_POST]);
             }
+
+            $energyRepository = new EnergyRepository($this->container);
+            $commentRepository = new CommentRepository($this->container);
+            $mainRepository = new MainCharacterRepository($this->container);
+            $accountRepository = new AccountRepository($this->container);
 
             $comment = CommentFactory::createNew($postId, $dto->getMessage(), $user);
             $commentRepository->add($comment);
@@ -68,8 +71,9 @@ class CreateCommentHandler extends AbstractHandler
             $mainRepository->save($user->getMainCharacterId(), $user->getLevel());
 
             $postRepository->increaseCommentsCount($postId);
+            $accountRepository->increaseCommentCount($user->getId());
 
-            // TODO Увеличение количества комментариев у юзера
+            // TODO Увеличение количества комментариев у сообщества, если оно есть
 
             return $this->json([
                 'success'    => true,

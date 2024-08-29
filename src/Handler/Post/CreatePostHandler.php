@@ -64,7 +64,7 @@ class CreatePostHandler extends AbstractHandler
             $user->getLevel()->addExp(PostInterface::CREATE_EXP);
             $mainRepository->save($user->getMainCharacterId(), $user->getLevel());
 
-            $accountRepository->increasePostComment($user->getId());
+            $accountRepository->increasePostCount($user->getId());
 
             return $this->json(['success' => true, 'slug' => $post->getSlug()]);
 

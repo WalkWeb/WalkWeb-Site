@@ -32,6 +32,9 @@ class CreateCommentHandlerTest extends AbstractTest
         // Проверка изначального количества комментариев у поста
         self::assertEquals(0, $this->getPost($postSlug)->getCommentsCount());
 
+        // Проверка изначального количества комментариев у пользователя
+        self::assertEquals(0, $this->getUserData($token)['comment_count']);
+
         $request = new Request([
             'REQUEST_URI' => '/comment/create', 'REQUEST_METHOD' => 'POST'],
             [
@@ -61,6 +64,9 @@ class CreateCommentHandlerTest extends AbstractTest
 
         // Проверка обновленного количества комментариев у поста
         self::assertEquals(1, $this->getPost($postSlug)->getCommentsCount());
+
+        // Проверка обновленного количества комментариев у пользователя
+        self::assertEquals(1, $this->getUserData($token)['comment_count']);
     }
 
     /**

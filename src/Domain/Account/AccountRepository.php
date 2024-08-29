@@ -223,18 +223,30 @@ class AccountRepository
     }
 
     /**
-     * TODO Можно подумать о вынесении этого метода в PostRepository, чтобы ради одного метода не создавать целый объект
+     * TODO Подумать о вынесении этого метода в PostRepository, чтобы ради одного метода не создавать целый объект
      *
      * @param string $id
      * @throws AppException
      */
-    public function increasePostComment(string $id): void
+    public function increasePostCount(string $id): void
     {
         $this->container->getConnectionPool()->getConnection()->query(
             'UPDATE `accounts` SET `post_count` = `post_count` + 1 WHERE `id` = ?',
-            [
-                ['type' => 's', 'value' => $id],
-            ]
+            [['type' => 's', 'value' => $id]]
+        );
+    }
+
+    /**
+     * TODO Подумать о вынесении этого метода в CommentRepository, чтобы ради одного метода не создавать целый объект
+     *
+     * @param string $id
+     * @throws AppException
+     */
+    public function increaseCommentCount(string $id): void
+    {
+        $this->container->getConnectionPool()->getConnection()->query(
+            'UPDATE `accounts` SET `comment_count` = `comment_count` + 1 WHERE `id` = ?',
+            [['type' => 's', 'value' => $id]]
         );
     }
 
