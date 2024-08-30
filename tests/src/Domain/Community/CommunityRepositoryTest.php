@@ -145,6 +145,17 @@ class CommunityRepositoryTest extends AbstractTest
     }
 
     /**
+     * @dataProvider getNameDataProvider
+     * @param string $slug
+     * @param string|null $name
+     * @throws AppException
+     */
+    public function testCommunityRepositoryGetName(string $slug, ?string $name): void
+    {
+        self::assertEquals($name, $this->getRepository()->getName($slug));
+    }
+
+    /**
      * @return array
      */
     public function getDataProvider(): array
@@ -216,6 +227,23 @@ class CommunityRepositoryTest extends AbstractTest
     }
 
     /**
+     * @return array
+     */
+    public function getNameDataProvider(): array
+    {
+        return [
+            [
+                'diablo-2-wiki',
+                'Diablo 2: База знаний',
+            ],
+            [
+                'no-community',
+                null,
+            ],
+        ];
+    }
+
+    /**
      * @return CommunityRepository
      * @throws AppException
      */
@@ -230,7 +258,7 @@ class CommunityRepositoryTest extends AbstractTest
      * @return array
      * @throws AppException
      */
-    public function getLinkData(string $accountId, string $communityId): array
+    private function getLinkData(string $accountId, string $communityId): array
     {
         return self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT * FROM `lk_account_community` WHERE `account_id` = ? AND `community_id` = ?',
@@ -247,7 +275,7 @@ class CommunityRepositoryTest extends AbstractTest
      * @return array
      * @throws AppException
      */
-    public function getCommunityData(string $communityId): array
+    private function getCommunityData(string $communityId): array
     {
         return self::getContainer()->getConnectionPool()->getConnection()->query(
             'SELECT * FROM `communities` WHERE `id` = ?',

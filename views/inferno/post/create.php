@@ -1,12 +1,21 @@
 <?php
 
 use App\Domain\Auth\AuthInterface;
+use App\Domain\Post\PostInterface;
 use WalkWeb\NW\AppException;
 
 $this->title = APP_NAME . ' — Создание нового поста';
 
 if (empty($user) || !($user instanceof AuthInterface)) {
     throw new AppException('view.post.create: miss or invalid $user');
+}
+
+if (empty($communitySlug) || !is_string($communitySlug)) {
+    throw new AppException('view.post.create: miss or invalid $communitySlug');
+}
+
+if (empty($communityName) || !is_string($communityName)) {
+    throw new AppException('view.post.create: miss or invalid $communityName');
 }
 
 ?>
@@ -25,6 +34,12 @@ if (empty($user) || !($user instanceof AuthInterface)) {
 
 <br /><br />
 <?= !empty($error) ? '<p class="center"><span class="red">' . $error . '</span></p><br />' : '' ?>
+
+<?php
+    if ($communitySlug !== PostInterface::NO_COMMUNITY) {
+        echo "<p class='post_c_t'><a href='/c/$communitySlug'>$communityName</a> » Добавить пост:</p>";
+    }
+?>
 
 <div class="post_create_box">
     <div id="post_create_title" contenteditable="true" spellcheck="true"><br /></div>

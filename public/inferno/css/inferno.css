@@ -823,6 +823,7 @@ p.chat_form_read_only {
 .select_text_header {
     text-align: center;
     font-size: 160%;
+    line-height: 120%;
 }
 
 .wiki_icon {
@@ -3051,6 +3052,11 @@ img.i_img {
 #added_tags span:hover {
     cursor: pointer;
     color: #f11;
+}
+
+.content_main_box .post_c_t {
+    font-size: 140%;
+    padding-bottom: 40px;
 }
 
 /* Create post style end */

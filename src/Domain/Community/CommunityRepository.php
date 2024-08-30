@@ -79,6 +79,26 @@ class CommunityRepository
     }
 
     /**
+     * @param string $slug
+     * @return string
+     * @throws AppException
+     */
+    public function getName(string $slug): string
+    {
+        $data = $this->container->getConnectionPool()->getConnection()->query(
+            'SELECT `name` FROM `communities` WHERE `slug` = ?',
+            [['type' => 's', 'value' => $slug]],
+            true
+        );
+
+        if (!$data) {
+            return '';
+        }
+
+        return (string)$data['name'];
+    }
+
+    /**
      * @return CommunityCollection
      * @throws AppException
      */

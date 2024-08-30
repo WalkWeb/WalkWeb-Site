@@ -67,7 +67,7 @@ function createPost() {
                 }
 
                 $.ajax({
-                    url: '/post/create/default',
+                    url: window.location.pathname,
                     data: {title: title, content: content, tags: tags},
                     type: 'POST',
                     success: function(data) {
@@ -360,11 +360,8 @@ function handleFiles(file) {
 
 /**
  * Обрабатывает загрузку картинки
- *
- * @param file
- * @param i
  */
-function uploadFile(file, i) {
+function uploadFile(file) {
     let url = '/image/upload/json';
     let xhr = new XMLHttpRequest();
     let formData = new FormData();
