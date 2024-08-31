@@ -29,6 +29,7 @@ class CommunityPageHandlerTest extends AbstractTest
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression("/$name/", $response->getBody());
         self::assertMatchesRegularExpression("/$post/", $response->getBody());
+        self::assertMatchesRegularExpression('/Добавить пост/', $response->getBody());
     }
 
     /**
@@ -47,6 +48,7 @@ class CommunityPageHandlerTest extends AbstractTest
         self::assertEquals(Response::OK, $response->getStatusCode());
         self::assertMatchesRegularExpression("/$name/", $response->getBody());
         self::assertMatchesRegularExpression("/$post/", $response->getBody());
+        self::assertMatchesRegularExpression('/Добавить пост/', $response->getBody());
     }
 
     /**

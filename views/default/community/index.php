@@ -40,6 +40,7 @@ $this->title = $community->getName() . ' | ' . APP_NAME;
                 echo '<div id="join_community"><span onclick="joinCommunity(\'' . $community->getSlug() . '\', ' . $community->getFollowers() . ')">Присоединиться</span></div>';
             }
             ?>
+            <div><a href="/post/create/<?= $community->getSlug() ?>" class="button">Добавить пост</a></div>
         </div>
     </div>
 </div>
