@@ -6,6 +6,7 @@ namespace App\Handler;
 
 use App\Domain\Post\PostRepository;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
@@ -13,6 +14,14 @@ class MainHandler extends AbstractHandler
 {
     public const OFFSET = 0;
     public const LIMIT  = 10;
+
+    private PostRepository $postRepository;
+
+    public function __construct(Container $container, ?PostRepository $postRepository = null)
+    {
+        parent::__construct($container);
+        $this->postRepository = $postRepository ?? new PostRepository($this->container);
+    }
 
     /**
      * Print main page
@@ -28,7 +37,7 @@ class MainHandler extends AbstractHandler
         return $this->render(
             'index',
             [
-                'posts' => (new PostRepository($this->container))->getAll(
+                'posts' => $this->postRepository->getAll(
                     self::OFFSET,
                     self::LIMIT,
                     $this->container->exist('user') ? $this->getUser() : null

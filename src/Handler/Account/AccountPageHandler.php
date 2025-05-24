@@ -9,11 +9,26 @@ use App\Domain\Account\Character\Collection\CharacterCollectionRepository;
 use Exception;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
 class AccountPageHandler extends AbstractHandler
 {
+    private AccountRepository $accountRepository;
+    private CharacterCollectionRepository $characterRepository;
+
+    public function __construct(
+        Container $container,
+        ?AccountRepository $accountRepository = null,
+        ?CharacterCollectionRepository $characterRepository = null
+    )
+    {
+        parent::__construct($container);
+        $this->accountRepository = $accountRepository ?? new AccountRepository($this->container);
+        $this->characterRepository = $characterRepository ?? new CharacterCollectionRepository($this->container);
+    }
+
     /**
      * @param Request $request
      * @return Response
@@ -24,13 +39,11 @@ class AccountPageHandler extends AbstractHandler
         $this->layoutUrl = 'layout/index.php';
 
         try {
-            $repository = new AccountRepository($this->container);
-            $characterRepository = new CharacterCollectionRepository($this->container);
-            $account = $repository->get($request->getAttribute('name'), $this->getSendNoticeAction());
+            $account = $this->accountRepository->get($request->getAttribute('name'), $this->getSendNoticeAction());
 
             return $this->render('account/index', [
                 'account'    => $account,
-                'characters' => $characterRepository->get($account->getMainCharacter()->getId()),
+                'characters' => $this->characterRepository->get($account->getMainCharacter()->getId()),
             ]);
 
         } catch (Exception $e) {

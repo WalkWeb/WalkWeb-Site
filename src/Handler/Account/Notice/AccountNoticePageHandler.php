@@ -9,6 +9,7 @@ use App\Domain\Account\Notice\NoticeRepository;
 use App\Domain\Auth\AuthException;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 use WalkWeb\NW\Traits\PaginationTrait;
@@ -18,6 +19,14 @@ class AccountNoticePageHandler extends AbstractHandler
     use PaginationTrait;
 
     private const PER_PAGE = 10;
+
+    private NoticeRepository $noticeRepository;
+
+    public function __construct(Container $container, ?NoticeRepository $noticeRepository = null)
+    {
+        parent::__construct($container);
+        $this->noticeRepository = $noticeRepository ?? new NoticeRepository($this->container);
+    }
 
     /**
      * TODO Перенести в Profile
@@ -37,10 +46,9 @@ class AccountNoticePageHandler extends AbstractHandler
         }
 
         $user = $this->getUser();
-        $repository = new NoticeRepository($this->container);
         $page = $request->page;
         $offset = ($page - 1) * self::PER_PAGE;
-        $notices = $repository->getAll($user->getId(), $offset, self::PER_PAGE);
+        $notices = $this->noticeRepository->getAll($user->getId(), $offset, self::PER_PAGE);
 
         if ($page > 0 && $notices->getTotal() > 0 && $page > ceil($notices->getTotal() / self::PER_PAGE)) {
             // TODO Нужно доработать ошибку во фреймворке и заменить на renderErrorPage()

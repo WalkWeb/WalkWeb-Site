@@ -10,13 +10,22 @@ use App\Domain\Account\AccountRepository;
 use App\Domain\Account\DTO\LoginRequestFactory;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
 class AccountLoginHandler extends AbstractHandler
 {
+    private AccountRepository $accountRepository;
+
+    public function __construct(Container $container, ?AccountRepository $accountRepository = null)
+    {
+        parent::__construct($container);
+        $this->accountRepository = $accountRepository ?? new AccountRepository($this->container);
+    }
+
     /**
-     * Авторизует пользователя
+     * Login user
      *
      * @param Request $request
      * @return Response
@@ -35,8 +44,8 @@ class AccountLoginHandler extends AbstractHandler
             }
 
             $loginRequest = LoginRequestFactory::create($request->getBody());
-            $repository = new AccountRepository($this->container);
-            if ($token = $repository->auth($loginRequest, KEY)) {
+
+            if ($token = $this->accountRepository->auth($loginRequest, KEY)) {
                 $this->container->getCookies()->set(AccountInterface::AUTH_TOKEN, $token);
                 return $this->redirect($loginRequest->getRedirectUrl());
             }

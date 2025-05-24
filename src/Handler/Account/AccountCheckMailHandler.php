@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Handler\Account;
 
-use App\Domain\Account\Notice\NoticeException;
 use App\Domain\Account\Notice\NoticeInterface;
 use App\Domain\Auth\AuthInterface;
 use App\Domain\Auth\AuthRepository;
@@ -21,7 +20,6 @@ class AccountCheckMailHandler extends AbstractHandler
      * @param Request $request
      * @return Response
      * @throws AppException
-     * @throws NoticeException
      */
     public function __invoke(Request $request): Response
     {
@@ -58,7 +56,7 @@ class AccountCheckMailHandler extends AbstractHandler
 
     /**
      * @param AuthInterface $user
-     * @throws NoticeException
+     * @throws AppException
      */
     private function addNotice(AuthInterface $user): void
     {
