@@ -7,11 +7,20 @@ namespace App\Handler\Rating;
 use App\Domain\Account\Character\Genesis\GenesisRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
 class GenesisRatingPageHandler extends AbstractHandler
 {
+    private GenesisRepository $genesisRepository;
+
+    public function __construct(Container $container, ?GenesisRepository $genesisRepository = null)
+    {
+        parent::__construct($container);
+        $this->genesisRepository = $genesisRepository ?? new GenesisRepository($this->container);
+    }
+
     /**
      * @param Request $request
      * @return Response
@@ -20,7 +29,7 @@ class GenesisRatingPageHandler extends AbstractHandler
     public function __invoke(Request $request): Response
     {
         return $this->render('rating/genesis', [
-            'top' => (new GenesisRepository($this->container))->getTop(THEME),
+            'top' => $this->genesisRepository->getTop(THEME),
         ]);
     }
 }

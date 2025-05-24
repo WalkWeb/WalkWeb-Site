@@ -8,11 +8,20 @@ use App\Domain\Rating\Rating;
 use App\Domain\Rating\RatingRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
 class AccountCarmaRatingPageHandler extends AbstractHandler
 {
+    private Rating $rating;
+
+    public function __construct(Container $container, ?Rating $rating = null)
+    {
+        parent::__construct($container);
+        $this->rating = $rating ?? (new Rating(new RatingRepository($this->container)));
+    }
+
     /**
      * @param Request $request
      * @return Response
@@ -21,7 +30,7 @@ class AccountCarmaRatingPageHandler extends AbstractHandler
     public function __invoke(Request $request): Response
     {
         return $this->render('rating/account_carma', [
-            'accounts' => (new Rating(new RatingRepository($this->container)))->getTopAccountCarma(),
+            'accounts' => $this->rating->getTopAccountCarma(),
         ]);
     }
 }

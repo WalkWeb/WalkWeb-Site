@@ -8,11 +8,20 @@ use App\Domain\Account\Character\CharacterInterface;
 use App\Domain\Account\Character\CharacterRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
 class CharacterPageHandler extends AbstractHandler
 {
+    private CharacterRepository $characterRepository;
+
+    public function __construct(Container $container, ?CharacterRepository $characterRepository = null)
+    {
+        parent::__construct($container);
+        $this->characterRepository = $characterRepository ?? new CharacterRepository($this->container);
+    }
+
     /**
      * @param Request $request
      * @return Response
@@ -20,9 +29,7 @@ class CharacterPageHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
-        $repository = new CharacterRepository($this->container);
-
-        if ($character = $repository->get($request->id)) {
+        if ($character = $this->characterRepository->get($request->id)) {
             return $this->render('character/index', ['character' => $character]);
         }
 

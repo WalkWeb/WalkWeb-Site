@@ -7,11 +7,20 @@ namespace App\Handler\Community;
 use App\Domain\Community\CommunityRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
 class CommunityListPageHandler extends AbstractHandler
 {
+    private CommunityRepository $communityRepository;
+
+    public function __construct(Container $container, ?CommunityRepository $communityRepository = null)
+    {
+        parent::__construct($container);
+        $this->communityRepository = $communityRepository ?? new CommunityRepository($this->container);
+    }
+
     /**
      * @param Request $request
      * @return Response
@@ -21,7 +30,7 @@ class CommunityListPageHandler extends AbstractHandler
     {
         $this->layoutUrl = 'layout/index.php';
         return $this->render('community/list', [
-            'communities' => (new CommunityRepository($this->container))->getAll(),
+            'communities' => $this->communityRepository->getAll(),
         ]);
     }
 }

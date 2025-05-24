@@ -8,11 +8,28 @@ use App\Domain\Community\CommunityRepository;
 use App\Domain\Post\PostRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
 class CommunityPageHandler extends AbstractHandler
 {
+    private const PER_PAGE = 20;
+
+    private CommunityRepository $communityRepository;
+    private PostRepository $postRepository;
+
+    public function __construct(
+        Container $container,
+        ?CommunityRepository $communityRepository = null,
+        ?PostRepository $postRepository = null
+    )
+    {
+        parent::__construct($container);
+        $this->communityRepository = $communityRepository ?? new CommunityRepository($this->container);
+        $this->postRepository = $postRepository ?? new PostRepository($this->container);
+    }
+
     /**
      * @param Request $request
      * @return Response
@@ -27,9 +44,8 @@ class CommunityPageHandler extends AbstractHandler
         // TODO rating post filter
 
         $this->layoutUrl = 'layout/index.php';
-        $repository = new CommunityRepository($this->container);
         $user = $this->container->exist('user') ? $this->getUser() : null;
-        $community = $repository->get($request->slug, $user);
+        $community = $this->communityRepository->get($request->slug, $user);
 
         if (!$community) {
             return $this->render(
@@ -39,12 +55,9 @@ class CommunityPageHandler extends AbstractHandler
             );
         }
 
-        $postRepository = new PostRepository($this->container);
-
-
         return $this->render('community/index', [
             'community' => $community,
-            'posts'     => $postRepository->getAll(0, 20, $user, $community->getSlug()),
+            'posts'     => $this->postRepository->getAll(0, self::PER_PAGE, $user, $community->getSlug()),
         ]);
     }
 }

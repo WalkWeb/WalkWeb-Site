@@ -9,12 +9,27 @@ use App\Domain\Comment\CommentRepository;
 use App\Handler\AbstractHandler;
 use App\Handler\Comment\Traits\LikeCommentTrait;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
 class LikeCommentHandler extends AbstractHandler
 {
     use LikeCommentTrait;
+
+    private CommentRepository $commentRepository;
+    private CarmaRepository $carmaRepository;
+
+    public function __construct(
+        Container $container,
+        ?CommentRepository $commentRepository = null,
+        ?CarmaRepository $carmaRepository = null
+    )
+    {
+        parent::__construct($container);
+        $this->commentRepository = $commentRepository ?? new CommentRepository($this->container);
+        $this->carmaRepository = $carmaRepository ?? new CarmaRepository($this->container);
+    }
 
     /**
      * @param Request $request
@@ -23,19 +38,16 @@ class LikeCommentHandler extends AbstractHandler
      */
     public function __invoke(Request $request): Response
     {
-        $commentRepository = new CommentRepository($this->container);
-        $carmaRepository = new CarmaRepository($this->container);
-
-        if ($response = $this->validateRequest($request, $commentRepository)) {
+        if ($response = $this->validateRequest($request, $this->commentRepository)) {
             return $response;
         }
 
         $id = $request->id;
-        $commentRepository->like($id, $this->getUser()->getId(), 1);
+        $this->commentRepository->like($id, $this->getUser()->getId(), 1);
 
         // Если комментария написан от гостя - ничью карму менять не нужно
-        if ($authorId = $commentRepository->getAuthorId($id)) {
-            $carmaRepository->changeRating($authorId, 1);
+        if ($authorId = $this->commentRepository->getAuthorId($id)) {
+            $this->carmaRepository->changeRating($authorId, 1);
         }
 
         return $this->json(['success' => true]);

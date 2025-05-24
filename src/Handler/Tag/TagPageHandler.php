@@ -10,6 +10,7 @@ use App\Domain\Post\Tag\TagInterface;
 use App\Domain\Post\Tag\TagRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
@@ -29,8 +30,7 @@ class TagPageHandler extends AbstractHandler
     public const RATING_HOT   = 5;
     public const RATING_TOP   = 10;
 
-    public const LIMIT  = 10;
-    public const OFFSET = 0;
+    public const PER_PAGE     = 10;
 
     private static array $ratings = [
         self::FILTER_ALL   => self::RATING_ALL,
@@ -38,6 +38,20 @@ class TagPageHandler extends AbstractHandler
         self::FILTER_HOT   => self::RATING_HOT,
         self::FILTER_TOP   => self::RATING_TOP,
     ];
+
+    private TagRepository $tagRepository;
+    private PostRepository $postRepository;
+
+    public function __construct(
+        Container $container,
+        ?TagRepository $tagRepository = null,
+        ?PostRepository $postRepository = null
+    )
+    {
+        parent::__construct($container);
+        $this->tagRepository = $tagRepository ?? new TagRepository($this->container);
+        $this->postRepository = $postRepository ?? new PostRepository($this->container);
+    }
 
     /**
      * @param Request $request
@@ -74,10 +88,7 @@ class TagPageHandler extends AbstractHandler
             $best = false;
         }
 
-        $tagRepository = new TagRepository($this->container);
-        $postRepository = new PostRepository($this->container);
-
-        $tag = $tagRepository->getBySlug($slug);
+        $tag = $this->tagRepository->getBySlug($slug);
 
         if (!$tag) {
             return $this->render(
@@ -92,7 +103,7 @@ class TagPageHandler extends AbstractHandler
         return $this->render('tag/index', [
             'tag'    => $tag,
             'rating' => $rating,
-            'posts'  => $postRepository->getPostByTag($slug, self::OFFSET, self::LIMIT, $minRating, $best, $user),
+            'posts'  => $this->postRepository->getPostByTag($slug, 0, self::PER_PAGE, $minRating, $best, $user),
         ]);
     }
 }

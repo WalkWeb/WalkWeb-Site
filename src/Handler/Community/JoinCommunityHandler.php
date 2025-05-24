@@ -8,11 +8,20 @@ use App\Domain\Community\CommunityException;
 use App\Domain\Community\CommunityRepository;
 use App\Handler\AbstractHandler;
 use WalkWeb\NW\AppException;
+use WalkWeb\NW\Container;
 use WalkWeb\NW\Request;
 use WalkWeb\NW\Response;
 
 class JoinCommunityHandler extends AbstractHandler
 {
+    private CommunityRepository $communityRepository;
+
+    public function __construct(Container $container, ?CommunityRepository $communityRepository = null)
+    {
+        parent::__construct($container);
+        $this->communityRepository = $communityRepository ?? new CommunityRepository($this->container);
+    }
+
     /**
      * @param Request $request
      * @return Response
@@ -26,14 +35,13 @@ class JoinCommunityHandler extends AbstractHandler
 
         // TODO validation slug
 
-        $repository = new CommunityRepository($this->container);
-        $communityId = $repository->getId($request->slug);
+        $communityId = $this->communityRepository->getId($request->slug);
 
         if (!$communityId) {
             return $this->json(['success' => false, 'error' => CommunityException::NOT_FOUND]);
         }
 
-        $repository->join($this->getUser()->getId(), $communityId);
+        $this->communityRepository->join($this->getUser()->getId(), $communityId);
 
         return $this->json(['success' => true]);
     }
