@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "85c568190b6aca0b6d19928ece7a5418",
+    "content-hash": "c40cbc8ab8a9d6006225359fd86a7bfb",
     "packages": [
         {
             "name": "brick/math",
@@ -1422,20 +1422,20 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.2",
+            "version": "2.1.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "0d5d4294a70deb7547db655c47685d680e39cfec"
+                "reference": "89b5ef665716fa2a52ecd2633f21007a6a349053"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/0d5d4294a70deb7547db655c47685d680e39cfec",
-                "reference": "0d5d4294a70deb7547db655c47685d680e39cfec",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/89b5ef665716fa2a52ecd2633f21007a6a349053",
+                "reference": "89b5ef665716fa2a52ecd2633f21007a6a349053",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2|^8.0"
+                "php": "^7.4|^8.0"
             },
             "conflict": {
                 "phpstan/phpstan-shim": "*"
@@ -1476,7 +1476,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-24T13:23:04+00:00"
+            "time": "2025-05-21T20:55:28+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
