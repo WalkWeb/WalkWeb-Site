@@ -28,8 +28,7 @@ class CreateAccountRequest
         string $referral,
         string $userAgent,
         string $ip
-    )
-    {
+    ) {
         $this->login = $login;
         $this->email = $email;
         $this->password = $password;

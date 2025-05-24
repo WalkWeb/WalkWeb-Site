@@ -44,7 +44,7 @@ class CommunityRepository
                 LEFT JOIN `lk_account_community` ON `communities`.`id` = `lk_account_community`.`community_id` AND `lk_account_community`.`account_id` = ?
 
                 WHERE `slug` = ?',
-                [
+            [
                     ['type' => 's', 'value' => $user->getId()],
                     ['type' => 's', 'value' => $slug],
                 ],

@@ -55,8 +55,7 @@ class AccountRegistrationHandler extends AbstractHandler
         ProfessionRepository $professionRepository = null,
         AvatarRepository $avatarRepository = null,
         CarmaRepository $carmaRepository = null
-    )
-    {
+    ) {
         parent::__construct($container);
         $this->sendNoticeAction = $sendNoticeAction ?? new SendNoticeAction(new NoticeRepository($this->container));
         $this->accountRepository = $accountRepository ?? new AccountRepository($this->container);
@@ -184,8 +183,7 @@ class AccountRegistrationHandler extends AbstractHandler
         GenesisInterface $genesis,
         ProfessionInterface $profession,
         AvatarInterface $avatar
-    ): CharacterInterface
-    {
+    ): CharacterInterface {
         $character = CharacterFactory::createNew($request, $account, $mainCharacter, $genesis, $profession, $avatar);
         $this->characterRepository->add($character, $mainCharacter);
         return $character;

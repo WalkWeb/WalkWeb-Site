@@ -25,7 +25,7 @@ class ProfessionRepository
     public function get(int $id, int $genesisId): ?ProfessionInterface
     {
         $data = $this->container->getConnectionPool()->getConnection()->query(
-        'SELECT 
+            'SELECT 
 
             `professions`.`id` as `profession_id`,
             `professions`.`icon` as `profession_icon`,

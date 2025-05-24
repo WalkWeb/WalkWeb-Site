@@ -85,8 +85,7 @@ class CommentFactory
         ?string $parentId = null,
         int $level = 0,
         string $guestName = ''
-    ): Comment
-    {
+    ): Comment {
         if ($user === null && $guestName === '') {
             throw new AppException(CommentException::NO_USER_AND_GUEST_NAME);
         }

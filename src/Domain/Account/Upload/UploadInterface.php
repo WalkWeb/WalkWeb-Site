@@ -11,10 +11,10 @@ interface UploadInterface
     // TODO MAX_UPLOAD_MAX_VALUE >= 300*1024*1024
 
     public const UPLOAD_MIN_VALUE          = 0;
-    public const UPLOAD_MAX_VALUE          = 300*1024*1024;
-    public const UPLOAD_MAX_BASE           = 20*1024*1024;
-    public const UPLOAD_PER_LEVEL          = 3*1024*1024;
-    public const UPLOAD_PER_STAT           = 1024*1024;
+    public const UPLOAD_MAX_VALUE          = 300 * 1024 * 1024;
+    public const UPLOAD_MAX_BASE           = 20 * 1024 * 1024;
+    public const UPLOAD_PER_LEVEL          = 3 * 1024 * 1024;
+    public const UPLOAD_PER_STAT           = 1024 * 1024;
 
     /**
      * Загруженный контент пользователем. Необходимо для расчета доступного места для загрузки медиа-файлов

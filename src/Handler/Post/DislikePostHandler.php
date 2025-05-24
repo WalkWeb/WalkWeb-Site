@@ -24,8 +24,7 @@ class DislikePostHandler extends AbstractHandler
         Container $container,
         ?PostRepository $postRepository = null,
         ?CarmaRepository $carmaRepository = null
-    )
-    {
+    ) {
         parent::__construct($container);
         $this->postRepository = $postRepository ?? new PostRepository($this->container);
         $this->carmaRepository = $carmaRepository ?? new CarmaRepository($this->container);

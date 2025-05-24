@@ -25,7 +25,7 @@ class CharacterRepository
     public function get(string $id): ?CharacterInterface
     {
         $data = $this->container->getConnectionPool()->getConnection()->query(
-        'SELECT 
+            'SELECT 
    
             `characters`.`id` as `character_id`,
             `characters`.`level` as `character_level`,
@@ -75,8 +75,9 @@ class CharacterRepository
      * @throws AppException
      */
     public function add(
-        CharacterInterface $character, MainCharacterInterface $mainCharacter): void
-    {
+        CharacterInterface $character,
+        MainCharacterInterface $mainCharacter
+    ): void {
         $this->container->getConnectionPool()->getConnection()->query(
             'INSERT INTO `characters` (
                     `id`, `character_main_id`, `season_id`, `genesis_id`, `profession_id`, `avatar_id`, `floor_id`,

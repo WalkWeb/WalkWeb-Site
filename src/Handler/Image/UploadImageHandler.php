@@ -25,8 +25,7 @@ class UploadImageHandler extends AbstractHandler
         Container $container,
         ?LoaderImage $loaderImage = null,
         ?ImageRepository $imageRepository = null
-    )
-    {
+    ) {
         parent::__construct($container);
         $this->loaderImage = $loaderImage ?? new LoaderImage($this->container);
         $this->imageRepository = $imageRepository ?? new ImageRepository($this->container);

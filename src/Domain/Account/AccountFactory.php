@@ -42,7 +42,8 @@ class AccountFactory
     {
         if (array_key_exists('main_character', $data)) {
             $mainCharacter = MainCharacterFactory::create(
-                self::array($data, 'main_character', AccountException::INVALID_MAIN_CHARACTER), $sendNoticeAction
+                self::array($data, 'main_character', AccountException::INVALID_MAIN_CHARACTER),
+                $sendNoticeAction
             );
         } else {
             $mainCharacter = null;

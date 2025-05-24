@@ -22,8 +22,7 @@ class AccountPageHandler extends AbstractHandler
         Container $container,
         ?AccountRepository $accountRepository = null,
         ?CharacterCollectionRepository $characterRepository = null
-    )
-    {
+    ) {
         parent::__construct($container);
         $this->accountRepository = $accountRepository ?? new AccountRepository($this->container);
         $this->characterRepository = $characterRepository ?? new CharacterCollectionRepository($this->container);

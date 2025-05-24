@@ -50,8 +50,7 @@ class Community implements CommunityInterface
         bool $isJoined,
         DateTimeInterface $createdAt,
         DateTimeInterface $updatedAt
-    )
-    {
+    ) {
         $this->id = $id;
         $this->level = $level;
         $this->name = $name;

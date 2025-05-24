@@ -37,8 +37,7 @@ class AccountList implements AccountListInterface
         int $postCount,
         int $commentCount,
         int $carma
-    )
-    {
+    ) {
         $this->id = $id;
         $this->avatar = $avatar;
         $this->name = $name;

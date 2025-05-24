@@ -173,7 +173,7 @@ class PostFactory
     {
         $text = htmlspecialchars($content);
 
-        $text = preg_replace( '[\[img\]([^"\s]+?)\[/img\]]m', PostInterface::IMAGE_TEMPLATE, $text);
+        $text = preg_replace('[\[img\]([^"\s]+?)\[/img\]]m', PostInterface::IMAGE_TEMPLATE, $text);
 
         return str_replace(
             ['[p]', '[/p]', '[video]', '[/video]', '[line]', '[h2]', '[/h2]', '[br]'],

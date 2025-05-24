@@ -41,8 +41,7 @@ class Comment implements CommentInterface
         RatingInterface $rating,
         DateTimeInterface $createdAt,
         DateTimeInterface $updatedAt
-    )
-    {
+    ) {
         $this->id = $id;
         $this->postId = $postId;
         $this->authorId = $authorId;

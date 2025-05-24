@@ -438,8 +438,7 @@ class MainLevel implements LevelInterface
         int $exp,
         int $statPoints,
         SendNoticeActionInterface $sendNoticeAction
-    )
-    {
+    ) {
         $this->accountId = $accountId;
         $this->characterId = $characterId;
         $this->level = $level;

@@ -6,6 +6,9 @@ migration:
 fixture:
 	migrations/bin/fixtures
 
+cs:
+	$(PHP_BIN) vendor/bin/php-cs-fixer fix src
+
 test:
 	$(PHP_BIN) vendor/bin/phpunit
 

@@ -24,8 +24,7 @@ class PostRepository
         Container $container,
         ?TagRepository $tagRepository = null,
         ?CommunityRepository $communityRepository = null
-    )
-    {
+    ) {
         $this->container = $container;
         $this->tagRepository = $tagRepository ?? new TagRepository($container);
         $this->communityRepository = $communityRepository ?? new CommunityRepository($this->container);
@@ -198,8 +197,7 @@ class PostRepository
         int $minRating,
         bool $best = false,
         ?AuthInterface $user = null
-    ): PostCollection
-    {
+    ): PostCollection {
         $order = $best ? '`rating` DESC ' : '`created_at` DESC ';
 
         if ($user === null) {
@@ -495,13 +493,13 @@ class PostRepository
     private function getUserReaction(string $slug, AuthInterface $user): int
     {
         return $this->container->getConnectionPool()->getConnection()->query(
-                'SELECT `value` FROM `lk_account_like_post` WHERE `account_id` = ? AND `post_slug` = ?',
-                [
+            'SELECT `value` FROM `lk_account_like_post` WHERE `account_id` = ? AND `post_slug` = ?',
+            [
                     ['type' => 's', 'value' => $user->getId()],
                     ['type' => 's', 'value' => $slug],
                 ],
-                true
-            )['value'] ?? 0;
+            true
+        )['value'] ?? 0;
     }
 
     /**

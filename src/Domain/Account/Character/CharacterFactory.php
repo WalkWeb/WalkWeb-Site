@@ -63,8 +63,7 @@ class CharacterFactory
         GenesisInterface $genesis,
         ProfessionInterface $profession,
         AvatarInterface $avatar
-    ): CharacterInterface
-    {
+    ): CharacterInterface {
         $id = Uuid::uuid4()->toString();
 
         return new Character(

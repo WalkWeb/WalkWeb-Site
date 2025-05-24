@@ -43,8 +43,7 @@ class Auth implements AuthInterface
         string $template,
         bool $emailVerified,
         UploadInterface $upload
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->avatar = $avatar;

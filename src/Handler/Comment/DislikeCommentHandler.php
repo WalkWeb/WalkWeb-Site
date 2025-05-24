@@ -24,8 +24,7 @@ class DislikeCommentHandler extends AbstractHandler
         Container $container,
         ?CommentRepository $commentRepository = null,
         ?CarmaRepository $carmaRepository = null
-    )
-    {
+    ) {
         parent::__construct($container);
         $this->commentRepository = $commentRepository ?? new CommentRepository($this->container);
         $this->carmaRepository = $carmaRepository ?? new CarmaRepository($this->container);

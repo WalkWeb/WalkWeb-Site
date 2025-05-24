@@ -42,8 +42,7 @@ class Notice implements NoticeInterface
         string $message,
         bool $view,
         DateTimeInterface $createdAt
-    )
-    {
+    ) {
         $this->id = $id;
         $this->accountId = $accountId;
         $this->message = $message;

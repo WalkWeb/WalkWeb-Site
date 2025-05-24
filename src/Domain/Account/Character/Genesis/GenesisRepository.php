@@ -27,7 +27,7 @@ class GenesisRepository
     public function get(int $id, int $themeId): ?GenesisInterface
     {
         $data = $this->container->getConnectionPool()->getConnection()->query(
-        'SELECT 
+            'SELECT 
        
             `id` as `genesis_id`,  
             `theme_id`,

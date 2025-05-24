@@ -24,7 +24,7 @@ class AvatarRepository
     public function get(int $id): ?AvatarInterface
     {
         $data = $this->container->getConnectionPool()->getConnection()->query(
-        'SELECT 
+            'SELECT 
                    
             `avatars`.`id` as `avatar_id`,
             `avatars`.`floor_id`,

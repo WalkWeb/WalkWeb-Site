@@ -23,8 +23,7 @@ class CommunityPageHandler extends AbstractHandler
         Container $container,
         ?CommunityRepository $communityRepository = null,
         ?PostRepository $postRepository = null
-    )
-    {
+    ) {
         parent::__construct($container);
         $this->communityRepository = $communityRepository ?? new CommunityRepository($this->container);
         $this->postRepository = $postRepository ?? new PostRepository($this->container);

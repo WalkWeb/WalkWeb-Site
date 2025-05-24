@@ -67,7 +67,9 @@ class AccountListRepository
     public function getTotal(): int
     {
         return $this->container->getConnectionPool()->getConnection()->query(
-            'SELECT count(`id`) as `total` FROM `accounts`', [], true
+            'SELECT count(`id`) as `total` FROM `accounts`',
+            [],
+            true
         )['total'];
     }
 }

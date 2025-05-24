@@ -35,8 +35,7 @@ class CreatePostHandler extends AbstractHandler
         ?EnergyRepository $energyRepository = null,
         ?MainCharacterRepository $mainRepository = null,
         ?AccountRepository $accountRepository = null
-    )
-    {
+    ) {
         parent::__construct($container);
         $this->tagRepository = $tagRepository ?? new TagRepository($this->container);
         $this->postRepository = $postRepository ?? new PostRepository($this->container, $this->tagRepository);

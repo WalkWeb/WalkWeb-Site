@@ -23,8 +23,7 @@ class MainCharacter implements MainCharacterInterface
         LevelInterface $level,
         int $energyBonus,
         int $uploadBonus
-    )
-    {
+    ) {
         $this->id = $id;
         $this->accountId = $accountId;
         $this->era = $era;

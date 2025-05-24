@@ -46,8 +46,7 @@ class TagPageHandler extends AbstractHandler
         Container $container,
         ?TagRepository $tagRepository = null,
         ?PostRepository $postRepository = null
-    )
-    {
+    ) {
         parent::__construct($container);
         $this->tagRepository = $tagRepository ?? new TagRepository($this->container);
         $this->postRepository = $postRepository ?? new PostRepository($this->container);

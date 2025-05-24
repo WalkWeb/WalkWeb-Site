@@ -35,8 +35,7 @@ class PostList implements PostListInterface
         string $communitySlug,
         string $communityName,
         DateTimeInterface $createdAt
-    )
-    {
+    ) {
         $this->id = $id;
         $this->title = $title;
         $this->slug = $slug;

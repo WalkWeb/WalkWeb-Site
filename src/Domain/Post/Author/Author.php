@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Post\Author;
 
-
 use App\Domain\Account\Status\AccountStatusInterface;
 
 class Author implements AuthorInterface

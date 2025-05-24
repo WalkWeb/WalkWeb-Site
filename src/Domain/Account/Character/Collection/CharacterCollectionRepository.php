@@ -24,7 +24,7 @@ class CharacterCollectionRepository
     public function get(string $mainCharacterId): CharacterCollection
     {
         return CharacterCollectionFactory::create($this->container->getConnectionPool()->getConnection()->query(
-        'SELECT 
+            'SELECT 
             
             `characters`.`id`, 
             `characters`.`level`, 

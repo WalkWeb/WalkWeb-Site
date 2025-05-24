@@ -46,8 +46,7 @@ class Post implements PostInterface
         string $communityName,
         DateTimeInterface $createdAt,
         ?DateTimeInterface $updatedAt = null
-    )
-    {
+    ) {
         $this->id = $id;
         $this->title = $title;
         $this->slug = $slug;

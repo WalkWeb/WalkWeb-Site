@@ -20,8 +20,7 @@ class Tag implements TagInterface
         string $icon,
         ?string $previewPostId,
         bool $approved
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->slug = $slug;

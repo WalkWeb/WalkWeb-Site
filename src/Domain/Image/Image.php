@@ -25,8 +25,8 @@ class Image implements ImageInterface
         int $size,
         int $width,
         int $height,
-        DateTimeInterface $createdAt)
-    {
+        DateTimeInterface $createdAt
+    ) {
         $this->id = $id;
         $this->accountId = $accountId;
         $this->name = $name;

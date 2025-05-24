@@ -67,8 +67,7 @@ class Account implements AccountInterface
         DateTimeInterface $createdAt,
         DateTimeInterface $updatedAt,
         ?MainCharacterInterface $mainCharacter
-    )
-    {
+    ) {
         $this->id = $id;
         $this->login = $login;
         $this->name = $name;

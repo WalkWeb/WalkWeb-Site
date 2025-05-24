@@ -40,8 +40,7 @@ class CreateCommentHandler extends AbstractHandler
         MainCharacterRepository $mainRepository = null,
         AccountRepository $accountRepository = null,
         CommunityRepository $communityRepository = null
-    )
-    {
+    ) {
         parent::__construct($container);
         $this->postRepository = $postRepository ?? new PostRepository($this->container);
         $this->energyRepository = $energyRepository ?? new EnergyRepository($this->container) ;

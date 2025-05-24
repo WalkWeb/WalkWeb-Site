@@ -440,8 +440,7 @@ class Level implements LevelInterface
         int $exp,
         int $statPoints,
         int $skillPoints
-    )
-    {
+    ) {
         $this->accountId = $accountId;
         $this->mainCharacterId = $mainCharacterId;
         $this->characterId = $characterId;
