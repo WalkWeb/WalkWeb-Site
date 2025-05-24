@@ -21,7 +21,7 @@ try {
     $db = $app->getContainer()->getConnectionPool()->getConnection();
     $maxEnergy = EnergyInterface::BASE_ENERGY;
 
-    $passwordHash = '$2y$10$seuD6osVV0pPxulOeJDWd.c0nvo0q9IfN3hvdSQFRmvE6JAiYE0jW';
+    $passwordHash = '$2y$10$mEqY7ilJkZEglZxK1cuy/e.0vrkuOJ8I681uu.xPeHv.urUJ7fb8S';
 
     $db->query("
         INSERT INTO `account_energy` (`id`, `energy`, `updated_at`, `residue`, `bonus`) VALUES
