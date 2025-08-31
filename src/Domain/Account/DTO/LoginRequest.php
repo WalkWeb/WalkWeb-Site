@@ -6,7 +6,7 @@ namespace App\Domain\Account\DTO;
 
 class LoginRequest
 {
-    public const REDIRECT_MAX_LENGTH = 100;
+    public const int REDIRECT_MAX_LENGTH = 100;
 
     private string $login;
     private string $password;

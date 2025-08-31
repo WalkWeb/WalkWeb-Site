@@ -8,14 +8,14 @@ use App\Domain\Pieces\Interfaces\ArrayableInterface;
 
 interface TagInterface extends ArrayableInterface
 {
-    public const NAME_MIN_LENGTH = 2;
-    public const NAME_MAX_LENGTH = 20;
+    public const int NAME_MIN_LENGTH = 2;
+    public const int NAME_MAX_LENGTH = 20;
 
-    public const SLUG_MIN_LENGTH = 2;
-    public const SLUG_MAX_LENGTH = 30;
+    public const int SLUG_MIN_LENGTH = 2;
+    public const int SLUG_MAX_LENGTH = 30;
 
-    public const ICON_MIN_LENGTH = 0;
-    public const ICON_MAX_LENGTH = 60;
+    public const int ICON_MIN_LENGTH = 0;
+    public const int ICON_MAX_LENGTH = 60;
 
     // TODO parent_id - для уже существующих тегов написанных с ошибками отображать в подсказках корректный родительский тег
     // TODO created_at

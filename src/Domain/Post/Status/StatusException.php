@@ -8,5 +8,5 @@ use Exception;
 
 class StatusException extends Exception
 {
-    public const UNKNOWN_POST_STATUS_ID = 'Unknown post status id';
+    public const string UNKNOWN_POST_STATUS_ID = 'Unknown post status id';
 }

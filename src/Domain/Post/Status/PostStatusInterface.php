@@ -6,18 +6,18 @@ namespace App\Domain\Post\Status;
 
 interface PostStatusInterface
 {
-    public const DEFAULT = 1;
-    public const SILVER  = 2;
-    public const GOLD    = 3;
-    public const DIAMOND = 4;
+    public const int DEFAULT = 1;
+    public const int SILVER  = 2;
+    public const int GOLD    = 3;
+    public const int DIAMOND = 4;
 
-    public const RATING_SILVER  = 3;
-    public const RATING_GOLD    = 6;
-    public const RATING_DIAMOND = 12;
+    public const int RATING_SILVER  = 3;
+    public const int RATING_GOLD    = 6;
+    public const int RATING_DIAMOND = 12;
 
-    public const EXP_SILVER  = 200;
-    public const EXP_GOLD    = 500;
-    public const EXP_DIAMOND = 1000;
+    public const int EXP_SILVER  = 200;
+    public const int EXP_GOLD    = 500;
+    public const int EXP_DIAMOND = 1000;
 
     /**
      * Возвращает ID статуса поста

@@ -14,42 +14,42 @@ use DateTimeInterface;
 
 interface AccountInterface
 {
-    public const AUTH_TOKEN                = 'auth';
+    public const string AUTH_TOKEN                = 'auth';
 
-    public const LOGIN_MIN_LENGTH          = 3;
-    public const LOGIN_MAX_LENGTH          = 20;
-    public const LOGIN_PARENT              = '/^[a-zA-Z0-9а-яА-ЯёЁ\-_]*$/u';
+    public const int LOGIN_MIN_LENGTH          = 3;
+    public const int LOGIN_MAX_LENGTH          = 20;
+    public const string LOGIN_PARENT           = '/^[a-zA-Z0-9а-яА-ЯёЁ\-_]*$/u';
 
-    public const NAME_MIN_LENGTH           = 3;
-    public const NAME_MAX_LENGTH           = 20;
-    public const NAME_PARENT               = '/^[a-zA-Z0-9а-яА-ЯёЁ\-_]*$/u';
+    public const int NAME_MIN_LENGTH           = 3;
+    public const int NAME_MAX_LENGTH           = 20;
+    public const string NAME_PARENT            = '/^[a-zA-Z0-9а-яА-ЯёЁ\-_]*$/u';
 
-    public const AVATAR_MIN_LENGTH         = 5;
-    public const AVATAR_MAX_LENGTH         = 90;
+    public const int AVATAR_MIN_LENGTH         = 5;
+    public const int AVATAR_MAX_LENGTH         = 90;
 
-    public const PASSWORD_MIN_LENGTH       = 5;
-    public const PASSWORD_MAX_LENGTH       = 60;
+    public const int PASSWORD_MIN_LENGTH       = 5;
+    public const int PASSWORD_MAX_LENGTH       = 60;
 
-    public const EMAIL_MIN_LENGTH          = 6;
-    public const EMAIL_MAX_LENGTH          = 40;
+    public const int EMAIL_MIN_LENGTH          = 6;
+    public const int EMAIL_MAX_LENGTH          = 40;
 
-    public const AUTH_TOKEN_MIN_LENGTH     = 30;
-    public const AUTH_TOKEN_MAX_LENGTH     = 30;
+    public const int AUTH_TOKEN_MIN_LENGTH     = 30;
+    public const int AUTH_TOKEN_MAX_LENGTH     = 30;
 
-    public const VERIFIED_TOKEN_MIN_LENGTH = 30;
-    public const VERIFIED_TOKEN_MAX_LENGTH = 30;
+    public const int VERIFIED_TOKEN_MIN_LENGTH = 30;
+    public const int VERIFIED_TOKEN_MAX_LENGTH = 30;
 
-    public const TEMPLATE_MIN_LENGTH       = 2;
-    public const TEMPLATE_MAX_LENGTH       = 10;
+    public const int TEMPLATE_MIN_LENGTH       = 2;
+    public const int TEMPLATE_MAX_LENGTH       = 10;
 
-    public const IP_MIN_LENGTH             = 7;
-    public const IP_MAX_LENGTH             = 39;
+    public const int IP_MIN_LENGTH             = 7;
+    public const int IP_MAX_LENGTH             = 39;
 
-    public const REF_MIN_LENGTH            = 0;
-    public const REF_MAX_LENGTH            = 30;
+    public const int REF_MIN_LENGTH            = 0;
+    public const int REF_MAX_LENGTH            = 30;
 
-    public const USER_AGENT_MIN_LENGTH     = 0;
-    public const USER_AGENT_MAX_LENGTH     = 150;
+    public const int USER_AGENT_MIN_LENGTH     = 0;
+    public const int USER_AGENT_MAX_LENGTH     = 150;
 
     public function getId(): string;
     public function getLogin(): string;
